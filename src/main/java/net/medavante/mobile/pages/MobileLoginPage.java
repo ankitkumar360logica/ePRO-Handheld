@@ -778,14 +778,18 @@ public class MobileLoginPage extends MobileCoreFunctions {
 		clickOnEnterTheCode();
 		enterTheRegistrationCode(registrationCode);
 		clickOnSubmitButton();
+		//_normalWait(DEFAULT_WAIT_ELEMENT);
 		clickOnContinueButton();
 		_normalWait(DEFAULT_WAIT_ELEMENT);
 		clickOnAcceptBtn();
 		enterPINCode(MobileConstants.Mobile_Pin);
 		enterConfirmPINCode(MobileConstants.Mobile_PinInCorrect);
 		verifyPinDontMatchTextDisplay();
+		clearConfirmPINBox();
+		_normalWait(DEFAULT_WAIT_ELEMENT);
 		enterConfirmPINCode(MobileConstants.Mobile_Pin);
 		clickOnNextButton();
+		_normalWait(DEFAULT_WAIT_ELEMENT);
 		clickOnChooseAQuestionOption();
 		//chooseAQuestion(MobileConstants.Choose_QuestionPin);
 		chooseAQuestion();

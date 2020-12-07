@@ -1,7 +1,5 @@
 package net.medavante.mobile.testscripts;
 
-import java.util.Properties;
-
 import org.jfree.util.Log;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -11,12 +9,10 @@ import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 
 import App.MultiLingual;
-import App.PropReader;
 import net.medavante.portal.dataproviders.DataProviders;
 import net.medavante.portal.pages.studynavigator.NewSubjectDetailPage;
 import net.medavante.portal.pages.studynavigator.StudyDashBoardPage;
 import net.medavante.portal.selenium.core.BaseTest;
-import net.medavante.portal.selenium.core.Configuration;
 import net.medavante.portal.utilities.Constants;
 
 public class Handheld_Translation_SIP extends BaseTest {
@@ -36,9 +32,9 @@ public class Handheld_Translation_SIP extends BaseTest {
 	@BeforeMethod
 	public void getTestData() throws Exception {
 		
-		String abc=	MultiLingual.locallang("Accept");
-				
-		System.out.println(abc);
+//		String abc=	MultiLingual.locallang("Accept");
+//				
+//		System.out.println(abc);
 		
 //		PropReader.updateproprty("locale.country", "RU");
 //		PropReader.updateproprty("locale.language", "ru");
@@ -91,7 +87,9 @@ public class Handheld_Translation_SIP extends BaseTest {
 		reportLog(
 				"1.2:MobileView Application launch and verify Register screen with instruction message,register the subject");
 		mobileLoginPage.verifyInstructionMessageText(registerScreenInstruction);
-		mobileLoginPage.configurationForRegisterTheSubject("314E-B501-4FCE-BC57");
+		mobileLoginPage.configurationForRegisterTheSubject("AE67-5B6F-4F4C-824F");
+		//mobileLoginPage.configurationForRegisterTheSubject("0BFC-46F0-4E02-9AEC");
+
 
 		reportLog("1.5:MobileView Login with configured Pin");
 		mobileLoginPage.verifySignInScreenDisplayed();
@@ -100,6 +98,15 @@ public class Handheld_Translation_SIP extends BaseTest {
 		reportLog("1.6:MobileView Check top menu configured with home,questionnaries,message,log an event");
 		dashborad.verifyUserLogin();
 		dashborad.verifyTopMenuOptions();
+		
+		
+		
+		
+		
+		reportLog("13: MobileView - Select ‘Questionnaires’ tab. ");
+		questionnairesPage = dashborad.clickOnQuestionnairesTab();
+		
+		
 	}
 
 		
