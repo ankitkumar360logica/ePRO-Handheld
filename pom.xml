@@ -3,12 +3,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>Medavante-Automation-Framework</groupId>
-	<artifactId>Medavante-Automation-Framework</artifactId>
+	<groupId>ePro-Automation-Framework</groupId>
+	<artifactId>ePro-Automation-Framework</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>Medavante-Automation-Framework</name>
+	<name>ePro-Automation-Framework</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
