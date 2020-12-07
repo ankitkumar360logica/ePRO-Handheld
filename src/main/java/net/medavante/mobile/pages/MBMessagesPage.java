@@ -21,6 +21,17 @@ public class MBMessagesPage extends MobileCoreFunctions {
 	@AndroidFindBy(xpath="//android.widget.ListView//android.view.ViewGroup/android.view.View/following-sibling::android.widget.TextView")
 	private List<MobileElement> messageTodayList; 
 	
+	@AndroidFindBy(xpath = "//android.view.ViewGroup[1]/android.widget.TextView")
+	private MobileElement composeScreen;
+	
+	@AndroidFindBy(xpath = "(//android.widget.EditText[@class='android.widget.EditText'])[1]")
+	private MobileElement msgSubjectInputField;
+	
+	@AndroidFindBy(xpath = "(//android.widget.EditText[@class='android.widget.EditText'])[2]")
+	private MobileElement msgBodyInputField;
+	
+	@AndroidFindBy(xpath = "//android.widget.ImageButton[@class='android.widget.ImageButton']")
+	private MobileElement backbtnOnComposeMsg;
 	
 	/* Verify Today Message List is Present */
 	public void verifyMessageListPresent() {
@@ -30,9 +41,65 @@ public class MBMessagesPage extends MobileCoreFunctions {
 			flag = true;
 		}
 		Assert.assertTrue(flag);
-		verifyPageIsDisplayAndCaptureTheScreenShot();
+		capturescreen("Screenshot");
+		//verifyPageIsDisplayAndCaptureTheScreenShot();
 	}
 	
+	public void clickOnComposeMessageIcon() {
+		_normalWait(DEFAULT_WAIT_ELEMENT);
+		click(addMessageBtn);
+	}
 	
+	public void verifyComposeMsgScreen() {
+		_normalWait(DEFAULT_WAIT_ELEMENT);
+		boolean flag = false;
+		if(composeScreen.isDisplayed()) {
+			flag = true;
+		}
+		Assert.assertTrue(flag);
+		capturescreen("Screenshot");
+	}
 	
+	public void inputTxtInMsgSubjectField(String msg) {
+		setText(msgSubjectInputField, msg);
+	}
+	
+	public void inputTxtInMsgBodyField(String txt) {
+		setText(msgBodyInputField, txt);
+	}
+	
+	public void clickOnBackbtnOnComposeScreen() {
+		click(backbtnOnComposeMsg);
+	}
+	
+	@AndroidFindBy(xpath = "//android.widget.TextView[@resource-id='android:id/alertTitle']")
+	private MobileElement exitPopUp;
+	
+	public void verifyExitPopUp() {
+		boolean flag = false;
+		if(exitPopUp.isDisplayed()) {
+			flag = true;
+		}
+		Assert.assertTrue(flag);
+		capturescreen("Screenshot");
+	}
+	
+	@AndroidFindBy(xpath = "//android.widget.Button[@resource-id='android:id/button2']")
+	private MobileElement noOptionOnExitPopUp;
+	public void clickOnNoOnExitPopUp() {
+		click(noOptionOnExitPopUp);
+	}
+	
+	@AndroidFindBy(xpath = "//android.widget.Button[@resource-id='android:id/button1']")
+	private MobileElement yesOptionOnExitPopUp;
+	public void clickOnYesOnExitPopUp() {
+		click(yesOptionOnExitPopUp);
+	}
+	
+	@AndroidFindBy(xpath = "(//android.view.ViewGroup//android.widget.TextView[@class='android.widget.TextView'])[2]")
+	private MobileElement sendMsgBtn;
+	public void clickOnSendMsgBtn() {
+		click(sendMsgBtn);
+		capturescreen("Screenshot");
+	}
 }

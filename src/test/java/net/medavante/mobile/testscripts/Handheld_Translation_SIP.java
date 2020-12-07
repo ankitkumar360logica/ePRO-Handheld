@@ -2,6 +2,7 @@ package net.medavante.mobile.testscripts;
 
 import java.util.Properties;
 
+import org.apache.maven.model.plugin.ReportConfigurationExpander;
 import org.jfree.util.Log;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -91,7 +92,7 @@ public class Handheld_Translation_SIP extends BaseTest {
 		reportLog(
 				"1.2:MobileView Application launch and verify Register screen with instruction message,register the subject");
 		mobileLoginPage.verifyInstructionMessageText(registerScreenInstruction);
-		mobileLoginPage.configurationForRegisterTheSubject("314E-B501-4FCE-BC57");
+		mobileLoginPage.configurationForRegisterTheSubject("AE67-5B6F-4F4C-824F");
 		
 		reportLog("2: MobileView Create Identity' screen is displayed with instruction message.");
 		mobileLoginPage.verifyTextOnScreen();
@@ -103,7 +104,68 @@ public class Handheld_Translation_SIP extends BaseTest {
 		reportLog("2.2: Click I forgt PIN link.");
 		mobileLoginPage.clickOnForgetPINLink();
 		
-//		reportLog("2.2: MobileView Next button shall be displayed in disabled state");
+		
+		
+		
+		reportLog("13: MobileView - Select ‘Questionnaires’ tab. Questionnaires page is displayed.");
+		questionnairesPage = dashborad.clickOnQuestionnairesTab();
+		
+		reportLog("14: Mobile View - Select the questionnaire");
+		questionnairesPage.clickOnFirstQuestionnairesInTheList();
+		
+		reportLog("15: Mobile View - Select ‘Start’ button and The questionnaire is displayed to complete.");
+		questionnairesPage.clickOnStartQuestion();
+		
+		reportLog("16: Mobile View - Thank you message is displayed for completing the questionnaire along with continue option.");
+		//questionnairesPage.
+		
+		
+		reportLog("21: MobileView - Select ‘Messages’ and refresh");
+		messgaePage = dashborad.clickOnMessageTab();
+		
+		reportLog("23: MobileView - Refresh Messages screen. ‘{0} new messages’ pop-up message is displayed if there’s a new message.");
+		messgaePage.verifyMessageListPresent();
+		
+		reportLog("24: MobileView - Select a ‘Messages’. User is navigated to the ‘Messages’ page and message is displayed with subject and message body and time stamp.");
+		messgaePage.verifyMessageListPresent();
+		
+		reportLog("25: MobileView - Select (+) compose icon. ‘Compose’ message page is displayed.");
+		messgaePage.clickOnComposeMessageIcon();
+		messgaePage.verifyComposeMsgScreen();
+		
+		reportLog("26: MobileView - Type ‘abcd’ in the message body and select back icon. Exit warning message is displayed along with yes/no options.");
+		messgaePage.inputTxtInMsgSubjectField("abcd");
+		messgaePage.clickOnBackbtnOnComposeScreen();
+		messgaePage.verifyExitPopUp();
+		
+		reportLog("27.1. MobileView - Select ‘No’.");
+		messgaePage.clickOnNoOnExitPopUp();
+		
+		reportLog("27.2. MobileView - The user stays in Compose message page.");
+		messgaePage.verifyComposeMsgScreen();
+		
+		reportLog("28.1. MobileView - Select ‘Yes’.");
+		messgaePage.clickOnYesOnExitPopUp();
+		
+		reportLog("28.2. MobileView - The user is navigated back to the Messages page.");
+		messgaePage.verifyMessageListPresent();
+		
+		reportLog("29. MobileView - Select (+) compose icon and write ‘abcd’ in the subject and select send icon. Message content cannot be empty text is displayed.");
+		messgaePage.clickOnComposeMessageIcon();
+		messgaePage.verifyComposeMsgScreen();
+		messgaePage.inputTxtInMsgSubjectField("abcd");
+		messgaePage.clickOnSendMsgBtn();
+		
+		reportLog("30.1: MobileView - Select (+) compose icon and write ‘abcd’ in the subject and ‘efgh’ in the body and select send icon.");
+		messgaePage.inputTxtInMsgSubjectField("abcd");
+		messgaePage.inputTxtInMsgBodyField("efgh");
+		messgaePage.clickOnSendMsgBtn();
+		
+		reportLog("30.2: MobileView - Sending message pop-up message is displayed and subsequently Message successfully sent pop-up message is displayed and the user is navigated back to the Messages page. ");
+		messgaePage.verifyMessageListPresent();
+		
+		
+		//		reportLog("2.2: MobileView Next button shall be displayed in disabled state");
 //		mobileLoginPage.verifyNextButtonIsDisabled();
 //		
 //		reportLog("2.3: MobileView Avatar and Participant version label shall be displayed");

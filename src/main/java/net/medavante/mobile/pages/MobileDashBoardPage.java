@@ -162,6 +162,7 @@ public class MobileDashBoardPage extends MobileCoreFunctions {
 		click(messageTab);
 		Assert.assertTrue(messageTab.isSelected());
 		 capturescreen("Screenshot");
+		
 		MBMessagesPage message = new MBMessagesPage(mobileDriver);
 		PageFactory.initElements(new AppiumFieldDecorator(mobileDriver), message);
 		 capturescreen("Screenshot");
