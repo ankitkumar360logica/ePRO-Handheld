@@ -92,14 +92,37 @@ public class Handheld_Translation_SIP extends BaseTest {
 				"1.2:MobileView Application launch and verify Register screen with instruction message,register the subject");
 		mobileLoginPage.verifyInstructionMessageText(registerScreenInstruction);
 		mobileLoginPage.configurationForRegisterTheSubject("314E-B501-4FCE-BC57");
-
-		reportLog("1.5:MobileView Login with configured Pin");
-		mobileLoginPage.verifySignInScreenDisplayed();
-		dashborad = mobileLoginPage.loginUser(Mobile_Pin);
-
-		reportLog("1.6:MobileView Check top menu configured with home,questionnaries,message,log an event");
-		dashborad.verifyUserLogin();
-		dashborad.verifyTopMenuOptions();
+		
+		reportLog("2: MobileView Create Identity' screen is displayed with instruction message.");
+		mobileLoginPage.verifyTextOnScreen();
+		mobileLoginPage.verifyInstructionMessageText(createIdentityInstructionMessage);
+		
+		reportLog("2.1: MobileView Pin and Confirm Pin edit boxes shall be displayed.");
+		mobileLoginPage.verifySignInScreenWithPINEditBox();
+		
+		reportLog("2.2: Click I forgt PIN link.");
+		mobileLoginPage.clickOnForgetPINLink();
+		
+//		reportLog("2.2: MobileView Next button shall be displayed in disabled state");
+//		mobileLoginPage.verifyNextButtonIsDisabled();
+//		
+//		reportLog("2.3: MobileView Avatar and Participant version label shall be displayed");
+//		mobileLoginPage.verifyAvatarAndVersionLabelIsDisplay();
+//		
+//		reportLog("3: MobileView Enter different identity. ( pin and non-matching confirm pin details).");
+//		mobileLoginPage.enterPINCode(Mobile_Pin);
+//		mobileLoginPage.enterConfirmPINCode(Mobile_PinInCorrect);
+//		
+//		reportLog("3.1: MobileView Next button shall be displayed in disabled state");
+//		mobileLoginPage.verifyNextButtonIsDisabled();
+//
+//		reportLog("1.5:MobileView Login with configured Pin");
+//		mobileLoginPage.verifySignInScreenDisplayed();
+//		dashborad = mobileLoginPage.loginUser(Mobile_Pin);
+//
+//		reportLog("1.6:MobileView Check top menu configured with home,questionnaries,message,log an event");
+//		dashborad.verifyUserLogin();
+//		dashborad.verifyTopMenuOptions();
 	}
 
 		
