@@ -75,7 +75,7 @@ public class MobileLoginPage extends MobileCoreFunctions {
 	@AndroidFindBy(xpath = "//android.view.View[@index='0']")
 	private MobileElement crossMarkBtn;
 
-	@AndroidFindBy(xpath = "//android.widget.Button[@text='Continue']")
+	@AndroidFindBy(xpath = "//android.widget.Button[@class='android.widget.Button']")
 	private MobileElement continueBtn;
 
 	@AndroidFindBy(xpath = "//android.widget.Button[@text='CANCEL']")
@@ -352,24 +352,25 @@ public class MobileLoginPage extends MobileCoreFunctions {
 	 * Click on continue button
 	 * @throws IOException 
 	 */
-//	public void clickOnContinueButton() {
-//		waitForElementToBecomeVisible(continueBtn, globalWaitTime);
-//		_normalWait(DEFAULT_WAIT_2_ELEMENT);
-//		click(continueBtn);
-//	}
-	
-	public void clickOnContinueButton() throws IOException {
-//		waitForElementToBecomeVisible(continueBtn, globalWaitTime);
+	public void clickOnContinueButton() {
+		waitForElementToBecomeVisible(continueBtn, globalWaitTime);
 		_normalWait(DEFAULT_WAIT_2_ELEMENT);
-//		click(continueBtn);
-		String btnContinue = MultiLingual.locallang("Continue");
-		System.out.println("Button Name is " + btnContinue);
-		MobileElement continueBtn = mobileDriver.findElement(By.xpath("android.widget.Button[@text='"+btnContinue+"']"));
-		waitForElementToBecomeVisible(continueBtn, DEFAULT_WAIT_ELEMENT);
-
 		click(continueBtn);
-		_normalWait(DEFAULT_WAIT_ELEMENT);
+		//capturescreen("Screenshot");
 	}
+	
+//	public void clickOnContinueButton() throws IOException {
+////		waitForElementToBecomeVisible(continueBtn, globalWaitTime);
+//		_normalWait(DEFAULT_WAIT_2_ELEMENT);
+////		click(continueBtn);
+//		String btnContinue = MultiLingual.locallang("Continue");
+//		System.out.println("Button Name is " + btnContinue);
+//		MobileElement continueBtn = mobileDriver.findElement(By.xpath("//android.widget.Button[@text='"+btnContinue+"']"));
+//		waitForElementToBecomeVisible(continueBtn, DEFAULT_WAIT_ELEMENT);
+//
+//		click(continueBtn);
+//		_normalWait(DEFAULT_WAIT_ELEMENT);
+//	}
 
 	/**
 	 * Click on accept button

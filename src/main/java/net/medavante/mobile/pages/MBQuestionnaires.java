@@ -85,6 +85,8 @@ public class MBQuestionnaires extends MobileCoreFunctions {
 	@AndroidFindBy(xpath = "(//android.view.ViewGroup[@index='0']//following-sibling::android.view.ViewGroup)[2]")
 	private MobileElement questionTextBoxBackButton;
 	
+	@AndroidFindBy(xpath = "(//android.widget.LinearLayout[2]//android.view.ViewGroup[@class='android.view.ViewGroup'])[1]")
+	private MobileElement firstQuesttabInList;
 
 	/* Verify Today Question is Present */
 	public void verifyTodayQuestionnairesListPresent() {
@@ -527,4 +529,15 @@ public class MBQuestionnaires extends MobileCoreFunctions {
 		 capturescreen("Screenshot");
 	}
 	
+	public void clickOnFirstQuestionnairesInTheList() {
+		_normalWait(DEFAULT_WAIT_ELEMENT);
+		boolean flag = false;
+		if(firstQuesttabInList.isDisplayed()) {
+			click(firstQuesttabInList);
+			flag =true;
+		}
+		Assert.assertTrue(flag);
+		_normalWait(DEFAULT_WAIT_ELEMENT);
+		 capturescreen("Screenshot");
+	}
 }
