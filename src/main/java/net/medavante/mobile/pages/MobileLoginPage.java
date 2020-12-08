@@ -75,7 +75,7 @@ public class MobileLoginPage extends MobileCoreFunctions {
 	@AndroidFindBy(xpath = "//android.view.View[@index='0']")
 	private MobileElement crossMarkBtn;
 
-	@AndroidFindBy(xpath = "//android.widget.Button[@text='Continue']")
+	@AndroidFindBy(xpath = "//android.widget.Button[@class='android.widget.Button']")
 	private MobileElement continueBtn;
 
 	@AndroidFindBy(xpath = "//android.widget.Button[@text='CANCEL']")
@@ -129,7 +129,8 @@ public class MobileLoginPage extends MobileCoreFunctions {
 	@AndroidFindBy(xpath = "//android.widget.EditText[@text='Enter an answer']")
 	private MobileElement enterAnAnswer;
 	
-	@AndroidFindBy(xpath = "//android.widget.TextView[@text='I forgot the PIN']")
+	//@AndroidFindBy(xpath = "//android.widget.TextView[@text='I forgot the PIN']")
+	@AndroidFindBy(xpath = "(//android.widget.TextView)[3]")
 	private MobileElement forgetLink;
 
 	@AndroidFindBy(xpath = "//android.widget.TextView[@content-desc='zxingDefaultOverlay_TopTextLabel']")
@@ -264,6 +265,11 @@ public class MobileLoginPage extends MobileCoreFunctions {
 		capturescreen("Screenshot");
 		//Assert.fail();
 	}
+	
+	public void verifyInstructionMessageText() throws IOException {
+		String insructionText=	MultiLingual.locallang("InstructionTextOnIdentityPage");
+		capturescreen("Screenshot");
+	}
 
 	/**
 	 * Verify Register screen is displayed
@@ -352,24 +358,21 @@ public class MobileLoginPage extends MobileCoreFunctions {
 	 * Click on continue button
 	 * @throws IOException 
 	 */
-//	public void clickOnContinueButton() {
-//		waitForElementToBecomeVisible(continueBtn, globalWaitTime);
-//		_normalWait(DEFAULT_WAIT_2_ELEMENT);
-//		click(continueBtn);
-//	}
-	
-	public void clickOnContinueButton() throws IOException {
-//		waitForElementToBecomeVisible(continueBtn, globalWaitTime);
+	public void clickOnContinueButton() {
+		waitForElementToBecomeVisible(continueBtn, globalWaitTime);
 		_normalWait(DEFAULT_WAIT_2_ELEMENT);
-//		click(continueBtn);
-		String btnContinue = MultiLingual.locallang("Continue");
-		System.out.println("Button Name is " + btnContinue);
-		MobileElement continueBtn = mobileDriver.findElement(By.xpath("android.widget.Button[@text='"+btnContinue+"']"));
-		waitForElementToBecomeVisible(continueBtn, DEFAULT_WAIT_ELEMENT);
-
 		click(continueBtn);
-		_normalWait(DEFAULT_WAIT_ELEMENT);
 	}
+	
+//	public void clickOnContinueButton() throws IOException {
+//		String btnContinue = MultiLingual.locallang("Continue");
+//		System.out.println("Button Name is " + btnContinue);
+//		MobileElement continueBtn = mobileDriver.findElement(By.xpath("//android.widget.Button[@text='"+btnContinue+"']"));
+//		//waitForElementToBecomeVisible(continueBtn, DEFAULT_WAIT_ELEMENT1);
+//
+//		click(continueBtn);
+//		_normalWait(DEFAULT_WAIT_ELEMENT);
+//	}
 
 	/**
 	 * Click on accept button
@@ -427,9 +430,21 @@ public class MobileLoginPage extends MobileCoreFunctions {
 
 	/**
 	 * Click on submit button after entered the registration code
+	 * @throws IOException 
 	 */
 	public void clickOnSubmitButton() {
 		click(submitBtn);
+		//_normalWait(globalWaitTime);
+		_normalWait(DEFAULT_WAIT_ELEMENT);
+		
+	}
+	
+	public void clickSubmitBtn() throws IOException {
+		String submitBtn= MultiLingual.locallang("Submit");
+		System.out.println("Button text is: " + submitBtn);
+		
+		MobileElement btnSubmit = mobileDriver.findElement(By.xpath("//android.widget.Button[@text='"+submitBtn+"']"));
+		click(btnSubmit);
 		//_normalWait(globalWaitTime);
 		_normalWait(DEFAULT_WAIT_ELEMENT);
 		
@@ -515,37 +530,43 @@ public class MobileLoginPage extends MobileCoreFunctions {
 	
 	public void verifySignInScreenWithPINEditBox() throws IOException {
 		//Assert.assertTrue(isElementPresent(pinInp) && isElementPresent(signInTitle));
-		String SignInTitle=	MultiLingual.locallang("Sign-In");
-		System.out.println("Title is: " + SignInTitle);
-		Assert.assertTrue(isElementPresent(pinInp) && isElementPresent(SignInTitle));
-
-//		MobileElement btnAccept = mobileDriver.findElement(By.xpath("//android.widget.TextView[@text='"+abc+"']"));
-//		click(btnAccept);
-//		
-//		_normalWait(DEFAULT_WAIT_ELEMENT);
+		//String signInTitle=	MultiLingual.locallang("Sign-In");
+		_normalWait(globalWaitTime);
+		String signInInstruction= MultiLingual.locallang("SignInInstructionText");
+		//MobileElement signInInstructionText = mobileDriver.findElement(By.xpath("//android.widget.TextView[@text='"+signInInstruction+"']"));
+		
+		String forgotPIN=	MultiLingual.locallang("IForgotPIN");
+		MobileElement IForgotLink = mobileDriver.findElement(By.xpath("//android.widget.TextView[@text='"+forgotPIN+"']"));
+		
+		String continueBtn= MultiLingual.locallang("Continue");
+		MobileElement continueButton = mobileDriver.findElement(By.xpath("//android.widget.Button[@text='"+continueBtn+"']"));
+		_normalWait(DEFAULT_WAIT_ELEMENT);
+		System.out.println("Sign-in instruction is: " + signInInstruction);
+		Assert.assertTrue(isElementPresent(pinInp));
+		//Assert.assertTrue(isElementPresent(signInInstructionText));
+		Assert.assertTrue(isElementPresent(IForgotLink));
+        Assert.assertTrue(isElementPresent(continueButton));
+		
 		 capturescreen("Screenshot");
 	}
 
-//	public void clickOnForgetPINLink() throws InterruptedException {
-//		_normalWait(globalWaitTime);
-//		click(forgetLink);
-//		waitForElementToBecomeVisible(registerInstruction, globalWaitTime);
-//
-//	}
-	
-	public void clickOnForgetPINLink() throws InterruptedException, IOException {
-//		_normalWait(globalWaitTime);
-//		click(forgetLink);
-//		waitForElementToBecomeVisible(registerInstruction, globalWaitTime);
-		
-		String forgotPIN=	MultiLingual.locallang("IForgotPIN");
-		System.out.println("Forgot PIN text is: " + forgotPIN);
-		MobileElement forgotPinLink = mobileDriver.findElement(By.xpath("//android.widget.TextView[@text='"+forgotPIN+"']"));
-		click(forgotPinLink);
+	public void clickOnForgetPINLink() throws InterruptedException {
+		_normalWait(globalWaitTime);
+		click(forgetLink);
 		waitForElementToBecomeVisible(registerInstruction, globalWaitTime);
-		//_normalWait(DEFAULT_WAIT_ELEMENT);
 
 	}
+	
+//	public void clickOnForgetPINLink() throws InterruptedException, IOException {
+//	
+//		String forgotPIN=	MultiLingual.locallang("IForgotPIN");
+//		System.out.println("Forgot PIN text is: " + forgotPIN);
+//		MobileElement forgotPinLink = mobileDriver.findElement(By.xpath("//android.widget.TextView[@text='"+forgotPIN+"']"));
+//		click(forgotPinLink);
+//		waitForElementToBecomeVisible(registerInstruction, globalWaitTime);
+//		//_normalWait(DEFAULT_WAIT_ELEMENT);
+//
+//	}
 
 	public void verifyTextOnScreen(String text) {
 
@@ -555,14 +576,32 @@ public class MobileLoginPage extends MobileCoreFunctions {
 
 	}
 	
-	public void verifyTextOnScreen() throws IOException {
-		String screenTitle=	MultiLingual.locallang("IdentityScreenTitle");
-		System.out.println("Screen title is " + screenTitle);
-		MobileElement  messageText = mobileDriver.findElement(By.xpath("//android.widget.TextView[@text='"+screenTitle+"']"));
+	public void verifyTitleOnScreen() throws IOException {
+		String title= MultiLingual.locallang("IdentityScreenTitle");
+		System.out.println("Screen title is " + title);
+		MobileElement  messageText = mobileDriver.findElement(By.xpath("//android.widget.TextView[@text='"+title+"']"));
 		Assert.assertTrue(messageText.isDisplayed());
 
 	}
 
+	public void verifyTextOnScreen() throws IOException {
+		String checklist= MultiLingual.locallang("CheckListText");
+		String digitPinConfirmation = MultiLingual.locallang("DigitPinConfirmation");
+		String secretQuestionText = MultiLingual.locallang("SecretQuestionText");
+				
+		System.out.println("Text on screen is: " + checklist + digitPinConfirmation + secretQuestionText );
+		
+		MobileElement  messageText = mobileDriver.findElement(By.xpath("//android.widget.TextView[@text='"+checklist+"']"));
+		MobileElement  messageText1 = mobileDriver.findElement(By.xpath("//android.widget.TextView[@text='"+digitPinConfirmation+"']"));
+		MobileElement  messageText2 = mobileDriver.findElement(By.xpath("//android.widget.TextView[@text='"+secretQuestionText+"']"));
+
+		Assert.assertTrue(messageText.isDisplayed());
+		Assert.assertTrue(messageText1.isDisplayed());
+		Assert.assertTrue(messageText2.isDisplayed());
+		capturescreen("Screenshot");
+
+	}
+	
 	public void verifyTextDoesNotAppearOnScreen(String text) {
 		WebElement messageText = mobileDriver
 				.findElement(By.xpath(String.format("//android.widget.TextView[@text='%s']", text)));
@@ -832,10 +871,13 @@ public class MobileLoginPage extends MobileCoreFunctions {
 		clickOnEnterTheCode();
 		enterTheRegistrationCode(registrationCode);
 		clickOnSubmitButton();
-		//_normalWait(DEFAULT_WAIT_ELEMENT1);
+		_normalWait(DEFAULT_WAIT_ELEMENT1);
+		System.out.println("Now click on continue button");
 		clickOnContinueButton();
 		_normalWait(DEFAULT_WAIT_ELEMENT);
 		clickOnAcceptBtn();
+		verifyTitleOnScreen();
+		verifyInstructionMessageText();
 		enterPINCode(MobileConstants.Mobile_Pin);
 		enterConfirmPINCode(MobileConstants.Mobile_PinInCorrect);
 		verifyPinDontMatchTextDisplay();
@@ -849,10 +891,29 @@ public class MobileLoginPage extends MobileCoreFunctions {
 		chooseAQuestion();
 		enterAnAnswer(MobileConstants.Choose_QuestionAnswer);
 		clickOnNextButton();
+		_normalWait(DEFAULT_WAIT_ELEMENT);
+
+		verifyTextOnScreen();
 		clickOnContinueButton();
 	}
 	
-
+public void provideWrongPINUntil1Attemptleft(String PINCode) throws IOException {
+	for (int i=4; i<=1; i--) {
+		System.out.println("Entered in loop");
+		String pinEditBoxString=	MultiLingual.locallang("Pin");
+		//System.out.println("Watermark text for pin is: " + pinEditBoxString);
+		
+		MobileElement pinEditBox = mobileDriver.findElement(By.xpath("//android.widget.EditText[@text='"+pinEditBoxString+"']"));
+		//waitForElementToBecomeVisible(confirmPinEditBox, globalWaitTime);
+		setText(pinEditBox, PINCode);
+		mobileDriver.hideKeyboard();
+		_normalWait(globalWaitTime);
+		System.out.println("total attempt left :" + i);
+		capturescreen("Screenshot");
+		//waitForElementToBecomeVisible(nextBtn, globalWaitTime);
+		
+	}
+}
 
 	public void enterTheAnswerCode(String string) {
 		setText(answerCodeText, string);

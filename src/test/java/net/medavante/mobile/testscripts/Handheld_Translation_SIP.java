@@ -18,6 +18,7 @@ import net.medavante.portal.pages.studynavigator.StudyDashBoardPage;
 import net.medavante.portal.selenium.core.BaseTest;
 import net.medavante.portal.selenium.core.Configuration;
 import net.medavante.portal.utilities.Constants;
+import net.medavante.portal.utilities.MobileConstants;
 
 public class Handheld_Translation_SIP extends BaseTest {
 
@@ -38,15 +39,7 @@ public class Handheld_Translation_SIP extends BaseTest {
 		
 		String abc=	MultiLingual.locallang("Accept");
 				
-		System.out.println(abc);
-		
-//		PropReader.updateproprty("locale.country", "RU");
-//		PropReader.updateproprty("locale.language", "ru");
-//
-//        String abc1=	MultiLingual.locallang("App.Home.001");
-//		
-//		System.out.println(abc1);
-	
+		System.out.println(abc);	
 		
 //		System.setProperty("className", getClass().getSimpleName());
 //		Properties properties = Configuration.readTestData("RegressionTestData");
@@ -91,17 +84,29 @@ public class Handheld_Translation_SIP extends BaseTest {
 		reportLog(
 				"1.2:MobileView Application launch and verify Register screen with instruction message,register the subject");
 		mobileLoginPage.verifyInstructionMessageText(registerScreenInstruction);
-		mobileLoginPage.configurationForRegisterTheSubject("314E-B501-4FCE-BC57");
+		mobileLoginPage.configurationForRegisterTheSubject("811D-8179-481A-9165");
 		
 		reportLog("2: MobileView Create Identity' screen is displayed with instruction message.");
-		mobileLoginPage.verifyTextOnScreen();
-		mobileLoginPage.verifyInstructionMessageText(createIdentityInstructionMessage);
-		
+		//mobileLoginPage.verifyTitleOnScreen();
+		//mobileLoginPage.verifyInstructionMessageText();
+			
 		reportLog("2.1: MobileView Pin and Confirm Pin edit boxes shall be displayed.");
-		mobileLoginPage.verifySignInScreenWithPINEditBox();
+		//mobileLoginPage.verifySignInScreenWithPINEditBox();
 		
-		reportLog("2.2: Click I forgt PIN link.");
+		reportLog("MobileView deactivate subject from device");
+		updateSubjectValueInPropertiesFile();
+		
+		reportLog("2.2: MobileView Click I forgot PIN link.");
 		mobileLoginPage.clickOnForgetPINLink();
+		
+		reportLog("2.3: MobileView Keep providing wrong PIN until 1attempt is left.");
+		mobileLoginPage.provideWrongPINUntil1Attemptleft(MobileConstants.Mobile_PinInCorrect);
+		
+		reportLog("2.4: MobileView Enter correct PIN’ and select ‘Submit’");
+		//mobileLoginPage.enterPINCode(MobileConstants.Mobile_Pin);
+		mobileLoginPage.enterAnAnswer(MobileConstants.Choose_QuestionAnswer);
+
+		mobileLoginPage.clickSubmitBtn();
 		
 //		reportLog("2.2: MobileView Next button shall be displayed in disabled state");
 //		mobileLoginPage.verifyNextButtonIsDisabled();
@@ -132,16 +137,35 @@ public class Handheld_Translation_SIP extends BaseTest {
 		if (ITestResult.SUCCESS == result.getStatus()) {
 
 			reportLog("Deactivate Subject");
-			dashBoardPage = loginPage.loginInApplication(SuperAdminUN, SuperAdminPW);
+			dashBoardPage = loginPage.loginInApplication(formAdminUN, formAdminPW);
 			studyNavigatorDashBoardPage = dashBoardPage.selectHorizontalUpperNavMenuItem(StudyDashBoardPage.class,
 					Constants.NavigateText, Constants.StudyText);
 			studyNavigatorDashBoardPage.searchFilterValueByColumnNameAndValue(Constants.StudyDashBoard_columnName_Subject, subjectName);
 			subjectDetailPage = studyNavigatorDashBoardPage.selectByFirstCell(NewSubjectDetailPage.class);
-			subjectDetailPage.deactivateSubjectConfiguration(SuperAdminUN, SuperAdminPW);
+			subjectDetailPage.deactivateSubjectConfiguration(formAdminUN, formAdminPW);
 			loginPage.logoutApplication();
 			loginPage.verifyUserLogout();
 		} else {
 			Log.error("Deactivation Not needed");
 		}
+	}
+	
+	public void updateSubjectValueInPropertiesFile() throws InterruptedException {
+		//if(ITestResult.SUCCESS==result.getStatus()) {
+			
+			reportLog("Deactivate Subject");
+			dashBoardPage = loginPage.loginInApplication(formAdminUN, formAdminPW);
+			studyNavigatorDashBoardPage = dashBoardPage.selectHorizontalUpperNavMenuItem(StudyDashBoardPage.class,
+					Constants.NavigateText, Constants.StudyText);
+			
+			studyNavigatorDashBoardPage
+					.searchFilterValueByColumnNameAndValue(Constants.StudyDashBoard_columnName_Subject, screeningNum);
+			subjectDetailPage = studyNavigatorDashBoardPage.selectByFirstCell(NewSubjectDetailPage.class);
+			subjectDetailPage.deactivateSubjectConfiguration(formAdminUN, formAdminPW);
+			loginPage.logoutApplication();
+			loginPage.verifyUserLogout();
+			
+			
+		
 	}
 }

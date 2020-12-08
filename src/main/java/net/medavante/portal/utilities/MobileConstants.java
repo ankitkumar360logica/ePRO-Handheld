@@ -28,11 +28,11 @@ public interface MobileConstants {
 	String DigitPinConfirmation = "- 4-digit PIN created";
 	String SecretQuestionText = "- 1 secret question provided";
 
-	String Mobile_Pin = "6667";
-	String Mobile_PinInCorrect = "0000";
+	String Mobile_Pin = "1234";
+	String Mobile_PinInCorrect = "1235";
 	//String Choose_QuestionPin = "What color was your first car?";
 	String Choose_QuestionPin = "What make was your first car?";
 	//String Choose_QuestionnariesQuestionPin = "What is your favorite color?";
-	String Choose_QuestionnariesQuestionPin = "Which country would yu most like to visit?";
+	String Choose_QuestionnariesQuestionPin = "Which country would you most like to visit?";
 	String Choose_QuestionAnswer = "Black";
 }
