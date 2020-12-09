@@ -13,6 +13,7 @@ import org.testng.annotations.Test;
 
 import App.MultiLingual;
 import App.PropReader;
+import net.medavante.mobile.pages.MobileDashBoardPage;
 import net.medavante.portal.dataproviders.DataProviders;
 import net.medavante.portal.pages.studynavigator.NewSubjectDetailPage;
 import net.medavante.portal.pages.studynavigator.StudyDashBoardPage;
@@ -92,7 +93,7 @@ public class Handheld_Translation_SIP extends BaseTest {
 		reportLog(
 				"1.2:MobileView Application launch and verify Register screen with instruction message,register the subject");
 		mobileLoginPage.verifyInstructionMessageText(registerScreenInstruction);
-		mobileLoginPage.configurationForRegisterTheSubject("AE67-5B6F-4F4C-824F");
+		mobileLoginPage.configurationForRegisterTheSubject("4206-5CF2-4278-B9C9");
 		
 		reportLog("2: MobileView Create Identity' screen is displayed with instruction message.");
 		mobileLoginPage.verifyTextOnScreen();
@@ -163,6 +164,34 @@ public class Handheld_Translation_SIP extends BaseTest {
 		
 		reportLog("30.2: MobileView - Sending message pop-up message is displayed and subsequently Message successfully sent pop-up message is displayed and the user is navigated back to the Messages page. ");
 		messgaePage.verifyMessageListPresent();
+		
+		reportLog("31: MobileView - Select a message from the message list and select the delete icon ");
+		messgaePage.clickDeletebtnOnMessageListScreen();
+		
+		reportLog("33: MobileView - Select a message and select the reply icon");
+		messgaePage.clickReplyIcon();
+		messgaePage.verifyReplyInputAndSendButton();
+		
+		reportLog("34.1: MobileView - Select back icon");
+		messgaePage.clickOnBackbtnOnComposeScreen();
+		
+		reportLog("34.2: MobileView - Verify that Exit warning message is displayed along with yes/no options");
+		messgaePage.verifyWarningpopupWithButtons();
+		
+		reportLog("37: MobileView - Select ‘Log an Event");
+		logAnEvent= dashborad.clickOnLogAnEventTab();
+		
+		reportLog("38: MobileView- Select an event’");
+		logAnEvent.clickOnEvent("EQ-5D-5L");
+		
+		reportLog("39: MobileView- Select Start");
+		logAnEvent.clickStartBtn();
+		
+		reportLog("40: MobileView- Complete the Event");
+		logAnEvent.clickStartBtn();
+		
+		reportLog("41: MobileView- Complete the Event");
+		logAnEvent.clickContinueBtn();
 		
 		
 		//		reportLog("2.2: MobileView Next button shall be displayed in disabled state");

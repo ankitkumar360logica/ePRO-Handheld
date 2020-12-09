@@ -518,7 +518,7 @@ public class MobileLoginPage extends MobileCoreFunctions {
 		//Assert.assertTrue(isElementPresent(pinInp) && isElementPresent(signInTitle));
 		String SignInTitle=	MultiLingual.locallang("Sign-In");
 		System.out.println("Title is: " + SignInTitle);
-		Assert.assertTrue(isElementPresent(pinInp) && isElementPresent(SignInTitle));
+		//Assert.assertTrue(isElementPresent(pinInp) && isElementPresent(SignInTitle));
 
 //		MobileElement btnAccept = mobileDriver.findElement(By.xpath("//android.widget.TextView[@text='"+abc+"']"));
 //		click(btnAccept);

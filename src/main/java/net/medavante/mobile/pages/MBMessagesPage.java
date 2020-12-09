@@ -33,6 +33,19 @@ public class MBMessagesPage extends MobileCoreFunctions {
 	@AndroidFindBy(xpath = "//android.widget.ImageButton[@class='android.widget.ImageButton']")
 	private MobileElement backbtnOnComposeMsg;
 	
+	@AndroidFindBy(xpath = "(//android.view.ViewGroup[2][@class='android.view.ViewGroup'])[3]")
+	private MobileElement selectFirstMessageFromList;
+	
+	@AndroidFindBy(xpath = "//android.support.v7.widget.LinearLayoutCompat")
+	private MobileElement deleteMessage;
+	
+	@AndroidFindBy(xpath = "//android.view.ViewGroup//following-sibling::android.view.View")
+	private MobileElement replyIcon;
+	
+	@AndroidFindBy(xpath = "//android.widget.LinearLayout[@resource-id='android:id/parentPanel']")
+	private MobileElement warningPopupWindow;	
+	
+	
 	/* Verify Today Message List is Present */
 	public void verifyMessageListPresent() {
 		_normalWait(DEFAULT_WAIT_ELEMENT);
@@ -100,6 +113,36 @@ public class MBMessagesPage extends MobileCoreFunctions {
 	private MobileElement sendMsgBtn;
 	public void clickOnSendMsgBtn() {
 		click(sendMsgBtn);
+		capturescreen("Screenshot");
+	}
+	
+	public void clickOnDeleteMessageButton() {
+		click(deleteMessage);
+	}
+	
+	public void clickDeletebtnOnMessageListScreen() {
+		click(selectFirstMessageFromList);
+		
+	}
+	
+	public void clickReplyIcon() {
+		click(selectFirstMessageFromList);
+		click(replyIcon);
+	}
+	
+	public void verifyReplyInputAndSendButton() {
+		Assert.assertTrue(isElementPresent(msgSubjectInputField));
+		Assert.assertTrue(isElementPresent(sendMsgBtn));
+		capturescreen("Screenshot");
+
+	}
+	
+	public void verifyWarningpopupWithButtons() {
+		boolean flag = false;
+		if(warningPopupWindow.isDisplayed() && noOptionOnExitPopUp.isDisplayed() && yesOptionOnExitPopUp.isDisplayed()) {
+			flag = true;
+		}
+		Assert.assertTrue(flag);
 		capturescreen("Screenshot");
 	}
 }

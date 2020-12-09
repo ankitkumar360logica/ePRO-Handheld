@@ -187,6 +187,7 @@ public class MobileDashBoardPage extends MobileCoreFunctions {
 		Assert.assertTrue(logAnEventTab.isSelected());
 		MBLogAnEventPage logAnEventPage = new MBLogAnEventPage(mobileDriver);
 		PageFactory.initElements(new AppiumFieldDecorator(mobileDriver), logAnEventPage);
+		capturescreen("Screenshot");
 		return logAnEventPage;
 	}
 
