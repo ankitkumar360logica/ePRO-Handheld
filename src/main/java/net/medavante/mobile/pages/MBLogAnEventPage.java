@@ -39,6 +39,8 @@ public class MBLogAnEventPage extends MobileCoreFunctions{
 				break;
 			}
 		}
+		_normalWait(DEFAULT_WAIT);
+		capturescreen("Screenshot");
 	}
 	
 	public void clickStartBtn() {

@@ -122,7 +122,8 @@ public class MBMessagesPage extends MobileCoreFunctions {
 	
 	public void clickDeletebtnOnMessageListScreen() {
 		click(selectFirstMessageFromList);
-		
+		click(deleteMessage);
+		capturescreen("Screenshot");
 	}
 	
 	public void clickReplyIcon() {

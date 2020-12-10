@@ -39,28 +39,28 @@ public class MobileDashBoardPage extends MobileCoreFunctions {
 	@AndroidFindBy(xpath = "//*[@class='android.support.v7.app.ActionBar$Tab'][4]")
 	private static MobileElement logAnEventTab;
 
-	@AndroidFindBy(xpath = "//android.widget.TextView[@text='My Account']")
+	@AndroidFindBy(xpath = "//*[@class='android.widget.LinearLayout' and @index='1']")
 	private MobileElement myAccount;
 
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Medications']")
 	private MobileElement medications;
 
-	@AndroidFindBy(xpath = "//android.widget.TextView[@text='My Schedule']")
+	@AndroidFindBy(xpath = "//*[@class='android.widget.LinearLayout' and @index='2']")
 	private MobileElement mySchedule;
 
-	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Study Information']")
+	@AndroidFindBy(xpath = "//*[@class='android.widget.LinearLayout' and @index='3']")
 	private MobileElement studyInformation;
 
-	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Contacts']")
+	@AndroidFindBy(xpath = "//*[@class='android.widget.LinearLayout' and @index='4']")
 	private MobileElement contacts;
 
-	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Settings']")
+	@AndroidFindBy(xpath = "//*[@class='android.widget.LinearLayout' and @index='5']")
 	private MobileElement settings;
 
-	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Help & Tutorial']")
+	@AndroidFindBy(xpath = "//*[@class='android.widget.LinearLayout' and @index='6']")
 	private MobileElement helpTutorial;
 
-	@AndroidFindBy(xpath = "//android.widget.TextView[@text='About Us']")
+	@AndroidFindBy(xpath = "//*[@class='android.widget.LinearLayout' and @index='7']")
 	private MobileElement aboutUs;
 
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Exit Application']")

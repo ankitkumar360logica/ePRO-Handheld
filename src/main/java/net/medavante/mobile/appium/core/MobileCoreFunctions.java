@@ -49,6 +49,7 @@ public class MobileCoreFunctions {
 	public int DEFAULT_WAIT_4_ELEMENT = 15;
 	public int DEFAULT_WAIT_2_ELEMENT = 50;
 	public int DEFAULT_WAIT_ELEMENT = 10000;
+	public int DEFAULT_WAIT = 3000;
 	
 	public MobileCoreFunctions(AppiumDriver<MobileElement> driver) {
 		this.mobileDriver = driver;

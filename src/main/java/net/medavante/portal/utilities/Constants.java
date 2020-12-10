@@ -304,7 +304,7 @@ public class Constants {
 	public static final String MarkAsNotCompletedLabel = "Mark as 'Not completed'";
 	public static final String MarkAsNotAdministeredLabel = "Mark as 'Not Administered'";
 
-	public static final String subjectLanguage = "Russian";
+	public static final String subjectLanguage = "German";
 	//public static final String subjectLanguage = "Spanish (Chile)";
 
 

@@ -33,31 +33,31 @@ public class MobileSideMenuPage extends MobileCoreFunctions {
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Participant Version']")
 	private MobileElement participantVersionText;
 
-	@AndroidFindBy(xpath = "//android.widget.TextView[@text='My Account']")
+	@AndroidFindBy(xpath = "(//android.widget.ListView/child::android.widget.LinearLayout[1])[2]")
 	private MobileElement myAccount;
 
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Medications']")
 	private MobileElement medications;
 
-	@AndroidFindBy(xpath = "//android.widget.TextView[@text='My Schedule']")
+	@AndroidFindBy(xpath = "(//android.widget.ListView/child::android.widget.LinearLayout[2])[2]")
 	private MobileElement mySchedule;
 
-	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Study Information']")
+	@AndroidFindBy(xpath = "(//android.widget.ListView/child::android.widget.LinearLayout[3])[2]")
 	private MobileElement studyInformation;
 
-	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Contacts']")
+	@AndroidFindBy(xpath = "(//android.widget.ListView/child::android.widget.LinearLayout[4])[2]")
 	private MobileElement contacts;
 
-	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Settings']")
+	@AndroidFindBy(xpath = "(//android.widget.ListView/child::android.widget.LinearLayout[5])[2]")
 	private MobileElement settings;
 
-	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Help & Tutorials']")
+	@AndroidFindBy(xpath = "(//android.widget.ListView/child::android.widget.LinearLayout[6])[2]")
 	private MobileElement helpTutorial;
 
-	@AndroidFindBy(xpath = "//android.widget.TextView[@text='About Us']")
+	@AndroidFindBy(xpath = "(//android.widget.ListView/child::android.widget.LinearLayout[7])[2]")
 	private MobileElement aboutUs;
 
-	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Exit Application']")
+	@AndroidFindBy(xpath = "//android.view.ViewGroup/android.widget.ImageView")
 	private MobileElement exitApplicationIcon;
 
 	@AndroidFindBy(xpath = "//*[@class='android.support.v7.app.ActionBar$Tab'][1]")
@@ -122,6 +122,12 @@ public class MobileSideMenuPage extends MobileCoreFunctions {
 	
 	@AndroidFindBy(xpath = "//android.view.ViewGroup[2]//android.widget.TextView[12]")
 	private MobileElement deviceModel;
+	
+	@AndroidFindBy(xpath = "(//android.view.ViewGroup/android.widget.TextView)[3]")
+	private MobileElement changeColorTheme;
+	
+	@AndroidFindBy(xpath = "//android.widget.LinearLayout/android.widget.Button")
+	private MobileElement cancelBTnOnchangeColorThemePopup;
 
 	public void verifyHomePageDisplay() {
 		waitForElementToBecomeVisible(homeTab, DEFAULT_WAIT_2_ELEMENT);
@@ -157,26 +163,61 @@ public class MobileSideMenuPage extends MobileCoreFunctions {
 		Assert.assertTrue( myAccount.isEnabled() && medications.isEnabled() && mySchedule.isEnabled()
 				&& studyInformation.isEnabled() && contacts.isEnabled() && settings.isEnabled()
 				&& helpTutorial.isEnabled() && aboutUs.isEnabled());
+		 capturescreen("Screenshot");
 	}
 
 	public void clickOnAboutUs() {
 		click(aboutUs);
-		Assert.assertTrue(aboutUs.isEnabled());
+		capturescreen("Screenshot");
+		click(menuBackIcon);
+	}
+	
+	public void clickOnContacts() {
+		click(contacts);
+		capturescreen("Screenshot");
+		click(menuBackIcon);
 	}
 
+	public void clickOnMySchedule() {
+		click(mySchedule);
+		capturescreen("Screenshot");
+		click(menuBackIcon);
+	}
+	
 	public void clickOnMyAccount() {
 		click(myAccount);
-		Assert.assertTrue(myAccount.isEnabled());
+		Assert.assertTrue(menuBackIcon.isEnabled());
+		capturescreen("Screenshot");
+		click(menuBackIcon);
 	}
 
 	public void clickOnStudyInformation() {
 		click(studyInformation);
-		Assert.assertTrue(studyInformation.isEnabled());
+		capturescreen("Screenshot");
+		click(menuBackIcon);
+
 	}
 
 	public void clickOnSettings() {
 		click(settings);
-		Assert.assertTrue(settings.isEnabled());
+		capturescreen("Screenshot");
+		click(menuBackIcon);
+	}
+	
+	public void clickOnChangeColorTheme() {
+		click(changeColorTheme);
+		capturescreen("Screenshot");
+		Assert.assertTrue(cancelBTnOnchangeColorThemePopup.isDisplayed());
+	}
+	
+	public void exitFromColorThemePopup() {
+		click(cancelBTnOnchangeColorThemePopup);
+	}
+	
+	public void helpAndTutorials() {
+		click(helpTutorial);
+		capturescreen("Screenshot");
+
 	}
 
 	public void clickOnMedications() {
@@ -189,9 +230,7 @@ public class MobileSideMenuPage extends MobileCoreFunctions {
 
 	public void clickOnExitApplication() throws Exception {
 		waitForElementToBecomeVisible(exitApplicationIcon, DEFAULT_WAIT_ELEMENT);
-		click(exitApplicationIcon);
-		verifyPageIsDisplayAndCaptureTheScreenShot();
-				
+		click(exitApplicationIcon);				
 	}
 
 	/* Verify user exit with application */
