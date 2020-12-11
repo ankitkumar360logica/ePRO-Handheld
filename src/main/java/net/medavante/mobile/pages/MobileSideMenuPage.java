@@ -129,6 +129,11 @@ public class MobileSideMenuPage extends MobileCoreFunctions {
 	@AndroidFindBy(xpath = "//android.widget.LinearLayout/android.widget.Button")
 	private MobileElement cancelBTnOnchangeColorThemePopup;
 
+	public void clickHomePageIcon() {
+		click(homeTab);
+
+	}
+	
 	public void verifyHomePageDisplay() {
 		waitForElementToBecomeVisible(homeTab, DEFAULT_WAIT_2_ELEMENT);
 		Assert.assertTrue(isElementPresent(homeTab));

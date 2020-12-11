@@ -116,6 +116,11 @@ public class MBMessagesPage extends MobileCoreFunctions {
 		capturescreen("Screenshot");
 	}
 	
+	public void longPressOnSendMsgBtn() {
+		longPress(sendMsgBtn);
+		capturescreen("Screenshot");
+	}
+	
 	public void clickOnDeleteMessageButton() {
 		click(deleteMessage);
 	}

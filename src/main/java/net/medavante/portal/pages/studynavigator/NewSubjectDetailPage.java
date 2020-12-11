@@ -293,6 +293,13 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 
 	@FindBy(xpath = "//div[contains(@class,'in') and @role='dialog']//div[text()='No']")
 	private WebElement popUpNoBTN;
+	
+	@FindBy(xpath = "//input[@id='message-subject-input']")
+	private WebElement messageSubjectInputField;
+	
+	@FindBy(xpath = "//textarea[@id='message-text-input']")
+	private WebElement messageTextArea;
+	
 
 	// =====================Appointment Popup Function===================//
 
@@ -422,6 +429,9 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 
 	@FindBy(css = "div[class='section-header'] span[data-ng-click ='showNewMessageDialog()']")
 	private WebElement sendMessageButton;
+	
+	@FindBy(xpath = "//input[@id='recipient-patient-checkbox']")
+	private WebElement selectRecepient;
 
 	@FindBy(xpath = "//div[@data-ng-show='canManageMessages']//label[contains(text(),'Open')]/parent::span/span[@class='btn circle-button btn-white']")
 	private WebElement openButtonUnderMessageArea;
@@ -8579,6 +8589,24 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		}
 		Assert.assertTrue(flag);
 		reportInfo();
+	}
+	
+	public void enterMessageSubject(String subject) {
+		messageSubjectInputField.sendKeys(subject);
+
+	}
+	
+	public void enterMessagetext(String messageText) {
+		messageTextArea.sendKeys(messageText);
+	}
+	
+	public void sendMessage() {
+		clickOnsendMessageButton();
+		selectRecipientUnderModalWindow("Subject");
+		enterMessageSubject("test");
+		enterMessagetext("1234");
+		clickOnSendButtonOnModelWindow();
+		
 	}
 	
 	

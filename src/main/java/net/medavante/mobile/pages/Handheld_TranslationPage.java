@@ -818,4 +818,6 @@ public class Handheld_TranslationPage extends MobileCoreFunctions {
 		clickBackButton();
 		_normalWait(DEFAULT_WAIT_ELEMENT);
 	}
+	
+	
 }

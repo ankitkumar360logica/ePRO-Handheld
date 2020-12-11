@@ -2,13 +2,19 @@ package net.medavante.mobile.pages;
 
 import java.io.IOException;
 import java.time.Duration;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+
+import com.google.common.collect.ImmutableMap;
 
 import App.MultiLingual;
 import io.appium.java_client.AppiumDriver;
@@ -60,7 +66,7 @@ public class MobileLoginPage extends MobileCoreFunctions {
 	@AndroidFindBy(xpath = "//android.widget.EditText[@text='Registration Code']")
 	private MobileElement registrationCodeInp;
 
-	@AndroidFindBy(xpath = "//android.widget.Button[@text='Submit']")
+	@AndroidFindBy(xpath = "//android.view.ViewGroup/android.widget.Button")
 	private MobileElement submitBtn;
 
 	@AndroidFindBy(xpath = "//android.view.ViewGroup/android.widget.Button")
@@ -117,8 +123,11 @@ public class MobileLoginPage extends MobileCoreFunctions {
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Scan the code']")
 	private MobileElement scanTheCodeBtn;
 
-	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Choose a question']")
+	@AndroidFindBy(xpath = "(//android.widget.ListView/android.widget.LinearLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup)[1]")
 	private MobileElement choosAQuestion;
+	
+	@AndroidFindBy(xpath = "(//android.widget.ListView/android.widget.TextView)[1]")
+	private MobileElement selectFirstQuestion;
 
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Enter the code']")
 	private MobileElement enterTheCodeBtn;
@@ -142,7 +151,8 @@ public class MobileLoginPage extends MobileCoreFunctions {
 	private MobileElement successIndicatorTickMarkIcon;
 
 	//@AndroidFindBy(xpath = "//android.widget.TextView[@text='Accept']")
-	@AndroidFindBy(xpath = "//*[@class='_highlighter-box_619e8 _inspected-element-box_619e8']")
+	@AndroidFindBy(xpath = "(//android.view.ViewGroup/android.widget.TextView)[4]")
+	//@AndroidFindBy(xpath = "(//android.view.ViewGroup/android.view.ViewGroup)[12]")
 	private MobileElement acceptBtn;
 
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Participant Version']")
@@ -357,6 +367,8 @@ public class MobileLoginPage extends MobileCoreFunctions {
 		_normalWait(DEFAULT_WAIT_2_ELEMENT);
 		click(continueBtn);
 		capturescreen("Screenshot");
+		_normalWait(globalWaitTime);
+
 	}
 	
 //	public void clickOnContinueButton() throws IOException {
@@ -375,23 +387,24 @@ public class MobileLoginPage extends MobileCoreFunctions {
 	/**
 	 * Click on accept button
 	 */
-//	public void clickOnAcceptBtn() {
-//		//longPress(acceptBtn);
-//		click(acceptBtn);
-//		_normalWait(DEFAULT_WAIT_ELEMENT);
-//	}
-	
-	public void clickOnAcceptBtn() throws IOException {
-		String abc=	MultiLingual.locallang("Accept");
-		System.out.println("Button Name is " + abc);
-		//String btn = (MultiLingual.locallang("Accept"));
-		MobileElement btnAccept = mobileDriver.findElement(By.xpath("//android.widget.TextView[@text='"+abc+"']"));
+	public void clickOnAcceptBtn() {
 		//longPress(acceptBtn);
-		click(btnAccept);
-		capturescreen("Screenshot");
-		
+		waitForElementToBecomeVisible(acceptBtn, globalWaitTime);
+		click(acceptBtn);
 		_normalWait(DEFAULT_WAIT_ELEMENT);
 	}
+	
+//	public void clickOnAcceptBtn() throws IOException {
+//		String abc=	MultiLingual.locallang("Accept");
+//		System.out.println("Button Name is " + abc);
+//		//String btn = (MultiLingual.locallang("Accept"));
+//		MobileElement btnAccept = mobileDriver.findElement(By.xpath("//android.widget.TextView[@text='"+abc+"']"));
+//		//longPress(acceptBtn);
+//		click(btnAccept);
+//		capturescreen("Screenshot");
+//		
+//		_normalWait(DEFAULT_WAIT_ELEMENT);
+//	}
 
 	/**
 	 * Verify Terms and conditions page is display
@@ -432,6 +445,14 @@ public class MobileLoginPage extends MobileCoreFunctions {
 	 */
 	public void clickOnSubmitButton() {
 		click(submitBtn);
+		//_normalWait(globalWaitTime);
+		_normalWait(DEFAULT_WAIT_ELEMENT);
+		
+	}
+	
+	public void clickOnSubmitButtonToCaptureScreenshot() {
+		click(submitBtn);
+		capturescreen("Screenshot");
 		//_normalWait(globalWaitTime);
 		_normalWait(DEFAULT_WAIT_ELEMENT);
 		
@@ -603,6 +624,7 @@ public class MobileLoginPage extends MobileCoreFunctions {
 			waitForElementToBecomeVisible(nextBtn, 30);
 			click(nextBtn);
 			_normalWait(globalWaitTime);
+			
 	}
 	
 	public void clickOnNextButtonToCaptureScreenshot() {
@@ -654,6 +676,7 @@ public class MobileLoginPage extends MobileCoreFunctions {
 		clickOnNextButton();
 		_normalWait(DEFAULT_WAIT);
 		}
+		 capturescreen("Screenshot");
 	}
 
 	/**
@@ -720,39 +743,28 @@ public class MobileLoginPage extends MobileCoreFunctions {
 		 capturescreen("Screenshot");
 	}
 
-//	public void clickOnChooseAQuestionOption() {
-//		waitForElementToBecomeVisible(choosAQuestion, 30);
-//		click(choosAQuestion)
-//	}
-
-	public void clickOnChooseAQuestionOption() throws IOException {
-		 capturescreen("Screenshot");
-		String chooseQuestion=	MultiLingual.locallang("ChooseAQuestionOption");
-		System.out.println("Watermark text for drop down is: " + chooseQuestion);
-		MobileElement chooseAQuestion = mobileDriver.findElement(By.xpath("//android.widget.TextView[@text='"+chooseQuestion+"']"));
-		//waitForElementToBecomeVisible(choosAQuestion, 30);
-		_normalWait(globalWaitTime);
-		click(chooseAQuestion);
-		_normalWait(globalWaitTime);
-
+	public void clickOnChooseAQuestionOption() {
+		waitForElementToBecomeVisible(choosAQuestion, 30);
+		click(choosAQuestion);
+		_normalWait(DEFAULT_WAIT_ELEMENT);
+		capturescreen("Screenshot");
 	}
+
+//	public void clickOnChooseAQuestionOption() throws IOException {
+//		 capturescreen("Screenshot");
+//		String chooseQuestion=	MultiLingual.locallang("ChooseAQuestionOption");
+//		System.out.println("Watermark text for drop down is: " + chooseQuestion);
+//		MobileElement chooseAQuestion = mobileDriver.findElement(By.xpath("//android.widget.TextView[@text='"+chooseQuestion+"']"));
+//		//waitForElementToBecomeVisible(choosAQuestion, 30);
+//		_normalWait(globalWaitTime);
+//		click(chooseAQuestion);
+//		_normalWait(globalWaitTime);
+//
+//	}
 	
 	public void clickOnCancelButton() {
 		click(cancelBtn);
 	}
-
-//	public void chooseAQuestion(String question) {
-//		_normalWait(globalWaitTime);
-//		click(choosAQuestion);	
-//		scrollFromTopToBottom();
-//		WebElement questionText = mobileDriver
-//		.findElement(By.xpath(String.format("//android.widget.FrameLayout//android.widget.TextView[@text='%s']", question)));
-//		if (questionText.isDisplayed()) {
-//			waitForElementToBecomeVisible(questionText, globalWaitTime);
-//			click(questionText);
-//		}
-//
-//	}
 
 	public void chooseAQuestion(String question) {
 		_normalWait(globalWaitTime);
@@ -766,22 +778,36 @@ public class MobileLoginPage extends MobileCoreFunctions {
 		}
 
 	}
-	
-	public void chooseAQuestion() throws IOException {
-		String question = MultiLingual.locallang("ChooseQuestionPIN");
-		System.out.println("Question to be selected is: " + question);
+
+	public void chooseAQuestion() {
 		_normalWait(globalWaitTime);
 		//click(choosAQuestion);	
-//		scrollFromTopToBottom();
+		scrollFromTopToBottom();
 //		WebElement questionText = mobileDriver
 //		.findElement(By.xpath(String.format("//android.widget.FrameLayout//android.widget.TextView[@text='%s']", question)));
-		MobileElement questionText = mobileDriver.findElement(By.xpath("//android.widget.FrameLayout//android.widget.TextView[@text='"+question+"']"));
-		if (questionText.isDisplayed()) {
-			waitForElementToBecomeVisible(questionText, globalWaitTime);
-			click(questionText);
+//		if (questionText.isDisplayed()) {
+			waitForElementToBecomeVisible(selectFirstQuestion, globalWaitTime);
+			click(selectFirstQuestion);
+			_normalWait(globalWaitTime);
+
 		}
 
-	}
+	
+	
+//	public void chooseAQuestion(String question) throws IOException {
+
+//		_normalWait(globalWaitTime);
+//		//click(choosAQuestion);	
+////		scrollFromTopToBottom();
+////		WebElement questionText = mobileDriver
+////		.findElement(By.xpath(String.format("//android.widget.FrameLayout//android.widget.TextView[@text='%s']", question)));
+//		MobileElement questionText = mobileDriver.findElement(By.xpath("//android.widget.FrameLayout//android.widget.TextView[@text='"+question+"']"));
+//		if (questionText.isDisplayed()) {
+//			waitForElementToBecomeVisible(questionText, globalWaitTime);
+//			click(questionText);
+//		}
+//
+//	}
 	
 	public void verifyQuestionText(String question) {
 		WebElement questionText = mobileDriver
@@ -891,4 +917,64 @@ public class MobileLoginPage extends MobileCoreFunctions {
 		clickBackButton();
 		_normalWait(DEFAULT_WAIT_ELEMENT);
 	}
+	
+	/**
+	 * This will turn off the Android device Wifi
+ 	 */
+	public void WifiOff() {
+		List<String> disableWiFi = Arrays.asList(
+				"wifi",
+				"disable"
+		);
+		Map<String, Object> disableWiFiCmd = ImmutableMap.of(
+				"command", "svc",
+				"args", disableWiFi
+		);
+
+		mobileDriver.executeScript("mobile: shell", disableWiFiCmd);
+
+	}
+
+	/**
+	 * This will turn off the Android device Wifi
+	 */
+	public void WifiOn() throws InterruptedException {
+		List<String> disableWiFi = Arrays.asList(
+				"wifi",
+				"enable"
+		);
+		Map<String, Object> enableWiFiCmd = ImmutableMap.of(
+				"command", "svc",
+				"args", disableWiFi
+		);
+		mobileDriver.executeScript("mobile: shell", enableWiFiCmd);
+		Thread.sleep(5000);
+
+	}
+	
+	/**
+//	 * Hold and scroll down to refresh the page
+//	 */
+//	public void scrollDownToRefreshPage() {
+//
+//		Dimension size;
+//		size = mobileDriver.manage().window().getSize();
+//
+//		//Get X Y Coordinates for starting point touch action
+//		int startX = (int) (size.width * 0.50);
+//		int startY = (int) (size.height * 0.30);
+//
+//		//Get X Y Coordinates for end point touch action
+//		int endX = (int) (size.width * 0.50);
+//		int endY = (int) (size.height * 0.70);
+//
+//		try {
+//			new TouchAction(mobileDriver).press(PointOption.point(startX, startY)).waitAction(WaitOptions.waitOptions(ofSeconds(1)))
+//					.moveTo(PointOption.point(endX, endY)).release().perform();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			System.out.println("unable to scroll");
+//		}
+//
+//	}
 }
