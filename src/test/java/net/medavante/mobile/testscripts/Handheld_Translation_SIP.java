@@ -186,7 +186,7 @@ public class Handheld_Translation_SIP extends BaseTest {
 		
 		reportLog("1.2:MobileView Application launch and verify Register screen with instruction message,register the subject");
 		mobileLoginPage.verifyInstructionMessageText(registerScreenInstruction);
-		mobileLoginPage.configurationForRegisterTheSubject("208E-8649-4EA8-B359");
+		mobileLoginPage.configurationForRegisterTheSubject(registrationCode);
 		
 		reportLog("2: MobileView Select Accept");
 		mobileLoginPage.clickOnAcceptBtn(); 	
