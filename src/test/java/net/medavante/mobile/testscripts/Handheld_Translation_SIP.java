@@ -183,9 +183,6 @@ public class Handheld_Translation_SIP extends BaseTest {
 
 		reportLog("1.1:MobileView As a Participant logged into the application");
 		mobileLoginPage = androidSetUp();
-		mobileLoginPage.WifiOff();
-		Thread.sleep(10000);
-		mobileLoginPage.WifiOn();
 		
 		reportLog("1.2:MobileView Application launch and verify Register screen with instruction message,register the subject");
 		mobileLoginPage.verifyInstructionMessageText(registerScreenInstruction);
@@ -588,14 +585,14 @@ public class Handheld_Translation_SIP extends BaseTest {
 		
 	public void deactivateSubject(String subjectName) throws InterruptedException {
 			reportLog("Deactivate Subject");
-			dashBoardPage = loginPage.loginInApplication(SuperAdminUN, SuperAdminPW);
+			dashBoardPage = loginPage.loginInApplication(FormUserName, Form_Password);
 			studyNavigatorDashBoardPage = dashBoardPage.selectHorizontalUpperNavMenuItem(StudyDashBoardPage.class,
 					Constants.NavigateText, Constants.StudyText);
 			
 			studyNavigatorDashBoardPage
 					.searchFilterValueByColumnNameAndValue(Constants.StudyDashBoard_columnName_Subject, subjectName);
 			subjectDetailPage = studyNavigatorDashBoardPage.clickOnSearchedSubject(subjectName);
-			subjectDetailPage.deactivateSubjectConfiguration(SuperAdminUN, SuperAdminPW);
+			subjectDetailPage.deactivateSubjectConfiguration(FormUserName, Form_Password);
 			loginPage.logoutApplication();
 			loginPage.verifyUserLogout();
 	}
