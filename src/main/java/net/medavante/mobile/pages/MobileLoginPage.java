@@ -932,6 +932,7 @@ public class MobileLoginPage extends MobileCoreFunctions {
 		);
 
 		mobileDriver.executeScript("mobile: shell", disableWiFiCmd);
+		_normalWait(DEFAULT_WAIT_ELEMENT);
 
 	}
 
@@ -948,7 +949,7 @@ public class MobileLoginPage extends MobileCoreFunctions {
 				"args", disableWiFi
 		);
 		mobileDriver.executeScript("mobile: shell", enableWiFiCmd);
-		Thread.sleep(5000);
+		_normalWait(DEFAULT_WAIT_ELEMENT);
 
 	}
 	

@@ -75,6 +75,8 @@ public class Handheld_Translation_SIP extends BaseTest {
 		visitName = properties.getProperty("EPROMandatoryVisit");
 
 		reportLog("Go to Portal Side to Create Subject for Step no 92");
+		studyNavigatorDashBoardPage = dashBoardPage.selectHorizontalUpperNavMenuItem(StudyDashBoardPage.class,
+				Constants.NavigateText, Constants.StudyText);
 		studyNavigatorDashBoardPage.creatingSubjectForPreRequisite(studyName, Constants.testSite,
 				subjectNameforStep92);
 		System.out.println(subjectNameforStep92);
@@ -94,6 +96,8 @@ public class Handheld_Translation_SIP extends BaseTest {
 		visitName = properties.getProperty("EPROMandatoryVisit");
 
 		reportLog("Go to Portal Side to Create Subject for Step no 99");
+		studyNavigatorDashBoardPage = dashBoardPage.selectHorizontalUpperNavMenuItem(StudyDashBoardPage.class,
+				Constants.NavigateText, Constants.StudyText);
 		studyNavigatorDashBoardPage.creatingSubjectForPreRequisite(studyName, Constants.testSite,
 				subjectNameforStep99);
 		System.out.println(subjectNameforStep99);
@@ -114,6 +118,8 @@ public class Handheld_Translation_SIP extends BaseTest {
 		observerRelation1 = properties.getProperty("Auto_Observer_Relation1");
 
 		reportLog("Go to Portal Side to Create Subject for Observer");
+		studyNavigatorDashBoardPage = dashBoardPage.selectHorizontalUpperNavMenuItem(StudyDashBoardPage.class,
+				Constants.NavigateText, Constants.StudyText);
 		studyNavigatorDashBoardPage.creatingSubjectForPreRequisite(studyName, Constants.testSite,
 				subjectNameforObserver);
 		System.out.println(subjectNameforObserver);
@@ -138,7 +144,7 @@ public class Handheld_Translation_SIP extends BaseTest {
 		
 		studyNavigatorDashBoardPage = dashBoardPage.selectHorizontalUpperNavMenuItem(StudyDashBoardPage.class,
 				Constants.NavigateText, Constants.StudyText);
-
+		studyNavigatorDashBoardPage.selectStudy(studyName, Constants.testSite);
 		studyNavigatorDashBoardPage.searchFilterValueByColumnNameAndValue(Constants.StudyDashBoard_columnName_Subject,
 				subjectName);
 		subjectDetailPage = studyNavigatorDashBoardPage.clickOnSearchedSubject(subjectName);
@@ -157,6 +163,7 @@ public class Handheld_Translation_SIP extends BaseTest {
 		
 		studyNavigatorDashBoardPage = dashBoardPage.selectHorizontalUpperNavMenuItem(StudyDashBoardPage.class,
 				Constants.NavigateText, Constants.StudyText);
+		studyNavigatorDashBoardPage.selectStudy(studyName, Constants.testSite);
 
 		studyNavigatorDashBoardPage.searchFilterValueByColumnNameAndValue(Constants.StudyDashBoard_columnName_Subject,
 				subjectName);
@@ -233,8 +240,12 @@ public class Handheld_Translation_SIP extends BaseTest {
 //		reportLog("10:MobileView Stay inactive for 15 mins");
 //		Thread.sleep(150000);
 		
+
 		reportLog("11:MobileView Disconnect from the internet and repeat step 9");
 		mobileLoginPage.WifiOff();
+		sideMenu = dashborad.clickOnHumBergerMenuAndOpenLeftPanel();
+		sideMenu.clickOnExitApplication();
+		mobileLoginPage = androidSetUp();
 		mobileLoginPage.enterPINCode(MobileConstants.Mobile_Pin);
 		mobileLoginPage.clickOnSubmitButtonToCaptureScreenshot();
 		
@@ -588,7 +599,7 @@ public class Handheld_Translation_SIP extends BaseTest {
 			dashBoardPage = loginPage.loginInApplication(FormUserName, Form_Password);
 			studyNavigatorDashBoardPage = dashBoardPage.selectHorizontalUpperNavMenuItem(StudyDashBoardPage.class,
 					Constants.NavigateText, Constants.StudyText);
-			
+			studyNavigatorDashBoardPage.selectStudy(studyName, Constants.testSite);
 			studyNavigatorDashBoardPage
 					.searchFilterValueByColumnNameAndValue(Constants.StudyDashBoard_columnName_Subject, subjectName);
 			subjectDetailPage = studyNavigatorDashBoardPage.clickOnSearchedSubject(subjectName);
