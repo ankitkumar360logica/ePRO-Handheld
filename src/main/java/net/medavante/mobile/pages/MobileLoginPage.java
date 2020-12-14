@@ -259,6 +259,16 @@ public class MobileLoginPage extends MobileCoreFunctions {
 		setText(pinInp, pinNum);
 		waitForElementToBecomeVisible(submitBtn, globalWaitTime);
 		click(submitBtn);
+		//waitForElementToBecomeVisible(continueBtn, globalWaitTime);
+
+		//capturescreen("Screenshot");
+		MobileDashBoardPage dashboard = new MobileDashBoardPage(mobileDriver);
+		PageFactory.initElements(new AppiumFieldDecorator(mobileDriver), dashboard);
+		return dashboard;
+		
+	}
+	
+	public MobileDashBoardPage mobiledashboard() {
 		MobileDashBoardPage dashboard = new MobileDashBoardPage(mobileDriver);
 		PageFactory.initElements(new AppiumFieldDecorator(mobileDriver), dashboard);
 		return dashboard;
@@ -366,6 +376,7 @@ public class MobileLoginPage extends MobileCoreFunctions {
 		waitForElementToBecomeVisible(continueBtn, globalWaitTime);
 		_normalWait(DEFAULT_WAIT_2_ELEMENT);
 		click(continueBtn);
+		waitForElementToBecomeVisible(continueBtn, globalWaitTime);
 		capturescreen("Screenshot");
 		_normalWait(globalWaitTime);
 
@@ -390,6 +401,7 @@ public class MobileLoginPage extends MobileCoreFunctions {
 	public void clickOnAcceptBtn() {
 		//longPress(acceptBtn);
 		waitForElementToBecomeVisible(acceptBtn, globalWaitTime);
+		capturescreen("Screenshot");
 		click(acceptBtn);
 		_normalWait(DEFAULT_WAIT_ELEMENT);
 	}
@@ -452,9 +464,23 @@ public class MobileLoginPage extends MobileCoreFunctions {
 	
 	public void clickOnSubmitButtonToCaptureScreenshot() {
 		click(submitBtn);
+		_normalWait(DEFAULT_WAIT);
+		waitForElementToBecomeVisible(continueBtn, globalWaitTime);
+
 		capturescreen("Screenshot");
 		//_normalWait(globalWaitTime);
 		_normalWait(DEFAULT_WAIT_ELEMENT);
+		
+	}
+	
+	public void clickOnSubmitButtonToCaptureScreenshot1() {
+		click(submitBtn);
+		_normalWait(DEFAULT_WAIT);
+		waitForElementToBecomeVisible(continueBtn, globalWaitTime);
+
+		capturescreen("Screenshot");
+		//_normalWait(globalWaitTime);
+		_normalWait(DEFAULT_WAIT);
 		
 	}
 	
@@ -954,28 +980,38 @@ public class MobileLoginPage extends MobileCoreFunctions {
 	}
 	
 	/**
-//	 * Hold and scroll down to refresh the page
-//	 */
-//	public void scrollDownToRefreshPage() {
-//
-//		Dimension size;
-//		size = mobileDriver.manage().window().getSize();
-//
-//		//Get X Y Coordinates for starting point touch action
-//		int startX = (int) (size.width * 0.50);
-//		int startY = (int) (size.height * 0.30);
-//
-//		//Get X Y Coordinates for end point touch action
-//		int endX = (int) (size.width * 0.50);
-//		int endY = (int) (size.height * 0.70);
-//
-//		try {
-//			new TouchAction(mobileDriver).press(PointOption.point(startX, startY)).waitAction(WaitOptions.waitOptions(ofSeconds(1)))
-//					.moveTo(PointOption.point(endX, endY)).release().perform();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			System.out.println("unable to scroll");
-//		}
-//
-//	}
+	 * Hold and scroll down to refresh the page
+	 */
+	public void scrollDownToRefreshPage() {
+       _normalWait(DEFAULT_WAIT);
+		Dimension size;
+		size = mobileDriver.manage().window().getSize();
+
+		//Get X Y Coordinates for starting point touch action
+		int startX = (int) (size.width * 0.50);
+		int startY = (int) (size.height * 0.30);
+
+		//Get X Y Coordinates for end point touch action
+		int endX = (int) (size.width * 0.50);
+		int endY = (int) (size.height * 0.70);
+
+		try {
+			new TouchAction(mobileDriver).press(PointOption.point(startX, startY)).moveTo(PointOption.point(endX, endY)).release().perform();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("unable to scroll");
+		}
+	       _normalWait(DEFAULT_WAIT);
+
+		capturescreen("Screenshot");
+
+	}
+	
+	public void tapOnViewIcon(int x, int y) {
+
+		TouchAction action = new TouchAction(mobileDriver);
+		action.press (PointOption.point(x,y)).release().perform();
+		capturescreen("Screenshot");
+		
+	}
 }

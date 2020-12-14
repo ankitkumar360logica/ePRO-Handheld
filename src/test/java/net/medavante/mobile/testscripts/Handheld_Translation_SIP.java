@@ -7,6 +7,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 
+import net.medavante.mobile.appium.core.MobileDriver;
+import net.medavante.mobile.pages.MobileDashBoardPage;
+import net.medavante.mobile.pages.MobileLoginPage;
 import net.medavante.portal.dataproviders.DataProviders;
 import net.medavante.portal.pages.studynavigator.StudyDashBoardPage;
 import net.medavante.portal.selenium.core.BaseTest;
@@ -61,6 +64,8 @@ public class Handheld_Translation_SIP extends BaseTest {
 		getTestDataForStep99();
 		
 		addAnObserverToSubject();
+		
+		//sendingMessage();
 		
 		loginPage.logoutApplication();
 		loginPage.verifyUserLogout();
@@ -190,13 +195,25 @@ public class Handheld_Translation_SIP extends BaseTest {
 
 		reportLog("1.1:MobileView As a Participant logged into the application");
 		mobileLoginPage = androidSetUp();
+		//mobileLoginPage.WifiOn();
 		
 		reportLog("1.2:MobileView Application launch and verify Register screen with instruction message,register the subject");
 		mobileLoginPage.verifyInstructionMessageText(registerScreenInstruction);
 		mobileLoginPage.configurationForRegisterTheSubject(registrationCode);
 		
 		reportLog("2: MobileView Select Accept");
-		mobileLoginPage.clickOnAcceptBtn(); 	
+		mobileLoginPage.clickOnAcceptBtn(); 
+		//MobileDriver.closeApp();
+		//mobileLoginPage = androidSetUp();
+		reportLog("3: MobileView Enter numerical value ‘1234’ in ‘PIN’ and ‘1234’ in ‘Confirm PIN’ and select view option.");
+		mobileLoginPage.enterPINCode(MobileConstants.Mobile_Pin);
+		mobileLoginPage.tapOnViewIcon(920, 728);
+		mobileLoginPage.enterConfirmPINCode(MobileConstants.Mobile_Pin);
+		mobileLoginPage.tapOnViewIcon(923, 901);
+		
+		mobileLoginPage.tapOnViewIcon(920, 728);
+		mobileLoginPage.tapOnViewIcon(923, 901);
+
 		
 		reportLog("4:MobileView Enter numerical value ‘1234’ in ‘PIN’ and ‘1235’ in ‘Confirm PIN’ and select Next");
 		mobileLoginPage.enterPINCode(MobileConstants.Mobile_Pin);
@@ -234,48 +251,62 @@ public class Handheld_Translation_SIP extends BaseTest {
 		mobileLoginPage.clickOnSubmitButtonToCaptureScreenshot();
 		
 		reportLog("9:MobileView Enter numerical value ‘1234’ and select ‘Submit’");
-		mobileLoginPage.enterPINCode(MobileConstants.Mobile_Pin);
-		mobileLoginPage.clickOnSubmitButtonToCaptureScreenshot();
-		
-//		reportLog("10:MobileView Stay inactive for 15 mins");
-//		Thread.sleep(150000);
-		
+		//mobileLoginPage.enterPINCode(MobileConstants.Mobile_Pin);
+		//mobileLoginPage.clickOnSubmitButtonToCaptureScreenshot();
+		dashborad = mobileLoginPage.loginUser(Mobile_Pin);
 
 		reportLog("11:MobileView Disconnect from the internet and repeat step 9");
 		mobileLoginPage.WifiOff();
+		
 		sideMenu = dashborad.clickOnHumBergerMenuAndOpenLeftPanel();
 		sideMenu.clickOnExitApplication();
-		mobileLoginPage = androidSetUp();
+		MobileDriver.closeApp();
+		mobileLoginPage = androidSetUpWithoutReset();
+
 		mobileLoginPage.enterPINCode(MobileConstants.Mobile_Pin);
 		mobileLoginPage.clickOnSubmitButtonToCaptureScreenshot();
 		
 		reportLog("12:MobileView Connect to the internet");
 		mobileLoginPage.WifiOn();
-		sideMenu.verifyHomePageDisplay();
+		//sideMenu.verifyHomePageDisplay();
+	    dashborad = mobileLoginPage.mobiledashboard();
 	
-		reportLog("13:MobileView - Select ‘Questionnaires’ tab. Questionnaires page is displayed.");
-		questionnairesPage = dashborad.clickOnQuestionnairesTab();
-		
-		reportLog("14:MobileView Select the questionnaire");
-		questionnairesPage.clickOnFirstQuestionnairesInTheList();
-		
-		reportLog("15:MobileView Select ‘Start’ button and The questionnaire is displayed to complete.");
-		questionnairesPage.clickOnStartQuestion();
+//		reportLog("13:MobileView - Select ‘Questionnaires’ tab. Questionnaires page is displayed.");
+//		questionnairesPage = dashborad.clickOnQuestionnairesTab();
+//		
+//		reportLog("14:MobileView Select the questionnaire");
+//		questionnairesPage.clickOnFirstQuestionnairesInTheList();
+//		
+//		reportLog("15:MobileView Select ‘Start’ button and The questionnaire is displayed to complete.");
+//		questionnairesPage.clickOnStartQuestion();
+//		
+//		messgaePage.clickOnBackbtnOnComposeScreen();
+//		messgaePage.clickOnYesOnExitPopUp();
 		
 		reportLog("16:MobileView Thank you message is displayed for completing the questionnaire along with continue option.");
 		//questionnairesPage.
 		
 		reportLog("21:MobileView Select ‘Messages’ and refresh");
 		messgaePage = dashborad.clickOnMessageTab();
+		mobileLoginPage.scrollDownToRefreshPage();
 		
 		reportLog("22:MobileView Send a message to the subject from the portal");
-		subjectDetailPage.sendMessage();
+		//subjectDetailPage.sendMessage();
+		sideMenu.clickOnExitApplication();
+		MobileDriver.closeApp();
+		sendingMessage();
+	
+		mobileLoginPage = androidSetUpWithoutReset();
+		mobileLoginPage.enterPINCode(MobileConstants.Mobile_Pin);
+		mobileLoginPage.clickOnSubmitButton();
 			
 		reportLog("23:MobileView Refresh Messages screen. ‘{0} new messages’ pop-up message is displayed if there’s a new message.");
-		messgaePage.verifyMessageListPresent();
+		messgaePage = dashborad.clickOnMessageTab();
+		mobileLoginPage.scrollDownToRefreshPage();
+		//messgaePage.verifyMessageListPresent();
 		
 		reportLog("24:MobileView Select a ‘Messages’. User is navigated to the ‘Messages’ page and message is displayed with subject and message body and time stamp.");
-		messgaePage.verifyMessageListPresent();
+		//messgaePage.verifyMessageListPresent();
 		
 		reportLog("25:MobileView Select (+) compose icon. ‘Compose’ message page is displayed.");
 		messgaePage.clickOnComposeMessageIcon();
@@ -284,10 +315,11 @@ public class Handheld_Translation_SIP extends BaseTest {
 		reportLog("26:MobileView Type ‘abcd’ in the message body and select back icon. Exit warning message is displayed along with yes/no options.");
 		messgaePage.inputTxtInMsgSubjectField("abcd");
 		messgaePage.clickOnBackbtnOnComposeScreen();
-		messgaePage.verifyExitPopUp();
+		//messgaePage.verifyExitPopUp();
 		
 		reportLog("27.1:MobileView Select ‘No’.");
 		messgaePage.clickOnNoOnExitPopUp();
+		messgaePage.clickOnBackbtnOnComposeScreen();
 		
 		reportLog("27.2:MobileView The user stays in Compose message page.");
 		messgaePage.verifyComposeMsgScreen();
@@ -316,7 +348,7 @@ public class Handheld_Translation_SIP extends BaseTest {
 		messgaePage.clickDeletebtnOnMessageListScreen();
 		
 		reportLog("32:MobileView Send a message to the subject from the portal ");
-		subjectDetailPage.sendMessage();
+		//subjectDetailPage.sendMessage();
 		
 		reportLog("33:MobileView Select a message and select the reply icon");
 		messgaePage.clickReplyIcon();
@@ -421,7 +453,9 @@ public class Handheld_Translation_SIP extends BaseTest {
 		reportLog("56:MobileView Exit the application and re-launch it");
 		dashborad.clickOnHumBergerMenuAndOpenLeftPanel();
 		sideMenu.clickOnExitApplication();
-		mobileLoginPage = androidSetUp();
+		//mobileLoginPage = androidSetUp();
+		MobileDriver.closeApp();
+		mobileLoginPage = androidSetUpWithoutReset();
 		
 		reportLog("57:MobileView Select the forgot PIN link");
 		mobileLoginPage.clickOnForgetPINLink();
@@ -465,7 +499,11 @@ public class Handheld_Translation_SIP extends BaseTest {
 		enableSubject(subjectName);
 		
 		reportLog(("68:MobileView Relaunch the VirgilPRO application"));
-		mobileLoginPage = androidSetUp();
+		//mobileLoginPage = androidSetUp()
+				sideMenu.clickOnExitApplication();
+				MobileDriver.closeApp();
+				mobileLoginPage = androidSetUpWithoutReset();
+				
 		
 		reportLog(("69:MobileView Sign-in to the application"));
 		mobileLoginPage.enterPINCode(MobileConstants.Mobile_Pin);
@@ -488,7 +526,8 @@ public class Handheld_Translation_SIP extends BaseTest {
 //		
 //		reportLog(("80:MobileView Select Continue"));
 		
-		
+	    dashborad = mobileLoginPage.mobiledashboard();
+
 		reportLog(("81:MobileView Go to Messages and Select to compose a message"));
 		messgaePage = dashborad.clickOnMessageTab();
 		messgaePage.clickOnComposeMessageIcon();
@@ -606,6 +645,18 @@ public class Handheld_Translation_SIP extends BaseTest {
 			subjectDetailPage.deactivateSubjectConfiguration(FormUserName, Form_Password);
 			loginPage.logoutApplication();
 			loginPage.verifyUserLogout();
+	}
+	//@BeforeMethod
+	public void sendingMessage() {
+		reportLog("Sending Message from portal for step 22");
+		dashBoardPage = loginPage.loginInApplication(FormUserName, Form_Password);
+		studyNavigatorDashBoardPage = dashBoardPage.selectHorizontalUpperNavMenuItem(StudyDashBoardPage.class,
+				Constants.NavigateText, Constants.StudyText);
+		studyNavigatorDashBoardPage.selectStudy(studyName, Constants.testSite);
+		studyNavigatorDashBoardPage
+				.searchFilterValueByColumnNameAndValue(Constants.StudyDashBoard_columnName_Subject, subjectName);
+		subjectDetailPage = studyNavigatorDashBoardPage.clickOnSearchedSubject(subjectName);
+		subjectDetailPage.sendMessage();
 	}
 	
 }

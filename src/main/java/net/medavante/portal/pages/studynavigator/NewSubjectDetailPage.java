@@ -5423,17 +5423,32 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	 */
 	public void selectRecipientUnderModalWindow(String typeOfRecipient) {
 		boolean flag = false;
-		Assert.assertTrue(editDraftedEmailModalWindow.isDisplayed());
-		for (WebElement recipient : recipientsUnderModalWindow) {
-			if (getText(recipient.findElement(By.xpath("./following-sibling::label"))).trim()
-					.startsWith(typeOfRecipient)) {
+		//Assert.assertTrue(editDraftedEmailModalWindow.isDisplayed());
+//		for (WebElement recipient : recipientsUnderModalWindow) {
+//			if (getText(recipient.findElement(By.xpath("./following-sibling::label"))).trim()
+//					.startsWith(typeOfRecipient)) {
+		WebElement recipient = driver.findElement(By.xpath("//input[@id='recipient-patient-checkbox']"));
 				waitAndClick(recipient);
-				flag = true;
-			}
+				//flag = true;
+			//}
 		}
-		Assert.assertTrue(flag);
-		reportInfo();
-	}
+		//Assert.assertTrue(flag);
+		//reportInfo();
+	
+	public void selectRecipientUnderModalWindow() {
+		boolean flag = false;
+		//Assert.assertTrue(editDraftedEmailModalWindow.isDisplayed());
+//		for (WebElement recipient : recipientsUnderModalWindow) {
+//			if (getText(recipient.findElement(By.xpath("./following-sibling::label"))).trim()
+//					.startsWith(typeOfRecipient)) {
+		WebElement recipient = driver.findElement(By.xpath("//input[@id='recipient-patient-checkbox']"));
+				waitAndClick(recipient);
+				//flag = true;
+			//}
+		}
+		//Assert.assertTrue(flag);
+		//reportInfo();
+	
 
 	public void clickOnCloseEmailModalWindow() {
 		Assert.assertTrue(editDraftedEmailModalWindow.isDisplayed());
@@ -8601,8 +8616,10 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	}
 	
 	public void sendMessage() {
+		//waitForElementToBecomeVisible(sendMessageButton, DEFAULT_WAIT_4_ELEMENT);
+		waitForElementPresent(sendMessageButton, DEFAULT_WAIT_4_ELEMENT);
 		clickOnsendMessageButton();
-		selectRecipientUnderModalWindow("Subject");
+		selectRecipientUnderModalWindow();
 		enterMessageSubject("test");
 		enterMessagetext("1234");
 		clickOnSendButtonOnModelWindow();

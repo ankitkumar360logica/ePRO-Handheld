@@ -15,7 +15,7 @@ public class MBMessagesPage extends MobileCoreFunctions {
 		super(driver);
 	}
 	
-	@AndroidFindBy(xpath="(//android.view.ViewGroup//android.view.View)[4]")
+	@AndroidFindBy(xpath="//android.view.ViewGroup//android.view.View")
 	private MobileElement addMessageBtn; 
 	
 	@AndroidFindBy(xpath="//android.widget.ListView//android.view.ViewGroup/android.view.View/following-sibling::android.widget.TextView")

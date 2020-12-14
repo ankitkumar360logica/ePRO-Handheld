@@ -33,7 +33,7 @@ public class MBQuestionnaires extends MobileCoreFunctions {
 	@AndroidFindBy(xpath = "//*[contains(@class,'ViewGroup') and @index='1']//android.widget.TextView[@index='1']")
 	private MobileElement questionStartingDescription;
 
-	@AndroidFindBy(xpath = "//*[contains(@class,'android.widget.Button') and @text='Start']")
+	@AndroidFindBy(xpath = "//android.view.ViewGroup/android.widget.Button")
 	private MobileElement startButtonForQuestion;
 
 	@AndroidFindBy(xpath = "//android.widget.EditText")

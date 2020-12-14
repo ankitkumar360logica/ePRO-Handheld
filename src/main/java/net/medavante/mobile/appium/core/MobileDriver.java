@@ -38,7 +38,7 @@ import net.medavante.tablet.pages.TabletLoginPage;
 
 public class MobileDriver {
 	
-	private AppiumDriver<MobileElement> appiumDriver;
+	private static AppiumDriver<MobileElement> appiumDriver;
 	protected MobileLoginPage mobileLoginPage;
 	protected TabletLoginPage tabletLoginPage;
 	protected MobileDashBoardPage dashborad;
@@ -151,37 +151,10 @@ public class MobileDriver {
 		//this.clickOnConnectAppIcon();
 		
 		apkPath=Configuration.readApplicationFile("APKPath");
-//		DesiredCapabilities capabilities = new DesiredCapabilities();
-//		capabilities.setCapability("platformName", Configuration.readApplicationFile("AndroiPlatformName"));
-//
-//		capabilities.setCapability("deviceName", Configuration.readApplicationFile("AndroidDeviceName"));
-//		
-//		//capabilities.setCapability("automationName","UiAutomator2");              
-//		capabilities.setCapability("udid", Configuration.readApplicationFile("AndoidUdid")/* getAttachedDevicesList().get(0) */);
-//		capabilities.setCapability("app", Utilities.getPath() + "\\src\\test\\resources\\webdriver\\" + apkPath + "");
-//		capabilities.setCapability("deviceName", Configuration.readApplicationFile("AndroidDeviceName"));       
-//		capabilities.setCapability("udid", Configuration.readApplicationFile("AndoidUdid")/* getAttachedDevicesList().get(0) */);
-//		capabilities.setCapability("app",
-//				Utilities.getPath() + "\\src\\test\\resources\\webdriver\\" + apkPath + "");
-//	
-//		capabilities.setCapability("udid", Configuration.readApplicationFile("AndoidUdid"));
-//		capabilities.setCapability("platformVersion", Configuration.readApplicationFile("AndroidPlatformVersion"));
-//		capabilities.setCapability("autoGrantPermissions", "true");
-//		capabilities.setCapability("noReset", "true");
-//		capabilities.setCapability("fullReset", "false");
-//		appiumDriver = new AndroidDriver<MobileElement>(new URL("http://localhost:4723/wd/hub"), capabilities);
-		
+
 		  DesiredCapabilities capabilities = new DesiredCapabilities();
-	  		//capabilities.setCapability("BROWSER_NAME", "Android");
-	  		//capabilities.setCapability("browserName", "Android");
-
-	  		//capabilities.setCapability("VERSION", "9.0");
 	  		capabilities.setCapability("platformVersion", "9.0"); 
-
-	  		//capabilities.setCapability("deviceName","Emulator");
 	  		capabilities.setCapability("deviceName","Android Emulator");
-			//capabilities.setCapability("app", Utilities.getPath() + "\\src\\test\\resources\\webdriver\\" + apkPath + "");
-
 	  		capabilities.setCapability("platformName","Android");
 	  		capabilities.setCapability("appPackage", "com.MAV.PRO.App.Android.Forms");
 	  		capabilities.setCapability("appActivity","md59cbe8238a5c2793500b4a11c8bef2f85.MainActivity");
@@ -193,6 +166,28 @@ public class MobileDriver {
 		Thread.sleep(5000);
 		return mobileLoginPage;                                                                                                                                                                  
 	}
+	
+	public MobileLoginPage androidSetUpWithoutReset() throws Exception {
+		//this.clickOnConnectAppIcon();
+		
+		apkPath=Configuration.readApplicationFile("APKPath");
+
+		  DesiredCapabilities capabilities = new DesiredCapabilities();
+	  		capabilities.setCapability("platformVersion", "9.0"); 
+	  		capabilities.setCapability("deviceName","Android Emulator");
+	  		capabilities.setCapability("platformName","Android");
+	  		capabilities.setCapability("appPackage", "com.MAV.PRO.App.Android.Forms");
+	  		capabilities.setCapability("appActivity","md59cbe8238a5c2793500b4a11c8bef2f85.MainActivity");
+	  		capabilities.setCapability("noReset", true);
+	  		appiumDriver = new AndroidDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+		Thread.sleep(3000);
+		
+		mobileLoginPage = new MobileLoginPage(appiumDriver);
+		PageFactory.initElements(new AppiumFieldDecorator(appiumDriver), mobileLoginPage);
+		Thread.sleep(5000);
+		return mobileLoginPage;                                                                                                                                                                  
+	}
+	
 	
 
 	
@@ -234,6 +229,15 @@ public class MobileDriver {
 		r.keyRelease(KeyEvent.VK_ENTER);
 	}
 	
-	
+	public static void closeApp(){
+		try {
+			if (appiumDriver!=null){
+				appiumDriver.quit();
+				appiumDriver = null;
+			}
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+	}
 
 }

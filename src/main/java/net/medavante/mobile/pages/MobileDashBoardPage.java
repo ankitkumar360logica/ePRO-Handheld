@@ -149,6 +149,7 @@ public class MobileDashBoardPage extends MobileCoreFunctions {
 	}
 
 	public MobileSideMenuPage clickOnHumBergerMenuAndOpenLeftPanel() {
+		waitForElementToBecomeVisible(humBurgerMenuIcon, globalWaitTime);
 		click(humBurgerMenuIcon);
 		MobileSideMenuPage sideMenu = new MobileSideMenuPage(mobileDriver);
 		PageFactory.initElements(new AppiumFieldDecorator(mobileDriver), sideMenu);
