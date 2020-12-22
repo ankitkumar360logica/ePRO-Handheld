@@ -76,7 +76,7 @@ public class MBQuestionnaires extends MobileCoreFunctions {
 	@AndroidFindBy(xpath = "(//*[@class='android.widget.TextView'])[2]")
 	private MobileElement completionMessage;
 
-	@AndroidFindBy(xpath = "//android.widget.Button[@text='Continue']")
+	@AndroidFindBy(xpath = "//android.widget.Button[@class='android.widget.Button']")
 	private MobileElement continueBtn;
 
 	@AndroidFindBy(xpath = "//android.widget.ImageButton")
@@ -88,6 +88,36 @@ public class MBQuestionnaires extends MobileCoreFunctions {
 	@AndroidFindBy(xpath = "(//android.widget.LinearLayout[2]//android.view.ViewGroup[@class='android.view.ViewGroup'])[1]")
 	private MobileElement firstQuesttabInList;
 
+	@AndroidFindBy(xpath="//android.view.ViewGroup[@index='4']")
+	private MobileElement nextArrowIcon; 
+	
+	@AndroidFindBy(xpath= "//android.widget.ListView//android.view.View//android.view.View//android.widget.RadioButton[1]")
+	private MobileElement selectRadioBtn;
+	
+	@AndroidFindBy(xpath = "//android.widget.LinearLayout//android.widget.Button")
+	private MobileElement okBtn;
+	
+	@AndroidFindBy(xpath = "//android.widget.Spinner[@index='1']")
+	private MobileElement totalNumberDrpDwn;
+	
+	@AndroidFindBy(xpath = "(//android.widget.EditText[@index='1'])[1]")
+	private MobileElement totalNumberTextBox;
+	
+	@AndroidFindBy(xpath = "(//android.widget.EditText[@index='1'])[2]")
+	private MobileElement childNumberTextBox;
+	
+	@AndroidFindBy(xpath = "//android.widget.CheckedTextView[@index='2']")
+	private MobileElement selectOptionRadioBtn;
+	
+	@AndroidFindBy(xpath = "//android.widget.EditText[@index='1']")
+	private MobileElement childNumberTxtBox;
+	
+	@AndroidFindBy(xpath = "//android.widget.CheckBox[@index='0']")
+	private MobileElement selectCheckBox;
+	
+	@AndroidFindBy(xpath = "(//android.view.View[3]//android.view.View[1])[4]")
+	private MobileElement textClick;
+	
 	/* Verify Today Question is Present */
 	public void verifyTodayQuestionnairesListPresent() {
 		_normalWait(DEFAULT_WAIT_ELEMENT);
@@ -125,7 +155,7 @@ public class MBQuestionnaires extends MobileCoreFunctions {
 
 	/* Click On Questions */
 
-	public void selectQuestionForms(String questionToBeSelect)
+	public void selectQuestionForms(String questionToBeSelect) throws InterruptedException
 
 	{
 		_normalWait(DEFAULT_WAIT_2_ELEMENT);
@@ -144,6 +174,7 @@ public class MBQuestionnaires extends MobileCoreFunctions {
 		}
 		Assert.assertTrue(flag);
 		_normalWait(globalWaitTime);
+		Thread.sleep(30000);
 		 capturescreen("Screenshot");
 		
 
@@ -160,11 +191,12 @@ public class MBQuestionnaires extends MobileCoreFunctions {
 	}
 
 	/* Click On start Question */
-	public void clickOnStartQuestion() {
+	public void clickOnStartQuestion() throws InterruptedException {
 		_normalWait(DEFAULT_WAIT_ELEMENT);
-		waitForElementToBecomeVisible(startButtonForQuestion, DEFAULT_WAIT_4_ELEMENT);
+		//waitForElementToBecomeVisible(startButtonForQuestion, DEFAULT_WAIT_4_ELEMENT);
 		click(startButtonForQuestion);
 		 capturescreen("Screenshot");
+		 Thread.sleep(3000);
 	}
 
 	/* Verify Question Can Be Answered */
@@ -539,5 +571,132 @@ public class MBQuestionnaires extends MobileCoreFunctions {
 		Assert.assertTrue(flag);
 		_normalWait(DEFAULT_WAIT_ELEMENT);
 		 capturescreen("Screenshot");
+	}
+	
+	public void questionnaireToBeCompleted() throws InterruptedException {
+		click(totalNumberDrpDwn);
+		Thread.sleep(2000);
+		
+		click(selectOptionRadioBtn);
+		
+		setText(childNumberTxtBox, "0");
+		hideKeyboard();
+		Thread.sleep(2000);
+		click(totalNumberDrpDwn);
+		Thread.sleep(2000);
+		click(selectOptionRadioBtn);
+		//click(childNumberTxtBox);
+
+		
+	}
+	
+	
+	public void questionnaireToBeCompleteTextBox() throws InterruptedException {
+		setText(totalNumberTextBox, "3");
+		hideKeyboard();
+		Thread.sleep(2000);
+		
+		//click(selectOptionRadioBtn);
+		
+		setText(childNumberTextBox, "1");
+		hideKeyboard();
+		Thread.sleep(2000);
+		click(textClick);
+//		Thread.sleep(2000);
+//		click(selectOptionRadioBtn);
+		//click(childNumberTxtBox);
+
+		
+	}
+	
+	public void completeQuestionnaire() throws InterruptedException {
+		_normalWait(DEFAULT_WAIT_ELEMENT);
+
+		click(selectRadioBtn);
+		click(nextArrowIcon);
+		
+		click(nextArrowIcon);
+		
+		click(nextArrowIcon);
+		
+		//questionnaireToBeCompleted();
+		
+		questionnaireToBeCompleteTextBox();
+		
+		
+
+		click(nextArrowIcon);
+		
+		click(nextArrowIcon);
+		
+		click(selectRadioBtn);
+
+		click(nextArrowIcon);
+
+		click(selectCheckBox);
+		
+		click(nextArrowIcon);
+		
+		click(selectRadioBtn);
+		
+		click(nextArrowIcon);
+		
+		click(selectRadioBtn);
+		
+		click(nextArrowIcon);
+		
+		
+		//click(nextArrowIcon);
+		capturescreen("Screenshot");
+		click(continueBtn);
+		Thread.sleep(3000);
+
+	}
+	
+	public void clickOnOkBtn() {
+		click(okBtn);
+		
+	}
+	
+	public void NotFinishQuestionnaire() throws InterruptedException {
+		_normalWait(DEFAULT_WAIT_ELEMENT);
+
+		click(selectRadioBtn);
+		click(nextArrowIcon);
+		
+		click(nextArrowIcon);
+		
+		click(nextArrowIcon);
+		
+		questionnaireToBeCompleted();
+		
+		
+
+		click(nextArrowIcon);
+		
+		click(nextArrowIcon);
+		
+		click(selectRadioBtn);
+
+		click(nextArrowIcon);
+
+		click(selectCheckBox);
+		
+		click(nextArrowIcon);
+		
+		click(selectRadioBtn);
+		
+		click(nextArrowIcon);
+		
+		click(selectRadioBtn);
+		
+		click(nextArrowIcon);
+		
+		
+		//click(nextArrowIcon);
+		capturescreen("Screenshot");
+		//click(continueBtn);
+		Thread.sleep(3000);
+
 	}
 }

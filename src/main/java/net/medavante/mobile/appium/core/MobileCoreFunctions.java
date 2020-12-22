@@ -274,7 +274,7 @@ public class MobileCoreFunctions {
 		for (int i = 0; i < 1; i++) {
 			TouchAction action = new TouchAction(mobileDriver);			
 			action.longPress(ElementOption.element(onElement)).waitAction(WaitOptions.waitOptions(Duration.ofSeconds(3))).release().perform();
-			BasePage.reportInfo();
+			//BasePage.reportInfo();
 		}
 		_normalWait(globalWaitTime);
 		return imagePath;

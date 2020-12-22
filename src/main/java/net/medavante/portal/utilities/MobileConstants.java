@@ -30,10 +30,13 @@ public interface MobileConstants {
 
 	String Mobile_Pin = "1234";
 	String New_Mobile_Pin= "1111";
+	String New_Mobile_Pin1= "3333";
+	String Mobile_Pin_AfterLock= "4444";
 	String Mobile_PinInCorrect = "0000";
 	//String Choose_QuestionPin = "What color was your first car?";
 	String Choose_QuestionPin = "What make was your first car?";
 	//String Choose_QuestionnariesQuestionPin = "What is your favorite color?";
 	String Choose_QuestionnariesQuestionPin = "Which country would yu most like to visit?";
 	String Choose_QuestionAnswer = "Black";
+	String Enter_IncorrectQuestionAnswer="White";
 }

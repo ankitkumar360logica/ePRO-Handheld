@@ -232,7 +232,7 @@ public class MedAvantePortalPage extends BasePage {
 	public void verifyHomeItemIsSelectedByDefault() {
 		moveToElement(ActiveHome);
 		Assert.assertTrue(isElementPresent(ActiveHome));
-		reportInfo();		
+		//reportInfo();		
 	}
 	/**
 	 * verify top level navigator item is displayed	

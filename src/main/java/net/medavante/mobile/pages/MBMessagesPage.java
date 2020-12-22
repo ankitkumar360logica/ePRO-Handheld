@@ -6,7 +6,9 @@ import org.junit.Assert;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.pagefactory.AndroidFindBy;
+import io.appium.java_client.touch.offset.PointOption;
 import net.medavante.mobile.appium.core.MobileCoreFunctions;
 
 public class MBMessagesPage extends MobileCoreFunctions {
@@ -85,6 +87,11 @@ public class MBMessagesPage extends MobileCoreFunctions {
 		click(backbtnOnComposeMsg);
 	}
 	
+	public void clickOnBackbtnOnComposeScreenToCaptureScreen() {
+		click(backbtnOnComposeMsg);
+		capturescreen("Screenshot");
+	}
+	
 	@AndroidFindBy(xpath = "//android.widget.TextView[@resource-id='android:id/alertTitle']")
 	private MobileElement exitPopUp;
 	
@@ -107,6 +114,7 @@ public class MBMessagesPage extends MobileCoreFunctions {
 	private MobileElement yesOptionOnExitPopUp;
 	public void clickOnYesOnExitPopUp() {
 		click(yesOptionOnExitPopUp);
+		_normalWait(globalWaitTime);
 	}
 	
 	@AndroidFindBy(xpath = "(//android.view.ViewGroup//android.widget.TextView[@class='android.widget.TextView'])[2]")
@@ -116,24 +124,45 @@ public class MBMessagesPage extends MobileCoreFunctions {
 		capturescreen("Screenshot");
 	}
 	
-	public void longPressOnSendMsgBtn() {
+	public void clickOnSendMessageBtnForMultiCapture() throws InterruptedException {
+		click(sendMsgBtn);
+		Thread.sleep(1000);
+		capturescreen("Screenshot");
+		Thread.sleep(2000);
+		capturescreen("Screenshot");
+
+	}
+	
+	
+	
+	public void longPressOnSendMsgBtn() throws InterruptedException {
 		longPress(sendMsgBtn);
+		Thread.sleep(1000);
 		capturescreen("Screenshot");
 	}
 	
 	public void clickOnDeleteMessageButton() {
 		click(deleteMessage);
+		capturescreen("Screenshot");
 	}
 	
-	public void clickDeletebtnOnMessageListScreen() {
+	public void clickDeletebtnOnMessageListScreen() throws InterruptedException {
 		click(selectFirstMessageFromList);
 		click(deleteMessage);
+		Thread.sleep(1000);
+		
+		//capturescreen("Screenshot");
+	}
+	
+	public void clickFirstMsgOnMessageListScreen() {
+		click(selectFirstMessageFromList);
 		capturescreen("Screenshot");
 	}
 	
 	public void clickReplyIcon() {
-		click(selectFirstMessageFromList);
+		//click(selectFirstMessageFromList);
 		click(replyIcon);
+		capturescreen("Screenshot");
 	}
 	
 	public void verifyReplyInputAndSendButton() {
@@ -149,6 +178,13 @@ public class MBMessagesPage extends MobileCoreFunctions {
 			flag = true;
 		}
 		Assert.assertTrue(flag);
+		capturescreen("Screenshot");
+	}
+	
+	public void clickOnComposeMessageIcon(int x, int y) {
+		 _normalWait(DEFAULT_WAIT_ELEMENT);
+		TouchAction action = new TouchAction(mobileDriver);
+		action.press (PointOption.point(x, y)).release().perform();
 		capturescreen("Screenshot");
 	}
 }

@@ -158,7 +158,12 @@ public class MobileDriver {
 	  		capabilities.setCapability("platformName","Android");
 	  		capabilities.setCapability("appPackage", "com.MAV.PRO.App.Android.Forms");
 	  		capabilities.setCapability("appActivity","md59cbe8238a5c2793500b4a11c8bef2f85.MainActivity");
+	  		capabilities.setCapability("newCommandTimeout", 90000);
+
+	  		// capabilities.setCapability("dontStopAppOnReset", true); 
 	  		appiumDriver = new AndroidDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+
+	  		
 		Thread.sleep(3000);
 		
 		mobileLoginPage = new MobileLoginPage(appiumDriver);
@@ -179,7 +184,11 @@ public class MobileDriver {
 	  		capabilities.setCapability("appPackage", "com.MAV.PRO.App.Android.Forms");
 	  		capabilities.setCapability("appActivity","md59cbe8238a5c2793500b4a11c8bef2f85.MainActivity");
 	  		capabilities.setCapability("noReset", true);
+	  		// capabilities.setCapability("dontStopAppOnReset", true); 
+	  		capabilities.setCapability("newCommandTimeout", 90000);
+
 	  		appiumDriver = new AndroidDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+
 		Thread.sleep(3000);
 		
 		mobileLoginPage = new MobileLoginPage(appiumDriver);

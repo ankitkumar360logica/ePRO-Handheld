@@ -158,15 +158,16 @@ public class MobileDashBoardPage extends MobileCoreFunctions {
 
 	}
 
+
 	public MBMessagesPage clickOnMessageTab() {
 		waitForElementToBecomeVisible(messageTab, globalWaitTime);
 		click(messageTab);
-		Assert.assertTrue(messageTab.isSelected());
+		//Assert.assertTrue(messageTab.isSelected());
 		 capturescreen("Screenshot");
 		
 		MBMessagesPage message = new MBMessagesPage(mobileDriver);
 		PageFactory.initElements(new AppiumFieldDecorator(mobileDriver), message);
-		 capturescreen("Screenshot");
+		 //capturescreen("Screenshot");
 		return message;
 	}
 
@@ -175,19 +176,33 @@ public class MobileDashBoardPage extends MobileCoreFunctions {
 		click(questionnairesTab);
 		click(questionnairesTab);
 		Assert.assertTrue(questionnairesTab.isSelected());
-		 capturescreen("Screenshot");
+		 //capturescreen("Screenshot");
 		MBQuestionnaires questionnaires = new MBQuestionnaires(mobileDriver);
 		PageFactory.initElements(new AppiumFieldDecorator(mobileDriver), questionnaires);
 		 capturescreen("Screenshot");
 		return questionnaires;
 
 	}
+	
+	public MBQuestionnaires clickOnQuestionnaires() {
+		waitForElementToBecomeVisible(questionnairesTab, globalWaitTime);
+		click(questionnairesTab);
+		click(questionnairesTab);
+		Assert.assertTrue(questionnairesTab.isSelected());
+		 //capturescreen("Screenshot");
+		MBQuestionnaires questionnaires = new MBQuestionnaires(mobileDriver);
+		PageFactory.initElements(new AppiumFieldDecorator(mobileDriver), questionnaires);
+		 //capturescreen("Screenshot");
+		return questionnaires;
 
-	public MBLogAnEventPage clickOnLogAnEventTab() {
+	}
+
+	public MBLogAnEventPage clickOnLogAnEventTab() throws InterruptedException {
 		click(logAnEventTab);
 		Assert.assertTrue(logAnEventTab.isSelected());
 		MBLogAnEventPage logAnEventPage = new MBLogAnEventPage(mobileDriver);
 		PageFactory.initElements(new AppiumFieldDecorator(mobileDriver), logAnEventPage);
+		Thread.sleep(3000);
 		capturescreen("Screenshot");
 		return logAnEventPage;
 	}

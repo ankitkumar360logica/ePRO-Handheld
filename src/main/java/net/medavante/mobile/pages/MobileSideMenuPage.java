@@ -33,28 +33,47 @@ public class MobileSideMenuPage extends MobileCoreFunctions {
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Participant Version']")
 	private MobileElement participantVersionText;
 
-	@AndroidFindBy(xpath = "(//android.widget.ListView/child::android.widget.LinearLayout[1])[2]")
+	//@AndroidFindBy(xpath = "(//android.widget.ListView/child::android.widget.LinearLayout[1])[2]")
+	//(//android.widget.ListView/child::android.widget.LinearLayout)[6]
+	//@AndroidFindBy(xpath = "//android.widget.TextView[@text='Mein Konto']")
+	@AndroidFindBy(xpath = "((//android.widget.ListView)[2]/android.widget.LinearLayout)[1]")
+	//@AndroidFindBy(xpath = "//android.widget.TextView[@text='マイアカウント']")   
 	private MobileElement myAccount;
 
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Medications']")
 	private MobileElement medications;
 
-	@AndroidFindBy(xpath = "(//android.widget.ListView/child::android.widget.LinearLayout[2])[2]")
+	//@AndroidFindBy(xpath = "(//android.widget.ListView/child::android.widget.LinearLayout[2])[2]")
+	//@AndroidFindBy(xpath = "//android.widget.TextView[@text='Mein Zeitplan']")
+	@AndroidFindBy(xpath = "((//android.widget.ListView)[2]/android.widget.LinearLayout)[2]")
+	//@AndroidFindBy(xpath = "//android.widget.TextView[@text='マイスケジュール']")
 	private MobileElement mySchedule;
 
-	@AndroidFindBy(xpath = "(//android.widget.ListView/child::android.widget.LinearLayout[3])[2]")
+	//@AndroidFindBy(xpath = "(//android.widget.ListView/child::android.widget.LinearLayout[3])[2]")
+	//@AndroidFindBy(xpath = "//android.widget.TextView[@text='Studieninformationen']")
+	@AndroidFindBy(xpath = "((//android.widget.ListView)[2]/android.widget.LinearLayout)[3]")
+	//@AndroidFindBy(xpath = "//android.widget.TextView[@text='治験情報']")
 	private MobileElement studyInformation;
 
-	@AndroidFindBy(xpath = "(//android.widget.ListView/child::android.widget.LinearLayout[4])[2]")
+	//@AndroidFindBy(xpath = "(//android.widget.ListView/child::android.widget.LinearLayout[4])[2]")
+	//@AndroidFindBy(xpath = "//android.widget.TextView[@text='Kontakte']")
+	@AndroidFindBy(xpath = "((//android.widget.ListView)[2]/android.widget.LinearLayout)[4]")
+	//@AndroidFindBy(xpath = "//android.widget.TextView[@text='問い合わせ先']")
 	private MobileElement contacts;
 
-	@AndroidFindBy(xpath = "(//android.widget.ListView/child::android.widget.LinearLayout[5])[2]")
+	//@AndroidFindBy(xpath = "(//android.widget.ListView/child::android.widget.LinearLayout[5])[2]")
+	//@AndroidFindBy(xpath = "//android.widget.TextView[@text='Einstellungen']")
+	@AndroidFindBy(xpath = "((//android.widget.ListView)[2]/android.widget.LinearLayout)[5]")
 	private MobileElement settings;
 
-	@AndroidFindBy(xpath = "(//android.widget.ListView/child::android.widget.LinearLayout[6])[2]")
+	//@AndroidFindBy(xpath = "(//android.widget.ListView/child::android.widget.LinearLayout[6])[1]")
+	//@AndroidFindBy(xpath = "//android.widget.TextView[@text='Hilfe und Schulungen']")
+	@AndroidFindBy(xpath = "((//android.widget.ListView)[2]/android.widget.LinearLayout)[6]")
 	private MobileElement helpTutorial;
 
-	@AndroidFindBy(xpath = "(//android.widget.ListView/child::android.widget.LinearLayout[7])[2]")
+	//@AndroidFindBy(xpath = "(//android.widget.ListView/child::android.widget.LinearLayout[7])[1]")
+	//@AndroidFindBy(xpath = "//android.widget.TextView[@text='Über uns']")
+	@AndroidFindBy(xpath = "((//android.widget.ListView)[2]/android.widget.LinearLayout)[7]")
 	private MobileElement aboutUs;
 
 	@AndroidFindBy(xpath = "//android.view.ViewGroup/android.widget.ImageView")
@@ -137,6 +156,7 @@ public class MobileSideMenuPage extends MobileCoreFunctions {
 	public void verifyHomePageDisplay() {
 		waitForElementToBecomeVisible(homeTab, DEFAULT_WAIT_2_ELEMENT);
 		Assert.assertTrue(isElementPresent(homeTab));
+		capturescreen("Screenshot");
 
 	}
 
@@ -144,14 +164,14 @@ public class MobileSideMenuPage extends MobileCoreFunctions {
       _normalWait(DEFAULT_WAIT_4_ELEMENT);
 		waitForElementToBecomeVisible(addMedicationIcon, 30);
 		click(addMedicationIcon);
-		verifyPageIsDisplayAndCaptureTheScreenShot();
-	}
+		capturescreen("Screenshot");
+		}
 
 	public void clickOnBackIcon() {
 		 _normalWait(DEFAULT_WAIT_4_ELEMENT);
 		click(menuBackIcon);
 		_normalWait(DEFAULT_WAIT_ELEMENT);
-		verifyPageIsDisplayAndCaptureTheScreenShot();
+		//capturescreen("Screenshot");
 
 	}
 
@@ -159,68 +179,85 @@ public class MobileSideMenuPage extends MobileCoreFunctions {
 		WebElement questionText = mobileDriver
 				.findElement(By.xpath(String.format("//android.widget.TextView[@text='%s']", pageTitle)));
 		Assert.assertTrue(isElementPresent(questionText));
-		verifyPageIsDisplayAndCaptureTheScreenShot();
+		capturescreen("Screenshot");
 
 	}
 
 	public void verifySideMenuOptions() {
 		_normalWait(DEFAULT_WAIT_ELEMENT);
-		Assert.assertTrue( myAccount.isEnabled() && medications.isEnabled() && mySchedule.isEnabled()
+		Assert.assertTrue( myAccount.isEnabled() && mySchedule.isEnabled()
 				&& studyInformation.isEnabled() && contacts.isEnabled() && settings.isEnabled()
 				&& helpTutorial.isEnabled() && aboutUs.isEnabled());
 		 capturescreen("Screenshot");
 	}
 
-	public void clickOnAboutUs() {
+	public void clickOnAboutUs() throws InterruptedException {
+		Thread.sleep(2000);
 		click(aboutUs);
 		capturescreen("Screenshot");
-		click(menuBackIcon);
+		//click(menuBackIcon);
 	}
 	
-	public void clickOnContacts() {
+	public void clickOnContacts() throws InterruptedException {
+		Thread.sleep(2000);
+
 		click(contacts);
 		capturescreen("Screenshot");
-		click(menuBackIcon);
+		//click(menuBackIcon);
 	}
 
-	public void clickOnMySchedule() {
+	public void clickOnMySchedule() throws InterruptedException {
+		Thread.sleep(2000);
+
 		click(mySchedule);
 		capturescreen("Screenshot");
-		click(menuBackIcon);
+		//click(menuBackIcon);
 	}
 	
-	public void clickOnMyAccount() {
+	public void clickOnMyAccount() throws InterruptedException {
+		Thread.sleep(1000);
+
 		click(myAccount);
-		Assert.assertTrue(menuBackIcon.isEnabled());
+		Thread.sleep(2000);
+		//Assert.assertTrue(menuBackIcon.isEnabled());
 		capturescreen("Screenshot");
-		click(menuBackIcon);
+		//click(menuBackIcon);
 	}
 
-	public void clickOnStudyInformation() {
+	public void clickOnStudyInformation() throws InterruptedException {
+		Thread.sleep(1000);
+
 		click(studyInformation);
+		Thread.sleep(2000);
 		capturescreen("Screenshot");
-		click(menuBackIcon);
+		//click(menuBackIcon);
 
 	}
 
-	public void clickOnSettings() {
+	public void clickOnSettings() throws InterruptedException {
+		Thread.sleep(1000);
+
 		click(settings);
+		Thread.sleep(2000);
 		capturescreen("Screenshot");
-		click(menuBackIcon);
+		//click(menuBackIcon);
 	}
 	
 	public void clickOnChangeColorTheme() {
 		click(changeColorTheme);
 		capturescreen("Screenshot");
-		Assert.assertTrue(cancelBTnOnchangeColorThemePopup.isDisplayed());
+		//Assert.assertTrue(cancelBTnOnchangeColorThemePopup.isDisplayed());
 	}
 	
 	public void exitFromColorThemePopup() {
 		click(cancelBTnOnchangeColorThemePopup);
 	}
 	
-	public void helpAndTutorials() {
+	public void helpAndTutorials() throws InterruptedException {
+		Thread.sleep(1000);
+
 		click(helpTutorial);
+		Thread.sleep(2000);
 		capturescreen("Screenshot");
 
 	}
@@ -228,7 +265,7 @@ public class MobileSideMenuPage extends MobileCoreFunctions {
 	public void clickOnMedications() {
 		click(medications);
 		Assert.assertTrue(medications.isEnabled());
-		verifyPageIsDisplayAndCaptureTheScreenShot();
+		capturescreen("Screenshot");
 		waitForElementToBecomeVisible(addMedicationIcon, globalWaitTime);
 
 	}
@@ -241,7 +278,7 @@ public class MobileSideMenuPage extends MobileCoreFunctions {
 	/* Verify user exit with application */
 	public void verifyApplicationExit() {
 		_normalWait(DEFAULT_WAIT_ELEMENT);
-		verifyPageIsDisplayAndCaptureTheScreenShot();
+		capturescreen("Screenshot");
 				
 	}
 
@@ -258,32 +295,32 @@ public class MobileSideMenuPage extends MobileCoreFunctions {
 
 	public void verifyCreateMedicationIconDisplay() {
 		Assert.assertTrue(createMedicationMenuItem.isDisplayed());
-		verifyPageIsDisplayAndCaptureTheScreenShot();
+		capturescreen("Screenshot");
 	}
 
 	public void enterMedicationName(String string) {
 		enterNameAndClickOnSave(string);
-		verifyPageIsDisplayAndCaptureTheScreenShot();
+		capturescreen("Screenshot");
 	}
 
 	public void verifyTextOnScreen(String text) {
 		WebElement messageText = mobileDriver
 				.findElement(By.xpath(String.format("//android.widget.TextView[@text='%s']", text)));
 		Assert.assertTrue(messageText.isDisplayed());
-		verifyPageIsDisplayAndCaptureTheScreenShot();
+		capturescreen("Screenshot");
 
 	}
 
 	public void verifyAddMedicationButtonDisplay() {
 		Assert.assertTrue(addMedicationIcon.isDisplayed());
-		verifyPageIsDisplayAndCaptureTheScreenShot();
+		capturescreen("Screenshot");
 	}
 
 	public void createMedication(String string) {
 		clickOnAddIcon();
 		enterNameAndClickOnSave(string);
 		_normalWait(DEFAULT_WAIT_2_ELEMENT);
-		verifyPageIsDisplayAndCaptureTheScreenShot();
+		capturescreen("Screenshot");
 	}
 
 	public void createSecondMedication(String string) {
@@ -291,7 +328,7 @@ public class MobileSideMenuPage extends MobileCoreFunctions {
 		click(addSecondMedicationIcon);
 		enterNameAndClickOnSave(string);
 		_normalWait(DEFAULT_WAIT_2_ELEMENT);
-		verifyPageIsDisplayAndCaptureTheScreenShot();
+		capturescreen("Screenshot");
 
 	}
 
@@ -299,28 +336,28 @@ public class MobileSideMenuPage extends MobileCoreFunctions {
 		click(humBurgerMenuIcon);
 		waitForElementToBecomeVisible(exitApplicationIcon, DEFAULT_WAIT_ELEMENT);
 		click(exitApplicationIcon);
-		verifyPageIsDisplayAndCaptureTheScreenShot();
+		capturescreen("Screenshot");
 	}
 
 	public void selectMedicationListItem(String name) {
 		WebElement medicationName = mobileDriver
 				.findElement(By.xpath(String.format("//android.widget.TextView[@text='%s']", name)));
 		click(medicationName);
-		verifyPageIsDisplayAndCaptureTheScreenShot();
+		capturescreen("Screenshot");
 
 	}
 
 	public void clickOnDeleteIcon() {
 		click(deleteIcon);
 		_normalWait(30);
-		verifyPageIsDisplayAndCaptureTheScreenShot();
+		capturescreen("Screenshot");
 	}
 
 	public void selectConfirmationOption(String option) {
 		WebElement deleteOption = mobileDriver
 				.findElement(By.xpath(String.format("//android.widget.Button[@text='%s']", option)));
 		click(deleteOption);
-		verifyPageIsDisplayAndCaptureTheScreenShot();
+		capturescreen("Screenshot");
 	}
 
 	public void verifyPresenceOfMedicationsInMedicatonList() {
@@ -337,7 +374,7 @@ public class MobileSideMenuPage extends MobileCoreFunctions {
 		Assert.assertTrue(medicationName.isDisplayed());
 		medicationName.click();
 		waitForElementToBecomeVisible(deleteIcon, globalWaitTime);
-		verifyPageIsDisplayAndCaptureTheScreenShot();
+		capturescreen("Screenshot");
 	}
 
 	public void verifyConfirmationDialogDisplayWithOkAndCancelOptions() {
@@ -388,23 +425,23 @@ public class MobileSideMenuPage extends MobileCoreFunctions {
 
 		setText(nameEditBox, Constants.WeekelyMedicationName);
 		FillTextAndDropDownPopUpValues("4", "150");
-		verifyPageIsDisplayAndCaptureTheScreenShot();
+		capturescreen("Screenshot");
 		FillTextAndDropDownPopUpValues("6", "mg");
-		verifyPageIsDisplayAndCaptureTheScreenShot();
+		capturescreen("Screenshot");
 		FillTextAndDropDownPopUpValues("8", "orally");
-		verifyPageIsDisplayAndCaptureTheScreenShot();
+		capturescreen("Screenshot");
 		FillTextAndDropDownPopUpValues("11", "frequency");
-		verifyPageIsDisplayAndCaptureTheScreenShot();
+		capturescreen("Screenshot");
 		FillTextAndDropDownPopUpValues("12", "1");
-		verifyPageIsDisplayAndCaptureTheScreenShot();
+		capturescreen("Screenshot");
 		String current = currentOnlyDate();
 		pickAdateFromCalender(current);
 		FillTextAndDropDownPopUpValues("18", "end date");
 		String dateToselect = getAfterSevenDayDateFromCurrentDate();
 		pickAdateFromCalender(dateToselect);
-		verifyPageIsDisplayAndCaptureTheScreenShot();
+		capturescreen("Screenshot");
 		click(createMedicationMenuItem);
-		verifyPageIsDisplayAndCaptureTheScreenShot();
+		capturescreen("Screenshot");
 		clickOnBackIcon();
 
 	}
@@ -473,6 +510,6 @@ public class MobileSideMenuPage extends MobileCoreFunctions {
 	 */
 	public void verifyAvatarAndVersionLabelIsDisplay() {
 		Assert.assertTrue(participantVersionText.isDisplayed());
-		verifyPageIsDisplayAndCaptureTheScreenShot();
+		capturescreen("Screenshot");
 	}
 }

@@ -1879,8 +1879,9 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	 * 
 	 * @param userName
 	 * @param password
+	 * @throws InterruptedException 
 	 */
-	public AssessmentsDetailsPage eSignReasonForChangeAndSubmit(String userName, String password) {
+	public AssessmentsDetailsPage eSignReasonForChangeAndSubmit(String userName, String password) throws InterruptedException {
 
 		inputCredentialsInReasonForChangePopUp(userName, password);
 		try {
@@ -1898,14 +1899,17 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		reportInfo();
 	}
 
-	public void inputCredentialsInReasonForChangePopUp(String userName, String password) {
+	public void inputCredentialsInReasonForChangePopUp(String userName, String password) throws InterruptedException {
 		_normalWait(500);
 		inputText(reasonForChangeUserNameINP, userName);
 		_normalWait(500);
 		inputText(reasonForChangePasswordINP, password);
 		clickOn(reasonForChangeOkBTN);
+		_normalWait(500);
 		waitForSpinner(DEFAULT_WAIT_4_ELEMENT);
-		reportInfo();
+		_normalWait(500);
+		Thread.sleep(4000);
+		//reportInfo();
 	}
 
 	public void inputCredentialsForReasonForChange(String userName, String password) {
@@ -4499,7 +4503,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	 */
 
 	public void verifyMobileProSubjectDisableReasonTextBoxIsHighlightedAsRequiredField() {
-		waitForElement(reportedOutComeMobileProSubjectDisableReasonTextbox);
+		waitForElement   (reportedOutComeMobileProSubjectDisableReasonTextbox);
 		Assert.assertTrue(reportedOutComeMobileProSubjectDisableReasonTextbox.getAttribute("class")
 				.contains("ng-invalid-required"));
 		moveToElement(reportedOutComeMobileProSubjectDisableReasonTextbox);
@@ -7576,7 +7580,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 
 	/* For Configuring Completed Subject By Clicking On Not Completed Link */
 
-	public void completingVisitByMarkAsNotCompleting(String visitname, String userName, String password) {
+	public void completingVisitByMarkAsNotCompleting(String visitname, String userName, String password) throws InterruptedException {
 		verifyNewSubjectDetailPage();
 		clickOnVisitRow(visitname);
 		clickOnAddVisitIcon();
@@ -7943,7 +7947,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	}
 
 	/* Deactivate Subject Configuration */
-	public void deactivateSubjectConfiguration(String userName, String password) {
+	public void deactivateSubjectConfiguration(String userName, String password) throws InterruptedException {
 		_normalWait(DEFAULT_WAIT_4_PAGE);
 		clickOnReportedOutComeMobileSubjectQrIcon();
 		clickOnDeactivateDeviceButtonForRegisteredSubject();
@@ -7953,7 +7957,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	}
 
 	/* Deactivate Observer Configuration */
-	public void deactivateObserverConfiguration(String userName, String password) {
+	public void deactivateObserverConfiguration(String userName, String password) throws InterruptedException {
 
 		clickOnMobileObserverQrIcon();
 		clickOnDeactivateDeviceButtonForRegisteredObserver();
@@ -7968,7 +7972,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	 * 
 	 */
 
-	public void configureObsreverForMobile(String observerRelation1, String userName, String pw) {
+	public void configureObsreverForMobile(String observerRelation1, String userName, String pw) throws InterruptedException {
 		clickOnReportedOutComeButton();
 		configureObserver(observerRelation1, observerRelation1);
 		selectMobileProObserver(observerRelation1);
@@ -8617,12 +8621,14 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	
 	public void sendMessage() {
 		//waitForElementToBecomeVisible(sendMessageButton, DEFAULT_WAIT_4_ELEMENT);
+		//for(int i=1; i<5; i++) {
 		waitForElementPresent(sendMessageButton, DEFAULT_WAIT_4_ELEMENT);
 		clickOnsendMessageButton();
 		selectRecipientUnderModalWindow();
 		enterMessageSubject("test");
 		enterMessagetext("1234");
 		clickOnSendButtonOnModelWindow();
+		//}
 		
 	}
 	

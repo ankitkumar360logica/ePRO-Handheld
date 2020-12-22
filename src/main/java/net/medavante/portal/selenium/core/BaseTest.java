@@ -1067,9 +1067,10 @@ public abstract class BaseTest extends MobileDriver
 		PdfPTable table = new PdfPTable(2);
 		table.setWidthPercentage(100);
 		table.setWidths(new int[] { 1, 3 });
-		table.addCell(createTextCell("ModuleName: " + moduleName + "\nTestName:" + System.getProperty("testcaseName")
-				+ "\nTest Step: " + getMessage() + "\nTime Stamp: " + timestamp));
+		//table.addCell(createTextCell("ModuleName: " + moduleName + "\nTestName:" + System.getProperty("testcaseName")
+		//		+ "\nTest Step: " + getMessage() + "\nTime Stamp: " + timestamp));
 		//table.addCell("   ");
+		table.addCell(createTextCell(getMessage()));
 		table.addCell(createImageCell(Scrrenshotpath));
 		document.add(table);
 	}

@@ -160,7 +160,7 @@ public abstract class BasePage {
 		Actions actn = new Actions(driver);
 		actn.moveToElement(element).build().perform();
 		javascripctHilightingElement(element);
-		reportInfo();
+		//reportInfo();
 		unhighLightElement();
 	}
 
@@ -237,7 +237,7 @@ public abstract class BasePage {
 	/** Click on WebElement by using java script */
 	public void javascriptButtonClick(WebElement webElement) {
 		javascripctHilightingElement(webElement);
-		reportInfo();
+		//reportInfo();
 		unhighLightElement();
 		waitForElement(webElement);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -1230,7 +1230,7 @@ public abstract class BasePage {
 	 */
 	public void doubleClickOnElement(WebElement element) {
 		javascripctHilightingElement(element);
-		reportInfo();
+		//reportInfo();
 		unhighLightElement();
 		Actions actions = new Actions(driver).doubleClick(element);
 		actions.build().perform();
@@ -1241,7 +1241,7 @@ public abstract class BasePage {
 	 */
 	public void clickOnElementThroughMouseHovering(WebElement element) {
 		javascripctHilightingElement(element);
-		reportInfo();
+		//reportInfo();
 		unhighLightElement();
 		Actions actions = new Actions(driver).pause(500).click(element);
 		actions.build().perform();
@@ -1491,7 +1491,7 @@ public abstract class BasePage {
 		Assert.assertTrue(flag);
 		waitUntillFinishProcessSpinnerDisable();
 
-		reportInfo();
+		//reportInfo();
 		return (T) PageFactory.initElements(driver, className);
 	}
 
@@ -1724,7 +1724,7 @@ public abstract class BasePage {
 		} catch (Exception e) {
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		//reportInfo();
 		
 	}
 	
@@ -1858,7 +1858,7 @@ public abstract class BasePage {
 		} catch (Exception e) {
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		//reportInfo();
 	}
 	
 	@FindBy(xpath="//div[@id='cdk-overlay-3']//span[@class='ma-dialog-title']")
@@ -1893,7 +1893,7 @@ public abstract class BasePage {
 		} catch (Exception e) {
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		//reportInfo();
 	}
 	
 	/**
@@ -1999,7 +1999,7 @@ public abstract class BasePage {
 		} catch (Exception e) {
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		//reportInfo();
 	}
 	
 	@FindBy(xpath = "//div[@class='cdk-overlay-container']//input[@placeholder='Search']")
@@ -2033,7 +2033,7 @@ public abstract class BasePage {
 		clickOn(sitestoBeSelected);
 		WebElement selectBtn = driver.findElement(ByLocator("//button[text()='Select']"));
 		waitAndClick(selectBtn);
-		reportInfo();
+		//reportInfo();
 	}
 	
 	public void navigateOnHomePage()

@@ -29,17 +29,39 @@ public class MBLogAnEventPage extends MobileCoreFunctions{
 	
 	@AndroidFindBy(xpath = "//android.widget.Button[@class='android.widget.Button']")
 	private MobileElement continueBtn;
+	
+	@AndroidFindBy(xpath = "//android.widget.ImageButton[@class='android.widget.ImageButton']")
+	private MobileElement backIcon;
 
 	
-	public void clickOnEvent(String eventToBeOpen){
+	public void clickOnEvent(String eventToBeOpen) throws InterruptedException{
 		for(MobileElement we:eventList){
 			if(we.getText().equalsIgnoreCase(eventToBeOpen)){
 				click(we);
+				//Thread.sleep(2000);
+				waitForElementToBecomeVisible(startBtn,DEFAULT_WAIT_ELEMENT);
+
 				capturescreen("Screenshot");
 				break;
 			}
 		}
-		_normalWait(DEFAULT_WAIT);
+		_normalWait(DEFAULT_WAIT_ELEMENT);
+		//capturescreen("Screenshot");
+	}
+	
+	public void clickOnEventWithoutStartBtnVisible(String eventToBeOpen) throws InterruptedException{
+		for(MobileElement we:eventList){
+			if(we.getText().equalsIgnoreCase(eventToBeOpen)){
+				click(we);
+				//Thread.sleep(2000);
+				//waitForElementToBecomeVisible(startBtn,DEFAULT_WAIT_ELEMENT);
+
+				capturescreen("Screenshot");
+				Thread.sleep(2000);
+				//break;
+			}
+		}
+		_normalWait(DEFAULT_WAIT_ELEMENT);
 		capturescreen("Screenshot");
 	}
 	
@@ -48,7 +70,12 @@ public class MBLogAnEventPage extends MobileCoreFunctions{
 		_normalWait(DEFAULT_WAIT_ELEMENT);
 	}
 	
+	public void clickOnBackIcon() {
+		click(backIcon);
+	}
+	
 	public void completeEvent() {
+		_normalWait(DEFAULT_WAIT_ELEMENT);
 		click(nextArrowIcon);
 		click(nextArrowIcon);
 		click(selectRadioBtn);
