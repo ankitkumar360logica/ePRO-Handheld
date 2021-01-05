@@ -28,6 +28,7 @@ import io.appium.java_client.touch.offset.PointOption;
 import net.medavante.mobile.appium.core.MobileCoreFunctions;
 import net.medavante.mobile.appium.core.MobileDriver;
 import net.medavante.portal.selenium.core.BasePage;
+import net.medavante.portal.utilities.Excel;
 import net.medavante.portal.utilities.MobileConstants;
 
 public class MobileLoginPage extends MobileCoreFunctions {
@@ -383,12 +384,15 @@ public class MobileLoginPage extends MobileCoreFunctions {
 	 * Click on continue button
 	 * @throws IOException 
 	 */
-	public void clickOnContinueButton() {
+	public void clickOnContinueButton(boolean blnCaptureScreenshot) {
 		waitForElementToBecomeVisible(continueBtn, DEFAULT_WAIT_2_ELEMENT);
 		_normalWait(DEFAULT_WAIT_2_ELEMENT);
 		click(continueBtn);
 		waitForElementToBecomeVisible(acceptBtn, DEFAULT_WAIT_2_ELEMENT);
+		
+		if(blnCaptureScreenshot) {
 		capturescreen("Screenshot");
+		}
 		//_normalWait(globalWaitTime);
 
 	}
@@ -412,7 +416,7 @@ public class MobileLoginPage extends MobileCoreFunctions {
 	public void clickOnAcceptBtn() {
 		//longPress(acceptBtn);
 		waitForElementToBecomeVisible(acceptBtn, globalWaitTime);
-		capturescreen("Screenshot");
+		//capturescreen("Screenshot");
 		click(acceptBtn);
 		_normalWait(DEFAULT_WAIT_ELEMENT);
 	}
@@ -586,14 +590,15 @@ public class MobileLoginPage extends MobileCoreFunctions {
 //		 capturescreen("Screenshot");
 //	}
 
-	public void clickOnForgetPINLink() throws InterruptedException {
+	public void clickOnForgetPINLink(boolean blnCaptureScreenshot) throws InterruptedException {
 		waitForElementToBecomeVisible(forgetLink, 60);
 		click(forgetLink);
 		_normalWait(globalWaitTime);
 
-		System.out.println("Clicked forgot link");
 		//waitForElementToBecomeVisible(registerInstruction, globalWaitTime);
+		if(blnCaptureScreenshot) {
 		capturescreen("Screenshot");
+		}
 
 	}
 	
@@ -749,7 +754,7 @@ public class MobileLoginPage extends MobileCoreFunctions {
 
 	public void clearConfirmPINBox() {
 		editBox.clear();
-		 capturescreen("Screenshot");
+		 //capturescreen("Screenshot");
 	}
 
 	/**
@@ -786,17 +791,21 @@ public class MobileLoginPage extends MobileCoreFunctions {
 		 capturescreen("Screenshot");
 	}
 	
-	public void verifyChooseAQuestionShowing() {
+	public void verifyChooseAQuestionShowing(boolean blnCaptureScreenshot) {
 		_normalWait(DEFAULT_WAIT_ELEMENT);
 		Assert.assertTrue(isElementPresent(verifyChooseAQuestion));
+		if(blnCaptureScreenshot) {
 		 capturescreen("Screenshot");
+		}
 	}
 
-	public void clickOnChooseAQuestionOption() {
+	public void clickOnChooseAQuestionOption(boolean blnCaptureScreenshot) {
 		waitForElementToBecomeVisible(choosAQuestion, 30);
 		click(choosAQuestion);
 		_normalWait(DEFAULT_WAIT_ELEMENT);
+		if(blnCaptureScreenshot) {
 		capturescreen("Screenshot");
+		}
 	}
 
 //	public void clickOnChooseAQuestionOption() throws IOException {
@@ -899,7 +908,7 @@ public class MobileLoginPage extends MobileCoreFunctions {
 			clickOnEnterTheCode();
 			enterTheRegistrationCode(registrationCode);
 			clickOnSubmitButton();
-			clickOnContinueButton();
+			clickOnContinueButton(false);
 			verifySignInScreenDisplayed();
 			loginUser(pinNum);
 		} else {
@@ -922,7 +931,7 @@ public class MobileLoginPage extends MobileCoreFunctions {
 		clickOnEnterTheCode();
 		enterTheRegistrationCode(registrationCode);
 		clickOnSubmitButton();
-		clickOnContinueButton();
+		clickOnContinueButton(true);
 	}	
 				
 //		_normalWait(DEFAULT_WAIT_ELEMENT);
@@ -1026,8 +1035,9 @@ public class MobileLoginPage extends MobileCoreFunctions {
 
 		try {
 			new TouchAction(mobileDriver).press(PointOption.point(startX, startY)).moveTo(PointOption.point(endX, endY)).release().perform();
+			Thread.sleep(1000);
 			capturescreen("Screenshot");
-			capturescreen("Screenshot");
+			//capturescreen("Screenshot");
 
 
 		} catch (Exception e) {
@@ -1047,14 +1057,16 @@ public class MobileLoginPage extends MobileCoreFunctions {
 		
 	}
 	
-	public void tapByCoordinate(int x, int y) throws InterruptedException {
+	public void tapByCoordinate(int x, int y, boolean blnCaptureScreenshot) throws InterruptedException {
 
 		Thread.sleep(10000);
 		try {
 			TouchAction action = new TouchAction(mobileDriver);
 			action.tap(PointOption.point(x,y)).perform();
 			Thread.sleep(2000);
+			if(blnCaptureScreenshot) {
 			capturescreen("Screenshot");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Failed to tap by coordinate");
@@ -1062,7 +1074,38 @@ public class MobileLoginPage extends MobileCoreFunctions {
 
 	}
 	
-	
+
+	public void verifyText(WebElement element, int rownumber) throws Exception {
+
+		String actualText = getText(element);
+		String expectedText = Excel.readLanguageData(rownumber);
+		if (actualText == expectedText) {
+			System.out.println("Expected text: " + expectedText + " matches with actual text: " + actualText);
+		} else {
+			System.out.println("Actual text: " + actualText + " does not matches with expected text: " + expectedText);
+
+		}
+	}
+
+	public void verifyPartialText(WebElement element, int rownumber) throws Exception {
+
+		String actualText = getText(element);
+		String expectedText = Excel.readLanguageData(rownumber).replaceAll("[0-9{}]", "");
+
+		if (actualText.contains(expectedText)) {
+			System.out.println("Expected text:" + expectedText + "contains in the actual text: " + actualText);
+		} else {
+			System.out.println("Expected text:" + expectedText + " does not matches with actual text: " + actualText);
+
+		}
+
+	}
+
+		public void verifyTextloginbutton() throws Exception {
+			_normalWait(DEFAULT_WAIT_ELEMENT);
+			//verifyText(pinEditBox,1);
+			verifyPartialText(pinEditBox,1);
+		}
 	
 	
 	

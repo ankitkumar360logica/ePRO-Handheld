@@ -40,10 +40,9 @@ public class MBLogAnEventPage extends MobileCoreFunctions{
 				click(we);
 				//Thread.sleep(2000);
 				waitForElementToBecomeVisible(startBtn,DEFAULT_WAIT_ELEMENT);
-
 				capturescreen("Screenshot");
 				break;
-			}
+				}
 		}
 		_normalWait(DEFAULT_WAIT_ELEMENT);
 		//capturescreen("Screenshot");
@@ -53,7 +52,7 @@ public class MBLogAnEventPage extends MobileCoreFunctions{
 		for(MobileElement we:eventList){
 			if(we.getText().equalsIgnoreCase(eventToBeOpen)){
 				click(we);
-				//Thread.sleep(2000);
+				Thread.sleep(1000);
 				//waitForElementToBecomeVisible(startBtn,DEFAULT_WAIT_ELEMENT);
 
 				capturescreen("Screenshot");
@@ -61,7 +60,7 @@ public class MBLogAnEventPage extends MobileCoreFunctions{
 				//break;
 			}
 		}
-		_normalWait(DEFAULT_WAIT_ELEMENT);
+		//_normalWait(DEFAULT_WAIT_ELEMENT);
 		capturescreen("Screenshot");
 	}
 	

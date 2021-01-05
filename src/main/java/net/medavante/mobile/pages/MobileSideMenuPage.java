@@ -33,46 +33,27 @@ public class MobileSideMenuPage extends MobileCoreFunctions {
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Participant Version']")
 	private MobileElement participantVersionText;
 
-	//@AndroidFindBy(xpath = "(//android.widget.ListView/child::android.widget.LinearLayout[1])[2]")
-	//(//android.widget.ListView/child::android.widget.LinearLayout)[6]
-	//@AndroidFindBy(xpath = "//android.widget.TextView[@text='Mein Konto']")
 	@AndroidFindBy(xpath = "((//android.widget.ListView)[2]/android.widget.LinearLayout)[1]")
-	//@AndroidFindBy(xpath = "//android.widget.TextView[@text='マイアカウント']")   
 	private MobileElement myAccount;
 
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Medications']")
 	private MobileElement medications;
 
-	//@AndroidFindBy(xpath = "(//android.widget.ListView/child::android.widget.LinearLayout[2])[2]")
-	//@AndroidFindBy(xpath = "//android.widget.TextView[@text='Mein Zeitplan']")
 	@AndroidFindBy(xpath = "((//android.widget.ListView)[2]/android.widget.LinearLayout)[2]")
-	//@AndroidFindBy(xpath = "//android.widget.TextView[@text='マイスケジュール']")
 	private MobileElement mySchedule;
 
-	//@AndroidFindBy(xpath = "(//android.widget.ListView/child::android.widget.LinearLayout[3])[2]")
-	//@AndroidFindBy(xpath = "//android.widget.TextView[@text='Studieninformationen']")
 	@AndroidFindBy(xpath = "((//android.widget.ListView)[2]/android.widget.LinearLayout)[3]")
-	//@AndroidFindBy(xpath = "//android.widget.TextView[@text='治験情報']")
 	private MobileElement studyInformation;
 
-	//@AndroidFindBy(xpath = "(//android.widget.ListView/child::android.widget.LinearLayout[4])[2]")
-	//@AndroidFindBy(xpath = "//android.widget.TextView[@text='Kontakte']")
 	@AndroidFindBy(xpath = "((//android.widget.ListView)[2]/android.widget.LinearLayout)[4]")
-	//@AndroidFindBy(xpath = "//android.widget.TextView[@text='問い合わせ先']")
 	private MobileElement contacts;
 
-	//@AndroidFindBy(xpath = "(//android.widget.ListView/child::android.widget.LinearLayout[5])[2]")
-	//@AndroidFindBy(xpath = "//android.widget.TextView[@text='Einstellungen']")
 	@AndroidFindBy(xpath = "((//android.widget.ListView)[2]/android.widget.LinearLayout)[5]")
 	private MobileElement settings;
 
-	//@AndroidFindBy(xpath = "(//android.widget.ListView/child::android.widget.LinearLayout[6])[1]")
-	//@AndroidFindBy(xpath = "//android.widget.TextView[@text='Hilfe und Schulungen']")
 	@AndroidFindBy(xpath = "((//android.widget.ListView)[2]/android.widget.LinearLayout)[6]")
 	private MobileElement helpTutorial;
 
-	//@AndroidFindBy(xpath = "(//android.widget.ListView/child::android.widget.LinearLayout[7])[1]")
-	//@AndroidFindBy(xpath = "//android.widget.TextView[@text='Über uns']")
 	@AndroidFindBy(xpath = "((//android.widget.ListView)[2]/android.widget.LinearLayout)[7]")
 	private MobileElement aboutUs;
 

@@ -148,23 +148,25 @@ public class MobileDashBoardPage extends MobileCoreFunctions {
 
 	}
 
-	public MobileSideMenuPage clickOnHumBergerMenuAndOpenLeftPanel() {
+	public MobileSideMenuPage clickOnHumBergerMenuAndOpenLeftPanel(boolean blnCaptureScreenshot) {
 		waitForElementToBecomeVisible(humBurgerMenuIcon, globalWaitTime);
 		click(humBurgerMenuIcon);
 		MobileSideMenuPage sideMenu = new MobileSideMenuPage(mobileDriver);
 		PageFactory.initElements(new AppiumFieldDecorator(mobileDriver), sideMenu);
-		 capturescreen("Screenshot");
+		if(blnCaptureScreenshot) {
+			capturescreen("Screenshot");
+		}
 		return sideMenu;
 
 	}
 
 
-	public MBMessagesPage clickOnMessageTab() {
+	public MBMessagesPage clickOnMessageTab(boolean blnCaptureScreenshot) {
 		waitForElementToBecomeVisible(messageTab, globalWaitTime);
 		click(messageTab);
-		//Assert.assertTrue(messageTab.isSelected());
-		 capturescreen("Screenshot");
-		
+		if(blnCaptureScreenshot) {
+			capturescreen("Screenshot");
+		}		
 		MBMessagesPage message = new MBMessagesPage(mobileDriver);
 		PageFactory.initElements(new AppiumFieldDecorator(mobileDriver), message);
 		 //capturescreen("Screenshot");
@@ -189,7 +191,7 @@ public class MobileDashBoardPage extends MobileCoreFunctions {
 		click(questionnairesTab);
 		click(questionnairesTab);
 		Assert.assertTrue(questionnairesTab.isSelected());
-		 //capturescreen("Screenshot");
+		 capturescreen("Screenshot");
 		MBQuestionnaires questionnaires = new MBQuestionnaires(mobileDriver);
 		PageFactory.initElements(new AppiumFieldDecorator(mobileDriver), questionnaires);
 		 //capturescreen("Screenshot");

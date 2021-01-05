@@ -119,14 +119,16 @@ public class MBMessagesPage extends MobileCoreFunctions {
 	
 	@AndroidFindBy(xpath = "(//android.view.ViewGroup//android.widget.TextView[@class='android.widget.TextView'])[2]")
 	private MobileElement sendMsgBtn;
-	public void clickOnSendMsgBtn() {
+	public void clickOnSendMsgBtn(boolean blnCaptureScreenshot) {
 		click(sendMsgBtn);
+		if(blnCaptureScreenshot) {
 		capturescreen("Screenshot");
+		}
 	}
 	
 	public void clickOnSendMessageBtnForMultiCapture() throws InterruptedException {
 		click(sendMsgBtn);
-		Thread.sleep(1000);
+		//Thread.sleep(1000);
 		capturescreen("Screenshot");
 		Thread.sleep(2000);
 		capturescreen("Screenshot");
@@ -154,9 +156,11 @@ public class MBMessagesPage extends MobileCoreFunctions {
 		//capturescreen("Screenshot");
 	}
 	
-	public void clickFirstMsgOnMessageListScreen() {
+	public void clickFirstMsgOnMessageListScreen(boolean blnCaptureScreenshot) {
 		click(selectFirstMessageFromList);
+		if(blnCaptureScreenshot) {
 		capturescreen("Screenshot");
+		}
 	}
 	
 	public void clickReplyIcon() {
@@ -172,14 +176,16 @@ public class MBMessagesPage extends MobileCoreFunctions {
 
 	}
 	
-	public void verifyWarningpopupWithButtons() {
+	public void verifyWarningpopupWithButtons(boolean blnCaptureScreenshot) {
 		boolean flag = false;
 		if(warningPopupWindow.isDisplayed() && noOptionOnExitPopUp.isDisplayed() && yesOptionOnExitPopUp.isDisplayed()) {
 			flag = true;
 		}
 		Assert.assertTrue(flag);
+		if(blnCaptureScreenshot) {
 		capturescreen("Screenshot");
-	}
+		}
+		}
 	
 	public void clickOnComposeMessageIcon(int x, int y) {
 		 _normalWait(DEFAULT_WAIT_ELEMENT);

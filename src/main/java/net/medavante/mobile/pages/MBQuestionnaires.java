@@ -118,6 +118,9 @@ public class MBQuestionnaires extends MobileCoreFunctions {
 	@AndroidFindBy(xpath = "(//android.view.View[3]//android.view.View[1])[4]")
 	private MobileElement textClick;
 	
+	@AndroidFindBy(xpath = "(//android.view.View[1]//android.view.View[3])[1]")
+	private MobileElement textClick1;
+	
 	/* Verify Today Question is Present */
 	public void verifyTodayQuestionnairesListPresent() {
 		_normalWait(DEFAULT_WAIT_ELEMENT);
@@ -155,7 +158,7 @@ public class MBQuestionnaires extends MobileCoreFunctions {
 
 	/* Click On Questions */
 
-	public void selectQuestionForms(String questionToBeSelect) throws InterruptedException
+	public void selectQuestionForms(String questionToBeSelect, boolean blnCaptureScreen) throws InterruptedException
 
 	{
 		_normalWait(DEFAULT_WAIT_2_ELEMENT);
@@ -174,10 +177,11 @@ public class MBQuestionnaires extends MobileCoreFunctions {
 		}
 		Assert.assertTrue(flag);
 		_normalWait(globalWaitTime);
-		Thread.sleep(30000);
+		//Thread.sleep(20000);
+		if(blnCaptureScreen) {
 		 capturescreen("Screenshot");
 		
-
+		}
 	}
 
 	/* Verify question Starting page and Description */
@@ -193,10 +197,10 @@ public class MBQuestionnaires extends MobileCoreFunctions {
 	/* Click On start Question */
 	public void clickOnStartQuestion() throws InterruptedException {
 		_normalWait(DEFAULT_WAIT_ELEMENT);
-		//waitForElementToBecomeVisible(startButtonForQuestion, DEFAULT_WAIT_4_ELEMENT);
+		waitForElementToBecomeVisible(startButtonForQuestion, DEFAULT_WAIT_2_ELEMENT);
 		click(startButtonForQuestion);
-		 capturescreen("Screenshot");
-		 Thread.sleep(3000);
+		// capturescreen("Screenshot");
+		 Thread.sleep(2000);
 	}
 
 	/* Verify Question Can Be Answered */
@@ -585,28 +589,115 @@ public class MBQuestionnaires extends MobileCoreFunctions {
 		click(totalNumberDrpDwn);
 		Thread.sleep(2000);
 		click(selectOptionRadioBtn);
-		//click(childNumberTxtBox);
-
 		
+		click(nextArrowIcon);
+
+		click(nextArrowIcon);
+
+		click(selectRadioBtn);
+		click(nextArrowIcon);
+		
+		click(selectCheckBox);
+		click(nextArrowIcon);
+		
+		click(selectRadioBtn);
+		click(nextArrowIcon);
+		
+		click(selectRadioBtn);
+		click(nextArrowIcon);
+		
+		capturescreen("Screenshot");
+		click(continueBtn);
+		Thread.sleep(3000);			
 	}
 	
 	
 	public void questionnaireToBeCompleteTextBox() throws InterruptedException {
+		
+		_normalWait(DEFAULT_WAIT_ELEMENT);
+		//capturescreen("Screenshot");
+		click(selectRadioBtn);
+		click(nextArrowIcon);
+		
+		//capturescreen("Screenshot");
+		click(nextArrowIcon);
+		click(nextArrowIcon);
+
+		//capturescreen("Screenshot");
+		
+		if(totalNumberDrpDwn.isDisplayed()) {
+			//capturescreen("Screenshot");
+			questionnaireToBeCompleted();
+		}
+		else {
+		
 		setText(totalNumberTextBox, "3");
 		hideKeyboard();
-		Thread.sleep(2000);
-		
-		//click(selectOptionRadioBtn);
-		
+		Thread.sleep(2000);		
 		setText(childNumberTextBox, "1");
 		hideKeyboard();
 		Thread.sleep(2000);
 		click(textClick);
-//		Thread.sleep(2000);
-//		click(selectOptionRadioBtn);
-		//click(childNumberTxtBox);
+		click(nextArrowIcon);
 
+		//capturescreen("Screenshot");
+		setText(totalNumberTextBox, "3");
+		hideKeyboard();
+		Thread.sleep(2000);		
+		setText(childNumberTextBox, "1");
+		hideKeyboard();
+		Thread.sleep(2000);
+		click(textClick);
+		click(nextArrowIcon);
 		
+		//capturescreen("Screenshot");
+		setText(totalNumberTextBox, "2");
+		hideKeyboard();
+		click(textClick1);
+		Thread.sleep(2000);	
+		click(nextArrowIcon);
+		
+		//capturescreen("Screenshot");
+		setText(totalNumberTextBox, "2");
+		hideKeyboard();
+		click(textClick1);
+		Thread.sleep(2000);
+		click(nextArrowIcon);
+		
+		//capturescreen("Screenshot");
+		click(nextArrowIcon);
+		
+		//capturescreen("Screenshot");
+		click(nextArrowIcon);
+		
+		//capturescreen("Screenshot");
+		click(selectRadioBtn);
+		click(nextArrowIcon);
+		
+		//capturescreen("Screenshot");
+		click(selectRadioBtn);
+		click(nextArrowIcon);
+		
+		//capturescreen("Screenshot");
+		click(selectRadioBtn);
+		click(nextArrowIcon);
+		
+		//capturescreen("Screenshot");
+		click(selectRadioBtn);
+		click(nextArrowIcon);
+		
+		//capturescreen("Screenshot");
+		click(selectCheckBox);
+		click(nextArrowIcon);
+		
+		//capturescreen("Screenshot");
+		click(selectRadioBtn);
+		click(nextArrowIcon);
+		
+		//capturescreen("Screenshot");
+		click(continueBtn);
+		Thread.sleep(3000);		
+	}
 	}
 	
 	public void completeQuestionnaire() throws InterruptedException {
@@ -619,12 +710,8 @@ public class MBQuestionnaires extends MobileCoreFunctions {
 		
 		click(nextArrowIcon);
 		
-		//questionnaireToBeCompleted();
+		questionnaireToBeCompleted();
 		
-		questionnaireToBeCompleteTextBox();
-		
-		
-
 		click(nextArrowIcon);
 		
 		click(nextArrowIcon);
@@ -661,7 +748,7 @@ public class MBQuestionnaires extends MobileCoreFunctions {
 	public void NotFinishQuestionnaire() throws InterruptedException {
 		_normalWait(DEFAULT_WAIT_ELEMENT);
 
-		click(selectRadioBtn);
+		//click(selectRadioBtn);
 		click(nextArrowIcon);
 		
 		click(nextArrowIcon);
@@ -670,8 +757,6 @@ public class MBQuestionnaires extends MobileCoreFunctions {
 		
 		questionnaireToBeCompleted();
 		
-		
-
 		click(nextArrowIcon);
 		
 		click(nextArrowIcon);

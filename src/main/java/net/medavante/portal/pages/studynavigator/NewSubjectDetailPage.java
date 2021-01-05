@@ -1318,12 +1318,12 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 
 	public void verifySiteBasedDisabledParticipantAndObserversTextInRed() {
 		Assert.assertTrue(disabledSiteBasedParticipantIcon.getCssValue("color").trim().contains("rgba(204, 71, 44, 1"));
-		reportInfo();
+		
 	}
 
 	public void verifySiteBasedDisabledParticipantAndObserversTextIsNotRed() {
 		Assert.assertTrue(disabledSiteBasedParticipantIcon.getCssValue("color").trim().contains("rgba(87, 87, 87, 1)"));
-		reportInfo();
+		
 	}
 
 	public void selectEnableSiteBasedProParticipant() {
@@ -1338,19 +1338,19 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 
 	public void inputDisabledSiteBasedProParticipantReason(String textToBeEnter) {
 		inputText(reportedOutComeSiteBasedProParticipantCommentINP, textToBeEnter);
-		reportInfo();
+		
 	}
 
 	public void verifyDisabledReasonTextForSiteBasedPROParticipant(String reasonToBeVerified) {
 		Assert.assertTrue(
 				reportedOutComeSiteBasedProParticipantCommentINP.getAttribute("value").contains(reasonToBeVerified));
-		reportInfo();
+		
 	}
 
 	public void verifyDisabledReasonTextForSiteBasedPROObserver(String reasonToBeVerified) {
 		Assert.assertTrue(
 				reportedOutComeSiteBasedProObserverCommentINP.getAttribute("value").contains(reasonToBeVerified));
-		reportInfo();
+		
 	}
 
 	public void selectDisabledSiteBasedProObserver() {
@@ -1360,32 +1360,32 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 
 	public void inputDisabledSiteBasedProObserverReason(String textToBeEnter) {
 		inputText(reportedOutComeSiteBasedProObserverCommentINP, textToBeEnter);
-		reportInfo();
+		
 	}
 
 	public void verifyParticipantAndObserverSettingsAreAvailable() {
 		Assert.assertTrue((reportedOutComeSiteBasedProParticipantDRPDOWN).isDisplayed());
 		Assert.assertTrue((reportedOutComeSiteBasedProObserverDRPDOWN).isDisplayed());
-		reportInfo();
+		
 	}
 
 	/* Verify In Mobile Pro Observer DropDown To Select Available */
 	public void verifyMobileProObserverDropdownToSelectIsAvailable() {
 		moveToElement(reportedOutComeMobileProObserverDRPDOWN);
 		Assert.assertTrue((reportedOutComeMobileProObserverDRPDOWN.isDisplayed()));
-		reportInfo();
+		
 	}
 
 	public void verifyReasonForDisablingParticipantAndObserverInputFieldAreEditable() {
 		Assert.assertTrue(reportedOutComeSiteBasedProParticipantCommentINP.isEnabled());
 		Assert.assertTrue(reportedOutComeSiteBasedProObserverCommentINP.isEnabled());
-		reportInfo();
+		
 	}
 
 	public void verifyReasonForDisablingParticipantAndObserverInputFieldIsNotDisplayed() {
 		Assert.assertFalse(isElementDisplayed(reportedOutComeSiteBasedProParticipantCommentINP));
 		Assert.assertFalse(isElementDisplayed(reportedOutComeSiteBasedProObserverCommentINP));
-		reportInfo();
+		
 	}
 
 	public void verifyDisabledParticipantAndObserverSiteBasedInputReasonFieldAppearAndHighlighted() {
@@ -1408,7 +1408,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		for (WebElement inputFieldEle : inputFieldsList) {
 			clearTextBox(inputFieldEle);
 		}
-		reportInfo();
+		
 		for (WebElement inputFieldElement : inputFieldsList) {
 			String color = getBackgroundColor(inputFieldElement);
 			bgColorAfterList.add(color);
@@ -1491,18 +1491,18 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 
 	public void verifyEnterPaperTranscriptionLINKIsDisplayed() {
 		Assert.assertTrue(enterPaperTranscriptionLINK.isDisplayed());
-		reportInfo();
+		
 	}
 
 	public void verifyReasonForChangeOptionPopUpIsDisplayed() {
 		waitForElementPresent(reasonForChangeReasonDRPDOWN, DEFAULT_WAIT_4_ELEMENT);
 		Assert.assertTrue(isElementPresent(reasonForChangeReasonDRPDOWN));
-		reportInfo();
+		
 	}
 
 	public void verifyReasonForChangeOptionPopUpIsNotDisplayed() {
 		Assert.assertFalse(reasonForChangeReasonDRPDOWN.isDisplayed());
-		reportInfo();
+		
 	}
 
 	public void verifyAddObserverTableHeaderAttributes(List<String> headerOptionToBeVerify) {
@@ -1513,19 +1513,19 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			}
 		}
 		Assert.assertTrue(optionList.containsAll(headerOptionToBeVerify));
-		reportInfo();
+		
 	}
 
 	public void verifyObserverGridIsDisplayedWithListOfObserver() {
 		Assert.assertTrue(observerSectionGRID.isDisplayed());
 		Assert.assertTrue(observerLIST.size() > 0);
-		reportInfo();
+		
 	}
 
 	public void verifyObserverGridIsHidden() {
 		Assert.assertFalse(isElementDisplayed(observerSectionGRID));
 		// Assert.assertTrue(observerLIST.size() == 0);
-		reportInfo();
+		
 	}
 
 	public void selectObserverRelationAndVerifyEditAndDeleteBTNIsDisplayed(String observerToSelect) {
@@ -1641,12 +1641,12 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 
 	public void verifyAddObserverBtnIsDisplayed() {
 		Assert.assertTrue(addObserversBTN.isDisplayed());
-		reportInfo();
+		
 	}
 
 	public void verifyReportedOutComeButtonIsDisplayed() {
 		Assert.assertTrue(reportedOutComeEditBTN.isDisplayed());
-		reportInfo();
+		
 	}
 
 	public void clickOnReportedOutComeButton() {
@@ -1657,19 +1657,19 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 
 	public void verifyReportedOutComeScreenIsNotDisplayed() {
 		Assert.assertFalse(isElementDisplayed(reportedOutComePopUpTitle));
-		reportInfo();
+		
 	}
 
 	public void verifyReportedOutComeIsDisplayed() {
 		waitUntillFinishProcessSpinnerDisable();
 		Assert.assertTrue((reportedOutComePopUpTitle.isDisplayed()));
 		moveToElement(reportedOutComePopUpTitle);
-		reportInfo();
+		
 	}
 
 	public void closeReportedOutComePopup() {
 		clickOn(reportedOutComeCancelBtn);
-		reportInfo();
+		
 	}
 
 	public void clickOnReportedOutComePopUpSaveBTN() {
@@ -1677,7 +1677,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		clickOn(reportedOutComePopUpSaveBTN);
 		waitForElementToBecomeInvisible(By.xpath("//div[@id='modal-fade' and @class='smart-spinner']"));
 		_normalWait(1000);
-		reportInfo();
+		
 	}
 
 	public void observerStaysInActiveState() {
@@ -1686,33 +1686,33 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 
 	public void verifyReasonForChangeInpIsHighlightedWithDefaultValue() {
 		Assert.assertTrue(requiredReasonForChangeINP.isDisplayed());
-		reportInfo();
+		
 	}
 
 	public void verifySelectedReasonForChangeValue(String reasonForChangeToBeVerified) {
 		Assert.assertTrue(selectedReasonForChangeTEXT.getText().trim().equalsIgnoreCase(reasonForChangeToBeVerified));
-		reportInfo();
+		
 	}
 
 	public void verifyReasonForChangeCommentFieldIsEnabledAndRequired() {
 		Assert.assertTrue(
 				requiredReasonForChangeCommentINP.isDisplayed() && requiredReasonForChangeCommentINP.isEnabled());
-		reportInfo();
+		
 	}
 
 	public void verifyReasonForChangeCommentFieldIsEnabledAndNotRequired() {
 		Assert.assertTrue(nonRequiredReasonForChangeCommentINP.isDisplayed());
-		reportInfo();
+		
 	}
 
 	public void inputReasonForChangeComment(String commentToBeEnter) {
 		inputText(nonRequiredReasonForChangeCommentINP, commentToBeEnter);
-		reportInfo();
+		
 	}
 
 	public void verifyReasonForChangeCommentIsAdded(String commentToBeEnter) {
 		inputText(nonRequiredReasonForChangeCommentINP, commentToBeEnter);
-		reportInfo();
+		
 	}
 
 	public void userCredentialsFieldIsRequiredAndEmpty() {
@@ -1721,17 +1721,17 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		Assert.assertTrue(reasonForChangePasswordINP.getAttribute("class")
 				.contains("ng-pristine ng-untouched ng-invalid ng-invalid-required")
 				&& reasonForChangePasswordINP.getAttribute("value").length() == 0);
-		reportInfo();
+		
 	}
 
 	public void verifyReasonForChangePopUpOkAndCancelButtonisDisplayed() {
 		Assert.assertTrue(reasonForChangeOkBTN.isDisplayed() && reasonForChangeCancelBTN.isDisplayed());
-		reportInfo();
+		
 	}
 
 	public void verifyReasonForChangeOkButtonIsDisabled() {
 		Assert.assertTrue(reasonForChangeOkBTN.getAttribute("disabled").contains("true"));
-		reportInfo();
+		
 	}
 
 	public void commentFieldIsNotMandatoryForAllReasonOptionsExceptOtherOption() {
@@ -1797,13 +1797,13 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class='smart-spinner']")));
 		waitUntillFinishProcessSpinnerDisable();
 		Assert.assertTrue(newSubjectDetailPageHeader.isDisplayed(), "Subject Deatil Page opened");
-		reportInfo();
+		
 	}
 
 	public void verifySubjectPageTitle(String titleToBeVerified) {
 		_normalWait(timeout);
 		Assert.assertTrue(newSubjectDetailPageHeader.getText().trim().contains(titleToBeVerified));
-		reportInfo();
+		
 	}
 
 	/**
@@ -1862,7 +1862,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 
 		clickOn(reasonForChangeReasonDRPDOWN);
 
-		reportInfo();
+		//
 
 	}
 
@@ -1871,7 +1871,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	 */
 	public void verifyReasonForChangeAuthenticationText(String AuthenticationText) {
 		Assert.assertEquals(getText(reasonForChangeAuthenticationText).trim(), AuthenticationText);
-		reportInfo();
+		//
 	}
 
 	/**
@@ -1896,7 +1896,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 
 	public void verifyInvalidCredentialsTextIsDisplayedForReasonForChange(String validationMessageToBeVerified) {
 		Assert.assertTrue(invalidPasswordValidationTEXT.getText().contains(validationMessageToBeVerified));
-		reportInfo();
+		//
 	}
 
 	public void inputCredentialsInReasonForChangePopUp(String userName, String password) throws InterruptedException {
@@ -1909,13 +1909,13 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		waitForSpinner(DEFAULT_WAIT_4_ELEMENT);
 		_normalWait(500);
 		Thread.sleep(4000);
-		//reportInfo();
+		//
 	}
 
 	public void inputCredentialsForReasonForChange(String userName, String password) {
 		inputText(reasonForChangeUserNameINP, userName);
 		inputText(reasonForChangePasswordINP, password);
-		reportInfo();
+		//
 	}
 
 	/** Verify New Subject Editing PopUp Window Displayed */
@@ -1936,7 +1936,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	public void inputScreeningNumber(String screeningNum) {
 		waitForElement(screeningNumberINP);
 		inputText(screeningNumberINP, screeningNum);
-		reportInfo();
+		//
 	}
 
 	/**
@@ -1949,7 +1949,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		waitForElement(addSubPopup_TemporaryID);
 		addSubPopup_TemporaryID.clear();
 		inputText(addSubPopup_TemporaryID, TemporaryIDToBeEnter[1]);
-		reportInfo();
+		//
 	}
 
 	/* Input Temp ID */
@@ -1960,7 +1960,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	 */
 	public void inputTemporaryID(String tempIdToBeEnter) {
 		inputText(addSubPopup_TemporaryID, tempIdToBeEnter);
-		reportInfo();
+		//
 	}
 
 	/**
@@ -1972,7 +1972,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		waitForElement(addSubPopup_RandomizationINP);
 		addSubPopup_RandomizationINP.clear();
 		inputText(addSubPopup_RandomizationINP, randomNumToBeEnter);
-		reportInfo();
+		//
 	}
 
 	/**
@@ -1982,7 +1982,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	 */
 	public void inputNotesText(String noteTextToBeEnter) {
 		inputText(editSubPopup_NotesINP, noteTextToBeEnter);
-		reportInfo();
+		//
 	}
 
 	/**
@@ -1992,7 +1992,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	 */
 	public void verifyScreeningNumIsEntered(String screenNumToBeVerified) {
 		Assert.assertEquals(screenNumToBeVerified, screeningNumberINP.getAttribute("value"));
-		reportInfo();
+		//
 	}
 
 	/* Get Screening Number From EditingSubjectPopUp */
@@ -2013,7 +2013,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 
 	public void verifyEditSubjectSaveButtonIsDisplayed() {
 		Assert.assertTrue(saveBTN.isDisplayed());
-		reportInfo();
+		//
 	}
 
 	public void clickOnReasonForChangeCancelBTN() {
@@ -2026,7 +2026,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 
 	public void verifyEditSubjectSaveButtonIsDisabled() {
 		Assert.assertFalse(saveBTN.isEnabled());
-		reportInfo();
+		//
 	}
 
 	/**
@@ -2035,7 +2035,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 
 	public void verifyEditSubjectCancelButtonIsDisplayed() {
 		Assert.assertTrue(cancelBTN.isDisplayed());
-		reportInfo();
+		//
 	}
 
 	/** Click On Editing Icon */
@@ -2051,7 +2051,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 
 	public void verifySubjectEditButtonIsNotDisplayed() {
 		Assert.assertFalse(subjectEditICN.isDisplayed());
-		reportInfo();
+		//
 	}
 
 	public StudySubjectListingPage deleteSubject() {
@@ -2068,7 +2068,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	 */
 	public void verifySubjectEdtingIconIsDisplayed() {
 		Assert.assertTrue(isElementPresent(subjectEditICN));
-		reportInfo();
+		//
 	}
 
 	public void verifysubjectDetailsLabelIsDisplayed() {
@@ -2078,14 +2078,14 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		moveToElement(label_subjectDetails);
 		waitSpinnerToBecomeInvisible();
 		_normalWait(3000);
-		reportInfo();
+		//
 	}
 
 	public void verifysubjectNoInTitle(String SubjectNoToBeVerify) {
 		waitForElement(title_SubjectNumber);
 		waitSpinnerToBecomeInvisible();
 		Assert.assertEquals(getText(title_SubjectNumber), SubjectNoToBeVerify);
-		reportInfo();
+		//
 	}
 
 	/** Click on save button of edit screening popup **/
@@ -2126,7 +2126,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 				.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class='smart-spinner']")));
 		Assert.assertTrue(isElementPresent(subjectDetailsGrid));
 		Assert.assertEquals(getText(screeningNumberTXT), screeningNumToBeVerify);
-		reportInfo();
+		//
 	}
 
 	/**
@@ -2139,7 +2139,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 				.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class='smart-spinner']")));
 		Assert.assertTrue(isElementPresent(subjectDetailsGrid));
 		Assert.assertEquals(getText(randomizationNumberTXT), randomizationNumberToBeVerify);
-		reportInfo();
+		//
 	}
 
 	/**
@@ -2167,7 +2167,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		} catch (Exception e) {
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	/**
@@ -2182,7 +2182,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		waitForPageLoaded();
 		Assert.assertTrue(isElementPresent(subjectDetailsGrid));
 		Assert.assertEquals(getText(yearOfBirthTXT), "");
-		reportInfo();
+		
 	}
 	
 	public void verifyyearOfBirthOnSubjectdetailsPage(String value)
@@ -2190,7 +2190,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		new WebDriverWait(driver, 30)
 		.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class='smart-spinner']")));
          Assert.assertEquals(getText(yearOfBirthTXT),value);
-         reportInfo();
+         
 	}
 	
 	@FindBy(xpath="//div[@class='year-editor-container']//div[@class='btn-group ng-isolate-scope']")
@@ -2206,7 +2206,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		new WebDriverWait(driver, 30)
 		.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class='smart-spinner']")));
        Assert.assertEquals(getText(yeardropdownField), value);
-       reportInfo();
+       
 		
 	}
 	
@@ -2223,7 +2223,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		} catch (Exception e) {
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 	/***
 	 * 
@@ -2247,7 +2247,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	 */
 	public void verifyNoteTextIsSaved(String noteTextToBeVerify) {
 		Assert.assertEquals(getText(savedNotesTEXT), noteTextToBeVerify);
-		reportInfo();
+		
 	}
 
 	/**
@@ -2257,14 +2257,14 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	 */
 	public void verifyNoteTextIsAddedInEditSubjectPopUp(String noteTextToBeVerify) {
 		Assert.assertTrue(editSubPopup_NotesINP.getAttribute("value").contains(noteTextToBeVerify));
-		reportInfo();
+		//
 	}
 
 	public void verifyTempIdIsDisplayed(String temporaryIDToBeVerified) {
 		new WebDriverWait(driver, 30)
 				.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class='smart-spinner']")));
 		Assert.assertTrue(temporaryIDTXT.getText().trim().contains(temporaryIDToBeVerified));
-		reportInfo();
+		
 	}
 
 	/**
@@ -2274,7 +2274,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	 */
 	public void verifySubjectStudyAndSite(String studyName, String siteName) {
 		Assert.assertTrue(studyNameLabel.getText().contains(studyName) && siteNameLabel.getText().contains(siteName));
-		reportInfo();
+		//
 	}
 
 	/**
@@ -2282,7 +2282,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	 */
 	public void verifyDuplicateScreeningErrorPoUpIsDisplayed(String messageToVerify) {
 		Assert.assertEquals(getText(errorMessage).trim(), messageToVerify);
-		reportInfo();
+		//
 
 	}
 
@@ -2290,7 +2290,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 
 	public void verifyErrorMessage(String message) {
 		Assert.assertEquals(getText(errorMessage).trim(), message);
-		reportInfo();
+		//
 	}
 
 	/**
@@ -2298,7 +2298,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	 */
 	public void verifyScreeningNumIsDisplayedAndEditable() {
 		Assert.assertTrue(screeningNumberINP.isDisplayed() && screeningNumberINP.isEnabled());
-		reportInfo();
+		//
 	}
 
 	/**
@@ -2306,7 +2306,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	 */
 	public void verifyEditSubjectLanguageInputIsDisplayedAndEditable() {
 		Assert.assertTrue(editSubPopup_LanguageINP.isDisplayed() && editSubPopup_LanguageINP.isEnabled());
-		reportInfo();
+		//
 	}
 
 	/**
@@ -2314,7 +2314,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	 */
 	public void verifyScreeningNumIsRequired() {
 		Assert.assertTrue(editSubPopup_RequiredScreeningINP.isDisplayed() && screeningNumberINP.isEnabled());
-		reportInfo();
+		//
 	}
 
 	/**
@@ -2325,7 +2325,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		waitForWebElementEnable(screeningNumberINP, 10);
 		screeningNumberINP.clear();
 		_normalWait(timeout);
-		reportInfo();
+		//
 	}
 
 	/* Clear Temp Id */
@@ -2430,7 +2430,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	 */
 	public void verifyVisitGridDisplayed() {
 		Assert.assertTrue(isElementPresent(visitGrid));
-		reportInfo();
+		//
 	}
 
 	/**
@@ -2439,7 +2439,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	public void verifyVisitCategoryFiltersDisplayed() {
 		waitForPageLoaded();
 		Assert.assertTrue(isElementPresent(visitCategoryFilterBlock));
-		reportInfo();
+		//
 	}
 
 	/**
@@ -2458,7 +2458,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			}
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		//
 	}
 
 	/**
@@ -2486,7 +2486,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		}
 		Assert.assertTrue(flag);
 		_normalWait(2000);
-		reportInfo();
+		//
 
 	}
 
@@ -2508,7 +2508,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			}
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		//
 	}
 
 	/* Verify Visit Present In CalenderVisitRow */
@@ -2550,7 +2550,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			}
 		}
 		Assert.assertTrue(flag, "Visit Present with projection dates");
-		reportInfo();
+		//
 
 	}
 
@@ -2567,7 +2567,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			}
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		//
 
 	}
 
@@ -2606,7 +2606,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			}
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		//
 	}
 
 	/**
@@ -2626,7 +2626,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	 */
 	public void verifyNoteSectionIsDisplayed() {
 		Assert.assertTrue(noteSection.isDisplayed());
-		reportInfo();
+		//
 	}
 
 	/**
@@ -2634,7 +2634,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	 */
 	public void verifyEditNotesButtonIsDisplayed() {
 		Assert.assertTrue(editNotesBtn.isDisplayed() && editNotesBtn.isEnabled());
-		reportInfo();
+		//
 	}
 
 	/**
@@ -2649,7 +2649,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			// TODO: handle exception
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		//
 	}
 
 	/**
@@ -2670,7 +2670,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	 */
 	public void verifyVisitNotesModalWindowIsDisplayed() {
 		Assert.assertTrue(visitNotesModalWindow.isDisplayed());
-		reportInfo();
+		//
 	}
 
 	/**
@@ -2685,7 +2685,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			flag = true;
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		//
 	}
 
 	/**
@@ -2697,7 +2697,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		if (editNotesTextarea.getAttribute("value").trim().equalsIgnoreCase(textToBeVerified))
 			flag = false;
 		Assert.assertTrue(flag);
-		reportInfo();
+		//
 
 	}
 
@@ -2708,7 +2708,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		Assert.assertTrue(editNotesTextarea.isDisplayed());
 		if (editNotesTextarea.getAttribute("value").trim().equalsIgnoreCase(textToBeVerified))
 			Assert.assertTrue(true, "Value present in Note Text = " + textToBeVerified);
-		reportInfo();
+		//
 	}
 
 	/**
@@ -2716,7 +2716,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	 */
 	public void verifyVisitNotesTextBoxUnderModalWindowIsDisplayedAndEditable() {
 		Assert.assertTrue(NotesTextBoxInModalWindow.isDisplayed() && NotesTextBoxInModalWindow.isEnabled());
-		reportInfo();
+		//
 	}
 
 	/**
@@ -2724,7 +2724,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	 */
 	public void enterValueInEditNoteUnderModelWindow(String ValueToBeEntered) {
 		inputText(NotesTextBoxInModalWindow, ValueToBeEntered);
-		reportInfo();
+		//
 	}
 
 	/**
@@ -2733,7 +2733,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	public void clearValueInEditNoteUnderModelWindow() {
 		waitForElement(NotesTextBoxInModalWindow);
 		clearTextBox(NotesTextBoxInModalWindow);
-		reportInfo();
+		//
 	}
 
 	/**
@@ -2745,7 +2745,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		} else {
 			Assert.assertFalse(false, "value is not displayed");
 		}
-		reportInfo();
+		//
 	}
 
 	/**
@@ -2758,7 +2758,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		} else {
 			Assert.assertFalse(false, "value is not displayed");
 		}
-		reportInfo();
+		//
 		return NotesTextBoxInModalWindow.getAttribute("value").trim();
 	}
 
@@ -2768,7 +2768,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	public void verifyInactiveSaveControlIsDisplayedOnModalWindow() {
 		Assert.assertTrue(visitNotesModalWindowSaveButton.isDisplayed());
 		Assert.assertFalse(visitNotesModalWindowSaveButton.isEnabled());
-		reportInfo();
+		
 	}
 
 	/**
@@ -2776,7 +2776,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	 */
 	public void verifyActiveSaveControlIsDisplayedOnModalWindow() {
 		Assert.assertTrue(visitNotesModalWindowSaveButton.isDisplayed() && visitNotesModalWindowSaveButton.isEnabled());
-		reportInfo();
+		
 	}
 
 	/**
@@ -2785,7 +2785,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	public void selectSaveControlOnModalWindow() {
 		if (visitNotesModalWindowSaveButton.isDisplayed() && visitNotesModalWindowSaveButton.isEnabled())
 			waitAndClick(visitNotesModalWindowSaveButton);
-		reportInfo();
+		
 	}
 
 	/**
@@ -2793,7 +2793,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	 */
 	public void verifyCancleButtonIsDisplayedOnModalWindow() {
 		Assert.assertTrue(visitNotesModalWindowCancelButton.isDisplayed());
-		reportInfo();
+		
 	}
 
 	/**
@@ -2802,7 +2802,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	public void clickOnCancleButtonIsDisplayedOnModalWindow() {
 		Assert.assertTrue(visitNotesModalWindowCancelButton.isDisplayed());
 		waitAndClick(visitNotesModalWindowCancelButton);
-		reportInfo();
+		
 	}
 
 	/**
@@ -2810,7 +2810,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	 */
 	public void verifyCancleIconIsDisplayedOnModalWindowHeader() {
 		Assert.assertTrue(visitNotesModalWindowCancelIconOnHeader.isDisplayed());
-		reportInfo();
+		
 	}
 
 	/**
@@ -2833,7 +2833,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		}
 
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	/**
@@ -2853,7 +2853,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			}
 		}
 		Assert.assertTrue(flag, visitStartDateToBeVerified + "Date is present in row");
-		reportInfo();
+		
 	}
 
 	public CentralRatingAppointmentPage clickOnAddVisitIcon() {
@@ -2877,7 +2877,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 
 	public void verifyAddVisitIconIsDisplayed() {
 		Assert.assertTrue(addVisitIcon.isDisplayed() && addVisitIcon.isEnabled());
-		reportInfo();
+		
 	}
 
 	public void verifyEditVisitIconIsDisplayed() {
@@ -2888,7 +2888,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		Assert.assertEquals(0, driver.findElements(By.xpath(
 				"//div[contains(@class,'selected')]//a[contains(@data-ng-click,'add') and @title='Add' and @class='circle-button btn btn-white']"))
 				.size());
-		reportInfo();
+		
 	}
 
 	public void clickOnEditVisitIcon() {
@@ -2901,7 +2901,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 
 	public void verifyUnscheduledAddVisitBTNIsDisplayed() {
 		Assert.assertTrue(unscheduledAddVisitBTN.isDisplayed());
-		reportInfo();
+		
 	}
 
 	public void clickOnUnscheduledAddVisitBTN() {
@@ -2910,7 +2910,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 
 	public void verifyUnscheduledVisitListDisplayed() {
 		Assert.assertTrue(unscheduledListGrid.isDisplayed());
-		reportInfo();
+		
 	}
 
 	public void verifyVisitContainsInUnscheduledVisitList(String visitListToBeVerified) {
@@ -2922,7 +2922,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			}
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	public void verifyVisitNotContainsInUnscheduledVisitList(String visitListToBeVerified) {
@@ -2934,7 +2934,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			}
 		}
 		Assert.assertTrue(flag, visitListToBeVerified + " visit should not be in unscheduled list");
-		reportInfo();
+		
 	}
 
 	public void selectUnscheduledVisit(String unscheduledVisitToBeSelected) {
@@ -2969,7 +2969,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 
 	public void verifydeleteVisitIconIsNOtDisplayed() {
 		Assert.assertFalse(deleteVisitIcon.isDisplayed());
-		reportInfo();
+		
 	}
 
 	public void deleteAddedVisit() {
@@ -2989,7 +2989,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	/* Verify Schedular Icon Calender */
 	public void verifySchedularCalenderIconIsVisible() {
 		Assert.assertTrue(visitSchedularIcon.isDisplayed() && visitSchedularIcon.isEnabled());
-		reportInfo();
+		
 	}
 
 	public void verifyScaleAndScaleTypeConfigured(String configuredFormType) {
@@ -3006,7 +3006,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 				}
 			}
 			Assert.assertTrue(flag);
-			reportInfo();
+			
 		}
 	}
 
@@ -3014,14 +3014,14 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		scrollToTopOfThePage();
 		Assert.assertTrue(raterLinkNexttoFormThumbnail.isDisplayed());
 		Assert.assertEquals(getText(raterLinkNexttoFormThumbnail).trim(), RaterName);
-		reportInfo();
+		
 	}
 
 	public void verifyRatersNameDisplayedIsNotHyprlink(String RaterName) {
 		scrollToTopOfThePage();
 		Assert.assertTrue(ratersNonHyperlinkNameNexttoFormThumbnail.isDisplayed());
 		Assert.assertEquals(getText(ratersNonHyperlinkNameNexttoFormThumbnail).trim(), RaterName);
-		reportInfo();
+		
 	}
 
 	public void verifySubmittedByRatersNameNonHyprlinkDisplayed(String RaterName) {
@@ -3029,7 +3029,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		Assert.assertTrue(submittedByRaterNameNexttoFormThumbnail.isDisplayed());
 		Assert.assertEquals(getText(submittedByRaterNameNexttoFormThumbnail).trim(), RaterName);
 		moveToElement(submittedByRaterNameNexttoFormThumbnail);
-		reportInfo();
+		
 	}
 	
 	
@@ -3050,7 +3050,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			moveToElement(additionalDetailsUndersubmittedDateNextToFormThumbnail);
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	public void verifyRatersNotHyprlinkIsDisabled(String RaterName) {
@@ -3058,7 +3058,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		Assert.assertTrue(ratersNonHyperlinkNameNexttoFormThumbnail.isDisplayed());
 		Assert.assertEquals(getText(ratersNonHyperlinkNameNexttoFormThumbnail).trim(), RaterName);
 		Assert.assertEquals(ratersNonHyperlinkNameNexttoFormThumbnail.getAttribute("data-ng-disabled").trim(), "true");
-		reportInfo();
+		
 	}
 
 	public void verifySubmittedByRatersNameNonHyprlinkIsDisabled(String RaterName) {
@@ -3074,7 +3074,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			// TODO: handle exception
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	public RatersDetailsPage clickOnRatersLink(String RaterName) {
@@ -3082,7 +3082,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		Assert.assertTrue(raterLinkNexttoFormThumbnail.isDisplayed());
 		Assert.assertEquals(getText(raterLinkNexttoFormThumbnail).trim(), RaterName);
 		waitAndClick(raterLinkNexttoFormThumbnail);
-		reportInfo();
+		
 		return PageFactory.initElements(driver, RatersDetailsPage.class);
 	}
 
@@ -3101,7 +3101,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		} else {
 			Log.info("No Scale configured for selected visit");
 		}
-		reportInfo();
+		
 	}
 
 	public void clickOnAssignRaterDropDown() {
@@ -3115,7 +3115,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			flag = getText((scaleRaterList.get(i))).equalsIgnoreCase("Me");
 			break;
 		}
-		reportInfo();
+		
 		Assert.assertTrue(flag);
 	}
 
@@ -3129,7 +3129,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 				}
 			}
 		}
-		reportInfo();
+		
 		Assert.assertTrue(flag);
 	}
 
@@ -3142,7 +3142,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			}
 		}
 		Assert.assertTrue(flag, "List showing rater name");
-		reportInfo();
+		
 		clickOn(assignDRPDWN);
 	}
 	
@@ -3159,7 +3159,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			}
 		}
 		Assert.assertTrue(flag, "List is not showing-up rater name");
-		reportInfo();
+		
 		clickOn(assignDRPDWN);
 	}
 
@@ -3193,18 +3193,18 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			flag = true;
 		}
 		assertTrue(flag);
-		reportInfo();
+		
 
 	}
 
 	public void verifyRaterDropDownIsDisplayed() {
 		Assert.assertTrue(assignDRPDWN.isDisplayed());
-		reportInfo();
+		
 	}
 
 	public void verifyRaterDropIsEnable() {
 		Assert.assertTrue(assignDRPDWN.isEnabled());
-		reportInfo();
+		
 	}
 
 	/** Verify Visit Is Present In List */
@@ -3250,7 +3250,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	/* Verify Subject Status Present In List */
@@ -3266,7 +3266,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 		clickOn(subjectStatusDRPBOX);
 	}
 
@@ -3294,7 +3294,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 				By.xpath("//*[@id='create-or-edit-subject-dialog']//*[@class='modal-dialog']")));
 		javascripctHilightingElement(editSubjectPopUp);
 		Assert.assertTrue(editSubjectPopUp.isDisplayed());
-		reportInfo();
+		
 		
 	}
 
@@ -3304,16 +3304,16 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	public void verifySubjectCantSavedWIthEmptyValues() {
 
 		mouseHoverOnAnElement(screeningNumberAtEditSubjectPopUp);
-		reportInfo();
+		
 		Assert.assertFalse(saveBTN.isEnabled());
-		reportInfo();
+		
 
 	}
 
 	public void verifyAppointmentPopUpIsDisplayed() {
 		waitForWebElementEnable(appointmentPopUpSelectedDate, 30);
 		Assert.assertTrue(appointmentPopUpTitle.isDisplayed());
-		reportInfo();
+		
 	}
 
 	public void verifyTodayDateIsSelected() {
@@ -3324,7 +3324,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			date = date.replace("0", "");
 		}
 		Assert.assertEquals(appointmentPopUpSelectedDate.getText(), date);
-		reportInfo();
+		
 	}
 	
 
@@ -3345,11 +3345,11 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 				}
 			}
 			Assert.assertTrue(flag, "All past Dates are disabled");
-			reportInfo();
+			
 		} else {
 			flag = true;
 			Assert.assertTrue(flag, "All past Dates are disabled date is starting date");
-			reportInfo();
+			
 		}
 	}
 
@@ -3383,7 +3383,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			clickOn(appointmentPopUpMoreAppointmentOptions);
 		}
 		Assert.assertTrue(appointmentPopUpTimeSlotGrid.isDisplayed());
-		reportInfo();
+		
 	}
 
 	/**
@@ -3402,7 +3402,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 
 	public void verifyScheduleAppointmentPanelIsDisplayed() {
 		Assert.assertTrue(appointmentPopUpScheduleControlGRID.isDisplayed());
-		reportInfo();
+		
 	}
 
 	public void clickOnYesButtonToConfirmAppointment() {
@@ -3437,7 +3437,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			break;
 		}
 		Assert.assertTrue(finalMessage.contains(messageToBeVerified + timeSlot));
-		reportInfo();
+		
 	}
 
 	/**
@@ -3448,7 +3448,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		String confirmMessage, appointmentDate;
 		confirmMessage = appointmentPopUpConfirmMessage.get(1).getText();
 		appointmentDate = confirmMessage.trim().split(" on ")[1];
-		reportInfo();
+		
 		return appointmentDate;
 	}
 
@@ -3463,7 +3463,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		} else if (reScheduledAppointmentPopUpReasonForReSchedulingINP.isDisplayed()) {
 			inputText(reScheduledAppointmentPopUpReasonForReSchedulingINP, reasonToReSchedulingTheAppointment);
 		}
-		reportInfo();
+		
 	}
 
 	public void clickOnYesBtnToCancelTheVisit() {
@@ -3476,12 +3476,12 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		Assert.assertTrue(cancelAppointmentOKBTN.isDisplayed());
 		clickOn(cancelAppointmentOKBTN);
 		waitForSpinnerBecomeInvisible(DEFAULT_WAIT_4_ELEMENT);
-		reportInfo();
+		
 	}
 
 	public void inputReasonToCancelTheAppointment(String reasonToCancelTheAppointment) {
 		inputText(reasonPopUpReasonToCancelINP, reasonToCancelTheAppointment);
-		reportInfo();
+		
 	}
 
 	public void verifyRescheduleAndCancelBtnIsDisplayedForSelectedVisit(String visitName) {
@@ -3498,7 +3498,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			}
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 
 	}
 
@@ -3517,7 +3517,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			}
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 
 	}
 
@@ -3539,13 +3539,13 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	public void verifyConfirmPopUpMessageIsDisplayed(String popupTxtToBeVerified) {
 		waitForElementPresent(popUpDisplayed, DEFAULT_WAIT_4_ELEMENT);
 		Assert.assertTrue(getText(popUpDisplayed).trim().contains(popupTxtToBeVerified));
-		reportInfo();
+		
 	}
 
 	public void verifyVisitCanceledPopUpFields() {
 		Assert.assertTrue(
 				reasonPopUpReasonToCancelINP.isDisplayed() && popUpYesBTN.isDisplayed() && popUpNoBTN.isDisplayed());
-		reportInfo();
+		
 	}
 
 	public void verifyVisitCancelledAndRescheduledBtnIsNotDisplayed() {
@@ -3557,7 +3557,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		} catch (Exception e) {
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	/** Return Back to Home Page */
@@ -3583,7 +3583,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 
 	public void verifyShowHistoryIconDisplayed() {
 		Assert.assertTrue(isElementPresent(showHistoryIcon));
-		reportInfo();
+		
 	}
 
 	/** Click On close History icon */
@@ -3596,7 +3596,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	/** Verify History Window Displayed */
 	public void verifyHistoryPopUpDisplayed() {
 		Assert.assertTrue(isElementPresent(subjcetStatusHistoryPopUp));
-		reportInfo();
+		
 	}
 
 	/** Check Subject Status History Contains The Information */
@@ -3609,7 +3609,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 
 			break;
 		}
-		reportInfo();
+		
 	}
 
 	/** Check Subject Status History Contains The Information */
@@ -3619,7 +3619,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 					element.findElement(By.xpath(".//div[contains(@class,'date-col')]//span[@class='ng-binding']")))
 							.trim().contains(date));
 		}
-		reportInfo();
+		
 	}
 
 	/** Check Subject Status History Contains The Information */
@@ -3630,21 +3630,21 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 							.trim().contains(Event));
 
 		}
-		reportInfo();
+		
 	}
 
 	public void verifyPaperClippedThumbnailIsDisplayed() {
 		_normalWait(2000);
 		waitForElement(paperScaleClippedThumbnailIMG);
 		Assert.assertTrue(paperScaleClippedThumbnailIMG.isDisplayed());
-		reportInfo();
+		
 	}
 
 	/** Verify Icon for note isn't displayed */
 	public void verifyIconForNoteNotDisplayed() {
 		boolean flag = historyICON.size() < 1;
 		Assert.assertTrue(flag, "Note Icon is not displayed");
-		reportInfo();
+		
 		navigateBack();
 		_normalWait(500);
 		navigateBack();
@@ -3654,36 +3654,36 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		String selectedLable = "//div[contains(@class,'small') and text()='" + labelName + "']";
 		Assert.assertTrue(isElementPresent(selectedLable));
 
-		reportInfo();
+		
 	}
 
 	public void verifyLabelsForVisitHeader(String labelName) {
 		String selectedLable = "//div[@class='row grid-header']/div[text()='" + labelName + "']";
 		Assert.assertTrue(isElementPresent(selectedLable));
-		reportInfo();
+		
 	}
 
 	public void verifySubmittedVisitRaterName(String raterNameToBeVerified) {
 		scrollToTopOfThePage();
 		_normalWait(1000);
 		Assert.assertTrue(getText(submittedScaleRaterNameTXT).contains(raterNameToBeVerified));
-		reportInfo();
+		
 	}
 
 	public void verifyRaterNameForNonAssignedVisit(String raterNameToBeVerified) {
 		scrollToTopOfThePage();
 		Assert.assertTrue(getText(nonSubmittedScaleRaterNameTXT).contains(raterNameToBeVerified));
-		reportInfo();
+		
 	}
 
 	public void verifyAssigneToFieldIsNonEditable() {
 		Assert.assertTrue(isElementPresent(assignedToFieldValue));
-		reportInfo();
+		
 	}
 
 	public void verifySubmittedVisitDate(String dateToBeVerified) {
 		Assert.assertTrue(scaleSubmittedDateTXT.getText().toLowerCase().trim().contains(dateToBeVerified.toLowerCase()));
-		reportInfo();
+		
 	}
 
 	/** Verify Rater Dropdown Selected Value */
@@ -3691,14 +3691,14 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		_normalWait(10);
 		waitForElementPresent(dropdownSelectedValue, DEFAULT_WAIT_4_PAGE);
 		Assert.assertTrue(getText(dropdownSelectedValue).trim().contains(valueSelected));
-		reportInfo();
+		
 	}
 
 	/** Verify observer selected value */
 	public void verifyObserverSelectedValue(String valueSelected) {
 		waitForElementPresent(observerSelectedValue, DEFAULT_WAIT_4_PAGE);
 		Assert.assertTrue(getText(observerSelectedValue).trim().contains(valueSelected));
-		reportInfo();
+		
 
 	}
 
@@ -3721,7 +3721,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 				}
 			}
 			Assert.assertTrue(flag);
-			reportInfo();
+			
 		}
 	}
 
@@ -3742,7 +3742,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 				}
 			}
 			Assert.assertTrue(flag);
-			reportInfo();
+			
 		}
 	}
 
@@ -3772,7 +3772,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 				}
 			}
 			Assert.assertTrue(flag);
-			reportInfo();
+			
 		}
 	}
 
@@ -3874,7 +3874,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 				}
 			}
 		}
-		reportInfo();
+		
 		return (PageFactory.initElements(driver, AssessmentsDetailsPage.class));
 	}
 
@@ -3885,7 +3885,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	 */
 	public void verifyFormOpenInPDFtemplate() {
 		Assert.assertTrue(getAttributeValueOfElement(pdfFormOpenInNewWindow, "type").trim().endsWith("pdf"));
-		reportInfo();
+		
 	}
 
 	/** Verify Required Field Highlighted */
@@ -3900,7 +3900,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	 */
 	public void verifyStudyNameDisplayed(String studyNameToBeVerified) {
 		Assert.assertEquals(studyNameToBeVerified, getText(studyNameTXT));
-		reportInfo();
+		
 	}
 
 	@FindBy(xpath = "//input[@name='screeningNum']")
@@ -3909,7 +3909,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	public void inputScreenNum(String screeningNum) {
 		waitForElementPresent(screenNumINP, 10);
 		inputText(screenNumINP, screeningNum);
-		reportInfo();
+		
 	}
 
 	@FindBy(xpath = "//div[@data-items='viewModel.cultures']")
@@ -3935,14 +3935,14 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 
 	public void verifySubjectEditBtnIsDisplayed() {
 		Assert.assertTrue(subjectDetailsEditIcon.isDisplayed());
-		reportInfo();
+		
 	}
 	
 	/* Verify locked icon display */
 	
 	public void verifySubjectLockedIconIsDisplayed() {
 		Assert.assertTrue(lockedIcon.isDisplayed());
-		reportInfo();
+		
 	}
 
 	/* Click on subject deatils edit icon */
@@ -3956,20 +3956,20 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 
 	public void verifySubjectDetailsDisabledEditIconDisplayed() {
 		Assert.assertTrue(subjectDetailsDisableEditIcon.isDisplayed());
-		reportInfo();
+		
 	}
 
 	
 	
 	public void verifySubjectDeleteBtnIsDisplayed() {
 		Assert.assertTrue(subjectDeleteBTN.isDisplayed());
-		reportInfo();
+		
 	}
 
 	public void verifyScreeningDisplay(String screeningNumToBeVerified) {
 
 		Assert.assertEquals(screeningNumToBeVerified, getText(screeningNumTXT));
-		reportInfo();
+		
 	}
 
 	/** Fill All Subject Data */
@@ -4030,12 +4030,12 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 
 	public void inputObserverRelationName(String observerRelationNameToBeEnter) {
 		inputText(observerRelationINP, observerRelationNameToBeEnter);
-		reportInfo();
+		
 	}
 
 	public void inputObserverAliasName(String observerAliasNameToBeEnter) {
 		inputText(observerAliasINP, observerAliasNameToBeEnter);
-		reportInfo();
+		
 	}
 
 	public void clickOnObserverSaveBTN() {
@@ -4047,7 +4047,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	 */
 	public void verifyObserverRelationAnAliasFieldsAreRequired() {
 		Assert.assertTrue(observerRelationRequiredINP.isDisplayed() && observerAliasRequiredINP.isDisplayed());
-		reportInfo();
+		
 	}
 
 	/**
@@ -4057,7 +4057,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	public void verifyObserverSaveButtonIsDisabledAndCancelEnable() {
 		Assert.assertFalse(reportedOutComePopUpSaveBTN.isEnabled());
 		Assert.assertTrue(reportedOutComePopUpCancelBTN.isEnabled());
-		reportInfo();
+		
 	}
 
 	/**
@@ -4067,7 +4067,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	public void verifyObserverSaveAndCancelButtonAreEnable() {
 
 		Assert.assertTrue(reportedOutComePopUpSaveBTN.isEnabled() && reportedOutComePopUpCancelBTN.isEnabled());
-		reportInfo();
+		
 	}
 
 	public void configureObserver(String observerRelationNameToBeEnter, String observerAliasNameToBeEnter) {
@@ -4159,13 +4159,13 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		waitForElementToBecomeInvisible(By.xpath("//div[@id='modal-fade' and @class='smart-spinner']"));
 		Assert.assertTrue(subjectDetailsGrid.isDisplayed());
 		Assert.assertTrue(getText(screeningNumberTXT).equalsIgnoreCase(screeningNumToBeVerify));
-		reportInfo();
+		
 	}
 
 	/** Navigate to previous page from the subject details page **/
 	public void navigateBackToPreviousPage() {
 		navigateBack();
-		reportInfo();
+		
 	}
 
 	/** Select Visit Option From DropDown On SubjectDetailPage */
@@ -4189,7 +4189,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		if (visitRelatedOptionOnDropDown.size() == 0) {
 			flag = true;
 			Assert.assertTrue(flag, "Categories drop-down list is unavailable for selection");
-			reportInfo();
+			
 		}
 	}
 
@@ -4197,14 +4197,14 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	public void verifyOnlyVisitListDisplayed() {
 		javascripctHilightingElement(onlyVisitSectionListHeader);
 		Assert.assertTrue(isElementPresent(onlyVisitSectionListHeader));
-		reportInfo();
+		
 	}
 
 	/* Verify After Submiited Assesment Thumbnail Image Present */
 	public void verifyAfterSubmissionNotAdministeredThumbnailImage() {
 		moveToElement(thumbnailIMG);
 		Assert.assertTrue(thumbnailIMG.isDisplayed());
-		reportInfo();
+		
 	}
 
 	public AssessmentsDetailsPage verifyAndClickOnAfterSubmittedThumbnailImage() {
@@ -4213,7 +4213,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		moveToElement(thumbnailIMG);
 		scrollToTopOfThePage();
 		waitAndClick(thumbnailIMG);
-		reportInfo();
+		
 		return (PageFactory.initElements(driver, AssessmentsDetailsPage.class));
 	}
 
@@ -4242,11 +4242,11 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 										.trim().equalsIgnoreCase(informationToBeVerified)) {
 							flag = true;
 							Assert.assertTrue(flag, "Observer Details Are Present");
-							reportInfo();
+							
 							break;
 						} else {
 							Assert.assertFalse(flag, "Observer Details Are  Not Present");
-							reportInfo();
+							
 						}
 						break;
 					}
@@ -4260,7 +4260,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 
 	public void verifyReportedOutcomeSaveButtonIsDisabled() {
 		Assert.assertFalse(reportedOutComePopUpSaveBTN.isEnabled(), "the save button is disabled");
-		reportInfo();
+		
 	}
 
 	public void refreshSubjectDetailPage() {
@@ -4290,11 +4290,11 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		if (reportedOutcomeMobileRegistrationDialogBTN.size() > 0) {
 			flag = true;
 			Assert.assertTrue(flag, " QR Code For Reported Outcome Mobile Subject Registration Dialog Is Displayed");
-			reportInfo();
+			
 		} else {
 			Assert.assertFalse(flag,
 					"QR Code For  Reported Outcome Mobile Subject Registration Dialog Is Not Displayed");
-			reportInfo();
+			
 		}
 	}
 
@@ -4308,7 +4308,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		if (reportedOutcomeMobileRegistrationDialogBTN.size() > 0) {
 			flag = true;
 			Assert.assertTrue(flag, " QR Code For Reported Outcome Mobile Subject Registration Dialog Is Displayed");
-			reportInfo();
+			
 		} else {
 			Log.info("Configure Mobile Subject");
 		}
@@ -4447,7 +4447,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		Assert.assertTrue(mobileProObserverSelectDRPDWN.getAttribute("aria-expanded").equalsIgnoreCase("true"));
 		moveToElement(mobileProObserverSelectDRPDWN);
 		clickOn(mobileProObserverSelectDRPDWN);
-		reportInfo();
+		
 	}
 
 	/* Verify Mobile Pro Observer Not Present In Observer to choose List */
@@ -4462,7 +4462,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			}
 		}
 		Assert.assertTrue(flag, "Observer Not Present In DropDown List");
-		reportInfo();
+		
 		clickOn(mobileProObserverSelectDRPDWN);
 	}
 
@@ -4477,7 +4477,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			}
 		}
 		Assert.assertTrue(flag, "Observer Present In DropDown List");
-		reportInfo();
+		
 		clickOn(mobileProObserverSelectDRPDWN);
 	}
 
@@ -4495,7 +4495,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		waitForElement(reportedOutComeMobileProObserverDRPDOWN);
 		clickOn(reportedOutComeMobileProObserverDRPDOWN);
 		clickOn(reportedOutComeMobileProObserverlist.findElement(By.xpath("./li[text()='" + OptionToBeSelect + "']")));
-		reportInfo();
+		
 	}
 
 	/**
@@ -4507,7 +4507,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		Assert.assertTrue(reportedOutComeMobileProSubjectDisableReasonTextbox.getAttribute("class")
 				.contains("ng-invalid-required"));
 		moveToElement(reportedOutComeMobileProSubjectDisableReasonTextbox);
-		reportInfo();
+		
 	}
 
 	/**
@@ -4518,7 +4518,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		Assert.assertTrue(reportedOutComeMobileProObserverDisableReasonTextbox.getAttribute("class")
 				.contains("ng-invalid-required"));
 		moveToElement(reportedOutComeMobileProObserverDisableReasonTextbox);
-		reportInfo();
+		
 	}
 
 	/**
@@ -4528,7 +4528,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		waitForElement(reportedOutComeMobileProObserverDisableReasonTextbox);
 		moveToElement(reportedOutComeMobileProObserverDisableReasonTextbox);
 		inputText(reportedOutComeMobileProObserverDisableReasonTextbox, ReasonToBeEntered);
-		reportInfo();
+		//
 	}
 
 	/**
@@ -4538,7 +4538,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		waitForElement(reportedOutComeMobileProSubjectDisableReasonTextbox);
 		moveToElement(reportedOutComeMobileProSubjectDisableReasonTextbox);
 		inputText(reportedOutComeMobileProSubjectDisableReasonTextbox, ReasonToBeEntered);
-		reportInfo();
+		//
 	}
 
 	/**
@@ -4556,7 +4556,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		} else {
 			Assert.assertFalse(flag, "Subject Reason text box containing null value");
 		}
-		reportInfo();
+		//
 	}
 
 	/** Verify Mobile Pro Subject Enabled */
@@ -4565,7 +4565,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		Assert.assertTrue(
 				reportedOutComeMobileProSubjectDRPDOWN.getAttribute("aria-disabled").equalsIgnoreCase("false"));
 		moveToElement(reportedOutComeMobileProSubjectDRPDOWN);
-		reportInfo();
+		//
 	}
 
 	/** Verify Mobile Pro Observer Enabled */
@@ -4574,7 +4574,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		Assert.assertTrue(
 				reportedOutComeMobileProObserverDRPDOWN.getAttribute("aria-disabled").equalsIgnoreCase("false"));
 		moveToElement(reportedOutComeMobileProObserverDRPDOWN);
-		reportInfo();
+		//
 	}
 
 	/** Verify Mobile Pro Observer Disabled */
@@ -4583,7 +4583,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		Assert.assertTrue(
 				reportedOutComeMobileProObserverDRPDOWN.getAttribute("aria-disabled").equalsIgnoreCase("true"));
 		moveToElement(reportedOutComeMobileProObserverDRPDOWN);
-		reportInfo();
+		//
 	}
 
 	/** Verify Mobile Pro Subject Disabled */
@@ -4592,7 +4592,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		Assert.assertTrue(
 				reportedOutComeMobileProSubjectDRPDOWN.getAttribute("aria-disabled").equalsIgnoreCase("true"));
 		moveToElement(reportedOutComeMobileProSubjectDRPDOWN);
-		reportInfo();
+		//
 	}
 
 	/** Select Mobile Pro Observer From DropDown */
@@ -4611,7 +4611,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	/** Verify Mobile Observer Qr Icon Present */
 	public void verifyQrMobileObserverIcon() {
 		Assert.assertTrue(isElementPresent(mobileObserverQrICN));
-		reportInfo();
+		//
 	}
 
 	/**
@@ -4620,7 +4620,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	public void verifySubjectValueColor(String colorToBeVerified) {
 		Assert.assertTrue(getTextColor(mobileSubjectDisabled).equals(colorToBeVerified));
 		moveToElement(mobileSubjectDisabled);
-		reportInfo();
+		//
 	}
 
 	/**
@@ -4629,7 +4629,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	public void verifyObserverValueColor(String colorToBeVerified) {
 		Assert.assertTrue(getTextColor(mobileObserverDisabled).equals(colorToBeVerified));
 		moveToElement(mobileObserverDisabled);
-		reportInfo();
+		//
 	}
 
 	/** Verify Mobile Subject is displayed with disable icon */
@@ -4638,7 +4638,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		Assert.assertTrue(
 				isElementPresent(mobileSubjectDisabled.findElement(By.xpath("./i[@class='glyphicon-ban-circle']"))));
 		moveToElement(mobileSubjectDisabled);
-		reportInfo();
+		//
 	}
 
 	/** Verify Mobile Observer is displayed with disable icon */
@@ -4647,7 +4647,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		Assert.assertTrue(
 				isElementPresent(mobileObserverDisabled.findElement(By.xpath("./i[@class='glyphicon-ban-circle']"))));
 		moveToElement(mobileObserverDisabled);
-		reportInfo();
+		//
 	}
 
 	/** Click On Mobile Observer QR Icon */
@@ -4663,7 +4663,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 
 	public void verifyObserverRegistrationDialogPoUpIsOpened() {
 		Assert.assertTrue(isElementPresent(observerRegistrationDialogPopUp));
-		reportInfo();
+		
 	}
 
 	/** Click On Observer Registration PopUp Close Button */
@@ -4686,14 +4686,14 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 				&& isElementPresent(registrationCodeObserver) && isElementPresent(printObserverBTN)
 				&& isElementPresent(observerRegistrationPopUpCloseBTN)
 				&& isElementPresent(closeObserverRegistrationCrossICN));
-		reportInfo();
+		
 	}
 
 	/* Verify Study name is displayed as active link */
 
 	public void verifyStudyNameIsDisplayedAsActiveLink() {
 		Assert.assertTrue(isElementPresent(studyActiveLink), "Study Name Is Displayed As ActiveLink");
-		reportInfo();
+		
 	}
 
 	/* Click On Study Active Link */
@@ -4705,7 +4705,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	public void verifyStudyProfileDisplayedInSubjectDetailPage() {
 		Assert.assertTrue(isElementPresent(studyProfileSliderPanelOpen),
 				"Study Profile Slider Panel Opened and Displayed");
-		reportInfo();
+		
 
 	}
 
@@ -4728,7 +4728,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		Assert.assertTrue(isElementPresent(studyProfileLinkICN) && isElementPresent(ratersLinkICN)
 				&& isElementPresent(queriesLinkICN) && isElementPresent(breadCrumbsStudyNameLink)
 				&& isElementPresent(breadCrumbsSiteNameLink) && isElementPresent(breadCrumbsSubjectLink));
-		reportInfo();
+		
 	}
 
 	/* Select Study Profile Icon On BreadCrumbs */
@@ -4828,20 +4828,20 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		waitForElementPresent(closeQueryButton, 10);
 		Assert.assertTrue(closeQueryButton.isDisplayed());
 		moveToElement(closeQueryButton);
-		reportInfo();
+		
 	}
 
 	/* Verify Raters Panel Displayed */
 	public void verifyRatersDetailsPanelIsOpened() {
 		Assert.assertTrue(isElementPresent(ratersProfileSliderPanelOpen), "Raters Details Slider panel is displayed");
-		reportInfo();
+		
 
 	}
 
 	/* Verify Queries Panel Displayed */
 	public void verifyQueriesDetailsPanelIsOpened() {
 		Assert.assertTrue(isElementPresent(queriesSliderPanelOpen), "Query Details Slider panel is displayed");
-		reportInfo();
+		
 
 	}
 
@@ -4849,7 +4849,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	public void verifyPopUpDescriptionWithMaskFormatIsDisplayed() {
 		doubleClickOnElement(screeningNumberINP);
 		Assert.assertTrue(maskingDescriptionPopUP.isDisplayed());
-		reportInfo();
+		
 	}
 
 	/**
@@ -4859,7 +4859,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	 */
 	public void verifyLanguageIsSelected(String selectedLanguage) {
 		Assert.assertEquals(getText(addSubPopup_SelectedSubjectLanguage).trim(), selectedLanguage);
-		reportInfo();
+		
 	}
 
 	public void verifyByDefaultSelectedSubTab(String SubTab) {
@@ -4874,7 +4874,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			}
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	public void selectCategorySubTab(String SubTab) {
@@ -4888,7 +4888,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		}
 		new WebDriverWait(driver, 15).until(ExpectedConditions
 				.invisibilityOfElementLocated(By.xpath("//div[@id='modal-fade' and @class='smart-spinner']")));
-		reportInfo();
+		
 	}
 
 	public void selectMessageBySubject(String Subject) {
@@ -4904,7 +4904,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			}
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	/**
@@ -4921,7 +4921,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			}
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	/**
@@ -4943,7 +4943,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			}
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	/**
@@ -4963,7 +4963,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			}
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	/**
@@ -4983,7 +4983,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			}
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	/**
@@ -4999,7 +4999,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			moveToElement(listOfMessages.get(0));
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	/**
@@ -5008,7 +5008,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	 */
 	public void verifyPresenceOfMessageInMessageList() {
 		Assert.assertTrue(sizeofTheList(listOfMessages) > 0);
-		reportInfo();
+		
 	}
 
 	/**
@@ -5027,7 +5027,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			}
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	/**
@@ -5045,7 +5045,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			}
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	/**
@@ -5063,7 +5063,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			}
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	/**
@@ -5085,7 +5085,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			}
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	/**
@@ -5106,7 +5106,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			}
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	/**
@@ -5126,7 +5126,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			}
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	/**
@@ -5142,7 +5142,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 				break;
 			}
 		}
-		reportInfo();
+		
 		return Subject;
 	}
 
@@ -5164,7 +5164,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			}
 		}
 		Assert.assertTrue(flag, "No message is present in collapsed form");
-		reportInfo();
+		
 	}
 
 	/**
@@ -5197,7 +5197,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			}
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	/**
@@ -5216,7 +5216,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			}
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	/**
@@ -5235,7 +5235,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			}
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	public void verifyMessageIsDeletedFromList(String Subject) {
@@ -5250,7 +5250,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			}
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	/**
@@ -5291,13 +5291,13 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		}
 		Assert.assertTrue(flag);
 		moveToElement(messageArea);
-		reportInfo();
+		
 	}
 
 	public void verifyOpenButtonUnderMessageAreaAfterSelectingMessage() {
 		Assert.assertTrue(openButtonUnderMessageArea.isEnabled());
 		moveToElement(openButtonUnderMessageArea);
-		reportInfo();
+		
 	}
 
 	public void clickOnOpenButtonUnderMessageArea() {
@@ -5305,14 +5305,14 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		waitAndClick(openButtonUnderMessageArea);
 		waitForElementToBecomeInvisible(By.xpath("//div[@id='modal-fade' and @class='smart-spinner']"));
 		_normalWait(2000);
-		reportInfo();
+		
 	}
 
 	public void clickOnsendMessageButton() {
 		_normalWait(DEFAULT_WAIT_4_ELEMENT);
 		waitAndClick(sendMessageButton);
 		_normalWait(DEFAULT_WAIT_4_ELEMENT);
-		reportInfo();
+		
 	}
 
 	/**
@@ -5323,7 +5323,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		waitForElementPresent(sendMessageButton, 2);
 		Assert.assertTrue(sendMessageButton.isDisplayed());
 		moveToElement(sendMessageButton);
-		reportInfo();
+		
 	}
 
 	/**
@@ -5340,7 +5340,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			flag = true;
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	/**
@@ -5356,7 +5356,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			_normalWait(DEFAULT_WAIT_4_PAGE);
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	/**
@@ -5370,14 +5370,14 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			flag = false;
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	public void updateEmailSubjectUnderModalWindow(String SubjectToBeEntered) {
 		Assert.assertTrue(editDraftedEmailModalWindow.isDisplayed());
 		clearTextBox(editEmailSubjectUnderModalWindow);
 		inputText(editEmailSubjectUnderModalWindow, SubjectToBeEntered);
-		reportInfo();
+		
 	}
 
 	/**
@@ -5386,14 +5386,14 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	public void verifyEmailSubjectUnderModalWindow() {
 		Assert.assertTrue(editEmailSubjectUnderModalWindow.isDisplayed());
 		moveToElement(editEmailSubjectUnderModalWindow);
-		reportInfo();
+		
 	}
 
 	public void updateEmailBodyUnderModalWindow(String emailBodyToBeEntered) {
 		Assert.assertTrue(editDraftedEmailModalWindow.isDisplayed());
 		clearTextBox(editEmailBodyUnderModalWindow);
 		inputText(editEmailBodyUnderModalWindow, emailBodyToBeEntered);
-		reportInfo();
+		
 	}
 
 	/**
@@ -5402,7 +5402,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	public void verifyEmailBodyUnderModalWindow() {
 		Assert.assertTrue(editEmailBodyUnderModalWindow.isDisplayed());
 		moveToElement(editEmailBodyUnderModalWindow);
-		reportInfo();
+		
 	}
 
 	/**
@@ -5419,7 +5419,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			}
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	/**
@@ -5437,7 +5437,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			//}
 		}
 		//Assert.assertTrue(flag);
-		//reportInfo();
+		//
 	
 	public void selectRecipientUnderModalWindow() {
 		boolean flag = false;
@@ -5451,13 +5451,13 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			//}
 		}
 		//Assert.assertTrue(flag);
-		//reportInfo();
+		//
 	
 
 	public void clickOnCloseEmailModalWindow() {
 		Assert.assertTrue(editDraftedEmailModalWindow.isDisplayed());
 		waitAndClick(closeDraftedEmailModalWindow);
-		reportInfo();
+		
 	}
 
 	public void clickOnSaveDraftedEmail() {
@@ -5465,18 +5465,18 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		waitAndClick(saveDraftedEmailModalWindow);
 		waitForElementToBecomeInvisible(By.xpath("//div[@id='modal-fade' and @class='smart-spinner']"));
 		_normalWait(2000);
-		reportInfo();
+		
 	}
 
 	public void verifySaveButtonIsDisabledForDraftedEmail() {
 		Assert.assertFalse(saveDraftedEmailModalWindow.isEnabled());
 		moveToElement(saveDraftedEmailModalWindow);
-		reportInfo();
+		
 	}
 
 	public void verifysendButtonIsDisabledForDraftedEmail() {
 		Assert.assertFalse(sendDraftedEmailModalWindow.isEnabled());
-		reportInfo();
+		
 	}
 
 	/**
@@ -5486,19 +5486,19 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		waitAndClick(sendDraftedEmailModalWindow);
 		waitForElementToBecomeInvisible(By.xpath("//div[@id='modal-fade' and @class='smart-spinner']"));
 		_normalWait(2000);
-		reportInfo();
+		
 	}
 
 	public void verifyCancelButtonIsEnabledForDraftedEmail() {
 		Assert.assertTrue(cancelDraftedEmailModalWindow.isEnabled());
 		moveToElement(cancelDraftedEmailModalWindow);
-		reportInfo();
+		
 	}
 
 	public void clickOnCancelButtonOnModelWindow() {
 		Assert.assertTrue(cancelDraftedEmailModalWindow.isEnabled());
 		waitAndClick(cancelDraftedEmailModalWindow);
-		reportInfo();
+		
 	}
 
 	public void clickOnYesEmailModalWindow() {
@@ -5506,30 +5506,30 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		waitAndClick(approveDeleteMessageFromConfirmationWindow);
 		waitForElementToBecomeInvisible(By.xpath("//div[@id='modal-fade' and @class='smart-spinner']"));
 		_normalWait(2000);
-		reportInfo();
+		
 	}
 
 	public void verifyDeleteButtonUnderMessageAreaAfterSelectingMessage() {
 		Assert.assertTrue(deleteButtonUnderMessageArea.isEnabled());
 		moveToElement(deleteButtonUnderMessageArea);
-		reportInfo();
+		
 	}
 
 	public void clickOnDeleteButtonUnderMessageAreaAfterSelectingMessage() {
 		waitAndClick(deleteButtonUnderMessageArea);
-		reportInfo();
+		
 	}
 
 	public void verifyConfirmationWindowBeforeDeleteMessage() {
 		Assert.assertTrue(confirmationWindowBeforeDeleteMessage.isDisplayed());
 		moveToElement(confirmationWindowBeforeDeleteMessage);
-		reportInfo();
+		
 	}
 
 	public void verifyEmailSubjectUnderMessageAreaAfterSelectingMessage() {
 		Assert.assertTrue(emailSubjectUnderMessageArea.isDisplayed());
 		moveToElement(emailSubjectUnderMessageArea);
-		reportInfo();
+		
 	}
 
 	/**
@@ -5539,7 +5539,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	public void verifyFlagIconDisplayedOnMessageAreaAfterSelectingMessage() {
 		Assert.assertTrue(iconFlag.isDisplayed());
 		moveToElement(iconFlag);
-		reportInfo();
+		
 	}
 
 	/**
@@ -5555,7 +5555,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			flag = true;
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	/**
@@ -5566,7 +5566,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		_normalWait(2000);
 		new WebDriverWait(driver, 10).until(ExpectedConditions
 				.invisibilityOfElementLocated(By.xpath("//div[@class='row scores-show']//div[@class='spinner']")));
-		reportInfo();
+		
 	}
 
 	/**
@@ -5576,7 +5576,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		waitForElement(checkBoxIncludeAutomated);
 		Assert.assertFalse(checkBoxIncludeAutomated.isSelected());
 		moveToElement(checkBoxIncludeAutomated);
-		reportInfo();
+		
 	}
 
 	/**
@@ -5584,7 +5584,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	 */
 	public void clickOnIncludeAutomatedCheckBox() {
 		waitAndClick(checkBoxIncludeAutomated);
-		reportInfo();
+		
 	}
 
 	/**
@@ -5599,7 +5599,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			flag = true;
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	/**
@@ -5607,7 +5607,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	 */
 	public void clickOnReplyButton() {
 		waitAndClick(btnReply);
-		reportInfo();
+		
 	}
 
 	/**
@@ -5616,26 +5616,26 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	public void verifyTimeStampUnderMessageAreaAfterSelectingMessage() {
 		Assert.assertTrue(timeStampUnderMessageArea.isDisplayed());
 		moveToElement(timeStampUnderMessageArea);
-		reportInfo();
+		
 	}
 
 	public void verifyEmailBodyUnderMessageAreaAfterSelectingMessage() {
 		Assert.assertTrue(emailBodyUnderMessageArea.isDisplayed());
 		moveToElement(emailBodyUnderMessageArea);
-		reportInfo();
+		
 	}
 
 	public void verifynoteTextBoxAppearUnderMessageAreaAfterSelectingMessage() {
 		Assert.assertTrue(noteTextBoxUnderMessageArea.isDisplayed());
 		moveToElement(noteTextBoxUnderMessageArea);
-		reportInfo();
+		
 	}
 
 	public void verifyCurrentConfiguredMasking(String maskToBeVerified) {
 		String numberWithMask = getScreeningNumberFromEditSubjectPopUp();
 		String[] currentmasking = numberWithMask.split("-");
 		Assert.assertTrue(currentmasking[0].trim().contains(maskToBeVerified));
-		reportInfo();
+		
 		screeningNumberINP.clear();
 	}
 
@@ -5672,7 +5672,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	public void verifyObserverLockIconDisplayed() {
 		Assert.assertTrue(isElementDisplayed(reportedOutcomeObserverLockIcon));
 		moveToElement(reportedOutcomeObserverLockIcon);
-		reportInfo();
+		
 	}
 
 	/**
@@ -5680,7 +5680,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	 */
 	public void verifySubjectLockIconNotDisplayed() {
 		Assert.assertFalse(isElementDisplayed(reportedOutcomeSubjectLockIcon));
-		reportInfo();
+		
 	}
 
 	/**
@@ -5689,7 +5689,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	public void verifyObserverLockIconNotDisplayed() {
 		Assert.assertFalse(isElementDisplayed(reportedOutcomeObserverLockIcon));
 
-		reportInfo();
+		
 	}
 
 	/**
@@ -5743,7 +5743,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	public void verifySubjectRegistrationDialogPoUpIsOpened() {
 		Assert.assertTrue(isElementPresent(subjectRegistrationDialogPopUp));
 		moveToElement(subjectRegistrationDialogPopUp);
-		reportInfo();
+		
 	}
 
 	/** Click On Observer Registration PopUp Close Button */
@@ -5764,7 +5764,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	public void verifyInformationInSubjectRegistratiOnPopUp() {
 		Assert.assertTrue(isElementPresent(deviceSubjectRegistrationHisortyLabel)
 				|| isElementPresent(registrationCodeSubject) || isElementPresent(printSubjectBTN));
-		reportInfo();
+		
 	}
 
 	/**
@@ -5774,7 +5774,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	public void verifySubjectNotRegisteredWithAnyDevice() {
 		Assert.assertEquals(getText(deviceUnRegistredSubjectHisortyText), "There is no device in use");
 		moveToElement(deviceUnRegistredSubjectHisortyText);
-		reportInfo();
+		
 	}
 
 	/**
@@ -5784,7 +5784,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	public void verifyObserverNotRegisteredWithAnyDevice() {
 		Assert.assertEquals(getText(deviceUnRegistredObserverHisortyText), "There is no device in use");
 		moveToElement(deviceUnRegistredObserverHisortyText);
-		reportInfo();
+		
 	}
 
 	/**
@@ -5793,7 +5793,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	public void verifyActivatedDeviceHistoryForRegisteredSubject() {
 		Assert.assertEquals(deviceStatusForRegistredSubject.get(0).getText().trim(), "Activated");
 		moveToElement(deviceStatusForRegistredSubject.get(0));
-		reportInfo();
+		
 	}
 
 	/**
@@ -5809,7 +5809,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			flag = false;
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	/**
@@ -5818,7 +5818,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	public void verifyActivatedDeviceHistoryForRegisteredObserver() {
 		Assert.assertEquals(deviceStatusForRegistredObserver.get(0).getText().trim(), "Activated");
 		moveToElement(deviceStatusForRegistredObserver.get(0));
-		reportInfo();
+		
 	}
 
 	/**
@@ -5827,7 +5827,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	public void clickOnDeactivateDeviceButtonForRegisteredObserver() {
 		Assert.assertEquals(deviceStatusForRegistredObserver.get(0).getText().trim(), "Activated");
 		waitAndClick(deviceDeactivateButtonForRegisteredObserver);
-		reportInfo();
+		
 	}
 
 	/**
@@ -5837,7 +5837,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		_normalWait(DEFAULT_WAIT_4_PAGE);
 		Assert.assertEquals(deviceStatusForRegistredSubject.get(0).getText().trim(), "Activated");
 		waitAndClick(deviceDeactivateButtonForRegisteredSubject);
-		reportInfo();
+		
 	}
 
 	/**
@@ -5847,7 +5847,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		Assert.assertEquals(deviceStatusForRegistredSubject.get(0).getText().trim(), "Activated");
 		Assert.assertTrue(deviceDeactivateButtonForRegisteredSubject.isDisplayed());
 		moveToElement(deviceDeactivateButtonForRegisteredSubject);
-		reportInfo();
+		
 	}
 
 	/**
@@ -5857,7 +5857,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	public void verifyDeactivateDeviceButtonNotDisplayedForRegisteredSubject() {
 		Assert.assertEquals(deviceStatusForRegistredSubject.get(0).getText().trim(), "Activated");
 		Assert.assertFalse(isElementDisplayed(deviceDeactivateButtonForRegisteredSubject));
-		reportInfo();
+		
 	}
 
 	/**
@@ -5867,7 +5867,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		Assert.assertEquals(deviceStatusForRegistredObserver.get(0).getText().trim(), "Activated");
 		Assert.assertTrue(deviceDeactivateButtonForRegisteredObserver.isDisplayed());
 		moveToElement(deviceDeactivateButtonForRegisteredObserver);
-		reportInfo();
+		
 	}
 
 	/**
@@ -5877,7 +5877,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	public void verifyDeactivateDeviceButtonNotDisplayedForRegisteredObserver() {
 		Assert.assertEquals(deviceStatusForRegistredObserver.get(0).getText().trim(), "Activated");
 		Assert.assertFalse(isElementDisplayed(deviceDeactivateButtonForRegisteredObserver));
-		reportInfo();
+		
 	}
 
 	/**
@@ -5903,7 +5903,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			}
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	/**
@@ -5929,7 +5929,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			}
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	/**
@@ -6001,7 +6001,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			}
 		}
 		Assert.assertTrue(verifyDate);
-		reportInfo();
+		
 	}
 
 	/**
@@ -6029,7 +6029,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			}
 		}
 		Assert.assertTrue(verifyDate);
-		reportInfo();
+		
 	}
 
 	/* Verify Values Are Not Editable */
@@ -6051,7 +6051,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	public void verifyReportedOutcomeSectionIsDisplayed() {
 		moveToElement(reportedOutComesSectionGrid);
 		Assert.assertTrue(isElementDisplayed(reportedOutComesSectionGrid));
-		reportInfo();
+		
 	}
 
 	/**
@@ -6061,7 +6061,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	public void verifyMobileProSectionWithSubjectAndObserverSettingsIsNotDisplayedInReportedOutcomePopup() {
 		Assert.assertFalse(isElementDisplayed(reportedOutComesPopUpMobileProSettingsSubjectStatusDropDown)
 				&& isElementDisplayed(reportedOutComesPopUpMobileProSettingsObserverStatusDropDown));
-		reportInfo();
+		
 	}
 
 	/**
@@ -6069,7 +6069,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	 */
 	public void verifyMobileProSectionWithSubjectSettingsIsDisplayedInReportedOutcomePopup() {
 		Assert.assertTrue(isElementDisplayed(reportedOutComesPopUpMobileProSettingsSubjectStatusDropDown));
-		reportInfo();
+		
 	}
 
 	/**
@@ -6079,7 +6079,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	public void verifyMobileProSectionWithSubjectAndObserverSettingsIsDisplayedInReportedOutcomePopup() {
 		Assert.assertTrue(isElementDisplayed(reportedOutComesPopUpMobileProSettingsSubjectStatusDropDown)
 				&& isElementDisplayed(reportedOutComesPopUpMobileProSettingsObserverStatusDropDown));
-		reportInfo();
+		
 	}
 
 	/**
@@ -6089,7 +6089,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	public void verifyReportedOutComesMobileSectionGridIsDisplayed() {
 		moveToElement(reportedOutComesSectionGrid);
 		Assert.assertTrue(reportedOutComesGridMobileRow.getAttribute("class").equalsIgnoreCase("info-row-with-list"));
-		reportInfo();
+		
 	}
 
 	/**
@@ -6100,7 +6100,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		scrollDown("150");
 		Assert.assertTrue(
 				reportedOutComesGridMobileRow.getAttribute("class").equalsIgnoreCase("info-row-with-list ng-hide"));
-		reportInfo();
+		
 	}
 
 	/**
@@ -6112,7 +6112,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		moveToElement(reportedOutcomeMobileSubjectValueText);
 		Assert.assertTrue(
 				reportedOutcomeMobileSubjectValueText.getText().equalsIgnoreCase(reportedOutComeMobileSubjectValue));
-		reportInfo();
+		
 	}
 
 	/**
@@ -6124,7 +6124,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		moveToElement(reportedOutcomeMobileObserversValueText);
 		Assert.assertTrue(
 				reportedOutcomeMobileObserversValueText.getText().contains(reportedOutComeMobileSubjectValue));
-		reportInfo();
+		
 	}
 
 	/**
@@ -6137,20 +6137,20 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	/* Verify Initiate button Displayed */
 	public void verifyInitiateButtonIsDisplayed() {
 		Assert.assertTrue(isElementPresent(initiateButtonForVisit));
-		reportInfo();
+		
 	}
 
 	/* Verify Visit Detail Section is Displayed */
 
 	public void verifyDetailsSectionIsdisplayed() {
 		Assert.assertTrue(isElementPresent(DetailSection));
-		reportInfo();
+		
 	}
 
 	/* Verify Visit Is Initiated */
 	public void verifyVisitIsInitiated() {
 		Assert.assertTrue(isElementPresent(noteSection) && isElementPresent(calenderVisitCancellIcon));
-		reportInfo();
+		
 	}
 
 	/* Click On Calendar Visit Cancel Icon */
@@ -6166,14 +6166,14 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		if (setFlagICN.size() == 0) {
 			flag = false;
 			Assert.assertFalse(flag, "Set Flag  Icon  Is Not  Present ");
-			reportInfo();
+			
 		}
 	}
 
 	/* Verify Set Flag Icon Displayed */
 	public void verifySetFlagIconDisplayed() {
 		Assert.assertTrue(isElementPresent(setFlagIcon));
-		reportInfo();
+		
 
 	}
 
@@ -6218,7 +6218,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	public void verifyClearFlagIconDisplayed() {
 
 		Assert.assertTrue(isElementPresent(clearFlagIcon));
-		reportInfo();
+		
 
 	}
 
@@ -6233,7 +6233,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	public void verifyClearFlagIconIsNotDisplayed() {
 		Assert.assertEquals(0,
 				driver.findElements(By.xpath("//div[@class='details-column']//span[@title='Clear Flag']")).size());
-		reportInfo();
+		
 
 	}
 
@@ -6249,7 +6249,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 				if (flagIconInMedicationList.isDisplayed()) {
 					flag = true;
 					Assert.assertTrue(flag, "Flag is set For Medication");
-					reportInfo();
+					
 					break;
 				}
 			}
@@ -6267,7 +6267,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 				if (flagIconInVisitList.isDisplayed()) {
 					flag = true;
 					Assert.assertTrue(flag, "Flag is set For Visit");
-					reportInfo();
+					
 					break;
 				}
 			}
@@ -6293,7 +6293,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			}
 		}
 		Assert.assertTrue(flag, "Flag Is Not Set Fot Medication");
-		reportInfo();
+		
 	}
 
 	/* Verify Flag Is Not Displayed For Visit */
@@ -6314,14 +6314,14 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			}
 		}
 		Assert.assertTrue(flag, "Flag Is Not Set Fot Visit");
-		reportInfo();
+		
 	}
 
 	/* Verify Assessment Is not assigned for calendar visit */
 	public void verifyAssesmentNotAssignedForCalenderVisit() {
 		moveToElement(notAssignedTextForCalenderVisit);
 		Assert.assertTrue(notAssignedTextForCalenderVisit.getText().equalsIgnoreCase("Not Assigned"));
-		reportInfo();
+		
 
 	}
 
@@ -6335,7 +6335,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 
 	public void verifyCalenderVisitAttachmentPresent() {
 		Assert.assertTrue(isElementPresent(calenderVisitAttachmentRow));
-		reportInfo();
+		
 	}
 
 	/**
@@ -6355,7 +6355,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			}
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	/**
@@ -6371,7 +6371,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			}
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	/**
@@ -6389,7 +6389,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			}
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	/**
@@ -6412,7 +6412,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			}
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	/**
@@ -6431,7 +6431,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			}
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	/** Verify File uploaded popup is displayed **/
@@ -6440,7 +6440,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		Assert.assertEquals(sourceUploadPopUpTitleDisplayed.findElement(By.xpath("./ancestor::div[@id='filesSource']"))
 				.getAttribute("aria-hidden").trim(), "false");
 
-		reportInfo();
+		
 	}
 
 	/** Verify File uploaded popup is not displayed **/
@@ -6448,7 +6448,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		waitForElementPresent(sourceUploadPopUpTitleDisplayed, 5);
 		Assert.assertEquals(sourceUploadPopUpTitleDisplayed.findElement(By.xpath("./ancestor::div[@id='filesSource']"))
 				.getAttribute("aria-hidden").trim(), "true");
-		reportInfo();
+		
 	}
 
 	/** Verify cancel button of upload files popup **/
@@ -6474,7 +6474,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	/** Verify upload button is displayed in File uploaded popup **/
 	public void verifyUploadButtonIsDisplayedInUploadFilesPopUp() {
 		Assert.assertTrue(isElementPresent(uploadSourceUploadBTN));
-		reportInfo();
+		
 	}
 
 	/** Click On upload button on File uploaded popup **/
@@ -6483,7 +6483,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		waitForElementToBecomeInvisible(By
 				.xpath("//div[@id='sourceDocument' and @aria-hidden='false']//div[@data-ng-if='file.isInLoadState']"));
 		_normalWait(5000);
-		reportInfo();
+		
 	}
 
 	/** click on close icon of upload files popup **/
@@ -6564,7 +6564,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			}
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	/** Verify Delete control for uploaded file **/
@@ -6580,7 +6580,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			break;
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	/** Verify Delete control is not displayed for uploaded file **/
@@ -6600,7 +6600,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			break;
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	/** Click on Delete control for uploaded file **/
@@ -6618,7 +6618,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			break;
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	/** Click on uploaded File **/
@@ -6632,7 +6632,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			break;
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	/** verify Confirmation Window Before Delete File **/
@@ -6641,7 +6641,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		Assert.assertEquals(confirmationWindowBeforeDeleteMessage
 				.findElement(By.xpath("./ancestor::div[@id='queryConfirmation']")).getAttribute("class").trim(),
 				"modal fade modalshow in");
-		reportInfo();
+		
 	}
 
 	/** verify Confirmation Window closed for Delete File **/
@@ -6653,7 +6653,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			flag = false;
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	/** Verify 'Confirm' dialog is displayed with "Yes" options **/
@@ -6662,7 +6662,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 				.findElement(By.xpath("./ancestor::div[@id='queryConfirmation']")).getAttribute("class").trim(),
 				"modal fade modalshow in");
 		Assert.assertTrue(approveDeleteMessageFromConfirmationWindow.isDisplayed());
-		reportInfo();
+		
 	}
 
 	/** Verify 'Confirm' dialog is displayed with "No" options **/
@@ -6671,7 +6671,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 				.findElement(By.xpath("./ancestor::div[@id='queryConfirmation']")).getAttribute("class").trim(),
 				"modal fade modalshow in");
 		Assert.assertTrue(declineDeleteMessageFromConfirmationWindow.isDisplayed());
-		reportInfo();
+		
 	}
 
 	/** Click on "Yes" option on 'Confirm' dialog is displayed with **/
@@ -6682,7 +6682,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		waitAndClick(approveDeleteMessageFromConfirmationWindow);
 		waitForElementToBecomeInvisible(By.xpath("//div[@id='modal-fade' and @class='smart-spinner']"));
 		_normalWait(2000);
-		reportInfo();
+		
 	}
 
 	/** Click on "No" option on 'Confirm' dialog **/
@@ -6693,7 +6693,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		waitAndClick(declineDeleteMessageFromConfirmationWindow);
 		waitForElementToBecomeInvisible(By.xpath("//div[@id='modal-fade' and @class='smart-spinner']"));
 		_normalWait(2000);
-		reportInfo();
+		
 	}
 
 	/* Verify Order By Date Of Action with latest on top */
@@ -6794,7 +6794,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	/* Medication details Displayed */
@@ -6808,7 +6808,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			if (infoHistoryOfIntsructionText.length() > 0) {
 				flag = true;
 				Assert.assertTrue(flag, "The Instruction Present In Medication Instruction");
-				reportInfo();
+				
 			}
 		}
 
@@ -6819,7 +6819,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	public void verifyMedicationName(String medicationName) {
 		javascripctHilightingElement(medicationInfoName);
 		Assert.assertTrue(medicationInfoName.getText().trim().equalsIgnoreCase(medicationName));
-		reportInfo();
+		
 	}
 
 	/* Verify Medication Comment */
@@ -6831,7 +6831,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		if (commentText.length() > 0) {
 			flag = true;
 			Assert.assertTrue(flag, "The Comment Present In Medication Comment");
-			reportInfo();
+			
 		}
 	}
 
@@ -6840,20 +6840,20 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 
 		javascripctHilightingElement(setFlagMedicationICN);
 		Assert.assertTrue(isElementPresent(setFlagMedicationICN));
-		reportInfo();
+		
 	}
 
 	/* Verify Set Flag Is Enable */
 	public void verifySetFlagMedicationIsEnabled() {
 		Assert.assertTrue(setFlagMedicationICN.isEnabled());
-		reportInfo();
+		
 	}
 
 	/* Verify Medication Notes Label Displayed */
 	public void verifyMedicationNotesLabelIsDisplayed() {
 		javascripctHilightingElement(medicationNotesInfo);
 		Assert.assertTrue(isElementPresent(medicationNotesInfo));
-		reportInfo();
+		
 	}
 
 	/* Verify Medication Date Time Present */
@@ -6866,26 +6866,26 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		if (dateTime[0].trim().contains(dateOfMedication)) {
 			flag = true;
 			Assert.assertTrue(flag, "Date Present");
-			reportInfo();
+			
 		}
 
 		if (text.contains("AM") || text.contains("PM")) {
 			flag = true;
 			Assert.assertTrue(flag, "Time Present");
-			reportInfo();
+			
 		}
 	}
 
 	/* Medication History Lat Action For Added Medication */
 	public void verifyMedicationHistoryLastActionForAddedMedication() {
 		Assert.assertTrue(isElementPresent(lastActionText));
-		reportInfo();
+		
 	}
 
 	/* Verify Medication History */
 	public void verifymedicationHistory() {
 		Assert.assertTrue(isElementPresent(showHistoryMedication));
-		reportInfo();
+		
 	}
 	/* Click On Medication History */
 
@@ -6898,13 +6898,13 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	/* Verify Medication History PopUp Displayed */
 	public void verifyMedicationHistoryPopUpDisplayed() {
 		Assert.assertTrue(isElementPresent(showHistoryMedicationPopUp));
-		reportInfo();
+		
 	}
 	/* Verify Medication PopUpHistory Displayed With RefreshIcon */
 
 	public void verifyMedicationHistoryPopUpDisplayedWithRefreshItemIcon() {
 		Assert.assertTrue(isElementPresent(reloadMedicationHistory));
-		reportInfo();
+		
 	}
 
 	/* Verify Medication PopUpHistory Displayed With Date/Time */
@@ -6916,7 +6916,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		if (dateTimeHistory.length() > 0) {
 			flag = true;
 			Assert.assertTrue(flag, "Date Time Present in medication History POPuP");
-			reportInfo();
+			
 		}
 	}
 
@@ -6925,7 +6925,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 
 		javascripctHilightingElement(eventMedicationHistory);
 		Assert.assertTrue(isElementPresent(eventMedicationHistory));
-		reportInfo();
+		
 	}
 
 	/* Verify select Medication Filter */
@@ -6943,7 +6943,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 
 	public void verifyMedicationListDisplayed() {
 		Assert.assertTrue(isElementPresent(medicationListGrid));
-		reportInfo();
+		
 	}
 
 	/**
@@ -6961,7 +6961,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 						.startsWith(medictaionStatus)) {
 					flag = true;
 					Assert.assertTrue(flag, "The Medication Status Is In Row Present");
-					reportInfo();
+					
 					break;
 				}
 				break;
@@ -6981,7 +6981,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	/* Show History Medication Icon Not Displayed */
 	public void verifyMedicationHistoryControlIsNotDisplayed() {
 		Assert.assertTrue(!(hiddenShowHistoryICN.isDisplayed()));
-		reportInfo();
+		
 
 	}
 
@@ -7015,7 +7015,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 
 	public void verifyEventListDisplayed() {
 		Assert.assertTrue(isElementPresent(eventListGrid));
-		reportInfo();
+		
 	}
 	/* Verify Logged event Details Block */
 
@@ -7023,7 +7023,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		if (loggedEventList.size() > 0) {
 			moveToElement(loggedEventDetailsBlock);
 			Assert.assertTrue(isElementPresent(loggedEventDetailsBlock));
-			reportInfo();
+			
 		} else {
 			Log.info("Records Are not Prsent");
 		}
@@ -7087,7 +7087,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	public void verifyFlagSectionForEventAndQuestionnaireDisplayedWithFlagSetIcon() {
 		waitForElement(setFlagEventQuestionnaireICN);
 		Assert.assertTrue(isElementPresent(setFlagEventQuestionnaireICN) && setFlagEventQuestionnaireICN.isEnabled());
-		reportInfo();
+		
 	}
 
 	/* Verify Clear Icon For Event */
@@ -7095,7 +7095,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	public void verifyFlagSectionForEventAndQuestionnaireDisplayedWithClearIcon() {
 		Assert.assertTrue(
 				isElementPresent(clearFlagEventAndQuestionnareICN) && clearFlagEventAndQuestionnareICN.isEnabled());
-		reportInfo();
+		
 	}
 
 	/* Click On Event Row To Select */
@@ -7146,7 +7146,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 						moveToElement(typeToSelect.findElement(By.cssSelector("div[class='meta'] span")));
 						flag = true;
 						Assert.assertTrue(flag);
-						reportInfo();
+						
 						break;
 					}
 				}
@@ -7176,7 +7176,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 						moveToElement(typeToSelect.findElement(By.xpath(".//div[@class='meta']//span")));
 						flag = true;
 						Assert.assertTrue(flag);
-						reportInfo();
+						
 						break;
 					}
 				}
@@ -7193,7 +7193,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 				flag = true;
 				javascripctHilightingElement(filterList);
 				Assert.assertTrue(flag, "SubTab Filters Displayed");
-				reportInfo();
+				
 				break;
 
 			}
@@ -7208,7 +7208,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		if (questionnaireListItemList.size() > 0) {
 			flag = true;
 			Assert.assertTrue(isElementPresent(questionnariesListGrid));
-			reportInfo();
+			
 		}
 		Assert.assertTrue(flag);
 		_normalWait(200);
@@ -7261,7 +7261,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	public void verifyQuestionnariesDetailsBlockDisplayed() {
 		if (questionnaireListItemList.size() > 0) {
 			Assert.assertTrue(isElementPresent(questionnariesDetailsBlock));
-			reportInfo();
+			
 		} else {
 			Log.info("Records Are not Prsent");
 		}
@@ -7273,7 +7273,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	public void verifyComplianceSectionDisplay() {
 		if (complianceRowList.size() > 0) {
 			Assert.assertTrue(isElementDisplayed(complianceSection));
-			reportInfo();
+			
 		}
 	}
 
@@ -7289,7 +7289,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			}
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	/* Select User Filter Block by Name */
@@ -7340,7 +7340,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			}
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 
 	}
 
@@ -7350,7 +7350,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		if (questionnaireListItemList.size() > 0) {
 			scrollToTopOfThePage();
 			Assert.assertTrue(isElementPresent(questionnairesDetailsBlock));
-			reportInfo();
+			
 		} else {
 			Log.info("Records Are not Prsent");
 		}
@@ -7365,7 +7365,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		if (questionnaireListItemList.size() > 0) {
 			Assert.assertTrue(isElementPresent(driver.findElement(By.xpath(
 					"//div[contains(@class,'questionnaire-info-block')]//i[contains(@class,'" + Status + "')]"))));
-			reportInfo();
+			
 		} else {
 			Log.info("Records Are not Prsent");
 		}
@@ -7384,7 +7384,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 				if (getText(statusToBeCheck.findElement(By.xpath("//following-sibling::time"))).length() > 0) {
 					flag = true;
 					Assert.assertTrue(flag, "The Status Is Present With Time");
-					reportInfo();
+					
 				}
 
 			}
@@ -7412,13 +7412,13 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			}
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	/* Verify Questionnaires Score Block Displayed */
 	public void verifyQuestionnairesScoreBlockPresent() {
 		Assert.assertTrue(isElementPresent(questionnairesScoresBlock));
-		reportInfo();
+		
 	}
 
 	/* Verify Questionnaires Score Block Not Displayed */
@@ -7426,21 +7426,21 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	public void verifyQuestionnariesContentScoresNotDisplayed() {
 		Assert.assertEquals(driver.findElements(By.xpath("//div[contains(@data-ng-if,'questionnaire.scores')]")).size(),
 				0);
-		reportInfo();
+		
 	}
 
 	/* Verify Logged Event Filter Only Block Present */
 	public void verifyLoggedEventFilterBlockPresent() {
 		moveToElement(loggedEventListFilterBlock);
 		Assert.assertTrue(isElementPresent(loggedEventListFilterBlock));
-		reportInfo();
+		
 	}
 	/* Verify No Logged Event Text Prsent */
 
 	public void verifyNoLoggedEventTextPresent() {
 		moveToElement(noLoggedEventText);
 		Assert.assertEquals(getText(noLoggedEventText), "No logged events");
-		reportInfo();
+		
 	}
 
 	public String getMobileSubjectRegistrationCode() {
@@ -7491,7 +7491,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 
 	public void verifyQueryEditButtonDisplay() {
 		Assert.assertTrue(queryEditButton.isDisplayed());
-		reportInfo();
+		
 	}
 
 	/*
@@ -7505,7 +7505,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			flag = true;
 		}
 		Assert.assertTrue(flag, "observer Selection Sucessfully Saved and displayed");
-		reportInfo();
+		
 	}
 
 	public void selectCheckboxQueryOption(String checkboxQueryName) {
@@ -7520,7 +7520,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	public void verifyListOfAllQueriesDisplayed() {
 		Assert.assertTrue(queriesList.size() > 0, "Queries List is displaying");
 		waitUntillFinishProcessSpinnerDisable();
-		reportInfo();
+		
 
 	}
 
@@ -7529,7 +7529,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	public void verifyNotAdministeredLabelPresent() {
 		moveToElement(notAdministeredLabel);
 		Assert.assertTrue(isElementPresent(notAdministeredLabel));
-		reportInfo();
+		
 	}
 
 	/* Verify Form Before Administered Thumbnail Image Displayed */
@@ -7543,7 +7543,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		scrollToTopOfThePage();
 		waitAndClick(thumbnailBeforeNotAdministeredIMG);
 		waitForSpinnerBecomeInvisible(DEFAULT_WAIT_4_PAGE);
-		reportInfo();
+		
 		return PageFactory.initElements(driver, AssessmentsDetailsPage.class);
 	}
 
@@ -7567,7 +7567,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		}
 
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	/* Verify For New Subject Status Disabled */
@@ -7575,7 +7575,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	public void verifySubjectStatusEditButtonDisabled() {
 		moveToElement(subjectStatusEditBTN);
 		Assert.assertFalse(subjectStatusEditBTN.isEnabled());
-		reportInfo();
+		
 	}
 
 	/* For Configuring Completed Subject By Clicking On Not Completed Link */
@@ -7620,7 +7620,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			flag = true;
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	/****
@@ -7635,7 +7635,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			flag = true;
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	public void verifyDateAtTop() {
@@ -7722,7 +7722,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			flag = true;
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	public void verifyTempIdAsNumber(String maskTempID, String TempIdToBeVerified) {
@@ -7766,7 +7766,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 
 	public void verifyConsentRecordEnabled() {
 		Assert.assertTrue(isElementDisplayed(consentToRecord));
-		reportInfo();
+		
 	}
 
 	/****
@@ -7797,7 +7797,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	public void verifyAllConfiguredVisitPresent() {
 		moveToElement(calendarVisitListGrid);
 		Assert.assertTrue(isElementPresent(calendarVisitListGrid));
-		reportInfo();
+		
 	}
 
 	/* Click on Calendar self Serve CRVisit AddICN */
@@ -7813,7 +7813,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	public void verifySelfCrScheduledDateCalenderWindowDisplayed() {
 		moveToElement(selfCrScheduledDateCalenderWindow);
 		Assert.assertTrue(selfCrScheduledDateCalenderWindow.isDisplayed());
-		reportInfo();
+		
 	}
 
 	public void selectTodayDateOnCrSelfCalenderPopUp(String dateToSelect) {
@@ -7828,7 +7828,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			}
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	public void selectTomorrowDateOnCrSelfCalenderPopUp() {
@@ -7840,7 +7840,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		}
 
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	public void selectTodayDateOnCrSelfCalenderPopUp() {
@@ -7852,7 +7852,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		}
 
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	public String getSelectedDateOnCrSelfCalenderPopUp() {
@@ -7869,7 +7869,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		}
 
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 		return SelectedDate;
 
 	}
@@ -7882,7 +7882,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	public void verifyCrSelfScheduledSelectedDate(String dateToBeVerify) {
 		Assert.assertTrue(getText(selectedCRSelfScheduleDateText).trim().equalsIgnoreCase(dateToBeVerify));
 		moveToElement(selectedCRSelfScheduleDateText);
-		reportInfo();
+		
 	}
 
 	public void verifyMedicationLastActionStatus(String StatusToBeVerified) {
@@ -7893,7 +7893,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			flag = true;
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	/**
@@ -8103,7 +8103,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			}
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	/**
@@ -8148,7 +8148,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			
 		    }
 		Assert.assertTrue(true);
-		reportInfo();
+		
 
 	}
 	
@@ -8156,7 +8156,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	{
 		moveToElement(birthYaerDropdown);
 		waitAndClick(birthYaerDropdown);
-		reportInfo();
+		
 	}
 	
 	/****r
@@ -8168,7 +8168,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		WebElement status = driver.findElement(ByLocator("//div[@id='create-or-edit-subject-dialog']//button/span[text()='"+Status+"']"));
 		waitAndClick(status);
 		waitSpinnerToBecomeInvisible();
-		reportInfo();
+		
 	}
 	
 	/*****
@@ -8190,7 +8190,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		inputText(pwdField, password);
 		moveToElement(reasonConfrmBtn);
 		waitAndClick(reasonConfrmBtn);
-		reportInfo();
+		
 		
 	}
 	
@@ -8242,7 +8242,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		WebElement scheduleDate = driver.findElement(By.xpath("(//div[contains(@style,'display: block')]//td[@class='day active today'])[last()]"));
 		waitAndClick(scheduleDate);
 		waitAndClick(saveVisitButton);
-		reportInfo();
+		
 		
 	}
 	
@@ -8324,7 +8324,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		} catch (Exception e) {
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	
 	}
 	
@@ -8345,7 +8345,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		{
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 
 	
@@ -8425,7 +8425,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 
 	public void verifyRaterDropdownlinkIsNotDisplayed() {
 		Assert.assertFalse(isElementPresent(By.xpath("//div[@class='row administered-row']//div[contains(@class,'btn-group ')]//ul//li/span")));
-		reportInfo();
+		
 	}
 	
 	
@@ -8440,7 +8440,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
         waitForAjaxRequestsToComplete();
 		waitForElementToBecomeInvisible(By.xpath("//div[@class='assessments-list']//div[@class='spinner']"));
 		waitAndClick(thumbnailIMG);
-		reportInfo();
+		
 		return PageFactory.initElements(driver, className);
     }
 	
@@ -8470,7 +8470,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		moveToElement(calendarIcon);
 		if(calendarIcon.isDisplayed()) {
 			Assert.assertTrue(true);
-			reportInfo();
+			
 		}
 	}
 
@@ -8492,7 +8492,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	public void clickOnCalendarIcon() {
 
 		waitAndClick(calendarIcon);
-		reportInfo();
+		
 	}
 
 	/***
@@ -8541,7 +8541,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		moveToElement(currentdateLabel);
 		if(currentdateLabel.isDisplayed()) {
 			Assert.assertTrue(true);
-			reportInfo();
+			
 		}
 		
 	}
@@ -8582,14 +8582,14 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			flag=false;
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 	
 	public void selectVisitByName(String VisitName)
 	{
 		WebElement visitToBeSelected = driver.findElement(ByLocator("//h4[contains(text(),'"+VisitName+"')]/ancestor::div[3]"));
 		clickOn(visitToBeSelected);
-		reportInfo();
+		
 	}
 	/**
 	 *  verify visit is displayed by name
@@ -8607,7 +8607,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			}
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		
 	}
 	
 	public void enterMessageSubject(String subject) {

@@ -184,7 +184,7 @@ public class LoginPage extends BasePage {
 			}
 		}
 		Assert.assertTrue(flag);
-		reportInfo();
+		//reportInfo();
 		//driver.close();
 	}
 
