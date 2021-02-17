@@ -1908,7 +1908,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		_normalWait(500);
 		waitForSpinner(DEFAULT_WAIT_4_ELEMENT);
 		_normalWait(500);
-		Thread.sleep(4000);
+		//Thread.sleep(4000);
 		//
 	}
 

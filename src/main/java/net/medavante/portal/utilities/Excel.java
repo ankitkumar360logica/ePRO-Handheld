@@ -49,12 +49,14 @@ public class Excel {
     public static HashMap<String, String> getEachExcelRowDataIntoHashMapObj(int currentRowNumber, String testDataFileName) {
 
         HashMap<String, String> eachTestCaseData = new HashMap<String, String>();
+        
+        locOfInputExcel = Utilities.getPath()+"/TestData/"+testDataFileName+".xlsx";
 
         try {
-            if (testDataFileName.equalsIgnoreCase("Test_Modules_Selector"))
-            {
-                locOfInputExcel = Utilities.getPath()+"/TestData/"+testDataFileName+".xlsx";
-            }
+//            if (testDataFileName.equalsIgnoreCase("Test_Modules_Selector"))
+//            {
+//                locOfInputExcel = Utilities.getPath()+"/TestData/"+testDataFileName+".xlsx";
+//            }
             FileInputStream fis = new FileInputStream(locOfInputExcel);
             XSSFWorkbook w = new XSSFWorkbook(fis);
             XSSFSheet s = w.getSheetAt(0);

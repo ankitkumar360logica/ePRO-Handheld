@@ -27,7 +27,6 @@ public class Handheld_Translation_SIP extends BaseTest {
 	private String registrationCodeForStep92, registrationCodeForStep99, registrationCodeForObserver;
 	private String observerRelation1, observerAlias = "Auto" + generateRandomString(2);
 	
-
 	public int DEFAULT_WAIT_ELEMENT = 3000;
 
 	@BeforeClass
@@ -145,16 +144,19 @@ public class Handheld_Translation_SIP extends BaseTest {
 		
 	}
 	
-	public void disableSubject(String subjectName) throws InterruptedException {
+	public void disableSubject(String subjectName) throws Exception {
 		
-		dashBoardPage = loginPage.loginInApplication(FormUserName, Form_Password);
+		Properties properties = Configuration.readTestData("RegressionTestData");
+		studyName = properties.getProperty("HandheldTranslationStudy");
 		
-		studyNavigatorDashBoardPage = dashBoardPage.selectHorizontalUpperNavMenuItem(StudyDashBoardPage.class,
-				Constants.NavigateText, Constants.StudyText);
-		studyNavigatorDashBoardPage.selectStudy(studyName, Constants.testSite);
-		studyNavigatorDashBoardPage.searchFilterValueByColumnNameAndValue(Constants.StudyDashBoard_columnName_Subject,
-				"EnglishUS");
-		subjectDetailPage = studyNavigatorDashBoardPage.clickOnSearchedSubject("EnglishUS");
+//		dashBoardPage = loginPage.loginInApplication(FormUserName, Form_Password);
+//		
+//		studyNavigatorDashBoardPage = dashBoardPage.selectHorizontalUpperNavMenuItem(StudyDashBoardPage.class,
+//				Constants.NavigateText, Constants.StudyText);
+//		studyNavigatorDashBoardPage.selectStudy(studyName, Constants.testSite);
+//		studyNavigatorDashBoardPage.searchFilterValueByColumnNameAndValue(Constants.StudyDashBoard_columnName_Subject,
+//				"Turkish2");
+//		subjectDetailPage = studyNavigatorDashBoardPage.clickOnSearchedSubject("Turkish2");
 		
 		subjectDetailPage.clickOnReportedOutComeButton();
 		Thread.sleep(3000);
@@ -171,21 +173,24 @@ public class Handheld_Translation_SIP extends BaseTest {
 		Thread.sleep(3000);
 		subjectDetailPage.clickOnReportedOutComePopUpSaveBTN();
 		Thread.sleep(5000);
-		loginPage.logoutApplication();
-		loginPage.verifyUserLogout();
+//		loginPage.logoutApplication();
+//		loginPage.verifyUserLogout();
 	}
 	
-	public void enableSubject(String subjectName) throws InterruptedException {
+	public void enableSubject(String subjectName) throws Exception {
 		
-		dashBoardPage = loginPage.loginInApplication(FormUserName, Form_Password);
-		
-		studyNavigatorDashBoardPage = dashBoardPage.selectHorizontalUpperNavMenuItem(StudyDashBoardPage.class,
-				Constants.NavigateText, Constants.StudyText);
-		studyNavigatorDashBoardPage.selectStudy(studyName, Constants.testSite);
+		Properties properties = Configuration.readTestData("RegressionTestData");
+		studyName = properties.getProperty("HandheldTranslationStudy");
+//		
+//		dashBoardPage = loginPage.loginInApplication(FormUserName, Form_Password);
+//		
+//		studyNavigatorDashBoardPage = dashBoardPage.selectHorizontalUpperNavMenuItem(StudyDashBoardPage.class,
+//				Constants.NavigateText, Constants.StudyText);
+//		studyNavigatorDashBoardPage.selectStudy(studyName, Constants.testSite);
 
-		studyNavigatorDashBoardPage.searchFilterValueByColumnNameAndValue(Constants.StudyDashBoard_columnName_Subject,
-				"EnglishUS");
-		subjectDetailPage = studyNavigatorDashBoardPage.clickOnSearchedSubject("EnglishUS");
+//		studyNavigatorDashBoardPage.searchFilterValueByColumnNameAndValue(Constants.StudyDashBoard_columnName_Subject,
+//				"Turkish2");
+//		subjectDetailPage = studyNavigatorDashBoardPage.clickOnSearchedSubject("Turkish2");
 		subjectDetailPage.clickOnReportedOutComeButton();
 		Thread.sleep(3000);
 		subjectDetailPage.selectMobileProSubjectOption("Enabled");
@@ -197,8 +202,8 @@ public class Handheld_Translation_SIP extends BaseTest {
 		Thread.sleep(2000);
 		subjectDetailPage.inputCredentialsInReasonForChangePopUp(FormUserName, Form_Password);
 		Thread.sleep(2000);
-		loginPage.logoutApplication();
-		loginPage.verifyUserLogout();
+//		loginPage.logoutApplication();
+//		loginPage.verifyUserLogout();
 	}
 
 	/**
@@ -214,40 +219,30 @@ public class Handheld_Translation_SIP extends BaseTest {
 	public void eCOAHandheldScriptWorkflow() throws Exception {
 		//reportLog("1.1:MobileView As a Participant logged into the application");
 		mobileLoginPage = androidSetUp();
-		//mobileLoginPage.WifiOn();
-		
+		//mobileLoginPage.WifiOn();		
 		
 	    reportLog("Verify the registeration instruction message");
 		mobileLoginPage.verifyInstructionMessageText(registerScreenInstruction);
 		
 		reportLog("Image 5");
-		mobileLoginPage.configurationForRegisterTheSubject("07E3-B91E-4E91-ABBF");
-		
-		
-		//reportLog("2: MobileView Select Accept");
+		mobileLoginPage.configurationForRegisterTheSubject("58DA-8E27-49B7-8833");
+			
 		reportLog("Click on Accept button");
 		mobileLoginPage.clickOnAcceptBtn(); 
 		
 		reportLog("Image 6");
 		mobileLoginPage.verifyPinAndConfirmPINEditBoxesAreDisplay();
-
-//		reportLog("3: MobileView Enter numerical value ‘1234’ in ‘PIN’ and ‘1234’ in ‘Confirm PIN’ and select view option.");
-//		mobileLoginPage.enterPINCode(MobileConstants.Mobile_Pin);
-//		mobileLoginPage.tapOnViewIcon(920, 728);
-//		mobileLoginPage.enterConfirmPINCode(MobileConstants.Mobile_Pin);
-//		mobileLoginPage.tapOnViewIcon(923, 901);
-//		
-//		mobileLoginPage.tapOnViewIcon(920, 728);
-//		mobileLoginPage.tapOnViewIcon(923, 901);
-
 		
 		reportLog("Image 7");
 		mobileLoginPage.enterPINCode(MobileConstants.Mobile_Pin);
+		Thread.sleep(2000);
 		mobileLoginPage.enterConfirmPINCode(MobileConstants.Mobile_PinInCorrect);
 		mobileLoginPage.verifyPinDontMatchTextDisplay();
 		
-		reportLog("5:MobileView Enter numerical value ‘1234’ in ‘PIN’ and ‘1234’ in ‘Confirm PIN’ Select ‘Next’ ");
+		reportLog("7.1:MobileView Enter numerical value ‘1234’ in ‘PIN’ and ‘1234’ in ‘Confirm PIN’ Select ‘Next’ ");
+		Thread.sleep(2000);
 		mobileLoginPage.clearConfirmPINBox();
+		Thread.sleep(2000);
 		mobileLoginPage.enterConfirmPINCode(MobileConstants.Mobile_Pin);
 		mobileLoginPage.clickOnNextButton();
 		
@@ -259,13 +254,13 @@ public class Handheld_Translation_SIP extends BaseTest {
 		
 		reportLog("");
 		mobileLoginPage.chooseAQuestion();
+		Thread.sleep(2500);
 		
-		//reportLog("Image 10");
 		mobileLoginPage.enterAnAnswer("Black");
 		reportLog("Image 10");
 		mobileLoginPage.clickOnNextButtonToCaptureScreenshot();
 
-		reportLog("7:MobileView Select Continue");
+		reportLog("10.1:MobileView Select Continue");
 		mobileLoginPage.clickOnContinueButton(false);
 		
 		reportLog("Image 11");
@@ -275,42 +270,26 @@ public class Handheld_Translation_SIP extends BaseTest {
 		mobileLoginPage.enterPINCode(MobileConstants.Mobile_PinInCorrect);
 		mobileLoginPage.clickOnSubmitButtonToCaptureScreenshot();
 		
-		reportLog("8.1:MobileView Keep providing wrong PIN until 1attempt is left");
+		reportLog("12.1:MobileView Keep providing wrong PIN until 1attempt is left");
 		mobileLoginPage.enterPINCode(MobileConstants.Mobile_PinInCorrect);
 		mobileLoginPage.clickOnSubmitButton();
 		
-		reportLog("8.2:MobileView Keep providing wrong PIN until 1attempt is left");
+		reportLog("12.2:MobileView Keep providing wrong PIN until 1attempt is left");
 		mobileLoginPage.enterPINCode(MobileConstants.Mobile_PinInCorrect);
 		mobileLoginPage.clickOnSubmitButton();
-		
+	
 		reportLog("Image 15");
 		mobileLoginPage.enterPINCode(MobileConstants.Mobile_PinInCorrect);
 		mobileLoginPage.clickOnSubmitButtonToCaptureScreenshot();
 		
-		//reportLog("9:MobileView Enter numerical value ‘1234’ and select ‘Submit’");
-		//mobileLoginPage.enterPINCode(MobileConstants.Mobile_Pin);
-		//mobileLoginPage.clickOnSubmitButtonToCaptureScreenshot();
-		
-		//reportLog("Image 13");
 		dashborad = mobileLoginPage.loginUser(Mobile_Pin);
 		sideMenu = mobileLoginPage.mobileSideMenu();
 		
 		reportLog("Image 13");
+		Thread.sleep(3000);
 		sideMenu.verifyHomePageDisplay();		
 		
-		reportLog("Go to Message tab");
-		messgaePage = dashborad.clickOnMessageTab(false);
-			
-		//reportLog("11:MobileView Disconnect from the internet and repeat step 9");
-		//mobileLoginPage = androidSetUpWithoutReset();
-	
-		//mobileLoginPage.WifiOff();
-		//mobileLoginPage.enterPINCode(MobileConstants.Mobile_Pin);
-		//mobileLoginPage.clickOnSubmitButton();
-		
 		reportLog("12:MobileView Connect to the internet");
-		//mobileLoginPage.WifiOn();
-		//sideMenu.verifyHomePageDisplay();
 	    dashborad = mobileLoginPage.mobiledashboard();
 	
 		reportLog("Image 18");
@@ -319,96 +298,65 @@ public class Handheld_Translation_SIP extends BaseTest {
 		reportLog(("75:MobileView Select a questionnaire and start completing"));
 		reportLog("Image 19");
 		questionnairesPage.selectQuestionForms("Diary 1", true);
-		//Thread.sleep(20000);
 
 		reportLog("click on Start button");
 		questionnairesPage.clickOnStartQuestion();
-		
-//		reportLog("Image 23");
-//		questionnairesPage.clickOnBackButtonIconOnQuestionPage();
-//		questionnairesPage.clickOnNoOption();
-//		//questionnairesPage.clickOnYesOption();
 		
 		reportLog("Image 20");
 		questionnairesPage.questionnaireToBeCompleteTextBox();
 		
 		reportLog("Image 21");
-		Thread.sleep(10000);
+		Thread.sleep(2000);
 		questionnairesPage	 = dashborad.clickOnQuestionnairesTab();
 		
 		reportLog("Image 22");
-		questionnairesPage	 = dashborad.clickOnQuestionnairesTab();
+		questionnairesPage = dashborad.clickOnQuestionnairesTab();
 		
-		reportLog("Click questionnaire 1");
-		questionnairesPage.selectQuestionForms("1", false);
-		Thread.sleep(20000);
+		reportLog("22.1:Click questionnaire Test_LMN Mobile");
+		questionnairesPage.selectQuestionForms("Test_LMN Mobile", false);
+		Thread.sleep(10000);
 		questionnairesPage.clickOnStartQuestion();
+		
 		reportLog("Image 23");
 		questionnairesPage.clickOnBackButtonIconOnQuestionPage();
 		questionnairesPage.clickOnYesOption();
-		
+	
 		reportLog("Image 24");
 		messgaePage = dashborad.clickOnMessageTab(true);
 		
 		reportLog("Image 25");
 		mobileLoginPage.scrollDownToRefreshPage();
 			
-		//reportLog("22:MobileView Send a message to the subject from the portal");
 		sendingMessage();
-		
-	    //reportLog("Message already send from portal in previous step");
-		mobileLoginPage = androidSetUpWithoutReset();
-	
-		mobileLoginPage.enterPINCode(MobileConstants.Mobile_Pin);
-		mobileLoginPage.clickOnSubmitButton();
-			
-		//reportLog("23:MobileView Refresh Messages screen. ‘{0} new messages’ pop-up message is displayed if there’s a new message.");
-		messgaePage = dashborad.clickOnMessageTab(false);
+
 		reportLog("Image 26");
 		mobileLoginPage.scrollDownToRefreshPage();
-		//mobileLoginPage.scrollDownToRefreshPage();
 			
-		//reportLog("scrolling");
-		//mobileLoginPage.scrollDownToRefreshPage();
-		//messgaePage= dashborad.clickOnMessageTab();
-
-		//messgaePage.verifyMessageListPresent();
-		
-		//reportLog("Image 27");
+		reportLog("26.1:MobileView Click on Message tab and click on the first message");
+		messgaePage = dashborad.clickOnMessageTab(false);
 		messgaePage.clickFirstMsgOnMessageListScreen(false);
+		
 		reportLog("Image 27");
 		messgaePage.clickOnBackbtnOnComposeScreenToCaptureScreen();
 		
-		reportLog("24:MobileView Select a ‘Messages’. User is navigated to the ‘Messages’ page and message is displayed with subject and message body and time stamp.");
-		//messgaePage.verifyMessageListPresent();
-		
 		reportLog("Image 28");
-		mobileLoginPage.tapByCoordinate(970, 1680, true);
+		mobileLoginPage.tapByCoordinate(1289, 2240, true);
 		
-		reportLog("26:MobileView Type ‘abcd’ in the message body and select back icon. Exit warning message is displayed along with yes/no options.");
+		reportLog("28.1:MobileView Type ‘abcd’ in the message body and select back icon. Exit warning message is displayed along with yes/no options.");
 		messgaePage.inputTxtInMsgSubjectField("abcd");
 		
 		reportLog("Image 29");
 		messgaePage.clickOnBackbtnOnComposeScreenToCaptureScreen();
-		//messgaePage.verifyExitPopUp();
 		
-		reportLog("27.1:MobileView Select ‘No’.");
+		reportLog("29.1:MobileView Select ‘No’.");
 		messgaePage.clickOnNoOnExitPopUp();
 		messgaePage.clickOnBackbtnOnComposeScreen();
 		
-		reportLog("27.2:MobileView The user stays in Compose message page.");
-		//messgaePage.verifyComposeMsgScreen();
-		
-		reportLog("28.1:MobileView Select ‘Yes’.");
+		reportLog("29.2:MobileView Select ‘Yes’.");
 		messgaePage.clickOnYesOnExitPopUp();
 		
-		reportLog("28.2:MobileView The user is navigated back to the Messages page.");
-		//messgaePage.verifyMessageListPresent();
-		
-		reportLog("29:MobileView Select (+) compose icon and write ‘abcd’ in the subject and select send icon. Message content cannot be empty text is displayed.");
-		mobileLoginPage.tapByCoordinate(970, 1680, false);
-
-		//messgaePage.verifyComposeMsgScreen();
+		reportLog("29.3:MobileView Select (+) compose icon and write ‘abcd’ in the subject and select send icon. Message content cannot be empty text is displayed.");
+		mobileLoginPage.tapByCoordinate(1289, 2240, false);
 		messgaePage.inputTxtInMsgSubjectField("abcd");
 		
 		reportLog("Image 30");
@@ -418,7 +366,13 @@ public class Handheld_Translation_SIP extends BaseTest {
 		messgaePage.inputTxtInMsgSubjectField("abcd");
 		messgaePage.inputTxtInMsgBodyField("efgh");
 		
-		reportLog("Image 31 and Image 32");
+		reportLog("Image 31");
+		messgaePage.clickOnSendMsgBtn(true);
+		
+		reportLog("Image 32");
+		mobileLoginPage.tapByCoordinate(1289, 2240, false);
+		messgaePage.inputTxtInMsgSubjectField("abcd");
+		messgaePage.inputTxtInMsgBodyField("efgh");
 		messgaePage.clickOnSendMessageBtnForMultiCapture();
 		
 		reportLog("Select the First message");
@@ -427,7 +381,6 @@ public class Handheld_Translation_SIP extends BaseTest {
 		reportLog("Image 33");
 		messgaePage.clickOnDeleteMessageButton();    
 		
-		//reportLog("32:MobileView Send a message to the subject from the portal ");
 		sendingMessage();
 		
 		mobileLoginPage = androidSetUpWithoutReset();
@@ -436,11 +389,9 @@ public class Handheld_Translation_SIP extends BaseTest {
 		
 		reportLog("Go to Message tab");
 		messgaePage = dashborad.clickOnMessageTab(false);
-
-		//mobileLoginPage.scrollDownToRefreshPage();
 		Thread.sleep(1000);
 		
-		reportLog("33:MobileView Select a message and select the reply icon");
+		reportLog("33.1:MobileView Select a message and select the reply icon");
 		messgaePage.clickFirstMsgOnMessageListScreen(false);
 		Thread.sleep(2000);
 		
@@ -453,44 +404,39 @@ public class Handheld_Translation_SIP extends BaseTest {
 		reportLog("Image 35");
 		messgaePage.verifyWarningpopupWithButtons(true);
 		
-		reportLog("35:MobileView Exit from reply message and go to Messages page, disconnect from the internet and refresh immediately");
+		reportLog("35.1:MobileView Exit from reply message and go to Messages page, disconnect from the internet and refresh immediately");
 		messgaePage.clickOnYesOnExitPopUp();
 		messgaePage.clickOnBackbtnOnComposeScreen();
 		messgaePage = dashborad.clickOnMessageTab(false);
-		//mobileLoginPage.WifiOff();
 		
 		reportLog("36:MobileView Connect to the internet, compose a message, select send and immediately disconnect from the internet");
-		//mobileLoginPage.WifiOn();
-		mobileLoginPage.tapByCoordinate(970, 1680, false);
+		mobileLoginPage.tapByCoordinate(1289, 2240, false);
 
 		messgaePage.inputTxtInMsgSubjectField("abcd");
 		messgaePage.inputTxtInMsgBodyField("efgh");
 		messgaePage.clickOnSendMsgBtn(false);
 		Thread.sleep(3000);
-		//mobileLoginPage.WifiOff();
 
 		reportLog("Image 38");
-		//mobileLoginPage.WifiOn();
-		//messgaePage.clickOnBackbtnOnComposeScreen();
 		logAnEvent= dashborad.clickOnLogAnEventTab();
 		
 		reportLog("Image 39");
 		logAnEvent.clickOnEvent("EQ-5D-5L");
 		
-		reportLog("39:MobileView Select Start");
+		reportLog("39.1:MobileView Select Start");
 		logAnEvent.clickStartBtn();
 		
 		reportLog("Image 40");
 		logAnEvent.completeEvent();
 		Thread.sleep(2000);
 		
-		reportLog("41:MobileView Select Continue");
+		reportLog("40.1:MobileView Select Continue");
 		logAnEvent.clickContinueBtn();
 		
 		//reportLog("42.1:MobileView Open an event and start it and select back icon on the top left");
 		logAnEvent.clickOnEvent("EQ-5D-5L");
 		
-		reportLog("42.2:MobileView Open an event and start it");
+		reportLog("40.2:MobileView Open an event and start it");
 		logAnEvent.clickStartBtn();
 		
 		reportLog("Image 41");
@@ -499,31 +445,21 @@ public class Handheld_Translation_SIP extends BaseTest {
 		reportLog("Verify popup buttons");
 		messgaePage.verifyWarningpopupWithButtons(false);
 		
-		reportLog("43:MobileView Select No");
+		reportLog("41.1:MobileView Select No");
 		messgaePage.clickOnNoOnExitPopUp();
 		
-		reportLog("44:MobileView Select Yes");
+		reportLog("41.2:MobileView Select Yes");
 		messgaePage.clickOnBackbtnOnComposeScreen();
 		messgaePage.clickOnYesOnExitPopUp();
 		
-		//reportLog("45:MobileView Select ‘JK_Mob’ event from the event list. ");
-		//logAnEvent.clickOnEvent("jk_mob");
-		
-		//reportLog("46:MobileView Disconnect from the internet and repeat step 45");
-		//mobileLoginPage.WifiOff();
-		
-		//reportLog("Image 41");
-		//messgaePage.clickOnBackbtnOnComposeScreen();
-		
-		reportLog("Image 42 and Image 43");
+		reportLog("Image 42");
 		logAnEvent.clickOnEventWithoutStartBtnVisible("jk_mob");
 		
-		reportLog("47.1:MobileView Connect to the internet and select the side menu icon.");
-		//messgaePage.clickOnBackbtnOnComposeScreen();
-		sideMenu = dashborad.clickOnHumBergerMenuAndOpenLeftPanel(false);
+		reportLog("Image 43");
+		logAnEvent.clickOnEvent1WithoutStartBtnVisible("jk_mob");
 		
-		reportLog("47.2:MobileView Verify side menu");
-		//mobileLoginPage.WifiOn();
+		reportLog("43.1:MobileView Connect to the internet and select the side menu icon.");
+		sideMenu = dashborad.clickOnHumBergerMenuAndOpenLeftPanel(false);
 		
 		reportLog("Image 45");
 		sideMenu.verifySideMenuOptions();
@@ -541,7 +477,7 @@ public class Handheld_Translation_SIP extends BaseTest {
 		reportLog("Click back icon");
 		sideMenu.clickOnBackIcon();
 		
-		reportLog("50:MobileView Select ‘Study Information’ from the side menu");
+		reportLog("60.1:MobileView Select ‘Study Information’ from the side menu");
 		dashborad.clickOnHumBergerMenuAndOpenLeftPanel(false);
 		
 		reportLog("Image 61");
@@ -550,7 +486,7 @@ public class Handheld_Translation_SIP extends BaseTest {
 		reportLog("Click back icon");
 		sideMenu.clickOnBackIcon();
 		
-		reportLog("51:MobileView Select ‘Contact Us’ from the side menu");
+		reportLog("61.1:MobileView Select ‘Contact Us’ from the side menu");
 		dashborad.clickOnHumBergerMenuAndOpenLeftPanel(false);
 		
 		reportLog("Image 62");
@@ -559,7 +495,7 @@ public class Handheld_Translation_SIP extends BaseTest {
 		reportLog("Click back icon");
 		sideMenu.clickOnBackIcon();
 		
-		reportLog("52:MobileView Select ‘Settings’ from the side menu");
+		reportLog("62.1:MobileView Select ‘Settings’ from the side menu");
 		dashborad.clickOnHumBergerMenuAndOpenLeftPanel(false);
 		
 		reportLog("Image 63");
@@ -568,7 +504,7 @@ public class Handheld_Translation_SIP extends BaseTest {
 		reportLog("Image 64");
 		sideMenu.clickOnChangeColorTheme();
 		
-		reportLog("54:MobileView Exit from the color theme and Select ‘Help & Tutorials’ from the side menu");
+		reportLog("64.1:MobileView Exit from the color theme and Select ‘Help & Tutorials’ from the side menu");
 		sideMenu.exitFromColorThemePopup();
 		sideMenu.clickOnBackIcon();
 		dashborad.clickOnHumBergerMenuAndOpenLeftPanel(false);
@@ -579,7 +515,7 @@ public class Handheld_Translation_SIP extends BaseTest {
 		reportLog("Click back icon");
 		sideMenu.clickOnBackIcon();
 		
-		reportLog("55:MobileView Select ‘About Us’ from the side menu");
+		reportLog("65.1:MobileView Select ‘About Us’ from the side menu");
 		dashborad.clickOnHumBergerMenuAndOpenLeftPanel(false);
 		
 		reportLog("Image 66");
@@ -588,7 +524,7 @@ public class Handheld_Translation_SIP extends BaseTest {
 		reportLog("Click back icon");
 		sideMenu.clickOnBackIcon();
 	
-		reportLog("56:MobileView Exit the application and re-launch it");
+		reportLog("66.1:MobileView Exit the application and re-launch it");
 		dashborad.clickOnHumBergerMenuAndOpenLeftPanel(false);
 		sideMenu.clickOnExitApplication();
 
@@ -600,33 +536,33 @@ public class Handheld_Translation_SIP extends BaseTest {
 		reportLog("Selected question is showing");
 		mobileLoginPage.verifyChooseAQuestionShowing(false);
 
-		reportLog(("58.1:MobileView Answer to the security question stored in Step#6"));
+		reportLog(("67.1:MobileView Answer to the security question stored in Step#6"));
 		mobileLoginPage.enterAnAnswer(Choose_QuestionAnswer);
 		mobileLoginPage.clickOnNextButton();
 		
-		reportLog(("58.2:MobileView Use the same PIN of Step#5 to create identity"));
+		reportLog(("67.2:MobileView Use the same PIN of Step#5 to create identity"));
 		mobileLoginPage.enterPINCode(Mobile_Pin);
 		mobileLoginPage.enterConfirmPINCode(Mobile_Pin);
 		
 		reportLog("Image 68");
 		mobileLoginPage.clickOnNextButtonToCaptureScreenshot();
 		
-		reportLog(("59.1:MobileView Use a different PIN to create identity"));
+		reportLog(("68.1:MobileView Use a different PIN to create identity"));
 		mobileLoginPage.enterPINCode(New_Mobile_Pin);
 		mobileLoginPage.enterConfirmPINCode(New_Mobile_Pin);
 		mobileLoginPage.clickOnNextButton();
 		
-		reportLog(("59.2:MobileView And then login using the new PIN"));
+		reportLog(("68.2:MobileView And then login using the new PIN"));
 		mobileLoginPage.enterPINCode(New_Mobile_Pin);
 		mobileLoginPage.clickOnNextButton();
 		
-		reportLog(("60:MobileView Repeat Step 56 and 57"));
+		reportLog(("68.3:MobileView Repeat Step 56 and 57"));
 		dashborad.clickOnHumBergerMenuAndOpenLeftPanel(false);
 		sideMenu.clickOnExitApplication();
 		
 		mobileLoginPage = androidSetUpWithoutReset();
 	
-		reportLog(("61:MobileView Provide wrong answer of the security question in all the attempts"));
+		reportLog(("68.4:MobileView Provide wrong answer of the security question in all the attempts"));
 		mobileLoginPage.clickOnForgetPINLink(false);
 		//mobileLoginPage.enterIncorrectPINCode(Mobile_PinInCorrect);
 		
@@ -634,15 +570,15 @@ public class Handheld_Translation_SIP extends BaseTest {
 		mobileLoginPage.enterIncorrectAnswer(Enter_IncorrectQuestionAnswer);
 		mobileLoginPage.clickOnNextButton();
 		
-		//reportLog("Unlock the subject");
+		reportLog("69.1:MobileView Unlock the subject");
 		unlockSubject();
 		
 		//reportLog(("62:MobileView From the portal deactivate the subject whose account is locked "));
-		//deactivateSubject("EnglishUS");
+		//deactivateSubject("Turkish2");
 		//Thread.sleep(100000);
 		
 		//reportLog(("65:MobileView Disable the subject from the portal"));
-		//disableSubject("EnglishUS");
+		//disableSubject("Turkish2");
 
 		mobileLoginPage = androidSetUpWithoutReset();
 	
@@ -659,15 +595,46 @@ public class Handheld_Translation_SIP extends BaseTest {
 		mobileLoginPage.enterPINCode(MobileConstants.Mobile_Pin_AfterLock);
 		mobileLoginPage.clickOnSubmitButton();
 		
-		//disableSubject("EnglishUS");
+//		disableSubject("Turkish2");
+//		
+//		questionnairesPage	 = dashborad.clickOnQuestionnairesTab();
+//
+//		reportLog("Image 71");
+//		mobileLoginPage.scrollDownToRefreshPage();
+//		
+//		enableSubject("Turkish2");
+		
+		reportLog(("MobileView Deactivate the subject from the portal and add a new subject"));
+		deactivateSubject("Turkish2");
+		
+		reportLog(("MobileView Relaunch the application, complete Registration process. "));
+		mobileLoginPage = androidSetUp();
+
+		mobileLoginPage.verifyInstructionMessageText(registerScreenInstruction);
+		
+		reportLog("Image 81");
+		mobileLoginPage.configurationForRegisterTheSubject("507E-F7A2-4280-8D74");
+		
+		reportLog("MobileView Click on Accept and complete the registration process for Observer");
+		mobileLoginPage.clickOnAcceptBtn();
+//		mobileLoginPage.enterPINCode(MobileConstants.Mobile_Pin);
+//		mobileLoginPage.enterConfirmPINCode(MobileConstants.Mobile_Pin);
+//		mobileLoginPage.clickOnNextButton();
+//		mobileLoginPage.clickOnChooseAQuestionOption(false);
+//		mobileLoginPage.chooseAQuestion();
+//		mobileLoginPage.enterAnAnswer("Black");
+//		mobileLoginPage.clickOnNextButton();
+//		mobileLoginPage.clickOnContinueButton(false);
+		
+		//disableSubject("Turkish2");
 			
 		//reportLog(("Image 71"));
 		//questionnairesPage = dashborad.clickOnQuestionnaires();
 		//mobileLoginPage.scrollDownToRefreshPage();
 		//Thread.sleep(100000);
 	
-		reportLog(("67:MobileView Enable the subject from the portal"));
-		//enableSubject("EnglishUS");
+//		reportLog(("67:MobileView Enable the subject from the portal"));
+		//enableSubject("Turkish2");
 	/*
 		reportLog(("68:MobileView Relaunch the VirgilPRO application"));
 		mobileLoginPage = androidSetUpWithoutReset();	
@@ -697,7 +664,7 @@ public class Handheld_Translation_SIP extends BaseTest {
 //		questionnairesPage.clickOnBackButtonIconOnQuestionPage();
 //		
 //		questionnairesPage.clickOnYesOption();
-		reportLog(("76:MobileView Leave one or two question(s) unanswered and go to the last page of the questionnaire"));
+//		reportLog(("76:MobileView Leave one or two question(s) unanswered and go to the last page of the questionnaire"));
 //		
 //		
 //		reportLog(("77:MobileView Complete the questionnaire and submit"));
@@ -707,12 +674,12 @@ public class Handheld_Translation_SIP extends BaseTest {
 //		
 //		
 //		reportLog(("80:MobileView Select Continue"));
-		
+/*		
 	    dashborad = mobileLoginPage.mobiledashboard();
 
 		reportLog(("81:MobileView Go to Messages and Select to compose a message"));
 		messgaePage = dashborad.clickOnMessageTab(false);
-		mobileLoginPage.tapByCoordinate(970, 1680, false);
+		mobileLoginPage.tapByCoordinate(1289, 2240, false);
 		
 		reportLog(("Image 82"));
 		messgaePage.longPressOnSendMsgBtn();
@@ -727,27 +694,27 @@ public class Handheld_Translation_SIP extends BaseTest {
 		reportLog(("90:MobileView Refresh the questionnaire page and immediately disconnect from the internet"));
 		//mobileLoginPage.WifiOff();		
 		
-		reportLog(("92:MobileView Deactivate the subject from the portal and add a new subject"));
-		deactivateSubject("EnglishUS");
-		
-		reportLog(("93:MobileView Relaunch the application, complete Registration process. "));
-		mobileLoginPage = androidSetUp();
-
-		mobileLoginPage.verifyInstructionMessageText(registerScreenInstruction);
-		
-		reportLog("Image 81");
-		mobileLoginPage.configurationForRegisterTheSubject("BC17-E30B-43E3-89E8");
-		
-		reportLog("Click on Accept and complete the registration process for Observer");
-		mobileLoginPage.clickOnAcceptBtn();
-		mobileLoginPage.enterPINCode(MobileConstants.Mobile_Pin);
-		mobileLoginPage.enterConfirmPINCode(MobileConstants.Mobile_Pin);
-		mobileLoginPage.clickOnNextButton();
-		mobileLoginPage.clickOnChooseAQuestionOption(false);
-		mobileLoginPage.chooseAQuestion();
-		mobileLoginPage.enterAnAnswer("Black");
-		mobileLoginPage.clickOnNextButton();
-		mobileLoginPage.clickOnContinueButton(false);
+//		reportLog(("92:MobileView Deactivate the subject from the portal and add a new subject"));
+//		deactivateSubject("Turkish2");
+//		
+//		reportLog(("93:MobileView Relaunch the application, complete Registration process. "));
+//		mobileLoginPage = androidSetUp();
+//
+//		mobileLoginPage.verifyInstructionMessageText(registerScreenInstruction);
+//		
+//		reportLog("Image 81");
+//		mobileLoginPage.configurationForRegisterTheSubject("FA56-09BF-42B3-8D29");
+//		
+//		reportLog("Click on Accept and complete the registration process for Observer");
+//		mobileLoginPage.clickOnAcceptBtn();
+//		mobileLoginPage.enterPINCode(MobileConstants.Mobile_Pin);
+//		mobileLoginPage.enterConfirmPINCode(MobileConstants.Mobile_Pin);
+//		mobileLoginPage.clickOnNextButton();
+//		mobileLoginPage.clickOnChooseAQuestionOption(false);
+//		mobileLoginPage.chooseAQuestion();
+//		mobileLoginPage.enterAnAnswer("Black");
+//		mobileLoginPage.clickOnNextButton();
+//		mobileLoginPage.clickOnContinueButton(false);
 		
 /*
 		mobileLoginPage.verifyInstructionMessageText(registerScreenInstruction);
@@ -842,34 +809,40 @@ public class Handheld_Translation_SIP extends BaseTest {
 					Constants.NavigateText, Constants.StudyText);
 			studyNavigatorDashBoardPage.selectStudy(studyName, Constants.testSite);
 			studyNavigatorDashBoardPage
-					.searchFilterValueByColumnNameAndValue(Constants.StudyDashBoard_columnName_Subject, "EnglishUS");
-			subjectDetailPage = studyNavigatorDashBoardPage.clickOnSearchedSubject("EnglishUS");
+					.searchFilterValueByColumnNameAndValue(Constants.StudyDashBoard_columnName_Subject, "Turkish2");
+			subjectDetailPage = studyNavigatorDashBoardPage.clickOnSearchedSubject("Turkish2");
 			subjectDetailPage.deactivateSubjectConfiguration(FormUserName, Form_Password);
 			loginPage.logoutApplication();
 			loginPage.verifyUserLogout();
 	}
 	
-	public void sendingMessage() {
+	public void sendingMessage() throws Exception {
+		Properties properties = Configuration.readTestData("RegressionTestData");
+		studyName = properties.getProperty("HandheldTranslationStudy");
+		
 		dashBoardPage = loginPage.loginInApplication(FormUserName, Form_Password);
 		studyNavigatorDashBoardPage = dashBoardPage.selectHorizontalUpperNavMenuItem(StudyDashBoardPage.class,
 				Constants.NavigateText, Constants.StudyText);
 		studyNavigatorDashBoardPage.selectStudy(studyName, Constants.testSite);
 		studyNavigatorDashBoardPage
-				.searchFilterValueByColumnNameAndValue(Constants.StudyDashBoard_columnName_Subject, "EnglishUS");
-		subjectDetailPage = studyNavigatorDashBoardPage.clickOnSearchedSubject("EnglishUS");
+				.searchFilterValueByColumnNameAndValue(Constants.StudyDashBoard_columnName_Subject, "Turkish2");
+		subjectDetailPage = studyNavigatorDashBoardPage.clickOnSearchedSubject("Turkish2");
 		subjectDetailPage.sendMessage();
 		loginPage.logoutApplication();
 		loginPage.verifyUserLogout();
 	}
 	
-	public void unlockSubject() throws InterruptedException {
+	public void unlockSubject() throws Exception {
+		Properties properties = Configuration.readTestData("RegressionTestData");
+		studyName = properties.getProperty("HandheldTranslationStudy");
+		
 		dashBoardPage = loginPage.loginInApplication(FormUserName, Form_Password);
 		studyNavigatorDashBoardPage = dashBoardPage.selectHorizontalUpperNavMenuItem(StudyDashBoardPage.class,
 				Constants.NavigateText, Constants.StudyText);
 		studyNavigatorDashBoardPage.selectStudy(studyName, Constants.testSite);
 		studyNavigatorDashBoardPage
-				.searchFilterValueByColumnNameAndValue(Constants.StudyDashBoard_columnName_Subject, "EnglishUS");
-		subjectDetailPage = studyNavigatorDashBoardPage.clickOnSearchedSubject("EnglishUS");
+				.searchFilterValueByColumnNameAndValue(Constants.StudyDashBoard_columnName_Subject, "Turkish2");
+		subjectDetailPage = studyNavigatorDashBoardPage.clickOnSearchedSubject("Turkish2");
 		
 		subjectDetailPage.clickOnReportedOutComeButton();
 		subjectDetailPage.clickOnSubjectUnLockButtonDisplayedOnReportedOutcomePopUp();

@@ -173,14 +173,14 @@ public class MobileSideMenuPage extends MobileCoreFunctions {
 	}
 
 	public void clickOnAboutUs() throws InterruptedException {
-		Thread.sleep(2000);
+		//Thread.sleep(2000);
 		click(aboutUs);
 		capturescreen("Screenshot");
 		//click(menuBackIcon);
 	}
 	
 	public void clickOnContacts() throws InterruptedException {
-		Thread.sleep(2000);
+		//Thread.sleep(2000);
 
 		click(contacts);
 		capturescreen("Screenshot");
@@ -188,7 +188,7 @@ public class MobileSideMenuPage extends MobileCoreFunctions {
 	}
 
 	public void clickOnMySchedule() throws InterruptedException {
-		Thread.sleep(2000);
+		//Thread.sleep(2000);
 
 		click(mySchedule);
 		capturescreen("Screenshot");
@@ -196,30 +196,30 @@ public class MobileSideMenuPage extends MobileCoreFunctions {
 	}
 	
 	public void clickOnMyAccount() throws InterruptedException {
-		Thread.sleep(1000);
+		//Thread.sleep(1000);
 
 		click(myAccount);
-		Thread.sleep(2000);
+		//Thread.sleep(2000);
 		//Assert.assertTrue(menuBackIcon.isEnabled());
 		capturescreen("Screenshot");
 		//click(menuBackIcon);
 	}
 
 	public void clickOnStudyInformation() throws InterruptedException {
-		Thread.sleep(1000);
+		//Thread.sleep(1000);
 
 		click(studyInformation);
-		Thread.sleep(2000);
+		//Thread.sleep(2000);
 		capturescreen("Screenshot");
 		//click(menuBackIcon);
 
 	}
 
 	public void clickOnSettings() throws InterruptedException {
-		Thread.sleep(1000);
+		//Thread.sleep(1000);
 
 		click(settings);
-		Thread.sleep(2000);
+		//Thread.sleep(2000);
 		capturescreen("Screenshot");
 		//click(menuBackIcon);
 	}
@@ -235,10 +235,10 @@ public class MobileSideMenuPage extends MobileCoreFunctions {
 	}
 	
 	public void helpAndTutorials() throws InterruptedException {
-		Thread.sleep(1000);
+		//Thread.sleep(1000);
 
 		click(helpTutorial);
-		Thread.sleep(2000);
+		//Thread.sleep(2000);
 		capturescreen("Screenshot");
 
 	}

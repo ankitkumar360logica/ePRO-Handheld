@@ -52,16 +52,19 @@ public class MBLogAnEventPage extends MobileCoreFunctions{
 		for(MobileElement we:eventList){
 			if(we.getText().equalsIgnoreCase(eventToBeOpen)){
 				click(we);
-				Thread.sleep(1000);
-				//waitForElementToBecomeVisible(startBtn,DEFAULT_WAIT_ELEMENT);
-
 				capturescreen("Screenshot");
-				Thread.sleep(2000);
-				//break;
 			}
 		}
-		//_normalWait(DEFAULT_WAIT_ELEMENT);
-		capturescreen("Screenshot");
+	}
+	
+	public void clickOnEvent1WithoutStartBtnVisible(String eventToBeOpen) throws InterruptedException{
+		for(MobileElement we:eventList){
+			if(we.getText().equalsIgnoreCase(eventToBeOpen)){
+				click(we);
+				Thread.sleep(3000);
+				capturescreen("Screenshot");
+			}
+		}
 	}
 	
 	public void clickStartBtn() {

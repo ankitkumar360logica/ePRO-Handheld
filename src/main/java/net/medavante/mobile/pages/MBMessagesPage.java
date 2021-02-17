@@ -128,14 +128,10 @@ public class MBMessagesPage extends MobileCoreFunctions {
 	
 	public void clickOnSendMessageBtnForMultiCapture() throws InterruptedException {
 		click(sendMsgBtn);
-		//Thread.sleep(1000);
-		capturescreen("Screenshot");
-		Thread.sleep(2000);
+		Thread.sleep(1500);
 		capturescreen("Screenshot");
 
 	}
-	
-	
 	
 	public void longPressOnSendMsgBtn() throws InterruptedException {
 		longPress(sendMsgBtn);
