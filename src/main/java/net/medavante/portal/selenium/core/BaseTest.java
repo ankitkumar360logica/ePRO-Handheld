@@ -346,6 +346,14 @@ public abstract class BaseTest extends MobileDriver
 					} else if (className.toString().contains("SPP")) {
 						this.applicationUrl = Configuration.readApplicationFile("sponserQaURL");
 					}
+				}else if (setEnvironment.equals("trn")) {
+					if (className.toString().contains("MAP")) {
+						this.applicationUrl = Configuration.readApplicationFile("maQaURL");
+					} else if (className.toString().contains("SIP")) {
+						this.applicationUrl = Configuration.readApplicationFile("trnURL");
+					} else if (className.toString().contains("SPP")) {
+						this.applicationUrl = Configuration.readApplicationFile("sponserQaURL");
+					}
 				}
 			} else {
 

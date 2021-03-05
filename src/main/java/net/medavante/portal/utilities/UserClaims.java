@@ -30,6 +30,8 @@ public interface UserClaims {
 	public static final String AT_Password = "#tester5";
 	public static final String FormUserName = "trnadmin1";
 	public static final String Form_Password = "#2Pencil";
+	public static final String TRNUserName = "trnadmin1";
+	public static final String TRN_Password = "#2Pencil";
 	
 	public static final String AT_SponsorUser = "v_sponsor2";
 	public static final String AT_SponsorUserPassword = "Qwerty1#";

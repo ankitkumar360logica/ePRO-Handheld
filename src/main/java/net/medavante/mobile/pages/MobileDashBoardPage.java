@@ -176,7 +176,7 @@ public class MobileDashBoardPage extends MobileCoreFunctions {
 	public MBQuestionnaires clickOnQuestionnairesTab() {
 		waitForElementToBecomeVisible(questionnairesTab, globalWaitTime);
 		click(questionnairesTab);
-		click(questionnairesTab);
+		//click(questionnairesTab);
 		Assert.assertTrue(questionnairesTab.isSelected());
 		 //capturescreen("Screenshot");
 		MBQuestionnaires questionnaires = new MBQuestionnaires(mobileDriver);
@@ -188,7 +188,7 @@ public class MobileDashBoardPage extends MobileCoreFunctions {
 	
 	public MBQuestionnaires clickOnQuestionnaires() {
 		waitForElementToBecomeVisible(questionnairesTab, globalWaitTime);
-		click(questionnairesTab);
+		//click(questionnairesTab);
 		click(questionnairesTab);
 		Assert.assertTrue(questionnairesTab.isSelected());
 		 capturescreen("Screenshot");

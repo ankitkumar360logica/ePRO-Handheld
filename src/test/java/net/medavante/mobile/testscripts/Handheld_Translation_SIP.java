@@ -149,7 +149,7 @@ public class Handheld_Translation_SIP extends BaseTest {
 		Properties properties = Configuration.readTestData("RegressionTestData");
 		studyName = properties.getProperty("HandheldTranslationStudy");
 		
-//		dashBoardPage = loginPage.loginInApplication(FormUserName, Form_Password);
+//		dashBoardPage = loginPage.loginInApplication(TRNUserName, TRN_Password);
 //		
 //		studyNavigatorDashBoardPage = dashBoardPage.selectHorizontalUpperNavMenuItem(StudyDashBoardPage.class,
 //				Constants.NavigateText, Constants.StudyText);
@@ -182,7 +182,7 @@ public class Handheld_Translation_SIP extends BaseTest {
 		Properties properties = Configuration.readTestData("RegressionTestData");
 		studyName = properties.getProperty("HandheldTranslationStudy");
 //		
-//		dashBoardPage = loginPage.loginInApplication(FormUserName, Form_Password);
+//		dashBoardPage = loginPage.loginInApplication(TRNUserName, TRN_Password);
 //		
 //		studyNavigatorDashBoardPage = dashBoardPage.selectHorizontalUpperNavMenuItem(StudyDashBoardPage.class,
 //				Constants.NavigateText, Constants.StudyText);
@@ -219,13 +219,14 @@ public class Handheld_Translation_SIP extends BaseTest {
 	public void eCOAHandheldScriptWorkflow() throws Exception {
 		//reportLog("1.1:MobileView As a Participant logged into the application");
 		mobileLoginPage = androidSetUp();
+		deactivateSubject("testEng");;
 		//mobileLoginPage.WifiOn();		
 		
 	    reportLog("Verify the registeration instruction message");
 		mobileLoginPage.verifyInstructionMessageText(registerScreenInstruction);
 		
 		reportLog("Image 5");
-		mobileLoginPage.configurationForRegisterTheSubject("58DA-8E27-49B7-8833");
+		mobileLoginPage.configurationForRegisterTheSubject("2E32-D68B-4D99-9E9B");
 			
 		reportLog("Click on Accept button");
 		mobileLoginPage.clickOnAcceptBtn(); 
@@ -804,14 +805,14 @@ public class Handheld_Translation_SIP extends BaseTest {
 		
 	public void deactivateSubject(String subjectName) throws InterruptedException {
 			reportLog("Deactivate Subject");
-			dashBoardPage = loginPage.loginInApplication(FormUserName, Form_Password);
+			dashBoardPage = loginPage.loginInApplication(TRNUserName, TRN_Password);
 			studyNavigatorDashBoardPage = dashBoardPage.selectHorizontalUpperNavMenuItem(StudyDashBoardPage.class,
 					Constants.NavigateText, Constants.StudyText);
 			studyNavigatorDashBoardPage.selectStudy(studyName, Constants.testSite);
 			studyNavigatorDashBoardPage
-					.searchFilterValueByColumnNameAndValue(Constants.StudyDashBoard_columnName_Subject, "Turkish2");
-			subjectDetailPage = studyNavigatorDashBoardPage.clickOnSearchedSubject("Turkish2");
-			subjectDetailPage.deactivateSubjectConfiguration(FormUserName, Form_Password);
+					.searchFilterValueByColumnNameAndValue(Constants.StudyDashBoard_columnName_Subject, "testEng");
+			subjectDetailPage = studyNavigatorDashBoardPage.clickOnSearchedSubject("testEng");
+			subjectDetailPage.deactivateSubjectConfiguration(TRNUserName, TRN_Password);
 			loginPage.logoutApplication();
 			loginPage.verifyUserLogout();
 	}
@@ -820,13 +821,13 @@ public class Handheld_Translation_SIP extends BaseTest {
 		Properties properties = Configuration.readTestData("RegressionTestData");
 		studyName = properties.getProperty("HandheldTranslationStudy");
 		
-		dashBoardPage = loginPage.loginInApplication(FormUserName, Form_Password);
+		dashBoardPage = loginPage.loginInApplication(TRNUserName, TRN_Password);
 		studyNavigatorDashBoardPage = dashBoardPage.selectHorizontalUpperNavMenuItem(StudyDashBoardPage.class,
 				Constants.NavigateText, Constants.StudyText);
 		studyNavigatorDashBoardPage.selectStudy(studyName, Constants.testSite);
 		studyNavigatorDashBoardPage
-				.searchFilterValueByColumnNameAndValue(Constants.StudyDashBoard_columnName_Subject, "Turkish2");
-		subjectDetailPage = studyNavigatorDashBoardPage.clickOnSearchedSubject("Turkish2");
+				.searchFilterValueByColumnNameAndValue(Constants.StudyDashBoard_columnName_Subject, "testEng");
+		subjectDetailPage = studyNavigatorDashBoardPage.clickOnSearchedSubject("testEng");
 		subjectDetailPage.sendMessage();
 		loginPage.logoutApplication();
 		loginPage.verifyUserLogout();
@@ -836,7 +837,7 @@ public class Handheld_Translation_SIP extends BaseTest {
 		Properties properties = Configuration.readTestData("RegressionTestData");
 		studyName = properties.getProperty("HandheldTranslationStudy");
 		
-		dashBoardPage = loginPage.loginInApplication(FormUserName, Form_Password);
+		dashBoardPage = loginPage.loginInApplication(TRNUserName, TRN_Password);
 		studyNavigatorDashBoardPage = dashBoardPage.selectHorizontalUpperNavMenuItem(StudyDashBoardPage.class,
 				Constants.NavigateText, Constants.StudyText);
 		studyNavigatorDashBoardPage.selectStudy(studyName, Constants.testSite);
@@ -848,7 +849,7 @@ public class Handheld_Translation_SIP extends BaseTest {
 		subjectDetailPage.clickOnSubjectUnLockButtonDisplayedOnReportedOutcomePopUp();
 		subjectDetailPage.selectReasonForChangeOption("Technical difficulties");
 		
-		subjectDetailPage.inputCredentialsInReasonForChangePopUp(FormUserName, Form_Password);
+		subjectDetailPage.inputCredentialsInReasonForChangePopUp(TRNUserName, TRN_Password);
         Thread.sleep(5000);
 		
 		subjectDetailPage.clickOnReportedOutComePopUpCancelBTN();

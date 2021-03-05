@@ -156,7 +156,7 @@ public class MobileDriver {
 	  		capabilities.setCapability("platformVersion", "9.0"); 
 	  		capabilities.setCapability("deviceName","Android Emulator");
 	  		capabilities.setCapability("platformName","Android");
-	  		capabilities.setCapability("appPackage", "com.MAV.PRO.App.Android.Forms");
+	  		capabilities.setCapability("appPackage", "com.MAV.PRO.Android.trn");
 	  		capabilities.setCapability("appActivity","md59cbe8238a5c2793500b4a11c8bef2f85.MainActivity");
 	  		capabilities.setCapability("newCommandTimeout", 90000);
 
@@ -181,7 +181,7 @@ public class MobileDriver {
 	  		capabilities.setCapability("platformVersion", "9.0"); 
 	  		capabilities.setCapability("deviceName","Android Emulator");
 	  		capabilities.setCapability("platformName","Android");
-	  		capabilities.setCapability("appPackage", "com.MAV.PRO.App.Android.Forms");
+	  		capabilities.setCapability("appPackage", "com.MAV.PRO.Android.trn");
 	  		capabilities.setCapability("appActivity","md59cbe8238a5c2793500b4a11c8bef2f85.MainActivity");
 	  		capabilities.setCapability("noReset", true);
 	  		// capabilities.setCapability("dontStopAppOnReset", true); 

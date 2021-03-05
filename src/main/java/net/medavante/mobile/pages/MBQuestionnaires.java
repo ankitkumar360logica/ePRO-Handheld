@@ -609,7 +609,7 @@ public class MBQuestionnaires extends MobileCoreFunctions {
 		
 		capturescreen("Screenshot");
 		click(continueBtn);
-		Thread.sleep(3000);			
+		//Thread.sleep(3000);			
 	}
 	
 	
@@ -680,7 +680,7 @@ public class MBQuestionnaires extends MobileCoreFunctions {
 		click(nextArrowIcon);
 		
 		click(continueBtn);
-		Thread.sleep(3000);		
+		//Thread.sleep(3000);		
 	}
 	}
 	

@@ -8621,12 +8621,12 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	
 	public void sendMessage() {
 		//waitForElementToBecomeVisible(sendMessageButton, DEFAULT_WAIT_4_ELEMENT);
-		//for(int i=1; i<5; i++) {
+		//for(int i=1; i<=2; i++) {
 		waitForElementPresent(sendMessageButton, DEFAULT_WAIT_4_ELEMENT);
 		clickOnsendMessageButton();
 		selectRecipientUnderModalWindow();
-		enterMessageSubject("test");
-		enterMessagetext("1234");
+		enterMessageSubject("morning Diary");
+		enterMessagetext("123");
 		clickOnSendButtonOnModelWindow();
 		//}
 		
