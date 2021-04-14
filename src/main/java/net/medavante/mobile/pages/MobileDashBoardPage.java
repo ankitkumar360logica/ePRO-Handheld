@@ -27,16 +27,16 @@ public class MobileDashBoardPage extends MobileCoreFunctions {
 	@AndroidFindBy(xpath = "//android.widget.ImageButton")
 	private MobileElement menuBackIcon;
 
-	@AndroidFindBy(xpath = "//*[@class='android.support.v7.app.ActionBar$Tab'][1]")
+	@AndroidFindBy(xpath = "//*[@class='androidx.appcompat.app.ActionBar$Tab'][1]")
 	private MobileElement homeTab;
 
-	@AndroidFindBy(xpath = "//*[@class='android.support.v7.app.ActionBar$Tab'][2]")
+	@AndroidFindBy(xpath = "//*[@class='androidx.appcompat.app.ActionBar$Tab'][2]")
 	private MobileElement questionnairesTab;
 
-	@AndroidFindBy(xpath = "//*[@class='android.support.v7.app.ActionBar$Tab'][3]")
+	@AndroidFindBy(xpath = "//*[@class='androidx.appcompat.app.ActionBar$Tab'][3]")
 	private MobileElement messageTab;
 
-	@AndroidFindBy(xpath = "//*[@class='android.support.v7.app.ActionBar$Tab'][4]")
+	@AndroidFindBy(xpath = "//*[@class='androidx.appcompat.app.ActionBar$Tab'][4]")
 	private static MobileElement logAnEventTab;
 
 	@AndroidFindBy(xpath = "//*[@class='android.widget.LinearLayout' and @index='1']")
@@ -182,6 +182,24 @@ public class MobileDashBoardPage extends MobileCoreFunctions {
 		MBQuestionnaires questionnaires = new MBQuestionnaires(mobileDriver);
 		PageFactory.initElements(new AppiumFieldDecorator(mobileDriver), questionnaires);
 		 capturescreen("Screenshot");
+		return questionnaires;
+
+	}
+	
+	public MBQuestionnaires clickOnQuestionnairesScrollFromTopToBottom() throws InterruptedException {
+		waitForElementToBecomeVisible(questionnairesTab, globalWaitTime);
+		click(questionnairesTab);
+		//click(questionnairesTab);
+		Assert.assertTrue(questionnairesTab.isSelected());
+		 //capturescreen("Screenshot");
+		MBQuestionnaires questionnaires = new MBQuestionnaires(mobileDriver);
+		PageFactory.initElements(new AppiumFieldDecorator(mobileDriver), questionnaires);
+		scrollFromTopToBottom();
+		Thread.sleep(1500);
+		capturescreen("Screenshot");
+		//Thread.sleep(2000);
+		//scrollFromBottomToTop();
+		//Thread.sleep(1500);
 		return questionnaires;
 
 	}

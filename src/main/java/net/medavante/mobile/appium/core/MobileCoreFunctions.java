@@ -339,6 +339,23 @@ public class MobileCoreFunctions {
 		TouchAction ts = new TouchAction(mobileDriver);
 		ts.longPress(PointOption.point(x, top_y)).moveTo(PointOption.point(x, bottom_y)).release().perform();
 	}
+	
+	public void scrollFromBottomToTop() {
+
+		Dimension dim = mobileDriver.manage().window().getSize();
+		int height = dim.getHeight();
+		int width = dim.getWidth();
+		int x = width / 2;
+		int top_y = (int) (height * 0.80);
+		int bottom_y = (int) (height * 0.20);
+		System.out.println("Height is: " + height);
+		System.out.println("Width is: " + width);
+		System.out.println("Value of X is: " + x);
+		System.out.println("Value of top_y is: " + top_y);
+		System.out.println("Value of bottom_y is: " + bottom_y);
+		TouchAction ts = new TouchAction(mobileDriver);
+		ts.longPress(PointOption.point(x, bottom_y)).moveTo(PointOption.point(x, top_y)).release().perform();
+	}
 
 	/* Get Only Current Date */
 	public String currentOnlyDate() {

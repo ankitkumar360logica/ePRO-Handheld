@@ -187,10 +187,10 @@ public class AdministrationPeoplePage extends BasePage {
 	  /**
 	   * verify if editbale mode is active 
 	   */
-	  private void removeTheEditableMode() {
-		  if(StringUtils.isAllBlank(cancel.getAttribute("disabled"))) 
-			  waitAndClick(cancel);
-	  }
+//	  private void removeTheEditableMode() {
+//		  if(StringUtils.isAllBlank(cancel.getAttribute("disabled"))) 
+//			  waitAndClick(cancel);
+//	  }
 	  
 	  /**
 	   * verify Person Type is set 
@@ -199,7 +199,7 @@ public class AdministrationPeoplePage extends BasePage {
 	  public void verifyPersonTypeIsSetTo(String personType) {
 		 
 		  try {
-		  removeTheEditableMode();
+		 // removeTheEditableMode();
 		  String person="//label[contains(text(),'"+personType+"')]/../following-sibling::div/child::input";
 		  Assert.assertTrue(getAttributeValueOfElement(person, "class").contains("ng-untouched"));
 		  }catch (Exception e) {

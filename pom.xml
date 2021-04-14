@@ -105,7 +105,12 @@
 			<artifactId>itextpdf</artifactId>
 			<version>5.5.13</version>
 		</dependency>
-
+		
+      <dependency>
+	<groupId>com.github.rostrovsky</groupId>
+	<artifactId>pdf-table</artifactId>
+	<version>1.0.0</version>
+     </dependency>
 
 		<dependency>
 			<groupId>com.itextpdf</groupId>

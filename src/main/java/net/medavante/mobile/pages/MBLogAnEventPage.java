@@ -22,6 +22,12 @@ public class MBLogAnEventPage extends MobileCoreFunctions{
 	@AndroidFindBy(xpath="//android.view.ViewGroup[@index='4']")
 	private MobileElement nextArrowIcon; 
 	
+	@AndroidFindBy(xpath="//android.view.View[@index='5']")
+	private MobileElement nextArrowIcon2; 
+	
+	@AndroidFindBy(xpath="(//android.view.View[@index='5'])[2]")
+	private MobileElement nextArrowIcon3; 
+	
 	@AndroidFindBy(xpath= "//android.widget.ListView//android.view.View//android.view.View//android.widget.RadioButton[1]")
 	private MobileElement selectRadioBtn;
 	
@@ -79,22 +85,22 @@ public class MBLogAnEventPage extends MobileCoreFunctions{
 	
 	public void completeEvent() {
 		_normalWait(DEFAULT_WAIT_ELEMENT);
-		click(nextArrowIcon);
-		click(nextArrowIcon);
+		click(nextArrowIcon2);
+		click(nextArrowIcon2);
 		click(selectRadioBtn);
-		click(nextArrowIcon);
+		click(nextArrowIcon2);
 		click(selectRadioBtn);
-		click(nextArrowIcon);
+		click(nextArrowIcon2);
 		click(selectRadioBtn);
-		click(nextArrowIcon);
+		click(nextArrowIcon2);
 		click(selectRadioBtn);
-		click(nextArrowIcon);
+		click(nextArrowIcon2);
 		click(selectRadioBtn);
-		click(nextArrowIcon);
-		click(nextArrowIcon);
+		click(nextArrowIcon2);
+		click(nextArrowIcon2);
 		click(setHealthArrow);
-		click(nextArrowIcon);
-		click(nextArrowIcon);
+		click(nextArrowIcon3);
+		click(nextArrowIcon2);
 		capturescreen("Screenshot");
 
 	}

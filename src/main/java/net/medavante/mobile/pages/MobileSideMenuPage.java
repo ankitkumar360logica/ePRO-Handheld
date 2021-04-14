@@ -60,7 +60,7 @@ public class MobileSideMenuPage extends MobileCoreFunctions {
 	@AndroidFindBy(xpath = "//android.view.ViewGroup/android.widget.ImageView")
 	private MobileElement exitApplicationIcon;
 
-	@AndroidFindBy(xpath = "//*[@class='android.support.v7.app.ActionBar$Tab'][1]")
+	@AndroidFindBy(xpath = "//*[@class='androidx.appcompat.app.ActionBar$Tab'][1]")
 	private MobileElement homeTab;
 
 	@AndroidFindBy(xpath = "//*[@class='android.view.View' and @index='0']")
@@ -175,6 +175,14 @@ public class MobileSideMenuPage extends MobileCoreFunctions {
 	public void clickOnAboutUs() throws InterruptedException {
 		//Thread.sleep(2000);
 		click(aboutUs);
+		capturescreen("Screenshot");
+		//click(menuBackIcon);
+	}
+	
+	public void clickOnAboutUs2() throws InterruptedException {
+		//Thread.sleep(2000);
+		click(aboutUs);
+		scrollFromTopToBottom();
 		capturescreen("Screenshot");
 		//click(menuBackIcon);
 	}

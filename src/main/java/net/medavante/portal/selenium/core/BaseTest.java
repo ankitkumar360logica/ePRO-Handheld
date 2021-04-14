@@ -1066,7 +1066,7 @@ public abstract class BaseTest extends MobileDriver
 		document.add(table);
 	}
 	
-	public static void pdfMobileScreenShotWriter(String Scrrenshotpath)
+	public static void pdfMobileScreenShotWriter(String Screenshotpath)
 			throws DocumentException, IOException, MalformedURLException, java.io.IOException, InterruptedException {
 		String moduleName = System.getProperty("className");
 		/* String testcaseName = System.getProperty("moduleName"); */
@@ -1079,7 +1079,7 @@ public abstract class BaseTest extends MobileDriver
 		//		+ "\nTest Step: " + getMessage() + "\nTime Stamp: " + timestamp));
 		//table.addCell("   ");
 		table.addCell(createTextCell(getMessage()));
-		table.addCell(createImageCell(Scrrenshotpath));
+		table.addCell(createImageCell(Screenshotpath));
 		document.add(table);
 	}
 

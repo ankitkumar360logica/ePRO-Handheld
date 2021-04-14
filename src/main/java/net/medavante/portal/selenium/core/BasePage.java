@@ -236,9 +236,9 @@ public abstract class BasePage {
 
 	/** Click on WebElement by using java script */
 	public void javascriptButtonClick(WebElement webElement) {
-		javascripctHilightingElement(webElement);
+		//javascripctHilightingElement(webElement);
 		//reportInfo();
-		unhighLightElement();
+		//unhighLightElement();
 		waitForElement(webElement);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].click();", webElement);

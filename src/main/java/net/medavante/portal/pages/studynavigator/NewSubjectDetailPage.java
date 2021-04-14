@@ -427,7 +427,8 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	@FindBy(css = "div[class='details-column'] div[class='subject-message-block']")
 	private WebElement messageArea;
 
-	@FindBy(css = "div[class='section-header'] span[data-ng-click ='showNewMessageDialog()']")
+	//@FindBy(css = "div[class='section-header'] span[data-ng-click ='showNewMessageDialog()']")
+	@FindBy(xpath = "//span[@title='New Message']")
 	private WebElement sendMessageButton;
 	
 	@FindBy(xpath = "//input[@id='recipient-patient-checkbox']")

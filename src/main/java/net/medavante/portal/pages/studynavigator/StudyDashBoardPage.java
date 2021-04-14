@@ -616,7 +616,7 @@ public class StudyDashBoardPage extends BasePage {
 	@FindBy(xpath = "//div[@class='cdk-overlay-container']//div[@class='item ng-star-inserted']")
 	private WebElement selectStudy;
 
-	@FindBy(xpath = "//div[@class='column form-container']//input[@formcontrolname='siteQuery']")
+	@FindBy(xpath = "//input[@formcontrolname='siteQuery']")
 	private WebElement searchSite;
 
 	@FindBy(xpath = "//div[@class='list-container ng-star-inserted']//div[@class='item ng-star-inserted']")

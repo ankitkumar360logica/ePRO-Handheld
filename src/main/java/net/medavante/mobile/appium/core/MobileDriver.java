@@ -46,7 +46,7 @@ public class MobileDriver {
 	protected String registrationCode, registrationCodeSubject, registrationObserver;
 	protected MobileSideMenuPage sideMenu;
 	protected MBQuestionnaires questionnairesPage;
-	protected MBMessagesPage messgaePage;
+	protected MBMessagesPage messagePage;
 	
 	private String apkPath;
 	
@@ -153,11 +153,11 @@ public class MobileDriver {
 		apkPath=Configuration.readApplicationFile("APKPath");
 
 		  DesiredCapabilities capabilities = new DesiredCapabilities();
-	  		capabilities.setCapability("platformVersion", "9.0"); 
+	  		capabilities.setCapability("platformVersion", "10.0"); 
 	  		capabilities.setCapability("deviceName","Android Emulator");
 	  		capabilities.setCapability("platformName","Android");
 	  		capabilities.setCapability("appPackage", "com.MAV.PRO.Android.trn");
-	  		capabilities.setCapability("appActivity","md59cbe8238a5c2793500b4a11c8bef2f85.MainActivity");
+	  		capabilities.setCapability("appActivity","crc64c71ff983b20c5ec6.MainActivity");
 	  		capabilities.setCapability("newCommandTimeout", 90000);
 
 	  		// capabilities.setCapability("dontStopAppOnReset", true); 
@@ -178,11 +178,11 @@ public class MobileDriver {
 		apkPath=Configuration.readApplicationFile("APKPath");
 
 		  DesiredCapabilities capabilities = new DesiredCapabilities();
-	  		capabilities.setCapability("platformVersion", "9.0"); 
+	  		capabilities.setCapability("platformVersion", "10.0"); 
 	  		capabilities.setCapability("deviceName","Android Emulator");
 	  		capabilities.setCapability("platformName","Android");
 	  		capabilities.setCapability("appPackage", "com.MAV.PRO.Android.trn");
-	  		capabilities.setCapability("appActivity","md59cbe8238a5c2793500b4a11c8bef2f85.MainActivity");
+	  		capabilities.setCapability("appActivity","crc64c71ff983b20c5ec6.MainActivity");
 	  		capabilities.setCapability("noReset", true);
 	  		// capabilities.setCapability("dontStopAppOnReset", true); 
 	  		capabilities.setCapability("newCommandTimeout", 90000);

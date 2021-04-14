@@ -85,7 +85,7 @@ public class MobileLoginPage extends MobileCoreFunctions {
 	@AndroidFindBy(xpath = "//android.widget.Button[@class='android.widget.Button']")
 	private MobileElement continueBtn;
 
-	@AndroidFindBy(xpath = "//android.widget.Button[@text='CANCEL']")
+	@AndroidFindBy(xpath = "//android.widget.LinearLayout/android.widget.Button")
 	private MobileElement cancelBtn;
 
 	@AndroidFindBy(xpath = "//android.widget.EditText")
@@ -155,8 +155,7 @@ public class MobileLoginPage extends MobileCoreFunctions {
 	private MobileElement successIndicatorTickMarkIcon;
 
 	//@AndroidFindBy(xpath = "//android.widget.TextView[@text='Accept']")
-	@AndroidFindBy(xpath = "(//android.view.ViewGroup/android.widget.TextView)[4]")
-	//@AndroidFindBy(xpath = "(//android.view.ViewGroup/android.view.ViewGroup)[12]")
+	@AndroidFindBy(xpath = "(//android.view.ViewGroup[@index='1'])[3]")
 	private MobileElement acceptBtn;
 
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Participant Version']")
@@ -263,9 +262,7 @@ public class MobileLoginPage extends MobileCoreFunctions {
 		setText(pinInp, pinNum);
 		waitForElementToBecomeVisible(submitBtn, globalWaitTime);
 		click(submitBtn);
-		//waitForElementToBecomeVisible(continueBtn, globalWaitTime);
        _normalWait(DEFAULT_WAIT_ELEMENT);
-		//capturescreen("Screenshot");
 		MobileDashBoardPage dashboard = new MobileDashBoardPage(mobileDriver);
 		PageFactory.initElements(new AppiumFieldDecorator(mobileDriver), dashboard);
 		return dashboard;
@@ -281,7 +278,6 @@ public class MobileLoginPage extends MobileCoreFunctions {
 	public MobileSideMenuPage mobileSideMenu() {
 		MobileSideMenuPage sideMenu = new MobileSideMenuPage(mobileDriver);
 		PageFactory.initElements(new AppiumFieldDecorator(mobileDriver), sideMenu);
-		 //capturescreen("Screenshot");
 		return sideMenu;
 
 	}
@@ -291,10 +287,7 @@ public class MobileLoginPage extends MobileCoreFunctions {
 	 */
 	public void verifyInstructionMessageText(String registerMessageToBeVerify) {
 		waitForElementToBecomeVisible(registerInstruction, DEFAULT_WAIT_ELEMENT);
-		// capturescreen("Screenshot");
-		//verifyPageIsDisplayAndCaptureTheScreenShot();
-		//capturescreen("Screenshot");
-		//Assert.fail();
+
 	}
 
 	/**
@@ -319,9 +312,7 @@ public class MobileLoginPage extends MobileCoreFunctions {
 	 */
 	public void clickOnEnterTheCode() {		
        _normalWait(DEFAULT_WAIT_ELEMENT);
-		//longPress(enterTheCodeBtn);
        enterTheCodeBtn.click();
-       //capturescreen("Screenshot");
 	}
 
 	/**
@@ -329,7 +320,6 @@ public class MobileLoginPage extends MobileCoreFunctions {
 	 */
 	public void clickOnScanTheCode() {
 		_normalWait(DEFAULT_WAIT_ELEMENT);
-		//longPress(scanTheCodeBtn);
 		click(scanTheCodeBtn);
 	}
 
@@ -366,7 +356,6 @@ public class MobileLoginPage extends MobileCoreFunctions {
 	 * @param registrationCodeToBeVerify
 	 */
 	public void verifyRegistratedCode(String registrationCodeToBeVerify) {
-		//int registeredCodeLength = registerCodeText.getText().replace("-", "").length();
 		Assert.assertTrue(registerCodeText.getText().contains(registrationCodeToBeVerify));
 		 capturescreen("Screenshot");
 	}
@@ -393,18 +382,24 @@ public class MobileLoginPage extends MobileCoreFunctions {
 		if(blnCaptureScreenshot) {
 		capturescreen("Screenshot");
 		}
-		//_normalWait(globalWaitTime);
-
 	}
 
 	/**
 	 * Click on accept button
+	 * @throws InterruptedException 
 	 */
-	public void clickOnAcceptBtn() {
-		//longPress(acceptBtn);
+	public void clickOnAcceptBtn(boolean blnCaptureScreenshot) throws InterruptedException {
 		waitForElementToBecomeVisible(acceptBtn, globalWaitTime);
-		//capturescreen("Screenshot");
 		click(acceptBtn);
+		if(acceptBtn.isDisplayed()) {
+			if(blnCaptureScreenshot) {
+				capturescreen("Screenshot");
+			}
+		click(acceptBtn);
+		}
+		else {
+			enterPin_ConfirmCode(null);
+		}
 		_normalWait(DEFAULT_WAIT_ELEMENT);
 	}
 
@@ -650,6 +645,7 @@ public class MobileLoginPage extends MobileCoreFunctions {
 	public void enterPINCode(String PINCode) {
 		waitForElementToBecomeVisible(pinEditBox, globalWaitTime);
 		setText(pinEditBox, PINCode);
+		mobileDriver.hideKeyboard();
 
 	}
 	
@@ -671,6 +667,18 @@ public class MobileLoginPage extends MobileCoreFunctions {
 	 * @throws IOException 
 	 */
 	public void enterConfirmPINCode(String PINCode) {
+		waitForElementToBecomeVisible(confirmPinEditBox, globalWaitTime);
+		setText(confirmPinEditBox, PINCode);
+		mobileDriver.hideKeyboard();
+		waitForElementToBecomeVisible(nextBtn, globalWaitTime);
+	}
+	
+	public void enterPin_ConfirmCode(String PINCode) throws InterruptedException {
+		waitForElementToBecomeVisible(pinEditBox, globalWaitTime);
+		setText(pinEditBox, PINCode);
+		mobileDriver.hideKeyboard();
+		Thread.sleep(2000);
+		
 		waitForElementToBecomeVisible(confirmPinEditBox, globalWaitTime);
 		setText(confirmPinEditBox, PINCode);
 		mobileDriver.hideKeyboard();
@@ -724,6 +732,16 @@ public class MobileLoginPage extends MobileCoreFunctions {
 		}
 	}
 	
+	public void clickOnChooseAQuestion(boolean blnCaptureScreenshot) {
+		waitForElementToBecomeVisible(choosAQuestion, 30);
+		click(choosAQuestion);
+		_normalWait(DEFAULT_WAIT_ELEMENT);
+		scrollFromTopToBottom();
+		if(blnCaptureScreenshot) {
+		capturescreen("Screenshot");
+		}
+	}
+	
 	public void clickOnCancelButton() {
 		click(cancelBtn);
 	}
@@ -743,7 +761,6 @@ public class MobileLoginPage extends MobileCoreFunctions {
 
 	public void chooseAQuestion() {
 		_normalWait(globalWaitTime);
-		//click(choosAQuestion);	
 		scrollFromTopToBottom();
 //		WebElement questionText = mobileDriver
 //		.findElement(By.xpath(String.format("//android.widget.FrameLayout//android.widget.TextView[@text='%s']", question)));
@@ -804,7 +821,6 @@ public class MobileLoginPage extends MobileCoreFunctions {
 		}
 		MobileDashBoardPage dashboard = new MobileDashBoardPage(mobileDriver);
 		PageFactory.initElements(new AppiumFieldDecorator(mobileDriver), dashboard);
-		//verifyPageIsDisplayAndCaptureTheScreenShot();
 		capturescreen("Screenshot");
 		return dashboard;
 	
@@ -858,7 +874,6 @@ public class MobileLoginPage extends MobileCoreFunctions {
 		);
 
 		mobileDriver.executeScript("mobile: shell", disableWiFiCmd);
-		//_normalWait(DEFAULT_WAIT_ELEMENT);
 
 	}
 
@@ -905,14 +920,12 @@ public class MobileLoginPage extends MobileCoreFunctions {
 			new TouchAction(mobileDriver).press(PointOption.point(startX, startY)).moveTo(PointOption.point(endX, endY)).release().perform();
 			Thread.sleep(2500);
 			capturescreen("Screenshot");
-			//capturescreen("Screenshot");
-
+			
 
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("unable to scroll");
 		}
-	       //_normalWait(DEFAULT_WAIT);
 			_normalWait(DEFAULT_WAIT);
 
 	}
@@ -921,7 +934,6 @@ public class MobileLoginPage extends MobileCoreFunctions {
 
 		TouchAction action = new TouchAction(mobileDriver);
 		action.press (PointOption.point(x,y)).release().perform();
-		//capturescreen("Screenshot");
 		
 	}
 	
