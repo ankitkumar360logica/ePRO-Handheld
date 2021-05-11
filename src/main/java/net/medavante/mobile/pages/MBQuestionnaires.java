@@ -722,34 +722,34 @@ public class MBQuestionnaires extends MobileCoreFunctions {
 
 		click(selectRadioButton);
 		click(nextArrowIcon2);
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		
 		click(selectRadioButton2);
 		click(nextArrowIcon2);
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		
 		click(selectYesRadioBtn);
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		click(nextArrowIcon3);
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		
 		setText(totalNumberTextBox, "3");
 		hideKeyboard();
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		click(clickBlankArea);
 		click(nextArrowIcon3);
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		
 		click(selectYesRadioBtn);
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		click(nextArrowIcon3);
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		
 		click(timeTextBox);
 		Thread.sleep(2000);
 		click(okBtnAtTime);
 		click(nextArrowIcon3);
-		Thread.sleep(1000);
+		//Thread.sleep(2000);
 		
 		if(blnCaptureScreenshot) {
 		capturescreen("Screenshot");

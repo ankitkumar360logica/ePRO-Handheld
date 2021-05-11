@@ -37,6 +37,7 @@ import net.medavante.portal.utilities.Constants;
 import net.medavante.portal.utilities.Utilities;
 
 public class NewSubjectDetailPage extends BasePage implements CentralRatingModuleConstants {
+	 String code123;
 
 	public NewSubjectDetailPage(WebDriver driver) {
 		super(driver);
@@ -1303,7 +1304,84 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	
 	@FindBy(xpath="//div[@class='visit-list-item ng-scope']")
 	private List<WebElement> visitList;
+	
+	// =====================Web Modality Function===================//
+	
+	@FindBy(xpath = "//div[@data-ng-repeat='visit in visits'][2]")
+	private WebElement visit3;
+	
+	@FindBy(xpath = "//div[@data-ng-click='selectVisit(visit)']//a[@class='circle-button btn btn-white']")
+	private WebElement visitInitiateIcon;
+	
+	@FindBy(xpath = "//a[@data-ng-click='initiateWebAssessment(form)']")
+	private WebElement confirmWebAssessmentLink;
+	
+	@FindBy(xpath = "//button[@data-ng-click='webAssessmentConfirm()']")
+	private WebElement btnConfirmWebAssessment;
+	
+	@FindBy(xpath = "//button[@data-ng-click='onWebLocalOpened()']")
+	private WebElement btnOpenWebAssessment;
+	
+	@FindBy(xpath = "//input[@id='input-pin']")
+	private WebElement PINTextBox;
+	
+	@FindBy(xpath = "//input[@type='submit']")
+	private WebElement signInBtn;
+	
+	@FindBy(xpath = "//button[@class='btn btn-primary']")
+	private WebElement takeBreak;
+	
+	@FindBy(xpath = "//button[@class='btn btn-success']")
+	private WebElement iAmDone;
+	
+	@FindBy(xpath = "//input[@id='assessmentcode']")
+	private WebElement subJectCodeTextField;
+	
+	@FindBy(xpath = "//input[@id='btn-submit']")
+	private WebElement continueBtn;
+	
+	@FindBy(xpath = "//input[@id='input-subject']")
+	private WebElement subjectIDTextField;	
 
+	@FindBy(xpath = "//input[@id='btn-submit']")
+	private WebElement signIn;
+	
+	@FindBy(xpath = "//div[@class='text-right small-text mt-small mb-md']/a")
+	private WebElement forgotPin;
+	
+	@FindBy(xpath = "//div[@class='code-text ng-binding']")
+	private WebElement subjectCode;
+	
+	@FindBy(xpath = "//input[@id='btn-submit']")
+	private WebElement nextBtn;
+	
+	@FindBy(xpath = "//input[@id='SecurityQuestions_0__Answer']")
+	private WebElement provideAnAnswerTextField;
+	
+	@FindBy(xpath = "//input[@id='btn-submit']")
+	private WebElement okBtn;
+	
+	@FindBy(xpath = "//input[@id='pin']")
+	private WebElement pinTextField;
+	
+	@FindBy(xpath = "//input[@id='confirm-pin']")
+	private WebElement confirmPintextField;
+	
+	@FindBy(xpath = "//div[@class='mat-dialog-actions ma-dialog-footer']//button[2]")
+	private WebElement noBtn;
+	
+	@FindBy(xpath = "//button[@class='btn-paging btn-next']")
+	private WebElement nextPaginationArrow;
+	
+	@FindBy(xpath = "//li[@class='item']//input[@type='radio' and @value='2']")
+	private WebElement selectCheckBox;
+	
+	@FindBy(xpath = "//div[@class='input-area']//div[@data-max='100']")
+	private WebElement setHealthArrow;	
+	
+	@FindBy(xpath = "//button[@class='btn btn-primary")
+	private WebElement assessmentCompleteOkBtn;	
+		
 	public void selectDisabledSiteBasedProParticipant() {
 		clickOn(reportedOutComeSiteBasedProParticipantDRPDOWN);
 		clickOn(reportedOutComeSiteBasedProParticipantDisabled);
@@ -8633,8 +8711,240 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		
 	}
 	
+	// =====================Web Modality Function===================//
 	
+	public void openWebAssessmentPage() throws InterruptedException {
+		System.out.println("Enter in the method");
+		Thread.sleep(10000);
+		waitForSpinnerBecomeInvisible(DEFAULT_WAIT_4_ELEMENT);
+		Thread.sleep(5000);
+		//waitAndClick(visit3);
+		System.out.println("click on visit3");
+		//javascriptButtonClick(visitInitiateIcon);
+		clickOn(visit3);
+		Thread.sleep(5000);
+		//_normalWait(DEFAULT_WAIT_4_ELEMENT);
+		clickOn(visitInitiateIcon);
+		waitForSpinnerBecomeInvisible(DEFAULT_WAIT_4_ELEMENT);
+		clickOn(confirmWebAssessmentLink);
+		waitForSpinnerBecomeInvisible(DEFAULT_WAIT_4_ELEMENT);
+		clickOn(btnConfirmWebAssessment);
+		waitForSpinnerBecomeInvisible(DEFAULT_WAIT_4_ELEMENT);
+		code123 = getSubjectCode();
+		clickOn(btnOpenWebAssessment);
+		Thread.sleep(4000);
+		waitForSpinnerBecomeInvisible(DEFAULT_WAIT_4_ELEMENT);
+		reportInfo();
+
+	}
 	
+	public String getSubjectCode() throws InterruptedException {
+		String subjectCode1= subjectCode.getText();
+		String code = subjectCode1.substring(6, 20);
+		System.out.println("Subject code is: " + code);
+		return code;
+		
+	}
+	
+	public void enterSubjectCode() throws InterruptedException {
+		Thread.sleep(3000);
+		subJectCodeTextField.clear();
+		subJectCodeTextField.sendKeys(code123);
+	}
+	
+	public void enterPin(String PIN) throws InterruptedException {
+		switchToChildWindow();
+		PINTextBox.sendKeys(PIN);
+		clickOn(signInBtn);
+		waitForSpinnerBecomeInvisible(DEFAULT_WAIT_4_ELEMENT);
+		reportInfo();
+	}
+	
+	public void enterCorrectPin(String PIN) {
+		PINTextBox.clear();
+		PINTextBox.sendKeys(PIN);
+		clickOn(signInBtn);
+		waitForSpinnerBecomeInvisible(DEFAULT_WAIT_4_ELEMENT);
+		reportInfo();
+	}
+	
+	public void clickTakeABreak() throws InterruptedException {
+		Thread.sleep(30000);
+		clickOn(takeBreak);
+		waitForSpinnerBecomeInvisible(DEFAULT_WAIT_4_ELEMENT);
+		//reportInfo();
+	}
+	
+	public void verifySubjectCodeTextFieldShowing() {
+		Assert.assertTrue(isElementPresent(subJectCodeTextField));
+		reportInfo();
+	}
+	
+	public void enterIncorrectSubjectCode(String subjectCode) {
+		subJectCodeTextField.sendKeys(subjectCode);
+		clickOn(continueBtn);
+		waitForSpinnerBecomeInvisible(DEFAULT_WAIT_4_ELEMENT);
+		reportInfo();
+		
+	}
+	
+	public void enterCorrectSubjectCode(String subjectCode) {
+		subJectCodeTextField.clear();
+		subJectCodeTextField.sendKeys(subjectCode);
+		clickOn(continueBtn);
+		waitForSpinnerBecomeInvisible(DEFAULT_WAIT_4_ELEMENT);
+		//reportInfo();
+		
+	}
+	
+	public void clickContinueBtn() {
+		clickOn(continueBtn);
+	}
+	
+	public void verifySubjectIDAndPinTextBoxDispalyed() {
+		//Assert.assertTrue(isElementDisplayed(subjectIDTextField ));
+		//Assert.assertTrue(isElementDisplayed(PINTextBox));
+		Assert.assertTrue(isElementPresent(subjectIDTextField) && isElementPresent(PINTextBox));
+
+		reportInfo();
+	}
+	
+	public void enterSubjectIDAndPin(String subjectID, String Pin, boolean blnCaptureScreenshot) {
+		subjectIDTextField.sendKeys(subjectID);
+		PINTextBox.sendKeys(Pin);
+		clickOn(signIn);
+		waitForSpinnerBecomeInvisible(DEFAULT_WAIT_4_ELEMENT);
+		if(blnCaptureScreenshot) {
+		reportInfo();
+		}
+	}
+	
+	public void verifySubjectIdDispalyed() {
+		Assert.assertTrue(isElementPresent(subjectIDTextField ));
+		reportInfo();
+	}
+	
+	public void clickForgotLink() {
+		clickOn(forgotPin);
+		waitForSpinnerBecomeInvisible(DEFAULT_WAIT_4_ELEMENT);
+		//reportInfo();
+	}
+	
+	public void enterSubjectID(String subjectID, boolean blnCaptureScreenshot) {
+		subjectIDTextField.clear();
+		subjectIDTextField.sendKeys(subjectID);
+		clickOn(nextBtn);
+		waitForSpinnerBecomeInvisible(DEFAULT_WAIT_4_ELEMENT);
+		if(blnCaptureScreenshot) {
+		reportInfo();
+		}
+	}
+	
+	public void clickNextBtn() {
+		clickOn(nextBtn);
+		waitForSpinnerBecomeInvisible(DEFAULT_WAIT_4_ELEMENT);
+	}
+	
+	public void verifyProvideAnAnswerFieldShowing() {
+		Assert.assertTrue(isElementPresent(provideAnAnswerTextField));
+		reportInfo();
+	}
+	
+	public void enterSecretAnswer(String secretAnswer, boolean blnCaptureScreenshot) {
+		provideAnAnswerTextField.clear();
+		provideAnAnswerTextField.sendKeys(secretAnswer);
+		clickOn(okBtn);
+		waitForSpinnerBecomeInvisible(DEFAULT_WAIT_4_ELEMENT);
+		if(blnCaptureScreenshot) {
+		reportInfo();
+		}
+	}
+	
+	public void verifyEnterPinAndConfirmPinTextFieldShowing() {
+		//Assert.assertTrue(pinTextField.isDisplayed());
+		//Assert.assertTrue(confirmPintextField.isDisplayed());
+		Assert.assertTrue(isElementPresent(pinTextField) && isElementPresent(confirmPintextField));
+		reportInfo();
+		
+	}
+	
+	public void enterPinAndConfirmPin(String pin, String confirmPin, boolean blnCaptureScreenshot) throws InterruptedException {
+		pinTextField.clear();
+		confirmPintextField.clear();
+		pinTextField.sendKeys(pin);
+		confirmPintextField.sendKeys(confirmPin);
+		Thread.sleep(5000);
+		//clickOn(okBtn);
+		//waitForSpinnerBecomeInvisible(DEFAULT_WAIT_4_ELEMENT);
+		if(blnCaptureScreenshot) {
+		reportInfo();
+		}
+	}
+	
+	public void clickOkBtn(boolean blnCaptureScreenshot) throws InterruptedException {
+		clickOn(okBtn);
+		Thread.sleep(5000);
+		if(blnCaptureScreenshot) {
+		reportInfo();
+		}
+	}
+	
+	public void clickIAmDoneBtn() throws InterruptedException {
+		clickOn(iAmDone);
+		Thread.sleep(5000);
+		reportInfo();
+	}
+	
+	public void clickNoBtn() {
+		clickOn(noBtn);
+	}
+	
+	public void completeAssessment() throws InterruptedException {
+		Thread.sleep(5000);
+		clickOn(nextPaginationArrow);
+		
+		Thread.sleep(5000);
+		clickOn(nextPaginationArrow);
+		
+		Thread.sleep(5000);
+		//selectCheckBox.click();
+		clickOnElementThroughMouseHovering(selectCheckBox);
+		clickOn(nextPaginationArrow);
+		
+		Thread.sleep(5000);
+		//selectCheckBox.click();
+		clickOnElementThroughMouseHovering(selectCheckBox);
+		clickOn(nextPaginationArrow);
+		
+		Thread.sleep(5000);
+		//selectCheckBox.click();
+		clickOnElementThroughMouseHovering(selectCheckBox);		
+		clickOn(nextPaginationArrow);
+
+		Thread.sleep(5000);
+		//selectCheckBox.click();
+		clickOnElementThroughMouseHovering(selectCheckBox);		
+		clickOn(nextPaginationArrow);
+		
+		Thread.sleep(5000);
+		//selectCheckBox.click();
+		clickOnElementThroughMouseHovering(selectCheckBox);		
+		clickOn(nextPaginationArrow);
+		
+		Thread.sleep(5000);
+		//selectCheckBox.click();
+		clickOnElementThroughMouseHovering(selectCheckBox);		
+		clickOn(nextPaginationArrow);
+		
+		Thread.sleep(5000);
+		clickOn(setHealthArrow);
+		clickOn(nextPaginationArrow);	
+		
+	}
+	
+	public void clickOnAssessmentCompleteOkBtn() {
+		clickOn(assessmentCompleteOkBtn);
+	}
 	
 }
 

@@ -77,6 +77,7 @@ import com.relevantcodes.extentreports.ExtentTest;
 import net.medavante.portal.enums.TagName;
 import net.medavante.portal.pages.RaterProfilePage;
 import net.medavante.portal.pages.qualificationlibrary.QualificationLibraryPage;
+import net.medavante.portal.pages.webassessment.WebAssessmentPage;
 import net.medavante.portal.report.MobileScreenRecorder;
 import net.medavante.portal.utilities.DateCalendar;
 import net.medavante.portal.utilities.Utilities;
@@ -92,7 +93,7 @@ public abstract class BasePage {
 	protected static WebDriverWait ajaxWait;
 	protected static WebDriver driver;
 	protected String title;
-	protected long timeout = 5;
+	protected long timeout = 15;
 	protected Robot robot;
 
 	static String resultPath;
@@ -145,7 +146,7 @@ public abstract class BasePage {
 
 	public void waitAndClick(WebElement element) {
 		// logger.info("Wait and Click");
-		_normalWait(3000);
+		_normalWait(10000);
 		waitForElement(element);
 		moveToElement(element);
 		element.click();
@@ -239,7 +240,7 @@ public abstract class BasePage {
 		//javascripctHilightingElement(webElement);
 		//reportInfo();
 		//unhighLightElement();
-		waitForElement(webElement);
+		//waitForElement(webElement);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].click();", webElement);
 	}

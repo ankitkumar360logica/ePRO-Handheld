@@ -252,7 +252,7 @@ public class Handheld_Translation_v1_SIP extends BaseTest {
 		mobileLoginPage.clickOnNextButton();
 		
 		reportLog("Image 8");
-		mobileLoginPage.verifyChooseAQuestionDisplay();
+		mobileLoginPage.verifyChooseAQuestionDisplay(true);
 		
 		reportLog("Image 9a");
 		mobileLoginPage.clickOnChooseAQuestionOption(true);
@@ -611,7 +611,7 @@ public class Handheld_Translation_v1_SIP extends BaseTest {
 		mobileLoginPage.enterPINCode(MobileConstants.New_Mobile_Pin);
 		mobileLoginPage.enterConfirmPINCode(MobileConstants.New_Mobile_Pin);
 		mobileLoginPage.clickOnNextButton();
-		mobileLoginPage.verifyChooseAQuestionDisplay();
+		mobileLoginPage.verifyChooseAQuestionDisplay(false);
 		mobileLoginPage.clickOnChooseAQuestionOption(false);
 		mobileLoginPage.chooseAQuestion();
 		mobileLoginPage.enterAnAnswer("Black");

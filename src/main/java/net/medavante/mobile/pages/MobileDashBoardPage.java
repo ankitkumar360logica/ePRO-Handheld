@@ -21,7 +21,8 @@ public class MobileDashBoardPage extends MobileCoreFunctions {
 
 	}
 
-	@AndroidFindBy(xpath = "//android.widget.ImageButton[@content-desc='OK']")
+	//@AndroidFindBy(xpath = "//android.widget.ImageButton[@content-desc='OK']")
+	@AndroidFindBy(xpath = "//android.view.ViewGroup//android.widget.ImageButton")
 	private MobileElement humBurgerMenuIcon;
 
 	@AndroidFindBy(xpath = "//android.widget.ImageButton")
@@ -209,7 +210,7 @@ public class MobileDashBoardPage extends MobileCoreFunctions {
 		//click(questionnairesTab);
 		click(questionnairesTab);
 		Assert.assertTrue(questionnairesTab.isSelected());
-		 capturescreen("Screenshot");
+		 //capturescreen("Screenshot");
 		MBQuestionnaires questionnaires = new MBQuestionnaires(mobileDriver);
 		PageFactory.initElements(new AppiumFieldDecorator(mobileDriver), questionnaires);
 		 //capturescreen("Screenshot");

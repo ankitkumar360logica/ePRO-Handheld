@@ -59,6 +59,7 @@ public class MBLogAnEventPage extends MobileCoreFunctions{
 		for(MobileElement we:eventList){
 			if(we.getText().equalsIgnoreCase(eventToBeOpen)){
 				click(we);
+				Thread.sleep(1500);
 				capturescreen("Screenshot");
 			}
 		}

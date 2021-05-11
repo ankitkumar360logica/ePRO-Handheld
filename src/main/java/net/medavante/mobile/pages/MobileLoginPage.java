@@ -391,15 +391,15 @@ public class MobileLoginPage extends MobileCoreFunctions {
 	public void clickOnAcceptBtn(boolean blnCaptureScreenshot) throws InterruptedException {
 		waitForElementToBecomeVisible(acceptBtn, globalWaitTime);
 		click(acceptBtn);
-		if(acceptBtn.isDisplayed()) {
-			if(blnCaptureScreenshot) {
-				capturescreen("Screenshot");
-			}
-		click(acceptBtn);
-		}
-		else {
-			enterPin_ConfirmCode(null);
-		}
+//		if(acceptBtn.isDisplayed()) {
+//			if(blnCaptureScreenshot) {
+//				capturescreen("Screenshot");
+//			}
+//		click(acceptBtn);
+//		}
+//		else {
+//			enterPin_ConfirmCode(null);
+//		}
 		_normalWait(DEFAULT_WAIT_ELEMENT);
 	}
 
@@ -636,6 +636,12 @@ public class MobileLoginPage extends MobileCoreFunctions {
 		 capturescreen("Screenshot");
 
 	}
+	
+	public void verifyPinAndConfirmPINEditBoxesAreDisplayed() {
+		Assert.assertTrue(isElementPresent(pinEditBox) && isElementPresent(confirmPinEditBox));
+		 //capturescreen("Screenshot");
+
+	}
 
 	/**
 	 * Enter the Pin code on enter the code page
@@ -709,10 +715,12 @@ public class MobileLoginPage extends MobileCoreFunctions {
 
 	}
 
-	public void verifyChooseAQuestionDisplay() {
+	public void verifyChooseAQuestionDisplay(boolean blnCaptureScreenshot) {
 		_normalWait(DEFAULT_WAIT_ELEMENT);
 		Assert.assertTrue(isElementPresent(choosAQuestion));
-		 capturescreen("Screenshot");
+		if(blnCaptureScreenshot) {
+			 capturescreen("Screenshot");
+			}
 	}
 	
 	public void verifyChooseAQuestionShowing(boolean blnCaptureScreenshot) {
@@ -834,7 +842,9 @@ public class MobileLoginPage extends MobileCoreFunctions {
 		clickOnEnterTheCode();
 		enterTheRegistrationCode(registrationCode);
 		clickOnSubmitButton();
-		clickOnContinueButton(true);
+		//clickOnContinueButton(true);
+		clickOnContinueButton(false);
+
 	}	
 	
 	public void enterTheAnswerCode(String string) {

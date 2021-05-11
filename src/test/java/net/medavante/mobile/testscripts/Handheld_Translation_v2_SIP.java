@@ -157,8 +157,8 @@ public class Handheld_Translation_v2_SIP extends BaseTest {
 //				Constants.NavigateText, Constants.StudyText);
 //		studyNavigatorDashBoardPage.selectStudy(studyName, Constants.testSite);
 //		studyNavigatorDashBoardPage.searchFilterValueByColumnNameAndValue(Constants.StudyDashBoard_columnName_Subject,
-//				"13SpanishUS");
-//		subjectDetailPage = studyNavigatorDashBoardPage.clickOnSearchedSubject("13SpanishUS");
+//				"SwedishSweden1");
+//		subjectDetailPage = studyNavigatorDashBoardPage.clickOnSearchedSubject("SwedishSweden1");
 		
 		subjectDetailPage.clickOnReportedOutComeButton();
 		Thread.sleep(3000);
@@ -213,7 +213,7 @@ public class Handheld_Translation_v2_SIP extends BaseTest {
 	 * eCOA Handheld Script Workflow
 	 * ====================================================================================================================
 	 * 
-	 * Require 3 Subjects now to overcome Unlock subject issue
+	 * 
 	 *  */
 	
 
@@ -227,7 +227,7 @@ public class Handheld_Translation_v2_SIP extends BaseTest {
 		mobileLoginPage.verifyInstructionMessageText(registerScreenInstruction);
 		
 		reportLog("Image 1");
-		mobileLoginPage.configurationForRegisterTheSubject("2C91-3836-47A8-BED1");
+		mobileLoginPage.configurationForRegisterTheSubject("D029-DB16-47FC-BC4D");
 			
 		reportLog("Click on Accept button at Terms and Condition page");
 		mobileLoginPage.clickOnAcceptBtn(false);  
@@ -250,7 +250,7 @@ public class Handheld_Translation_v2_SIP extends BaseTest {
 		mobileLoginPage.clickOnNextButton();
 		
 		reportLog("Image 4");
-		mobileLoginPage.verifyChooseAQuestionDisplay();
+		mobileLoginPage.verifyChooseAQuestionDisplay(true);
 		
 		reportLog("Image 5a");
 		mobileLoginPage.clickOnChooseAQuestionOption(true);
@@ -321,8 +321,9 @@ public class Handheld_Translation_v2_SIP extends BaseTest {
 		
 		reportLog("Image 17\nNote:\nAll Questionnaire Names: Place-\nholder text, no translation needed");
 		questionnairesPage = dashborad.clickOnQuestionnairesScrollFromTopToBottom();
+		//Thread.sleep(4000);
 		
-		reportLog("48.1:MobileView Exit the application and re-launch it");
+		reportLog("17.1:MobileView Exit the application and re-launch it");
 		dashborad.clickOnHumBergerMenuAndOpenLeftPanel(false);
 		sideMenu.clickOnExitApplication();
 
@@ -339,17 +340,18 @@ public class Handheld_Translation_v2_SIP extends BaseTest {
 		reportLog("Image 18\nNote:\nBackground English Text: Placeholder text, \nno translation needed.");
 		questionnairesPage.clickOnBackButtonIconOnQuestionPage();
 		questionnairesPage.clickOnYesOption();
+		//Thread.sleep(20000);
 		
 		messagePage = dashborad.clickOnMessageTab(false);
 		messagePage = dashborad.clickOnMessageTab(false);
         Thread.sleep(5000);
-	
+/*	
 		reportLog("Image 19");
 		messagePage = dashborad.clickOnMessageTab(true);
 		
 		reportLog("Image 20");
 		mobileLoginPage.scrollDownToRefreshPage();
-/*			
+		
 		sendingMessage();
 
 		reportLog("Image 21\nNote:\nmorning Diary: Placeholder\ntext, no translation needed.\ntest123: Placeholder text, no \ntranslation needed");
@@ -602,18 +604,18 @@ public class Handheld_Translation_v2_SIP extends BaseTest {
 		mobileLoginPage.clickOnNextButton();
 		
 		reportLog("51.1:MobileView Unlock the subject");
-		deactivateSubject("13SpanishUS");
+		deactivateSubject("SwedishSweden1");
 		
 		mobileLoginPage = androidSetUp();	
 		
 		mobileLoginPage.verifyInstructionMessageText(registerScreenInstruction);
-		mobileLoginPage.configurationForRegisterTheSubject("D6EF-64B6-4361-86BC");
+		mobileLoginPage.configurationForRegisterTheSubject("A3DB-AF25-4B21-979D"); //Span20Arg
 		mobileLoginPage.clickOnAcceptBtn(false); 
 				
 		mobileLoginPage.enterPINCode(MobileConstants.New_Mobile_Pin);
 		mobileLoginPage.enterConfirmPINCode(MobileConstants.New_Mobile_Pin);
 		mobileLoginPage.clickOnNextButton();
-		mobileLoginPage.verifyChooseAQuestionDisplay();
+		mobileLoginPage.verifyChooseAQuestionDisplay(false);
 		mobileLoginPage.clickOnChooseAQuestionOption(false);
 		mobileLoginPage.chooseAQuestion();
 		mobileLoginPage.enterAnAnswer("Black");
@@ -643,7 +645,7 @@ public class Handheld_Translation_v2_SIP extends BaseTest {
 		reportLog("Image 57");
 		questionnairesPage.NotFinishQuestionnaire();
 		
-		reportLog("click on OK button");
+		reportLog("MobileView Select a questionnaire and start completingclick on OK button");
 		questionnairesPage.clickOnOkBtn();
 		
 		Thread.sleep(2000);
@@ -653,7 +655,7 @@ public class Handheld_Translation_v2_SIP extends BaseTest {
 		questionnairesPage.clickOnYesOption();
 		
 		reportLog(("MobileView Deactivate the subject from the portal and add a new subject"));
-		deactivateSubject("13SpanishQA");
+		deactivateSubject("SwedishSweden2");
 		
 		reportLog(("MobileView Relaunch the application, complete Registration process. "));
 		mobileLoginPage = androidSetUp();
@@ -661,16 +663,18 @@ public class Handheld_Translation_v2_SIP extends BaseTest {
 		mobileLoginPage.verifyInstructionMessageText(registerScreenInstruction);
 		
 		reportLog("Image 68");
-		mobileLoginPage.configurationForRegisterTheSubject("A8CE-B7E2-4CDE-B871"); //13SpanishUSObs
+		mobileLoginPage.configurationForRegisterTheSubject("7E7E-22A5-47EB-ABB1"); //SpanishMexico3
 		
 		reportLog("Image 69\nNote:\nEnglish text for Acknowledgement test:\nPlaceholder text, no translation needed.");
 		mobileLoginPage.clickOnAcceptBtn(true);
-
 		
 	} 
 		
-	public void deactivateSubject(String subjectName) throws InterruptedException {
+	public void deactivateSubject(String subjectName) throws Exception {
 			reportLog("Deactivate Subject");
+			Properties properties = Configuration.readTestData("RegressionTestData");
+			studyName = properties.getProperty("HandheldTranslationStudy");
+			
 			dashBoardPage = loginPage.loginInApplication(TRNUserName, TRN_Password);
 			studyNavigatorDashBoardPage = dashBoardPage.selectHorizontalUpperNavMenuItem(StudyDashBoardPage.class,
 					Constants.NavigateText, Constants.StudyText);
@@ -692,8 +696,8 @@ public class Handheld_Translation_v2_SIP extends BaseTest {
 				Constants.NavigateText, Constants.StudyText);
 		studyNavigatorDashBoardPage.selectStudy(studyName, Constants.testSite);
 		studyNavigatorDashBoardPage
-				.searchFilterValueByColumnNameAndValue(Constants.StudyDashBoard_columnName_Subject, "13SpanishUS");
-		subjectDetailPage = studyNavigatorDashBoardPage.clickOnSearchedSubject("13SpanishUS");
+				.searchFilterValueByColumnNameAndValue(Constants.StudyDashBoard_columnName_Subject, "SwedishSweden1");
+		subjectDetailPage = studyNavigatorDashBoardPage.clickOnSearchedSubject("SwedishSweden1");
 		subjectDetailPage.sendMessage();
 		loginPage.logoutApplication();
 		loginPage.verifyUserLogout();
@@ -708,8 +712,8 @@ public class Handheld_Translation_v2_SIP extends BaseTest {
 				Constants.NavigateText, Constants.StudyText);
 		studyNavigatorDashBoardPage.selectStudy(studyName, Constants.testSite);
 		studyNavigatorDashBoardPage
-				.searchFilterValueByColumnNameAndValue(Constants.StudyDashBoard_columnName_Subject, "13SpanishUS");
-		subjectDetailPage = studyNavigatorDashBoardPage.clickOnSearchedSubject("13SpanishUS");
+				.searchFilterValueByColumnNameAndValue(Constants.StudyDashBoard_columnName_Subject, "SwedishSweden1");
+		subjectDetailPage = studyNavigatorDashBoardPage.clickOnSearchedSubject("SwedishSweden1");
 		
 		subjectDetailPage.clickOnReportedOutComeButton();
 		subjectDetailPage.clickOnSubjectUnLockButtonDisplayedOnReportedOutcomePopUp();

@@ -31,6 +31,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -138,6 +139,7 @@ import net.medavante.portal.pages.studynavigator.VisitDetailsPage;
 import net.medavante.portal.pages.traininglibrary.AssetsDetailsPage;
 import net.medavante.portal.pages.traininglibrary.CoursesDetailsPage;
 import net.medavante.portal.pages.traininglibrary.TrainingDetailsPage;
+import net.medavante.portal.pages.webassessment.WebAssessmentPage;
 import net.medavante.portal.report.MobileScreenRecorder;
 import net.medavante.portal.utilities.ApplicationVerificationMessage;
 import net.medavante.portal.utilities.CentralRatingModuleConstants;
@@ -234,6 +236,8 @@ public abstract class BaseTest extends MobileDriver
 	protected CoursesDetailsPage coursesDetailsPage=new CoursesDetailsPage(driver);
 	protected AssetsDetailsPage assetsDetailsPage=new AssetsDetailsPage(driver);
 	protected FormManagerPage formManagerPage = new FormManagerPage(driver);
+	
+	protected WebAssessmentPage webAssessmentPage = new WebAssessmentPage(driver);
 	
 
 	private static String browserType, applicationUrl, machineForRun, setEnvironment, quitBrowser;
@@ -380,6 +384,11 @@ public abstract class BaseTest extends MobileDriver
 				ChromeOptions options = new ChromeOptions();
 				options.addArguments("--disable-extensions");
 				options.addArguments("disable-infobars");
+				options.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
+				options.setExperimentalOption("useAutomationExtension", false);
+				//options.addArguments("--headless");
+				//options.addArguments("--no-sandbox");
+				//options.addArguments("--disable-dev-shm-usage");
 				driver = new ChromeDriver(options);
 			} else {
 				throw new Exception("Please pass a valid browser type value");
@@ -443,7 +452,7 @@ public abstract class BaseTest extends MobileDriver
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
-					document.close();
+					//document.close();
 					extent.endTest(test);
 					extent.flush();
 
@@ -457,7 +466,7 @@ public abstract class BaseTest extends MobileDriver
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
-					document.close();
+					//document.close();
 					extent.endTest(test);
 					extent.flush();
 				}
@@ -499,7 +508,7 @@ public abstract class BaseTest extends MobileDriver
 			extent.endTest(test);
 			extent.flush();
 		} else if (reportSwitch.equals("0") || reportSwitch.equals("2")) {
-			document.close();
+			//document.close();
 			extent.endTest(test);
 			extent.flush();
 		}
@@ -1060,8 +1069,9 @@ public abstract class BaseTest extends MobileDriver
 		PdfPTable table = new PdfPTable(2);
 		table.setWidthPercentage(100);
 		table.setWidths(new int[] { 1, 3 });
-		table.addCell(createTextCell("ModuleName: " + moduleName + "\nTestName:" + System.getProperty("testcaseName")
-				+ "\nTest Step: " + getMessage() + "\nTime Stamp: " + timestamp));
+		//table.addCell(createTextCell("ModuleName: " + moduleName + "\nTestName:" + System.getProperty("testcaseName")
+			//	+ "\nTest Step: " + getMessage() + "\nTime Stamp: " + timestamp));
+		table.addCell(createTextCell(getMessage()));
 		table.addCell(createImageCell(MobileScreenRecorder.imgPath));
 		document.add(table);
 	}

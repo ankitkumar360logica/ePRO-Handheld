@@ -39,7 +39,7 @@ public class MobileScreenRecorder {
 			imgPath=path +"/" +screenshotName+ ".png";
 			Robot robot = null;
 			robot = new Robot();
-			BufferedImage img = robot.createScreenCapture(new Rectangle(screenSize));  //1366, 768
+			BufferedImage img = robot.createScreenCapture(new Rectangle(1366, 730));  //1366, 768
 			ImageIO.write(img, "png", new File(imgPath));
 			BaseTest.test.log(LogStatus.PASS,fileName + "_" + "\n Snapshot below: " + BaseTest.test.addScreenCapture(fileName + "/" +
 					 screenshotName + ".png"));
