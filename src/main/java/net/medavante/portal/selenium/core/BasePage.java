@@ -46,6 +46,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.OutputType;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -77,7 +78,6 @@ import com.relevantcodes.extentreports.ExtentTest;
 import net.medavante.portal.enums.TagName;
 import net.medavante.portal.pages.RaterProfilePage;
 import net.medavante.portal.pages.qualificationlibrary.QualificationLibraryPage;
-import net.medavante.portal.pages.webassessment.WebAssessmentPage;
 import net.medavante.portal.report.MobileScreenRecorder;
 import net.medavante.portal.utilities.DateCalendar;
 import net.medavante.portal.utilities.Utilities;
@@ -160,15 +160,21 @@ public abstract class BasePage {
 	public void moveToElement(WebElement element) {
 		Actions actn = new Actions(driver);
 		actn.moveToElement(element).build().perform();
-		javascripctHilightingElement(element);
+		//javascripctHilightingElement(element);
 		//reportInfo();
-		unhighLightElement();
+		//unhighLightElement();
 	}
 
 	public void clickOn(WebElement element) {
 		// logger.info("Click");
 		moveToElement(element);
 		element.click();
+	}
+	
+	public void click(WebElement element) {
+		//JavascriptExecutor js = (JavascriptExecutor) driver;
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+
 	}
 
 	private WebElement lastElem = null;
@@ -278,6 +284,51 @@ public abstract class BasePage {
 	public void scrollDown(String pixel) {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0," + pixel + ")", "");
+	}
+	
+	public void scrollDown(WebElement element) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript ("arguments[0].scrollIntoView({block: 'center', inline: 'nearest'})", element);
+	}
+	
+	public void scrollDownThePage2(WebElement element) throws AWTException, InterruptedException {
+
+		//Thread.sleep(3000);
+		element.click();
+		Robot r = new Robot();
+		r.keyPress(KeyEvent.VK_DOWN);
+		r.keyPress(KeyEvent.VK_DOWN);
+		
+		r.keyRelease(KeyEvent.VK_DOWN);
+		r.keyRelease(KeyEvent.VK_DOWN);
+
+	}
+	
+	public void scrollDownThePage3(WebElement element) throws AWTException, InterruptedException {
+
+		//Thread.sleep(3000);
+		element.click();
+
+		Robot r = new Robot();
+		r.keyPress(KeyEvent.VK_DOWN);
+		r.keyPress(KeyEvent.VK_DOWN);
+		r.keyPress(KeyEvent.VK_DOWN);
+
+		
+		r.keyRelease(KeyEvent.VK_DOWN);
+		r.keyRelease(KeyEvent.VK_DOWN);
+		r.keyRelease(KeyEvent.VK_DOWN);
+
+	}
+	
+	public void scrolling(WebElement element) {
+		 Point p = element.getLocation();
+	      int X = p.getX();
+	      int Y = p.getY();
+	      System.out.println("X is : " + X + "and Y is: " + Y);
+	      //scroll with Javascript Executor
+	      JavascriptExecutor j = (JavascriptExecutor) driver;
+	      j.executeScript("window.scrollBy(" + X + ", " + Y + ");");
 	}
 
 	public void scrollToDocumentHeight() {
@@ -1262,6 +1313,8 @@ public abstract class BasePage {
 
 		Actions actions = new Actions(driver);
 		actions.moveToElement(webElement).build().perform();
+		//actions.moveToElement(webElement).perform();
+
 
 	}
 
@@ -1449,6 +1502,7 @@ public abstract class BasePage {
 			try {
 				if (getText(menuItem).trim().equalsIgnoreCase(itemToBeSelect)) {
 					waitAndClick(menuItem);
+					//reportInfo();
 					waitForSpinnerBecomeInvisible(DEFAULT_WAIT_4_PAGE);
 					flag = true;
 					break;
@@ -1458,6 +1512,8 @@ public abstract class BasePage {
 				if (menuItem.findElement(By.xpath(".//span[@class='dropdown-text']")).getText()
 						.equalsIgnoreCase(itemToBeSelect)) {
 					waitAndClick(menuItem);
+					//reportInfo();
+
 					waitForSpinnerBecomeInvisible(DEFAULT_WAIT_4_PAGE);
 					flag = true;
 					break;
@@ -1470,6 +1526,7 @@ public abstract class BasePage {
 		try {
 			new WebDriverWait(driver, 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
 					"//*[@id='header']//ul[@class='dropdown-menu']/parent::li[contains(@class,'open')]//following-sibling::ul/li/a")));
+			reportInfo();
 
 		} catch (Exception e) {
 
@@ -1482,6 +1539,8 @@ public abstract class BasePage {
 					"//*[@id='header']//ul[@class='dropdown-menu']/parent::li[contains(@class,'open')]//following-sibling::ul/li/a"))) {
 				if (getText(subTab).trim().contains(subTabValue[0])) {
 					waitAndClick(subTab);
+					//reportInfo();
+
 					waitForSpinnerBecomeInvisible(DEFAULT_WAIT_4_ELEMENT);
 					flag = true;
 					break;
@@ -1918,6 +1977,13 @@ public abstract class BasePage {
 		driver.close();
 		getDriver().switchTo().window(Win);
 	}
+	
+	/** Switch to parent window */
+	public void switchToParentWindowNew() {
+		driver.close();
+        ArrayList<String> tab = new ArrayList<>(driver.getWindowHandles());
+        driver.switchTo().window(tab.get(0));	
+    }
 
 	@FindBy(xpath="//div[contains(@class,'form-fields-box')]/button[text()='Launch Training']")
 	private WebElement launchTrainingBtn;
@@ -2000,7 +2066,7 @@ public abstract class BasePage {
 		} catch (Exception e) {
 		}
 		Assert.assertTrue(flag);
-		//reportInfo();
+		reportInfo();
 	}
 	
 	@FindBy(xpath = "//div[@class='cdk-overlay-container']//input[@placeholder='Search']")

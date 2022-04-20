@@ -19,13 +19,8 @@ import net.medavante.portal.selenium.core.Configuration;
 import net.medavante.portal.utilities.Constants;
 import net.medavante.portal.utilities.MobileConstants;
 import  net.medavante.mobile.appium.core.MobileCoreFunctions;
-import net.medavante.portal.pages.webassessment.*;
 
 public class WebModality_Translation_SIP extends BaseTest {
-
-	//private String subjectName = "AutomationEpro" + generateRandomString(5);
-	private String subjectCode= "19EE-3F5F-4C48";
-	private String subjectname;
 	
 	public int DEFAULT_WAIT_ELEMENT = 3000;
 
@@ -58,7 +53,7 @@ public class WebModality_Translation_SIP extends BaseTest {
 
 	@Test(description = "eCOA Handheld Script Workflow", groups = { "Mobile" })
 
-	public void subjectRegistration() throws Exception {
+	public void subjectRegistration_WebModality() throws Exception {
 		//reportLog("1.1:MobileView As a Participant logged into the application");
 		mobileLoginPage = androidSetUp();
 		
@@ -66,10 +61,10 @@ public class WebModality_Translation_SIP extends BaseTest {
 		mobileLoginPage.verifyInstructionMessageText(registerScreenInstruction);
 		
 		//reportLog("Image 1");
-		mobileLoginPage.configurationForRegisterTheSubject("B965-DECE-4EB3-AD61");
+		//mobileLoginPage.configureForRegisterTheSubject("7627-EBE1-4862-BD33");
 			
 		//reportLog("Click on Accept button at Terms and Condition page");
-		mobileLoginPage.clickOnAcceptBtn(false);  
+		mobileLoginPage.clickOnAccept(false);  
 		
 		//reportLog("Image 2");
 		mobileLoginPage.verifyPinAndConfirmPINEditBoxesAreDisplayed();
@@ -78,7 +73,7 @@ public class WebModality_Translation_SIP extends BaseTest {
 		mobileLoginPage.enterPINCode(MobileConstants.Mobile_Pin);
         Thread.sleep(2000);
         
-		mobileLoginPage.enterConfirmPINCode(MobileConstants.Mobile_Pin);
+		mobileLoginPage.enterConfirmPINCode(MobileConstants.Mobile_Pin, false);
 		//mobileLoginPage.verifyPinDontMatchTextDisplay();
 		
 		//reportLog("3.1:MobileView Enter numerical value ‘1234’ in ‘PIN’ and ‘1234’ in ‘Confirm PIN’ Select ‘Next’ ");
@@ -96,7 +91,7 @@ public class WebModality_Translation_SIP extends BaseTest {
 		mobileLoginPage.chooseAQuestion();
 		Thread.sleep(1000);
 		
-		mobileLoginPage.enterAnAnswer("black");
+		mobileLoginPage.enterAnAnswer("black", false);
 		mobileLoginPage.clickOnNextButton();
 
 		//reportLog("6.1:MobileView Select Continue");
@@ -105,13 +100,14 @@ public class WebModality_Translation_SIP extends BaseTest {
 		//**************** Web Modality function ************************************
 		
 		reportLog("Image 1");
-		webAssessmentSubject("EngUS10_1");
+		webAssessmentSubject("ENUS18_1");
 		
 		reportLog("Image 2");
 		subjectDetailPage.enterPin("2222");
 		
 		reportLog("Image 4\nNote:\nthe content inside the form \n“_EQ-5D-5L_” is placeholder, \nno translation needed");
 		subjectDetailPage.enterCorrectPin("1234");
+		Thread.sleep(30000);
 		
 		reportLog("Click on Take a Break");
 		subjectDetailPage.clickTakeABreak();
@@ -142,7 +138,7 @@ public class WebModality_Translation_SIP extends BaseTest {
 		subjectDetailPage.enterSubjectID("abcd", true);
 		
 		reportLog("Enter correct Subject ID");
-		subjectDetailPage.enterSubjectID("EngUS10_1", false);
+		subjectDetailPage.enterSubjectID("ENUS18_1", false);
 		
 		reportLog("Image 11");
 		subjectDetailPage.verifyProvideAnAnswerFieldShowing();
@@ -170,7 +166,7 @@ public class WebModality_Translation_SIP extends BaseTest {
 		subjectDetailPage.clickOkBtn(false);
 		
 		reportLog("Enter subject id and newly created PIN");
-		subjectDetailPage.enterSubjectIDAndPin("EngUS10_1", "2222", false);
+		subjectDetailPage.enterSubjectIDAndPin("ENUS18_1", "2222", false);
 		
 		reportLog("Image 16\nNote:\nthe background content inside the \nform “_EQ-5D-5L_” is placeholder, \nno translation needed");
 		subjectDetailPage.clickIAmDoneBtn();

@@ -621,6 +621,9 @@ public class StudyDashBoardPage extends BasePage {
 
 	@FindBy(xpath = "//div[@class='list-container ng-star-inserted']//div[@class='item ng-star-inserted']")
 	private WebElement selectSite;
+	
+	@FindBy(xpath = "//div[@class='list-container ng-star-inserted']//div[@class='item big']")
+	private WebElement selectStgSite;
 
 	@FindBy(xpath = "//div[@class='ma-dialog-actions']//button[text()='Select']")
 	private WebElement selectButtonForStudyAndSite;
@@ -871,9 +874,93 @@ public class StudyDashBoardPage extends BasePage {
 		@FindBy(xpath="//a[@class='k-link ng-star-inserted']//span[@class='k-icon k-i-sort-desc-sm']")
 		private WebElement sortingInDescorder;
 		
-	
-	
-	
+		
+		@FindBy(xpath="//input[@formcontrolname='studyQuery']")
+		private WebElement studyInputField;
+		
+		@FindBy(xpath="//input[@formcontrolname='studyQuery']/..//div[contains(text(),'New_WebModality_Test')]")
+		private WebElement selectStudyNew;
+		
+		@FindBy(xpath="//input[@formcontrolname='siteQuery']")
+		private WebElement siteInputField;
+		
+		@FindBy(xpath="//input[@formcontrolname='siteQuery']/..//div[@class='item big']")
+		private WebElement selectSiteNew;
+		
+		@FindBy(xpath="//input[@formcontrolname='siteQuery']/..//div[@class='item ng-star-inserted']")
+		private WebElement selectProdSite;
+		
+		@FindBy(xpath="//div[@class='ma-dialog-actions']//button")
+		private WebElement selectButton;
+		
+		@FindBy(xpath="//a[@title='Add Subject']")
+		private WebElement addBtn;
+		
+		@FindBy(xpath="//select[@title='Choose Site']")
+		private WebElement chooseSite;
+		
+		@FindBy(xpath="//select[@title='Choose Site']/option[2]")
+		private WebElement selectSite19;
+		
+		@FindBy(xpath="//input[@id='screening-number-input']")
+		private WebElement subjectInputField;
+		
+		@FindBy(xpath="//button[@id='dropdownMenu1']")
+		private WebElement languageDrpdwn;
+		
+		@FindBy(xpath="//button[@id='dropdownMenu1']/..//ul/li/a/span[text()='English (US)']")
+		private WebElement selectLanguage;
+		
+		@FindBy(xpath="//div[@id='create-or-edit-subject-dialog']//button[@data-ng-click='save()']")
+		private WebElement subjectSaveBtn;
+		
+		
+		public void selectStudyNew(String studyName, String siteName) throws InterruptedException {
+			selectStudy(studyName);
+			reportInfo();
+			//selectStudyNew.click();
+			inputText(siteInputField, siteName);
+			selectSiteNew.click();
+//			Thread.sleep(2000);
+//			selectButton.click();
+		}
+		
+		public void selectProdStudyAndSite(String studyName, String siteName) throws InterruptedException {
+			selectStudy(studyName);
+			reportInfo();
+			//selectStudyNew.click();
+			inputText(siteInputField, siteName);
+			selectProdSite.click();
+//			Thread.sleep(2000);
+//			selectButton.click();
+		}
+		
+		public void clickSelectButton() throws InterruptedException {
+			Thread.sleep(2000);
+			reportInfo();
+			selectButton.click();
+			new WebDriverWait(driver, 30)
+			.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class='smart-spinner']")));
+	waitUntillFinishProcessSpinnerDisable();
+		}
+		
+		public void addSubject(String subjectName) throws InterruptedException {
+			Thread.sleep(5000);
+			addBtn.click();
+			Thread.sleep(2000);
+			chooseSite.click();
+			Thread.sleep(2000);
+			selectSite19.click();
+			Thread.sleep(2000);
+			inputText(subjectInputField,subjectName);
+			languageDrpdwn.click();
+			Thread.sleep(2000);
+			selectLanguage.click();
+			Thread.sleep(2000);
+			subjectSaveBtn.click();
+			Thread.sleep(2000);
+
+		}
 
 	/* Select Study Profile Icon On BreadCrumbs */
 
@@ -1032,7 +1119,7 @@ public class StudyDashBoardPage extends BasePage {
 
 			}
 			Assert.assertTrue(flag);
-			reportInfo();
+			//reportInfo();
 		}
 	}
 
@@ -1248,6 +1335,14 @@ public class StudyDashBoardPage extends BasePage {
 	public void selectSite(String siteName) {
 		clickOn(siteDRPDWN);
 		siteDRPDWN.findElement(By.xpath("//following-sibling::div/ul/li/span[contains(text(),'" + siteName + "')]"))
+				.click();
+		waitSpinnerToBecomeInvisible();
+		reportInfo();
+	}
+	
+	public void selectSTGSite(String siteName) {
+		clickOn(siteDRPDWN);
+		siteDRPDWN.findElement(By.xpath("//div[contains(text(),'" + siteName + "')]"))
 				.click();
 		waitSpinnerToBecomeInvisible();
 		reportInfo();
@@ -1612,7 +1707,30 @@ public class StudyDashBoardPage extends BasePage {
 		}
 		new WebDriverWait(driver, 10).until(ExpectedConditions.elementToBeClickable(addSubPopup_CancelBTN));
 	}
+	
+	public void slectSite() throws InterruptedException {
+	chooseSite.click();
+	Thread.sleep(2000);
+	reportInfo();
+	selectSite19.click();
+	Thread.sleep(2000);
+	}
+	
+	public void clickAddSubjectBtn() throws InterruptedException {
+	Thread.sleep(5000);
+	reportInfo();
+	addBtn.click();
+	Thread.sleep(2000);
+	}
+	
+	public void clickOnAddSubjectButton(String... siteNameToSelect) {
 
+
+		waitSpinnerToBecomeInvisible();
+		waitAndClick(addSubjectBTN);
+		//new WebDriverWait(driver, 10).until(ExpectedConditions.elementToBeClickable(addSubPopup_CancelBTN));
+	}
+	
 	/**
 	 * Verify Add Subject Button Is Displayed
 	 */
@@ -1622,7 +1740,7 @@ public class StudyDashBoardPage extends BasePage {
 		Assert.assertTrue(isElementPresent(addSubjectBTN));
 		new WebDriverWait(driver, 20).until(
 				ExpectedConditions.visibilityOfElementLocated(By.xpath("//table//thead//th//span[text()='Subject']")));
-		reportInfo();
+		//reportInfo();
 	}
 
 	/**
@@ -1639,7 +1757,7 @@ public class StudyDashBoardPage extends BasePage {
 	 */
 	public void verifyAddSubjectPopUpIsDisplayed() {
 		Assert.assertTrue(isElementPresent(addSubPopup_AddSubjectTITLE));
-		reportInfo();
+		//reportInfo();
 	}
 
 	/**
@@ -1679,6 +1797,13 @@ public class StudyDashBoardPage extends BasePage {
 		Assert.assertFalse(addSubPopup_SaveBTN.isEnabled());
 		reportInfo();
 	}
+	
+	public void verifySaveButtonIsEnabled() {
+		Assert.assertTrue(addSubPopup_SaveBTN.isEnabled());
+		reportInfo();
+	}
+	
+	
 
 	/**
 	 * Enter text in Screening input field in add subject popup
@@ -1687,7 +1812,7 @@ public class StudyDashBoardPage extends BasePage {
 	 */
 	public void inputScreeningNum(String inputScreeningNumToBeEntered) {
 		inputText(addSubPopup_ScreeningINP, inputScreeningNumToBeEntered);
-		reportInfo();
+		//reportInfo();
 	}
 
 	/**
@@ -1729,6 +1854,7 @@ public class StudyDashBoardPage extends BasePage {
 		//_normalWait(100);
 		for (WebElement language : configuredLanguageLIST) {
 			if (getText(language).trim().equalsIgnoreCase(languageToBeSelect)) {
+				reportInfo();
 				waitAndClick(language);
 				break;
 			}
@@ -1757,6 +1883,7 @@ public class StudyDashBoardPage extends BasePage {
 	 * @return SubjectsDetailsPage
 	 */
 	public NewSubjectDetailPage clickOnSaveBTN() {
+		verifySaveButtonIsEnabled();
 		waitAndClick(addSubPopup_SaveBTN);
 		waitSpinnerToBecomeInvisible();
 		new WebDriverWait(driver, 50)
@@ -2470,8 +2597,11 @@ public class StudyDashBoardPage extends BasePage {
 		waitForElementToBecomeInvisible(By.xpath("//div[@class='smart-spinner']//div[@class='spinner']"));
 		boolean flag = false;
 		for (WebElement subjectName : gridTableFirstColumnList) {
-			if (getText(subjectName).trim().contains(subjectToBeClicked)) {
+			//if (getText(subjectName).trim().contains(subjectToBeClicked)) {
+			if (getText(subjectName).trim().equals(subjectToBeClicked)) {
 				javascriptButtonClick(subjectName);
+				waitForAjaxRequestsToComplete();
+
 				flag = true;
 				break;
 			}
@@ -3715,6 +3845,22 @@ public class StudyDashBoardPage extends BasePage {
 		selectSubjectLanguage(Constants.subjectLanguage);
 
 	}
+	
+	/* Configuring Subject For Pre-Requisite */
+	public void creatingSubjectForPreRequisiteWithLanguage(String studyName, String siteName, String subjectName, String language) throws InterruptedException {
+
+      //selectStudy(studyName, siteName);
+		selectStudyNew(studyName, siteName);
+		_normalWait(3000);
+		waitUntillFinishProcessSpinnerDisable();
+		verifyAddSubjectBtnIsDisplayed();
+		//clickOnAddSubjectBTN();
+		clickAddSubjectBtn();
+		verifyAddSubjectPopUpIsDisplayed();
+		inputScreeningNum(subjectName);
+		selectSubjectLanguage(language);
+		reportInfo();
+	}
 
 	
 	
@@ -3730,11 +3876,13 @@ public class StudyDashBoardPage extends BasePage {
 	 * 
 	 *  fill details i.e Year of Birth etc
 	 * @param subjectName
+	 * @throws InterruptedException 
 	 */
-	public void fillRequiredfieldsForsubject(String subjectName)
+	public void fillRequiredfieldsForsubject(String subjectName) throws InterruptedException
 	{
+		//clickAddSubjectBtn();
 		inputScreeningNum(subjectName);
-		selectSubjectLanguage(Constants.subjectLanguage);
+		//selectSubjectLanguage(Constants.subjectLanguage);
 		reportInfo();
 		
 	}
@@ -3863,8 +4011,9 @@ public class StudyDashBoardPage extends BasePage {
 			inputText(searchSite, siteName);
 			for (WebElement site : siteLists) {
 				if (site.getText().trim().contains(siteName)) {
-					javascriptButtonClick(site);
+					//javascriptButtonClick(site);
 					_normalWait(1000);
+					site.click();
 					break;
 				}
 
@@ -3904,9 +4053,12 @@ public class StudyDashBoardPage extends BasePage {
 		} else {
 
 			selectStudy(studyName);
-			selectSite(siteName);
+			//selectSite(siteName);
+			selectSTGSite(siteName);
 		}
 	}
+	
+
 
 	/**
 	 * verify Option To Select Study if already selected Is Displayed/ Study and
@@ -4669,5 +4821,27 @@ public class StudyDashBoardPage extends BasePage {
    		Assert.assertTrue(flag);
    		
    }
+       
+       public void clickChooseSiteDrpDownToCreateSubject(String studyName, String siteName, String subjectName) throws InterruptedException {
+    	      selectStudy(studyName, siteName);
+    			_normalWait(1000);
+    			//waitUntillFinishProcessSpinnerDisable();
+    			//waitForAjaxRequestsToComplete();
+    			//waitForElementToBecomeInvisible(By.xpath("//span[@class='spinner']"));
+    			
+    			clickOnAddSubjectButton();
+
+    			
+    	   WebElement siteDrpDown = driver.findElement(By.xpath("//select[@title='Choose Site']"));
+    	   siteDrpDown.click();
+    	   
+    	   WebElement siteOption = driver.findElement(By.xpath("//select[@title='Choose Site']//option[2]"));
+    	   siteOption.click();
+    	   Thread.sleep(4000);
+    	   
+   		   verifyAddSubjectPopUpIsDisplayed();
+   		   inputScreeningNum(subjectName);
+   		   selectSubjectLanguage(Constants.subjectLanguage);
+       }
        
 }

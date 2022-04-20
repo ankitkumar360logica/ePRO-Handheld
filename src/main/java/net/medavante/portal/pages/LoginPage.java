@@ -55,15 +55,18 @@ public class LoginPage extends BasePage {
 	 * @param userName
 	 * @param password
 	 * @return
+	 * @throws InterruptedException 
 	 */
 
-	public MedAvantePortalPage loginInApplication(String userName, String password) {
+	public MedAvantePortalPage loginInApplication(String userName, String password) throws InterruptedException {
 		inputText(userInput, userName);
 		inputText(passwordInput, password);
+		Thread.sleep(2000);
+		reportInfo();
 		waitAndClick(loginButton);
 		waitForSpinnerBecomeInvisible(DEFAULT_WAIT_4_PAGE);
 		waitUntillFinishProcessSpinnerDisable();
-		completeAllAssetsInTraining(userName, password);
+		//completeAllAssetsInTraining(userName, password);
 		return PageFactory.initElements(driver, MedAvantePortalPage.class);
 	}
 
@@ -85,7 +88,7 @@ public class LoginPage extends BasePage {
 		clickOn(loginButton);
 		waitForSpinnerBecomeInvisible(DEFAULT_WAIT_4_PAGE);
 		waitUntillFinishProcessSpinnerDisable();
-		completeAllAssetsInTraining(userName, password);
+		//completeAllAssetsInTraining(userName, password);
 				return PageFactory.initElements(driver, MedAvantePortalPage.class);
 	}
 

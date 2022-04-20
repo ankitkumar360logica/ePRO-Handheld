@@ -148,7 +148,6 @@ public class MobileDriver {
 	 * @throws Exception
 	 */
 	public MobileLoginPage androidSetUp() throws Exception {
-		//this.clickOnConnectAppIcon();
 		
 		apkPath=Configuration.readApplicationFile("APKPath");
 
@@ -158,16 +157,17 @@ public class MobileDriver {
 	  		capabilities.setCapability("platformName","Android");
 	  		capabilities.setCapability("appPackage", "com.MAV.PRO.Android.trn");
 	  		capabilities.setCapability("appActivity","crc64c71ff983b20c5ec6.MainActivity");
-	  		capabilities.setCapability("newCommandTimeout", 90000);
-
+	  		capabilities.setCapability("autoGrantPermissions", "true");
+	  		capabilities.setCapability("newCommandTimeout", 99000);
 	  		// capabilities.setCapability("dontStopAppOnReset", true); 
 	  		appiumDriver = new AndroidDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+	  		//appiumDriver = new AndroidDriver<MobileElement>(new URL("http://127.0.0.1:8208/wd/hub"), capabilities);
 
 	  		
 		Thread.sleep(3000);
 		
 		mobileLoginPage = new MobileLoginPage(appiumDriver);
-		PageFactory.initElements(new AppiumFieldDecorator(appiumDriver), mobileLoginPage);
+		//PageFactory.initElements(new AppiumFieldDecorator(appiumDriver), mobileLoginPage);
 		Thread.sleep(5000);
 		return mobileLoginPage;                                                                                                                                                                  
 	}
@@ -185,9 +185,10 @@ public class MobileDriver {
 	  		capabilities.setCapability("appActivity","crc64c71ff983b20c5ec6.MainActivity");
 	  		capabilities.setCapability("noReset", true);
 	  		// capabilities.setCapability("dontStopAppOnReset", true); 
-	  		capabilities.setCapability("newCommandTimeout", 90000);
+	  		capabilities.setCapability("newCommandTimeout", 99000);
 
 	  		appiumDriver = new AndroidDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+	  		//appiumDriver = new AndroidDriver<MobileElement>(new URL("http://127.0.0.1:8208/wd/hub"), capabilities);
 
 		Thread.sleep(3000);
 		

@@ -34,10 +34,11 @@ public class PreQualificationTest_SIP extends BaseTest {
 	 * Test Case Id: TC-11 Test Case Name: Pre-Qualification Summary page displayed
 	 * Expected Condition: Pre-Qualification Summary Should load and open
 	 * successfully. Inputs: User Name, Password,Study Name
+	 * @throws InterruptedException 
 	 * 
 	 */
 	@Test(description = "Smoke TC-11--Pre-Qualification Summary page displayed", groups = { "smoke" })
-	public void SFB_TC_2625_verifyPreQualificationSummary() {
+	public void SFB_TC_2625_verifyPreQualificationSummary() throws InterruptedException {
 		reportLog("Login in to application");
 		dashBoardPage = loginPage.loginInApplication(SuperAdminUN,SuperAdminPW);
 		

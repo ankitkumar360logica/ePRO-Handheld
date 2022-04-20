@@ -545,4 +545,8 @@ public class MobileDashBoardPage extends MobileCoreFunctions {
 		String value = getText(nextVisitValue);
 		return value;
 	}
+	
+	public void captureQuestionnaireScreen() {
+		capturescreen("Screenshot");
+	}
 }

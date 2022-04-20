@@ -35,6 +35,7 @@ public class MobileLoginPage extends MobileCoreFunctions {
 
 	public MobileLoginPage(AppiumDriver<MobileElement> driver) {
 		super(driver);
+		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
 	}
 
 	@AndroidFindBy(className = "android.widget.EditText")
@@ -110,7 +111,7 @@ public class MobileLoginPage extends MobileCoreFunctions {
 	private MobileElement registerTitle;
 
 	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Create Identity']")
-	private MobileElement createIdentityTitle;
+	private MobileElement createIdentityT;
 
 	@AndroidFindBy(xpath = "(//android.view.ViewGroup/android.widget.TextView)[1]")
 	private MobileElement signInTitle;
@@ -153,13 +154,33 @@ public class MobileLoginPage extends MobileCoreFunctions {
 
 	@AndroidFindBy(xpath = "//android.view.ViewGroup[@class='android.view.ViewGroup']//android.view.View")
 	private MobileElement successIndicatorTickMarkIcon;
+	
+	@AndroidFindBy(xpath = "(//android.view.ViewGroup/android.widget.TextView)[1]")
+	private MobileElement pageTitle;
+	
+	@AndroidFindBy(xpath = "(//android.view.ViewGroup/android.widget.TextView)[2]")
+	private MobileElement pageTopText;
 
 	//@AndroidFindBy(xpath = "//android.widget.TextView[@text='Accept']")
-	@AndroidFindBy(xpath = "(//android.view.ViewGroup[@index='1'])[3]")
+	//@AndroidFindBy(xpath = "(//android.view.ViewGroup[@index='1'])[3]")
+	@AndroidFindBy(xpath = "(//android.view.ViewGroup/android.widget.TextView)[4]")
 	private MobileElement acceptBtn;
-
-	@AndroidFindBy(xpath = "//android.widget.TextView[@text='Participant Version']")
+	
+	@AndroidFindBy(xpath = "(//android.view.ViewGroup/android.widget.TextView)[3]")
+	private MobileElement checklistText;
+	
+	@AndroidFindBy(xpath = "(//android.view.ViewGroup/android.widget.TextView)[4]")
+	private MobileElement checklistText1;
+	
+	@AndroidFindBy(xpath = "(//android.view.ViewGroup/android.widget.TextView)[5]")
+	private MobileElement checklistText2;
+	
+	//@AndroidFindBy(xpath = "//android.widget.TextView[@text='Participant Version']")
+	@AndroidFindBy(xpath = "(//android.view.ViewGroup/android.widget.TextView)[5]")
 	private MobileElement participantVersionText;
+
+	@AndroidFindBy(xpath = "(//android.view.ViewGroup[@index='1'])[3]")
+	private MobileElement acceptBtnAtAckScreen;
 	
 	@AndroidFindBy(xpath = "//android.view.View[@resource-id='android:id/statusBarBackground']")
 	private MobileElement tapOn;
@@ -173,6 +194,11 @@ public class MobileLoginPage extends MobileCoreFunctions {
 	@AndroidFindBy(xpath = "//android.widget.TextView[contains(@text,'360')]")
 	private MobileElement systemConfiguration;
 	
+	@AndroidFindBy(xpath = "//span[@title='Show Registration Code']")
+	private MobileElement mobileQRCode;
+	
+	@AndroidFindBy(xpath = "//div[@id='subject-registration-dialog']//strong[@class='bolded-title registration-code ng-binding']")
+	private MobileElement registrationCode;
 	
 
 	/**
@@ -187,7 +213,7 @@ public class MobileLoginPage extends MobileCoreFunctions {
 	 * Verify Register instruction is displayed
 	 */
 	public void verifyInstructionMessageTextOnCreateIdentity(String messageToBeVerify) {
-		waitForElementToBecomeVisible(createIdentityTitle, 60);
+		waitForElementToBecomeVisible(createIdentityT, 60);
 		Assert.assertTrue(registerInstruction.getText().equalsIgnoreCase(messageToBeVerify));
 		 capturescreen("Screenshot");
 	}
@@ -292,8 +318,9 @@ public class MobileLoginPage extends MobileCoreFunctions {
 
 	/**
 	 * Verify Register screen is displayed
+	 * @throws InterruptedException 
 	 */
-	public void verifyRegisterScreenIsDisplay() {
+	public void verifyRegisterScreenIsDisplay() throws InterruptedException {
 		Assert.assertTrue(isElementPresent(registerTitle) && isElementPresent(scanTheCodeBtn)
 				&& isElementPresent(enterTheCodeBtn));
 		 capturescreen("Screenshot");
@@ -313,6 +340,7 @@ public class MobileLoginPage extends MobileCoreFunctions {
 	public void clickOnEnterTheCode() {		
        _normalWait(DEFAULT_WAIT_ELEMENT);
        enterTheCodeBtn.click();
+       capturescreen("Screenshot");
 	}
 
 	/**
@@ -344,10 +372,14 @@ public class MobileLoginPage extends MobileCoreFunctions {
 	 * 
 	 * @param registrationCode
 	 */
-	public void enterTheRegistrationCode(String registrationCode) {
+	public void enterTheRegistrationCode(String registrationCode, boolean blnCaptureScreenshot) {
 		_normalWait(DEFAULT_WAIT_ELEMENT);
 		registerCodeText.clear();
 		setText(registrationCodeInp, registrationCode);
+		mobileDriver.hideKeyboard();
+		if(blnCaptureScreenshot) {
+			 capturescreen("Screenshot");
+		}
 	}
 
 	/**
@@ -391,16 +423,17 @@ public class MobileLoginPage extends MobileCoreFunctions {
 	public void clickOnAcceptBtn(boolean blnCaptureScreenshot) throws InterruptedException {
 		waitForElementToBecomeVisible(acceptBtn, globalWaitTime);
 		click(acceptBtn);
-//		if(acceptBtn.isDisplayed()) {
-//			if(blnCaptureScreenshot) {
-//				capturescreen("Screenshot");
-//			}
-//		click(acceptBtn);
-//		}
-//		else {
-//			enterPin_ConfirmCode(null);
-//		}
+		//click(acceptBtnAtAckScreen);
+		tapByCoordinate(720,2147,false);
+	}
+	
+	public void clickOnAccept(boolean blnCaptureScreenshot) throws InterruptedException {
+		waitForElementToBecomeVisible(acceptBtn, globalWaitTime);
+		click(acceptBtn);
 		_normalWait(DEFAULT_WAIT_ELEMENT);
+		if(blnCaptureScreenshot) {
+			capturescreen("Screenshot");
+		}
 	}
 
 	/**
@@ -672,10 +705,13 @@ public class MobileLoginPage extends MobileCoreFunctions {
 	 * @param pinCode
 	 * @throws IOException 
 	 */
-	public void enterConfirmPINCode(String PINCode) {
+	public void enterConfirmPINCode(String PINCode, boolean blnCaptureScreenshot) {
 		waitForElementToBecomeVisible(confirmPinEditBox, globalWaitTime);
 		setText(confirmPinEditBox, PINCode);
 		mobileDriver.hideKeyboard();
+		if(blnCaptureScreenshot) {
+			 capturescreen("Screenshot");
+		}
 		waitForElementToBecomeVisible(nextBtn, globalWaitTime);
 	}
 	
@@ -744,7 +780,7 @@ public class MobileLoginPage extends MobileCoreFunctions {
 		waitForElementToBecomeVisible(choosAQuestion, 30);
 		click(choosAQuestion);
 		_normalWait(DEFAULT_WAIT_ELEMENT);
-		scrollFromTopToBottom();
+		//scrollFromTopToBottom();
 		if(blnCaptureScreenshot) {
 		capturescreen("Screenshot");
 		}
@@ -768,12 +804,12 @@ public class MobileLoginPage extends MobileCoreFunctions {
 	}
 
 	public void chooseAQuestion() {
-		_normalWait(globalWaitTime);
-		scrollFromTopToBottom();
+		//_normalWait(globalWaitTime);
+		//scrollFromTopToBottom();
 //		WebElement questionText = mobileDriver
 //		.findElement(By.xpath(String.format("//android.widget.FrameLayout//android.widget.TextView[@text='%s']", question)));
 //		if (questionText.isDisplayed()) {
-			waitForElementToBecomeVisible(selectFirstQuestion, globalWaitTime);
+			//waitForElementToBecomeVisible(selectFirstQuestion, globalWaitTime);
 			click(selectFirstQuestion);
 			_normalWait(globalWaitTime);
 
@@ -796,9 +832,12 @@ public class MobileLoginPage extends MobileCoreFunctions {
 	 * 
 	 * @param registrationCode
 	 */
-	public void enterAnAnswer(String answerCode) {
+	public void enterAnAnswer(String answerCode, boolean blnCaptureScreenshot) {
 		setText(enterAnAnswerTextBox, answerCode);
 		mobileDriver.hideKeyboard();
+		if(blnCaptureScreenshot) {
+			 capturescreen("Screenshot");
+		}
 	}
 
 	public void closeApp() {
@@ -818,7 +857,7 @@ public class MobileLoginPage extends MobileCoreFunctions {
 		if (getApiumDriver().findElementsByXPath("//android.widget.TextView[@text='Enter the code']").size() > 0) {
 
 			clickOnEnterTheCode();
-			enterTheRegistrationCode(registrationCode);
+			enterTheRegistrationCode(registrationCode, false);
 			clickOnSubmitButton();
 			clickOnContinueButton(false);
 			verifySignInScreenDisplayed();
@@ -839,13 +878,22 @@ public class MobileLoginPage extends MobileCoreFunctions {
 
 	public void configurationForRegisterTheSubject(String registrationCode) throws IOException {
 
-		clickOnEnterTheCode();
-		enterTheRegistrationCode(registrationCode);
+		//clickOnEnterTheCode();
+		//enterTheRegistrationCode(registrationCode, false);
 		clickOnSubmitButton();
-		//clickOnContinueButton(true);
-		clickOnContinueButton(false);
+		clickOnContinueButton(true);
+		//clickOnContinueButton(false);
 
 	}	
+	
+	public void clickSubmitBtn() throws IOException {
+
+		//clickOnEnterTheCode();
+		//enterTheRegistrationCode(registrationCode, false);
+		clickOnSubmitButton();
+		clickOnContinueButton(false);
+
+	}
 	
 	public void enterTheAnswerCode(String string) {
 		setText(answerCodeText, string);
@@ -868,6 +916,7 @@ public class MobileLoginPage extends MobileCoreFunctions {
 		_normalWait(5000);
 		clickBackButton();
 		_normalWait(DEFAULT_WAIT_ELEMENT);
+		
 	}
 	
 	/**
@@ -964,7 +1013,6 @@ public class MobileLoginPage extends MobileCoreFunctions {
 
 	}
 	
-
 	public void verifyText(WebElement element, int rownumber) throws Exception {
 
 		String actualText = getText(element);
@@ -973,19 +1021,25 @@ public class MobileLoginPage extends MobileCoreFunctions {
 		String expectedText = Excel.readLanguageData(rownumber);
 		System.out.println("Expected text is : " + expectedText);
 		
-		//if (actualText == expectedText) {
-		if(actualText.equals(expectedText)) {
-			System.out.println("Expected text: " + expectedText + " matches with actual text: " + actualText);
-		} else {
-			System.out.println("Actual text: " + actualText + " does not matches with expected text: " + expectedText);
+//		if(actualText.equals(expectedText)) {
+//			System.out.println("Expected text: " + expectedText + " matches with actual text: " + actualText);
+//		} else {
+//			System.out.println("Actual text: " + actualText + " does not matches with expected text: " + expectedText);
+//
+//		}
+		
+		Assert.assertEquals(actualText, expectedText);
+		System.out.println("Expected text: " + expectedText + " matches with actual text: " + actualText);
 
-		}
 	}
 
 	public void verifyPartialText(WebElement element, int rownumber) throws Exception {
 
 		String actualText = getText(element);
+		System.out.println("Actual text is : " + actualText);
+
 		String expectedText = Excel.readLanguageData(rownumber).replaceAll("[0-9{}]", "");
+		System.out.println("Expected text is : " + expectedText);
 
 		if (actualText.contains(expectedText)) {
 			System.out.println("Expected text:" + expectedText + "contains in the actual text: " + actualText);
@@ -996,14 +1050,91 @@ public class MobileLoginPage extends MobileCoreFunctions {
 
 	}
 
-		public void verifyAcceptbutton() throws Exception {
-			_normalWait(DEFAULT_WAIT_ELEMENT);
-			verifyText(acceptBtn,1);
-			//verifyPartialText(acceptBtn,1);
-		}
+	public void verifyTermsAndConditionPage() throws Exception {
+		_normalWait(DEFAULT_WAIT_ELEMENT);
+		//verifyText(acceptBtn,1);
+		verifyText(pageTitle,160);
+		verifyText(pageTopText,125);
+		verifyText(acceptBtn,12);
+		verifyText(participantVersionText,116);
+		Thread.sleep(2000);
+		capturescreen("Screenshot");
+
+		//verifyPartialText(acceptBtn,1);
+	}
 	
+	public void verifyCreateIdentityPage() throws Exception {
+		_normalWait(DEFAULT_WAIT_ELEMENT);
+		//verifyText(nextBtn,4);
+		verifyText(pageTitle,42);
+		verifyText(pageTopText,41);
+		verifyText(pinEditBox,119);
+		verifyText(confirmPinEditBox,37);
+		verifyText(nextBtn,104);
+		Thread.sleep(2000);
+		capturescreen("Screenshot");
+
+		//verifyPartialText(acceptBtn,1);
+	}
 	
+	public void verifyChooseAQuetionPage() throws Exception {
+		_normalWait(DEFAULT_WAIT_ELEMENT);
+		//verifyText(nextBtn,4);
+		verifyText(pageTitle,42);
+		verifyText(pageTopText,127);
+		verifyText(verifyChooseAQuestion,32);
+		verifyText(enterAnAnswerTextBox,58);
+		verifyText(nextBtn,104);
+		Thread.sleep(2000);
+		capturescreen("Screenshot");
+
+		//verifyPartialText(acceptBtn,1);
+	}
 	
+	public void verifyChecklistPage() throws Exception {
+		_normalWait(DEFAULT_WAIT_ELEMENT);
+		//verifyText(continueBtn,2);
+		verifyText(pageTitle,42);
+		verifyText(pageTopText,188);
+		verifyText(checklistText,31);
+		verifyPartialText(checklistText1,2);
+		verifyText(checklistText2,1);
+		verifyText(continueBtn,39);
+		Thread.sleep(2000);
+		capturescreen("Screenshot");
+
+		//verifyPartialText(acceptBtn,1);
+	}
+	
+	public void verifySignInPage() throws Exception {
+		_normalWait(DEFAULT_WAIT_ELEMENT);
+		//verifyText(submitBtn,3);
+		verifyText(submitBtn,157);
+		verifyText(forgetLink,76);
+		Thread.sleep(2000);
+		capturescreen("Screenshot");
+
+		//verifyPartialText(acceptBtn,1);
+	}
+	
+	public void verifyIForgotPinLink() throws Exception {
+		_normalWait(DEFAULT_WAIT_ELEMENT);
+		//verifyText(forgetLink,49);
+		verifyText(forgetLink,76);
+		//Thread.sleep(2000);
+		//capturescreen("Screenshot");
+
+		//verifyPartialText(acceptBtn,1);
+	}
+	
+	public String getRegistrationCode() throws InterruptedException {
+		click(mobileQRCode);
+		Thread.sleep(3000);
+		String code= registrationCode.getText();
+		System.out.println("Registration code is : " + code);
+		return code;
+		
+	}
 	
 	
 }

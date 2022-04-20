@@ -22,9 +22,10 @@ public class LoginTest_SIP extends BaseTest {
 	 * Test Case Id: TC -01 Test Case Name: User Login and Logout Expected
 	 * Condition: User able login to site Portal and logout the application
 	 * Inputs: User Name, Password
+	 * @throws InterruptedException 
 	 */
 	@Test(description = "Smoke TC01--User Login and Logout", groups = "smoke")
-	public void SFB_TC_2563_verifyUserLoginLogout() {
+	public void SFB_TC_2563_verifyUserLoginLogout() throws InterruptedException {
 
 		reportLog("Login in to application");
 		MedAvantePortalPage dashBoardPage = loginPage.loginInApplication(AT_ProdAdminOps, AT_Password);

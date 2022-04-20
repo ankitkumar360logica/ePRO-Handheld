@@ -32,6 +32,12 @@ public interface UserClaims {
 	public static final String Form_Password = "#2Pencil";
 	public static final String TRNUserName = "trnadmin1";
 	public static final String TRN_Password = "#2Pencil";
+	public static final String SITEUserName = "t_siteuser";
+	public static final String SITE_Password = "#2Pencil";
+	
+	
+	public static final String STGUserName = "v_adm1";
+	public static final String STG_Password = "Qwerty1!";
 	
 	public static final String AT_SponsorUser = "v_sponsor2";
 	public static final String AT_SponsorUserPassword = "Qwerty1#";

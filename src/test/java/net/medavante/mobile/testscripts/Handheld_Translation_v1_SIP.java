@@ -91,7 +91,7 @@ public class Handheld_Translation_v1_SIP extends BaseTest {
 		System.out.println(subjectNameforStep92);
 		subjectDetailPage = studyNavigatorDashBoardPage.clickOnSaveBTN();
 		subjectDetailPage.verifyNewSubjectDetailPage();
-		subjectDetailPage.clickOnReportedOutComeMobileSubjectQrIcon();
+		subjectDetailPage.clickOnReportedOutComeMobileSubjectQrIcon(false);
 		registrationCodeForStep92 = subjectDetailPage.getRegistrationCodeOfSubject();
 		subjectDetailPage.clickOnSubjectRegistrationPopUpCloseButton();
 				
@@ -112,7 +112,7 @@ public class Handheld_Translation_v1_SIP extends BaseTest {
 		System.out.println(subjectNameforStep99);
 		subjectDetailPage = studyNavigatorDashBoardPage.clickOnSaveBTN();
 		subjectDetailPage.verifyNewSubjectDetailPage();
-		subjectDetailPage.clickOnReportedOutComeMobileSubjectQrIcon();
+		subjectDetailPage.clickOnReportedOutComeMobileSubjectQrIcon(false);
 		registrationCodeForStep99 = subjectDetailPage.getRegistrationCodeOfSubject();
 		subjectDetailPage.clickOnSubjectRegistrationPopUpCloseButton();
 
@@ -134,7 +134,7 @@ public class Handheld_Translation_v1_SIP extends BaseTest {
 		System.out.println(subjectNameforObserver);
 		subjectDetailPage = studyNavigatorDashBoardPage.clickOnSaveBTN();
 		subjectDetailPage.verifyNewSubjectDetailPage();
-		subjectDetailPage.clickOnReportedOutComeMobileSubjectQrIcon();
+		subjectDetailPage.clickOnReportedOutComeMobileSubjectQrIcon(false);
 		registrationCodeForObserver = subjectDetailPage.getRegistrationCodeOfSubject();
 		subjectDetailPage.clickOnSubjectRegistrationPopUpCloseButton();
 
@@ -240,14 +240,14 @@ public class Handheld_Translation_v1_SIP extends BaseTest {
 		mobileLoginPage.enterPINCode(MobileConstants.Mobile_Pin);
 
 		Thread.sleep(2000);
-		mobileLoginPage.enterConfirmPINCode(MobileConstants.Mobile_PinInCorrect);
+		mobileLoginPage.enterConfirmPINCode(MobileConstants.Mobile_PinInCorrect, false);
 		mobileLoginPage.verifyPinDontMatchTextDisplay();
 		
 		reportLog("7.1:MobileView Enter numerical value ‘1234’ in ‘PIN’ and ‘1234’ in ‘Confirm PIN’ Select ‘Next’ ");
 		Thread.sleep(1000);
 		mobileLoginPage.clearConfirmPINBox();
 		Thread.sleep(1000);
-		mobileLoginPage.enterConfirmPINCode(MobileConstants.Mobile_Pin);
+		mobileLoginPage.enterConfirmPINCode(MobileConstants.Mobile_Pin, false);
 
 		mobileLoginPage.clickOnNextButton();
 		
@@ -265,7 +265,7 @@ public class Handheld_Translation_v1_SIP extends BaseTest {
 		mobileLoginPage.chooseAQuestion();
 		Thread.sleep(1000);
 		
-		mobileLoginPage.enterAnAnswer("Black");
+		mobileLoginPage.enterAnAnswer("Black", false);
 		reportLog("Image 10");
 		mobileLoginPage.clickOnNextButtonToCaptureScreenshot();
 
@@ -565,12 +565,12 @@ public class Handheld_Translation_v1_SIP extends BaseTest {
 		mobileLoginPage.verifyChooseAQuestionShowing(false);
 
 		reportLog(("67.1:MobileView Answer to the security question stored in Step#6"));
-		mobileLoginPage.enterAnAnswer(Choose_QuestionAnswer);
+		mobileLoginPage.enterAnAnswer(Choose_QuestionAnswer, false);
 		mobileLoginPage.clickOnNextButton();
 		
 		reportLog(("67.2:MobileView Use the same PIN of Step#5 to create identity"));
 		mobileLoginPage.enterPINCode(Mobile_Pin);
-		mobileLoginPage.enterConfirmPINCode(Mobile_Pin);
+		mobileLoginPage.enterConfirmPINCode(Mobile_Pin, false);
 		
 		reportLog("Image 68");
 		mobileLoginPage.clickOnNextButtonToCaptureScreenshot();
@@ -578,7 +578,7 @@ public class Handheld_Translation_v1_SIP extends BaseTest {
 		
 		reportLog(("68.1:MobileView Use a different PIN to create identity"));
 		mobileLoginPage.enterPINCode(New_Mobile_Pin);
-		mobileLoginPage.enterConfirmPINCode(New_Mobile_Pin);
+		mobileLoginPage.enterConfirmPINCode(New_Mobile_Pin, false);
 		mobileLoginPage.clickOnNextButton();
 		
 		reportLog(("68.2:MobileView And then login using the new PIN"));
@@ -609,12 +609,12 @@ public class Handheld_Translation_v1_SIP extends BaseTest {
 		mobileLoginPage.clickOnAcceptBtn(false); 
 				
 		mobileLoginPage.enterPINCode(MobileConstants.New_Mobile_Pin);
-		mobileLoginPage.enterConfirmPINCode(MobileConstants.New_Mobile_Pin);
+		mobileLoginPage.enterConfirmPINCode(MobileConstants.New_Mobile_Pin, false);
 		mobileLoginPage.clickOnNextButton();
 		mobileLoginPage.verifyChooseAQuestionDisplay(false);
 		mobileLoginPage.clickOnChooseAQuestionOption(false);
 		mobileLoginPage.chooseAQuestion();
-		mobileLoginPage.enterAnAnswer("Black");
+		mobileLoginPage.enterAnAnswer("Black", false);
 		mobileLoginPage.clickOnNextButton();
 		mobileLoginPage.clickOnContinueButton(false);
 		

@@ -3,11 +3,17 @@ package net.medavante.portal.pages.studynavigator;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
+import java.awt.AWTException;
 import java.awt.Robot;
+import java.awt.Scrollbar;
 import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -18,6 +24,8 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Properties;
 
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
 import org.jfree.util.Log;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -28,16 +36,23 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import com.itextpdf.pdfa.PdfADocument;
+
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.pagefactory.AndroidFindBy;
+import net.medavante.mobile.pages.MobileLoginPage;
 import net.medavante.portal.pages.MedAvantePortalPage;
 import net.medavante.portal.pages.centralrating.CentralRatingAppointmentPage;
 import net.medavante.portal.selenium.core.BasePage;
 import net.medavante.portal.selenium.core.Configuration;
 import net.medavante.portal.utilities.CentralRatingModuleConstants;
 import net.medavante.portal.utilities.Constants;
+import net.medavante.portal.utilities.Excel;
 import net.medavante.portal.utilities.Utilities;
 
 public class NewSubjectDetailPage extends BasePage implements CentralRatingModuleConstants {
 	 String code123;
+	 String copiedURL;
 
 	public NewSubjectDetailPage(WebDriver driver) {
 		super(driver);
@@ -250,7 +265,8 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 
 	// =============Reason For Change PopupLocators================
 
-	@FindBy(xpath = "//div[contains(@data-display-value,'changeReason')]")
+	//@FindBy(xpath = "//div[contains(@data-display-value,'changeReason')]")
+	@FindBy(xpath = "//div[@data-ng-change='okValidation()']")
 	private WebElement reasonForChangeReasonDRPDOWN;
 	
 	@FindBy(xpath = "//div[contains(@data-display-value,'changeReason')]//span[@id='selectedStudy']")
@@ -640,6 +656,9 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	private WebElement reasonChangeOKBTN;
 
 	// =====================Observer Section ========================//
+	@FindBy(xpath = "//div[@data-observers='observers']//button[@data-ng-click='showEditDialog()']")
+	private WebElement reportedOutcomesEditIcon;
+	
 	@FindBy(xpath = "//div[contains(@class,'modalshow in')]//span[@title='Add']")
 	private WebElement addObserversBTN;
 
@@ -671,16 +690,16 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	@FindBy(xpath = "//div[contains(@class,'modalshow in')]//span[@class='relation-column']/input[contains(@class,'ng-invalid ng-invalid-required')]")
 	private WebElement observerRelationRequiredINP;
 
-	@FindBy(xpath = "//div[contains(@class,'modalshow in')]//span[@class='relation-column']//input")
+	@FindBy(xpath = "//div[contains(@class,'observer-row')]//span[contains(@class, 'relation-column')]//input[1]")
 	private WebElement observerRelationINP;
 
-	@FindBy(xpath = "//div[contains(@class,'modalshow in')]//span[@class='alias-column']//input")
+	@FindBy(xpath = "//div[contains(@class,'observer-row')]//span[contains(@class, 'alias-column')]//input[1]")
 	private WebElement observerAliasINP;
 
 	@FindBy(xpath = "//div[contains(@class,'modalshow in')]//span[@class='alias-column']/input[contains(@class,'ng-invalid ng-invalid-required')]")
 	private WebElement observerAliasRequiredINP;
 
-	@FindBy(xpath = "//div[contains(@class,'modalshow in')]//div[@class='observer-row ng-scope']//span[@class='buttons-column']//span[@title='Save']")
+	@FindBy(xpath = "//span[@title='Save']")
 	private WebElement observerSaveBTN;
 
 	@FindBy(xpath = "//div[@id='edit-reported-outcomes-dialog' and contains(@class,'modalshow in')]//button/span[text()='Cancel']")
@@ -1157,11 +1176,14 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	List<WebElement> dateInHistoryModalWindow;
 
 	// ------------Calendar Visit Calendar Date Set Locators---------//
-	@FindBy(xpath = "//*[@id='datepicker']//a")
+	@FindBy(xpath = "//div[@id='auditTrailConfirmation']//*[@id='datepicker']//a")
 	private WebElement NotSetCalenderButton;
 
 	@FindBy(xpath = "(//td[contains(@class,'today')])[2]")
 	private WebElement scheduleCurrentDate;
+	
+	@FindBy(xpath = "(//td[contains(@class,'today')])[3]")
+	private WebElement scheduleCurrentDate1;
 
 	@FindBy(xpath = "//div[@class='modal-dialog modal-md']//div[@class='row ng-scope']")
 	List<WebElement> subjectHistoryWindowtext;
@@ -1305,7 +1327,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	@FindBy(xpath="//div[@class='visit-list-item ng-scope']")
 	private List<WebElement> visitList;
 	
-	// =====================Web Modality Function===================//
+//==============================Web Modality Function==========================================================//
 	
 	@FindBy(xpath = "//div[@data-ng-repeat='visit in visits'][2]")
 	private WebElement visit3;
@@ -1331,7 +1353,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	@FindBy(xpath = "//button[@class='btn btn-primary']")
 	private WebElement takeBreak;
 	
-	@FindBy(xpath = "//button[@class='btn btn-success']")
+	@FindBy(xpath = "//div[@class='command-pane']/button[2]")
 	private WebElement iAmDone;
 	
 	@FindBy(xpath = "//input[@id='assessmentcode']")
@@ -1370,6 +1392,9 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	@FindBy(xpath = "//div[@class='mat-dialog-actions ma-dialog-footer']//button[2]")
 	private WebElement noBtn;
 	
+	@FindBy(xpath = "//div[@class='mat-dialog-actions ma-dialog-footer']//button[1]")
+	private WebElement yesBtn;
+	
 	@FindBy(xpath = "//button[@class='btn-paging btn-next']")
 	private WebElement nextPaginationArrow;
 	
@@ -1379,9 +1404,306 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	@FindBy(xpath = "//div[@class='input-area']//div[@data-max='100']")
 	private WebElement setHealthArrow;	
 	
-	@FindBy(xpath = "//button[@class='btn btn-primary")
+	@FindBy(xpath = "//button[@class='btn btn-primary]")
 	private WebElement assessmentCompleteOkBtn;	
+	
+	
+//============================Web Modality Register on Site device:===================================================
+	
+	@FindBy(xpath= "//span[text()='Register']")
+	private WebElement register;
 		
+	@FindBy(xpath= "//div[@class='modal-dialog dialog-xmd']")
+	private WebElement registerSubjectPopUpWindow;
+
+	@FindBy(xpath= "//div[@class='form-fields-box']//div[2]/strong")
+	private WebElement subjectValue;
+
+	@FindBy(xpath= "//div[@class='form-fields-box']//div[3]/strong")
+	private WebElement userNameValue;
+
+	@FindBy(xpath= "//input[@id='radio-reg-device']")
+	private WebElement siteDeviceRadioBtn;
+
+	@FindBy(xpath= "//input[@id='radio-reg-subdevice']")
+	private WebElement subjectDeviceRadioBtn;
+	
+	@FindBy(xpath= "//div[@data-ng-if='!!registrationCodeModel.link']")
+	private WebElement registrationURL;
+		
+	@FindBy(xpath= "//div[@class='copy-box']//button")
+	private static WebElement copyTextBtn;
+		
+	@FindBy(xpath= "//div[@class='modal-header has-action']//button[@data-ng-click='cancel()']")
+	private WebElement closeRegisterSubjectWindow;
+		
+	@FindBy(xpath= "//button[@data-ng-click='onLocalRegistrationOpened()']")
+	private WebElement btnStartRegistration;
+		
+	@FindBy(xpath= "//div[@class='l-container']")
+	private WebElement termsAndConditionPageWindow;
+		
+	@FindBy(xpath= "//button[@class='btn btn-primary']")
+	private WebElement btnAccept;
+	
+	@FindBy(xpath= "//form[@id='passwordForm']")
+	private WebElement createPasswordForm;
+	
+	@FindBy(xpath= "//form[@id='pinForm']")
+	private WebElement createPINForm;
+
+	@FindBy(xpath= "//input[@id='password']")
+	private WebElement passwordField;
+		
+	@FindBy(xpath= "//input[@id='password']/..//i")
+	private WebElement showPasswordIcon;
+		
+	@FindBy(xpath= "//input[@id='confirm-password']")
+	private WebElement confirmPasswordField;
+		
+	@FindBy(xpath= "//input[@id='confirm-password']/..//i")
+	private WebElement showConfirmPasswordIcon;
+		
+	@FindBy(xpath= "//button[@id='btn-submit']")
+	private WebElement btnNext;
+
+	@FindBy(xpath= "//input[@id='pin']")
+	private WebElement pinField;
+		
+	@FindBy(xpath= "//input[@id='pin']/..//i")
+	private WebElement showPinIcon;
+		
+	@FindBy(xpath= "//input[@id='confirm-pin']")
+	private WebElement confirmPinField;
+		
+	@FindBy(xpath= "//input[@id='confirm-pin']/..//i")
+	private WebElement showConfirmPinIcon;
+	
+	@FindBy(xpath= "//button[@type='button']//span")
+	private WebElement selectAQuestionDropdown;
+
+	@FindBy(xpath= "//div[@class='select-list']//li[1]")
+	private WebElement selectQuestionFromList;
+	
+	@FindBy(xpath= "//input[@id='SecurityAnswers_0__SecurityQuestionId']/..//div/ul/li[10]")
+	private WebElement scrollQuestionList;
+
+	@FindBy(xpath= "//input[@id='SecurityAnswers_0__Answer']")
+	private WebElement answerField;
+
+	@FindBy(xpath= "//span[@class='success-reg-badge']")
+	private WebElement greenTickSign;
+
+	@FindBy(xpath= "//div[@class='page-panel']//p[2]")
+	private WebElement successMessage;
+	
+	@FindBy(xpath= "//button[@id='btn-submit']")
+	private WebElement btnOpenWebApp;
+	
+	@FindBy(xpath= "//div[@data-ng-if='subject.userName']/span/span[1]")
+	private WebElement userName;
+	
+	@FindBy(xpath= "//form[@id='login-form']")
+	private WebElement loginForm;
+	
+	@FindBy(xpath= "//div[@class='input-smart-box']/parent::div//div[2]/a")
+	private WebElement forgotUserNameLink;
+	
+	@FindBy(xpath= "//div[@class='input-smart-box password-icon-box']/parent::div//div[2]/a")
+	private WebElement forgotPasswordLink;
+	
+	@FindBy(xpath= "//input[@id='userName']")
+	private WebElement enterUserNameField;
+	
+	@FindBy(xpath= "//button[@id='btn-submit']")
+	private WebElement btnBack;
+	
+	@FindBy(xpath= "//form[@id='user-name-form']")
+	private WebElement userNameForm;
+	
+	@FindBy(xpath= "//span[@data-valmsg-for='UserIsNotRegisteredErrorMessage']")
+	private WebElement userNotRegisteredMessage;
+	
+	@FindBy(xpath= "//input[@id='SecurityQuestions_0__Answer']")
+	private WebElement securityAnswerField;
+	
+	@FindBy(xpath= "//div[@data-ng-if='actionAccessModel.isReportedOutcomesSectionVisible']//button[@title='Edit']")
+	private WebElement reportedOutcomeIcon;
+	
+	@FindBy(xpath= "//button[@title='Reset Credentials']")
+	private WebElement resetCredentials;
+	
+	@FindBy(xpath= "//button[@class='action-link']")
+	private WebElement regenerateLink;
+
+	@FindBy(xpath= "//div[@class='input-smart-box password-icon-box']/parent::div//div[2]/a")
+	private WebElement recoverPasswordLink;
+	
+	@FindBy(xpath= "//button[@id='btn-submit']")
+	private WebElement signInBtnAfterPasswordSet;
+	
+	@FindBy(xpath= "//div[@class='input-smart-box password-icon-box']/parent::div//div[2]/a")
+	private WebElement recoverPINLink;
+	
+	@FindBy(xpath= "//input[@id='input-pin']")
+	private WebElement pinFieldAfterRecoverPIN;
+	
+	@FindBy(xpath= "//main[@class='main']//ul[@class='tabs-list']/li[1]")
+	private WebElement pastVisitsTab;
+	
+	@FindBy(xpath= "//ul[@class='tabs-list']//li[2]")
+	private WebElement availableVisitsTab;
+	
+	@FindBy(xpath= "//main[@class='main']//ul[@class='tabs-list']/li[3]")
+	private WebElement upcomingVisitsTab;
+	
+	@FindBy(xpath= "//div[@class='data-container']//h2[text()='ClinRoVisit2']/..//div")
+	private WebElement skippedStatus;
+	
+	@FindBy(xpath= "//h2[text()='ClinRoVisit2']/..//button[@class='toggler']")
+	private WebElement expandBtn;
+	
+	@FindBy(xpath= "//article[@class='data-item expanded']/div//span")
+	private WebElement noAssessmentText;
+	
+	@FindBy(xpath= "//div[@data-ng-repeat='visit in visits'][3]")
+	private WebElement visitToInitiate;
+	
+	@FindBy(xpath= "//div[@data-ng-repeat='visit in visits'][2]")
+	private WebElement selectVisit2;
+	
+	@FindBy(xpath= "//button[@data-ng-click='initiate()']")
+	private WebElement initiateIcon;
+	
+	@FindBy(xpath= "//div[@class='title-action-frame clearfix']//strong[@title='MMSE']/..//..//div//div[@class='control-holder']")
+	private WebElement actionsIcon;
+	
+	@FindBy(xpath= "//div[@class='title-action-frame clearfix']//strong[@title='MMSE']/..//..//div//div[@class='control-holder open']//ul/li[@class='ng-scope']/a")
+	private WebElement markAsNotAdministered;
+	
+	@FindBy(xpath= "//div[@id='notAdministeredConfirmation']//div[@data-ng-click='okClick()']")
+	private WebElement yesBtnAtConfirmWindow;
+	
+	@FindBy(xpath= "//a[@class='btn btn-primary disabled']/../span")
+	private WebElement startTooltipIcon;
+	
+	@FindBy(xpath= "//div[@class='grid-content']/div[5]")
+	private WebElement scrollToLastVisit;
+	
+	@FindBy(xpath= "//a[@class='btn btn-primary']")
+	private WebElement visitStartButton;
+	
+	@FindBy(xpath= "//span[@id='assessment_studyname']")
+	private WebElement studyName;
+	
+	@FindBy(xpath= "//span[@class='nav-panel-toggler']")
+	private WebElement formTogglerIcon;
+	
+	@FindBy(xpath= "//button[@class='btn-paging btn-next']")
+	private WebElement paginationNextBTN;
+	
+	@FindBy(xpath= "//button[@class='btn btn-secondary ng-star-inserted']")
+	private WebElement cancelBtnAtTakeBreakPopUp;
+	
+	@FindBy(xpath= "//mat-dialog-container[@id='mat-dialog-0']//button[1]")
+	private WebElement oKBtnAtTakeBreakPopUp;
+	
+	@FindBy(xpath= "//div[@class='ma-dialog-actions']/button")
+	private WebElement oKBtnAtCompleteAssessment;
+	
+	@FindBy(xpath= "//a[@class='link-logout']")
+	private WebElement logout;
+	
+	@FindBy(xpath= "//div[@class='info-definitions-frame']//dl[2]/dt")
+	private WebElement observerKeyword;
+
+	@FindBy(xpath= "//span[@data-ng-click='openSubjectRegistrationDialogForObserver(observer)']")
+	private WebElement observerRegisterBtn;
+	
+	@FindBy(xpath= "//div[@class='error-notification']/span")
+	private WebElement passwordExpirationMsg;
+	
+	@FindBy(xpath= "//div[@class='l-container']//p[1]")
+	private WebElement browserversionNotSupported;
+	
+	@FindBy(xpath= "//div[@class='l-container']//p[1]")
+	private WebElement errorPage;
+	
+	@FindBy(xpath= "//button[@title='Refresh']")
+	private WebElement subjctDetailRefreshIcon;
+	
+	@FindBy(xpath= "//div[@class='subjct-calendar-visits-block']//li[1]")
+	private WebElement subCalendarVisitBlockAll;
+	
+	@FindBy(xpath= "//div[@id='datepicker']//a[1]")
+	private WebElement initiateDateOfVisit;
+	
+	@FindBy(xpath= "//div[@id='subject-calendar-visit-initiate-dialog']//button[@class='btn btn-active btn-without-icon']")
+	private WebElement initiateBtn;
+	
+	@FindBy(xpath= "//div[@class='title-action-frame clearfix']//strong[@title='AI (PRO)']/..//..//a[@class='circle-button btn btn-white']")
+	private WebElement actionIconForFirstAssessment;
+	
+	@FindBy(xpath= "//div[@class='title-action-frame clearfix']//strong[@title='AI (PRO)']/..//..//div//div[@class='control-holder open']//ul/li/a[@data-ng-click='markAsNotCompleted(form)']")
+	private WebElement markAsNotCompleted;
+	
+	@FindBy(xpath = "//span[@title='Show Registration Code']")
+	private WebElement mobileQRCode;
+	
+//========================================================================================================
+
+	@FindBy(xpath= "//h1[@class='logo']/..//p[2]")
+	private WebElement termsAndConditionText1;
+	
+	@FindBy(xpath= "//h1[@class='logo']/..//p[3]")
+	private WebElement termsAndConditionText2;
+
+	@FindBy(xpath = "//form[@id='passwordForm']//p[2]")
+	private WebElement createPasswordBelow;
+	
+	@FindBy(xpath = "//span[@class='notes-text']")
+	private WebElement yourPasswordShouldHave;
+	
+	@FindBy(xpath = "//ul[@class='conditions-list']//li[1]")
+	private WebElement lowerCaseLetter;
+	
+	@FindBy(xpath = "//ul[@class='conditions-list']//li[2]")
+	private WebElement digit;
+	
+	@FindBy(xpath = "//ul[@class='conditions-list']//li[3]")
+	private WebElement upperCaseLetter;
+	
+	@FindBy(xpath = "//ul[@class='conditions-list']//li[4]")
+	private WebElement characters;
+	
+	@FindBy(xpath = "//ul[@class='conditions-list']//li[5]")
+	private WebElement specialCharacters;
+	
+	@FindBy(xpath = "//form[@id='pinForm']//p[2]")
+	private WebElement createPINBelow;
+	
+	@FindBy(xpath = "//span[@class='notes-text']")
+	private WebElement yourPINShouldHave;
+	
+	@FindBy(xpath = "//ul[@class='conditions-list']/li[@id='length']")
+	private WebElement length;
+	
+	@FindBy(xpath = "//span[@class='text-field']")
+	private WebElement selectAQuestionText;
+	
+	@FindBy(xpath = "//div[@class='l-container text-center']//p[2]")
+	private WebElement successfullySetupPasswordPIN;
+	
+	@FindBy(xpath = "//div[@class='l-container text-center']//p[3]")
+	private WebElement closeThisTabText;
+	
+	@FindBy(xpath = "//div[@id='next-question-btn']//button")
+	private WebElement openWebAppButtonText;
+	
+	
+//==============================================================================================================//
+
+	
 	public void selectDisabledSiteBasedProParticipant() {
 		clickOn(reportedOutComeSiteBasedProParticipantDRPDOWN);
 		clickOn(reportedOutComeSiteBasedProParticipantDisabled);
@@ -1807,6 +2129,10 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		Assert.assertTrue(reasonForChangeOkBTN.isDisplayed() && reasonForChangeCancelBTN.isDisplayed());
 		
 	}
+	
+	public void clickOnReasonForChangeOKBtn() {
+		clickOn(reasonForChangeOkBTN);
+	}
 
 	public void verifyReasonForChangeOkButtonIsDisabled() {
 		Assert.assertTrue(reasonForChangeOkBTN.getAttribute("disabled").contains("true"));
@@ -1876,6 +2202,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 			.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class='smart-spinner']")));
 		waitUntillFinishProcessSpinnerDisable();
 		Assert.assertTrue(newSubjectDetailPageHeader.isDisplayed(), "Subject Deatil Page opened");
+		reportInfo();
 		
 	}
 
@@ -1983,6 +2310,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		inputText(reasonForChangeUserNameINP, userName);
 		_normalWait(500);
 		inputText(reasonForChangePasswordINP, password);
+		Thread.sleep(7000);
 		clickOn(reasonForChangeOkBTN);
 		_normalWait(500);
 		waitForSpinner(DEFAULT_WAIT_4_ELEMENT);
@@ -4791,8 +5119,8 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	/* Click On Refresh Icon */
 	public void refreshPage() {
 		driver.navigate().refresh();
-		new WebDriverWait(driver, 15)
-				.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class='smart-spinner']")));
+		//new WebDriverWait(driver, 15)
+		//		.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class='smart-spinner']")));
 
 	}
 
@@ -5720,11 +6048,14 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 
 	/* Click On ReportedOutcome Mobile Subject QR Icon */
 
-	public void clickOnReportedOutComeMobileSubjectQrIcon() {
+	public void clickOnReportedOutComeMobileSubjectQrIcon(boolean blnCaptureScreenshot) {
 		javascriptButtonClick(reportedOutcomeMobileRegistrationDialogQrIcon);
 		new WebDriverWait(driver, 30).until(ExpectedConditions
 				.invisibilityOfElementLocated(By.xpath("//div[@class='row scores-show']//div[@class='spinner']")));
 		_normalWait(2000);
+		if(blnCaptureScreenshot) {
+		reportInfo();
+		}
 	}
 
 	/*
@@ -7673,11 +8004,14 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 				.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class='smart-spinner']")));
 	}
 
-	/** Select Current Date for Calendar Visit */
+	/** Select Current Date for Calendar Visit 
+	 * @throws InterruptedException */
 
-	public void setCurrentDate() {
-		waitAndClick(NotSetCalenderButton);
-		clickOn(scheduleCurrentDate);
+	public void setCurrentDate() throws InterruptedException {
+		//waitAndClick(NotSetCalenderButton);
+		clickOn(NotSetCalenderButton);
+		javascriptButtonClick(scheduleCurrentDate1);
+
 	}
 
 	/** Select Scheduled Date for Calendar Visit */
@@ -8028,7 +8362,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	/* Deactivate Subject Configuration */
 	public void deactivateSubjectConfiguration(String userName, String password) throws InterruptedException {
 		_normalWait(DEFAULT_WAIT_4_PAGE);
-		clickOnReportedOutComeMobileSubjectQrIcon();
+		clickOnReportedOutComeMobileSubjectQrIcon(false);
 		clickOnDeactivateDeviceButtonForRegisteredSubject();
 		selectReasonForChangeOption(Constants.reasonsForChangeDeactivateDevice.get(0));
 		eSignReasonForChangeAndSubmit(userName, password);
@@ -8705,7 +9039,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		clickOnsendMessageButton();
 		selectRecipientUnderModalWindow();
 		enterMessageSubject("morning Diary");
-		enterMessagetext("123");
+		enterMessagetext("test123");
 		clickOnSendButtonOnModelWindow();
 		//}
 		
@@ -8763,16 +9097,17 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	public void enterCorrectPin(String PIN) {
 		PINTextBox.clear();
 		PINTextBox.sendKeys(PIN);
-		clickOn(signInBtn);
-		waitForSpinnerBecomeInvisible(DEFAULT_WAIT_4_ELEMENT);
-		reportInfo();
+		//clickOn(signInBtn);
+		//waitForSpinnerBecomeInvisible(DEFAULT_WAIT_4_ELEMENT);
+		//reportInfo();
 	}
 	
 	public void clickTakeABreak() throws InterruptedException {
-		Thread.sleep(30000);
-		clickOn(takeBreak);
-		waitForSpinnerBecomeInvisible(DEFAULT_WAIT_4_ELEMENT);
-		//reportInfo();
+		//Thread.sleep(30000);
+		javascriptButtonClick(takeBreak);
+		//waitForSpinnerBecomeInvisible(DEFAULT_WAIT_4_ELEMENT);
+		Thread.sleep(2000);
+		reportInfo();
 	}
 	
 	public void verifySubjectCodeTextFieldShowing() {
@@ -8882,7 +9217,7 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	}
 	
 	public void clickOkBtn(boolean blnCaptureScreenshot) throws InterruptedException {
-		clickOn(okBtn);
+		javascriptButtonClick(okBtn);
 		Thread.sleep(5000);
 		if(blnCaptureScreenshot) {
 		reportInfo();
@@ -8890,13 +9225,17 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 	}
 	
 	public void clickIAmDoneBtn() throws InterruptedException {
-		clickOn(iAmDone);
-		Thread.sleep(5000);
+		javascriptButtonClick(iAmDone);
+		Thread.sleep(2000);
 		reportInfo();
 	}
 	
 	public void clickNoBtn() {
-		clickOn(noBtn);
+		javascriptButtonClick(noBtn);
+	}
+	
+	public void clickYesBtnAtIamDone() {
+		javascriptButtonClick(yesBtn);
 	}
 	
 	public void completeAssessment() throws InterruptedException {
@@ -8946,7 +9285,845 @@ public class NewSubjectDetailPage extends BasePage implements CentralRatingModul
 		clickOn(assessmentCompleteOkBtn);
 	}
 	
-}
-
+	//======================================================================================//
 	
+	public void clickOnRegister(boolean blnCaptureScreenshot) throws InterruptedException {
+		waitForElementPresent(register, DEFAULT_WAIT_4_ELEMENT);
+		scrollIntoView(register);
+		if(blnCaptureScreenshot) {
+			Thread.sleep(2000);
+		reportInfo();
+		}
+		if(isElementPresent(register)) {
+		javascriptButtonClick(register);
+	}
+  }
+	
+	public void verifyRegisterSubPopUpWindowOpen(boolean blnCaptureScreenshot) throws InterruptedException {
+		Assert.assertTrue(isElementPresent(registerSubjectPopUpWindow));
+		clickOn(siteDeviceRadioBtn);
+		//Assert.assertTrue(isElementPresent(siteDeviceRadioBtn));
+		//Assert.assertTrue(isElementPresent(subjectDeviceRadioBtn));
+		Assert.assertTrue(isElementPresent(btnStartRegistration));
+		if(blnCaptureScreenshot) {
+			Thread.sleep(2000);
+		reportInfo();
+		}
+	}
+	
+	public String getSubjectName() {
+		String subjectNameValue = subjectValue.getText();
+		System.out.println("Subject Name is : " + subjectNameValue);
+		return subjectNameValue;
+	}
+	
+//	public String getUserName() {
+//		String userName = userNameValue.getText();
+//		System.out.println("Subject Name is : " + userName);
+//		return userName;
+//	}
+	
+	public void clickOnRegisterSubjectBtn() throws InterruptedException {
+		javascriptButtonClick(btnStartRegistration);
+		Thread.sleep(5000);
+	}
+	
+	public void verifyTermsAndConditionPageOpen(boolean blnCaptureScreenshot) throws InterruptedException, AWTException {
+		switchToChildWindow();
+		Assert.assertTrue(isElementPresent(termsAndConditionPageWindow));
+		Assert.assertTrue(isElementPresent(btnAccept));
+		if(blnCaptureScreenshot) {
+			Thread.sleep(2000);
+		reportInfo();
+		//Thread.sleep(3000);
+		}
+	}
+	
+	public void switchToParentWindow() {
+		switchToParentWindowNew();
+	}
+	
+	/** Switch to parent window */
+	public void switchToParentWindowWithoutClosingChildWindow() {
+        ArrayList<String> tab = new ArrayList<>(driver.getWindowHandles());
+        driver.switchTo().window(tab.get(0));	
+    }
+	
+	public void selectSubjectDeviceRadioBtn(boolean blnCaptureScreenshot) throws InterruptedException {
+		clickOn(subjectDeviceRadioBtn);
+		_normalWait(5000);
+		if(blnCaptureScreenshot) {
+			Thread.sleep(2000);
+		reportInfo();
+		}
+	}
+	
+	public void selectSiteDeviceRadioBtn() {
+		javascriptButtonClick(siteDeviceRadioBtn);
+	}
+	
+	public void clickOnCopyBtn() throws InterruptedException {
+		scrollIntoView(copyTextBtn);
+		Thread.sleep(3000);
+		javascriptButtonClick(copyTextBtn);
+		
+	}
+	
+	 public String getURLFromClipboard() {
+		 	String actualText=null;
+		    Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+		    DataFlavor flavor = DataFlavor.stringFlavor;
+		    if (clipboard.isDataFlavorAvailable(flavor)) {
+		      try {
+		       String text = (String) clipboard.getData(flavor);
+		       System.out.println("Copied text is:" + text);
+		       int size = text.length();
+		       System.out.println("Length of the copied url is: " + size);
+		      // actualText= text.substring(135, size);
+		       actualText= text.substring(0, size);
 
+		       System.out.println("Actual URL is : " + actualText);
+
+		      } catch (UnsupportedFlavorException e) {
+		        System.out.println(e);
+		      } catch (IOException e) {
+		        System.out.println(e);
+		      }
+		    }
+	        return actualText;
+		  }
+	 
+	 public String getCopiedData(boolean blnCaptureScreenshot) throws InterruptedException {
+		scrollIntoView(copyTextBtn);
+		Thread.sleep(3000);
+		//javascriptButtonClick(copyTextBtn)
+		clickOn(copyTextBtn);
+		Thread.sleep(2000);
+		 if(blnCaptureScreenshot) {
+			 reportInfo();
+			 }
+		String code = registrationURL.getText();
+		 //String word= getCopiedData();
+		 System.out.println("Copied text is: " + code);
+		return code;
+		
+	 }
+//	 public String getStringFromClipboard() throws UnsupportedFlavorException, IOException {
+//			Toolkit toolkit = Toolkit.getDefaultToolkit();
+//			Clipboard clipboard = toolkit.getSystemClipboard();
+//			String result = (String) clipboard.getData(DataFlavor.stringFlavor);
+//			System.out.println("String from Clipboard:" + result);
+//			return result;
+//	 }
+	 
+	 public void closeRegisterSubjectPopupWindow () {
+		 clickOn(closeRegisterSubjectWindow);
+	 }
+	 
+	 public void openNotepadAndPasteCopiedText(boolean blnCaptureScreenshot) throws AWTException, InterruptedException {
+		    Robot r = new Robot();
+		    Runtime rs = Runtime.getRuntime();
+
+		    try {
+		      rs.exec("notepad");
+		      Thread.sleep(4000);
+			    r.keyPress(KeyEvent.VK_CONTROL);
+			    r.keyPress(KeyEvent.VK_V);
+			    r.keyRelease(KeyEvent.VK_CONTROL);
+			    r.keyRelease(KeyEvent.VK_V);
+		    }
+		    catch (IOException e) {
+		      System.out.println(e);
+		    }
+		    Thread.sleep(3000);
+			 if(blnCaptureScreenshot) {
+					Thread.sleep(2000);
+
+				 reportInfo();
+			 }
+		    
+			//To minimize the notepad window
+			
+		    r.keyPress(KeyEvent.VK_WINDOWS);
+		    r.keyPress(KeyEvent.VK_DOWN);
+		    r.keyRelease(KeyEvent.VK_WINDOWS);
+		    r.keyRelease(KeyEvent.VK_DOWN);
+	 }
+	 
+	 public void clickAcceptBtn(boolean blnCaptureScreenshot) throws InterruptedException {
+		 javascriptButtonClick(btnAccept);
+		 Thread.sleep(2000);
+		 if(blnCaptureScreenshot) {
+				Thread.sleep(2000);
+
+			 reportInfo();
+		 }		 
+	 }
+	 
+	 public void enterURLInBrowserAddressBar(boolean blnCaptureScreenshot) throws AWTException, InterruptedException {
+		 copiedURL = getURLFromClipboard();
+		 Thread.sleep(3000);
+		 driver.navigate().to(copiedURL);
+		 Robot r = new Robot();
+		 r.keyPress(KeyEvent.VK_ENTER);
+		 r.keyRelease(KeyEvent.VK_ENTER);
+		 Thread.sleep(2000);
+		 if(blnCaptureScreenshot) {
+			 reportInfo();
+			 }
+	 }
+	 
+//	 public void pasteTheCopiedURL(boolean blnCaptureScreenshot) throws InterruptedException, AWTException {
+//		 copiedURL= getCopiedData();
+//		 
+//		 driver.navigate().to(copiedURL);
+//		 Robot r = new Robot();
+//		 r.keyPress(KeyEvent.VK_ENTER);
+//		 r.keyRelease(KeyEvent.VK_ENTER);
+//		 Thread.sleep(2000);
+//		 if(blnCaptureScreenshot) {
+//			 reportInfo();
+//		 }
+//	 }
+	 
+	 public void verifyCreatePasswordFormShowing(boolean blnCaptureScreenshots) throws InterruptedException, AWTException {
+		 Assert.assertTrue(isElementPresent(createPasswordForm));
+		 scrollDownThePage3(createPasswordForm);
+		 Thread.sleep(2000);
+		 if(blnCaptureScreenshots) {
+		 reportInfo();
+		 }
+	 }
+	 
+	 public void verifyCreatePINFormShowing() throws InterruptedException, AWTException {
+		 Assert.assertTrue(isElementPresent(createPINForm));
+		 scrollDownThePage3(createPINForm);
+		 Thread.sleep(2000);
+		 reportInfo();
+	 }
+	 
+	 public void enterPassword(String password, boolean blnCaptureScreenshot) throws InterruptedException {
+		inputText(passwordField, password);
+		Thread.sleep(2000);
+		 if(blnCaptureScreenshot) {
+			 reportInfo();
+		 }
+	 }
+	 
+	 public void clickShowPasswordIcon(boolean blnCaptureScreenshot) throws InterruptedException, AWTException {
+		clickOn(passwordField);
+		Thread.sleep(2000);
+		javascriptButtonClick(showPasswordIcon);
+		Thread.sleep(2000);
+
+		 if(blnCaptureScreenshot) {
+			 reportInfo();
+		 }
+	 }
+	 
+	 public void clickShowConfirmPasswordIcon(boolean blnCaptureScreenshot) throws InterruptedException {
+		 clickOn(confirmPasswordField);
+		 Thread.sleep(2000);
+		 javascriptButtonClick(showConfirmPasswordIcon);
+		 if(blnCaptureScreenshot) {
+				Thread.sleep(2000);
+
+			 reportInfo();
+		 }
+	 }
+	 
+	 public void enterConfirmPassword(String confirmPassword, boolean blnCaptureScreenshot) throws InterruptedException {
+		inputText(confirmPasswordField, confirmPassword);
+		Thread.sleep(2000);
+		 if(blnCaptureScreenshot) {
+			 reportInfo();
+		 }
+	 }
+	 
+	 public void clickNextBtn(boolean blnCaptureScreenshot) throws InterruptedException, AWTException {
+		 javascriptButtonClick(btnNext);
+		 Thread.sleep(5000);
+		 if(blnCaptureScreenshot) {
+				Thread.sleep(2000);
+
+			 reportInfo();
+		 }
+	 }
+	 
+	 public void clickNextBtnAndWaitForElementVisible() throws InterruptedException {
+		 javascriptButtonClick(btnNext);
+		 Thread.sleep(10000);
+	 }
+	 
+	 public void enterPinForSubject(String pin, boolean blnCaptureScreenshot) throws InterruptedException {
+		 inputText(pinField, pin);
+		 if(blnCaptureScreenshot) {
+				Thread.sleep(2000);
+
+			 reportInfo();
+		 }
+	 }
+	 
+	 public void enterConfirmPinForSubject(String confirmPin, boolean blnCaptureScreenshot) throws InterruptedException {
+		 inputText(confirmPinField, confirmPin);
+		 if(blnCaptureScreenshot) {
+				Thread.sleep(2000);
+
+			 reportInfo();
+		 }
+	 }
+	 
+	 public void clickShowPinIcon(boolean blnCaptureScreenshot) throws InterruptedException {
+		 clickOn(pinField);
+		 Thread.sleep(2000);
+		 javascriptButtonClick(showPinIcon);
+		 if(blnCaptureScreenshot) {
+				Thread.sleep(2000);
+
+			 reportInfo();
+		 }
+	 }
+	 
+	 public void clickShowConfirmPinIcon(boolean blnCaptureScreenshot) throws InterruptedException {
+		 clickOn(confirmPinField);
+		 Thread.sleep(2000);		
+		 javascriptButtonClick(showConfirmPinIcon);
+		 if(blnCaptureScreenshot) {
+				Thread.sleep(2000);
+
+			 reportInfo();
+		 }
+	 }
+	 
+	 public void clickQuestionDropDown(boolean blnCaptureScreenshot) throws InterruptedException {
+		 javascriptButtonClick(selectAQuestionDropdown);
+		 Thread.sleep(1000);
+		 if(blnCaptureScreenshot) {
+				Thread.sleep(2000);
+
+			 reportInfo();
+		 }
+		 //scrollTheQuestionList(true);
+		 
+		 //javascriptButtonClick(selectQuestionFromList);
+	 }
+	 
+	 public void scrollTheQuestionListAndSelectAQuestion(boolean blnCaptureScreenshot) throws InterruptedException {
+		 
+		 scrollIntoView(scrollQuestionList);
+		 Thread.sleep(2000);
+		 if(blnCaptureScreenshot) {
+
+		 reportInfo();
+		 }
+		 javascriptButtonClick(selectQuestionFromList);
+
+	 }
+	
+	 public void provideAnswerForSelectedQuestion(String answer, boolean blnCaptureScreenshot) throws InterruptedException {
+		 //Thread.sleep(2000);
+		 inputText(answerField, answer);
+		 Thread.sleep(2000);
+		 if(blnCaptureScreenshot) {
+
+		 reportInfo();
+		 }
+	 }
+	 
+	 public void verifyRegistrationCompletePageShowing( ) throws InterruptedException {
+		 Assert.assertTrue(isElementPresent(greenTickSign));
+		 Assert.assertTrue(isElementPresent(btnOpenWebApp));
+			//Thread.sleep(2000);
+
+		 reportInfo();
+	 }
+	 
+	public String getUserName() throws InterruptedException {
+		Thread.sleep(DEFAULT_WAIT_4_ELEMENT);
+		scrollIntoView(register);
+		String userName1 = userName.getText();
+		System.out.println("UserName is : " + userName1);
+		return userName1;
+	}
+	
+	public void clickOpenWebAppBtn() throws InterruptedException {
+		javascriptButtonClick(btnOpenWebApp);
+		Thread.sleep(2000);		
+	}
+		
+	public void verifyLoginFormShowing() throws InterruptedException {
+		Assert.assertTrue(isElementPresent(loginForm));
+		Thread.sleep(2000);
+		enterUserNameField.clear();
+		Thread.sleep(2000);
+		reportInfo();
+	}
+	
+	public void clickForgotUserNameLink() throws InterruptedException {
+		javascriptButtonClick(forgotUserNameLink);
+		Thread.sleep(2000);
+		reportInfo();
+	}
+	
+	public void clickBackBtn() {
+		javascriptButtonClick(btnBack);
+	}
+	
+	public void clickForgotPasswordLink() {
+		javascriptButtonClick(forgotPasswordLink);
+	}
+	
+	public void verifyRecoverUserNameFormShowing() throws InterruptedException {
+		Assert.assertTrue(isElementPresent(userNameForm));
+		Thread.sleep(2000);
+
+		reportInfo();
+	}
+	
+	public void enterUserNameInField(String userName) {
+		inputText(enterUserNameField, userName);
+	}
+	
+	public void verifyUserNotRegisteredMessageShowing() throws InterruptedException {
+		Assert.assertTrue(isElementPresent(userNotRegisteredMessage));
+		Thread.sleep(2000);
+
+		reportInfo();
+	}
+	
+	public void enterAnswerForSecurityQuestion(String answer) {
+		inputText(securityAnswerField, answer);
+	}
+	
+	public void clickReportedOutcomeIcon() {
+		javascriptButtonClick(reportedOutcomeIcon);
+	}
+	
+	public void clickResetCredentialsIcon( ) {
+		scrollIntoView(resetCredentials);
+		javascriptButtonClick(resetCredentials);
+	}
+	
+	public void clickRegenerateLink( ) throws InterruptedException {
+		scrollIntoView(regenerateLink);
+		Thread.sleep(3000);
+		javascriptButtonClick(regenerateLink);
+		Thread.sleep(5000);
+	}
+	
+	/* Click On Refresh Icon */
+	public void refreshThePage() throws InterruptedException {
+		driver.navigate().refresh();
+		Thread.sleep(3000);
+		reportInfo();
+//		new WebDriverWait(driver, 15)
+//				.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class='smart-spinner']")));
+
+	}
+	
+	public void verifyRecoverPasswordLinkShowing() {
+		Assert.assertTrue(isElementPresent(recoverPasswordLink));
+		reportInfo();
+	}
+	
+	public void clickRecoverPasswordLink() {
+		javascriptButtonClick(recoverPasswordLink);
+		
+	}
+	
+	public void verifySignInBtnShowing() {
+		Assert.assertTrue(isElementPresent(signInBtnAfterPasswordSet));
+		reportInfo();
+	}
+	
+	public void clickSignInBtn(boolean blnCaptureScreenshot) throws InterruptedException {
+		javascriptButtonClick(signInBtnAfterPasswordSet);
+		Thread.sleep(7000);
+		 if(blnCaptureScreenshot) {
+			 reportInfo();
+		 }
+	}
+	
+	public void enterIncorrectPassword(String password) {
+		for(int i=0; i<5; i++) {
+			inputText(passwordField, password+i);
+			javascriptButtonClick(btnNext);
+		}
+	}
+	
+	public void verifyRecoverPINLinkShowing() {
+		Assert.assertTrue(isElementPresent(recoverPINLink));
+		reportInfo();
+	}
+	
+	public void clickRecoverPINLink() throws InterruptedException {
+		javascriptButtonClick(recoverPINLink);
+		Thread.sleep(2000);
+		reportInfo();
+	}
+	
+	public void EnterPinAfterRecoverPin(String PIN) {
+		inputText(pinFieldAfterRecoverPIN, PIN);
+
+	}
+	
+	public void enterIncorrectPin(String PIN) throws InterruptedException {
+		for(int i=0; i<=3; i++) {
+			inputText(pinFieldAfterRecoverPIN, PIN);
+			try {
+				javascriptButtonClick(signInBtnAfterPasswordSet);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			Thread.sleep(2000);
+		}
+		//reportInfo();
+
+	}
+	
+	public void verifyTabs() {
+		Assert.assertTrue(isElementPresent(pastVisitsTab));
+		Assert.assertTrue(isElementPresent(availableVisitsTab));
+		Assert.assertTrue(isElementPresent(upcomingVisitsTab));
+		reportInfo();
+	}
+	
+	public void clickPastVisitsTab() throws InterruptedException, AWTException {
+		//javascriptButtonClick(pastVisitsTab);
+//		normalClick(pastVisitsTab);
+//		Thread.sleep(3000);
+		Robot r = new Robot();
+		r.keyPress(KeyEvent.VK_TAB);
+		r.keyPress(KeyEvent.VK_ENTER);
+		
+		r.keyRelease(KeyEvent.VK_TAB);
+		r.keyRelease(KeyEvent.VK_ENTER);
+		Thread.sleep(3000);
+	}
+	
+	public void clickUpcomingVisitTab() throws InterruptedException, AWTException {
+//		Robot r = new Robot();
+//		Thread.sleep(2000);
+//		r.keyPress(KeyEvent.VK_TAB);
+//		r.keyPress(KeyEvent.VK_TAB);
+//		r.keyPress(KeyEvent.VK_TAB);
+//		r.keyPress(KeyEvent.VK_TAB);
+//		r.keyPress(KeyEvent.VK_TAB);
+//		r.keyPress(KeyEvent.VK_TAB);
+//		r.keyPress(KeyEvent.VK_ENTER);
+//		
+//		r.keyRelease(KeyEvent.VK_TAB);
+//		r.keyRelease(KeyEvent.VK_TAB);
+//		r.keyRelease(KeyEvent.VK_TAB);
+//		r.keyRelease(KeyEvent.VK_TAB);
+//		r.keyRelease(KeyEvent.VK_TAB);
+//		r.keyRelease(KeyEvent.VK_TAB);
+//		r.keyRelease(KeyEvent.VK_ENTER);
+		javascriptButtonClick(upcomingVisitsTab);
+//		click(upcomingVisitsTab);
+//		clickOn(upcomingVisitsTab);
+		Thread.sleep(4000);
+		reportInfo();
+	}
+	
+	public void verifySkippedStatusforVisit1() {
+		Assert.assertTrue(isElementPresent(skippedStatus));
+		
+	}
+	
+	public void clickExpandButton() throws InterruptedException {
+		javascriptButtonClick(expandBtn);
+		Thread.sleep(3000);
+		scrollIntoView(noAssessmentText);
+		Thread.sleep(1000);
+		reportInfo();
+	}
+	
+	public void selectVisit3() {
+		javascriptButtonClick(visitToInitiate);
+	}
+	
+	public void clickInitiateIcon() {
+		javascriptButtonClick(initiateIcon);
+	}
+	
+	public void clickActionsIcon() throws InterruptedException {
+		Thread.sleep(3000);
+		clickOn(actionsIcon);
+		Thread.sleep(2000);
+	}
+	
+	public void selectNotAdministered() {
+		javascriptButtonClick(markAsNotAdministered);
+	}
+	
+	public void clickYesBtn() {
+		javascriptButtonClick(yesBtnAtConfirmWindow);
+	}
+	
+	public void clickAvailableVisitsTab() throws InterruptedException {
+		javascriptButtonClick(availableVisitsTab);
+		Thread.sleep(3000);
+	}
+	
+	public void clickUpcomingVisitsTab() throws InterruptedException {
+		javascriptButtonClick(upcomingVisitsTab);
+		Thread.sleep(3000);
+		reportInfo();
+	}
+	
+	public void scrollToTheLastVisit() throws InterruptedException {
+		scrollIntoView(scrollToLastVisit);
+		Thread.sleep(3000);
+		reportInfo();
+	}
+	
+	public void moveCursorOnStartInfo() throws InterruptedException {
+		Thread.sleep(2000);
+		mouseHoverOnAnElement(startTooltipIcon);
+		//javascriptButtonClick(startTooltipIcon);
+		Thread.sleep(1000);
+		reportInfo();
+	}
+	
+	public void clickStartButtonForVisit(boolean blnCaptureScreenshot) throws InterruptedException {
+		scrollIntoView(visitStartButton);
+		javascriptButtonClick(visitStartButton);
+		Thread.sleep(40000);
+		if(blnCaptureScreenshot) {
+		reportInfo();
+		}
+	}
+	
+	public void formToggler(boolean blnCaptureScreenshot) throws InterruptedException {
+		javascriptButtonClick(formTogglerIcon);
+		Thread.sleep(4000);
+		if(blnCaptureScreenshot) {
+		reportInfo();
+	}	}
+	
+	public void clickNextAtPagination() {
+		javascriptButtonClick(paginationNextBTN);
+	}
+	
+	public void cancelBtnTakeABreak() throws InterruptedException {
+		Thread.sleep(3000);
+		javascriptButtonClick(cancelBtnAtTakeBreakPopUp);
+		Thread.sleep(3000);
+	}
+	
+	public void completeForm(boolean blnCaptureScreenshot) throws InterruptedException {
+		//javascriptButtonClick(paginationNextBTN);
+		javascriptButtonClick(iAmDone);
+		clickYesBtnAtIamDone();
+		Thread.sleep(4000);
+		if(blnCaptureScreenshot) {
+		reportInfo();
+	}
+		javascriptButtonClick(oKBtnAtCompleteAssessment);
+		
+	}
+	
+	public void clickOkBtnAtCompleteAssessment() {
+		javascriptButtonClick(oKBtnAtCompleteAssessment);
+
+	}
+	
+	public void oKBtnAtTakeABreak() throws InterruptedException {
+		Thread.sleep(2000);
+		javascriptButtonClick(oKBtnAtTakeBreakPopUp);
+		Thread.sleep(2000);
+		
+	}
+	
+	public void logout() throws InterruptedException {
+		scrollIntoView(logout);
+		Thread.sleep(3000);
+		javascriptButtonClick(logout);
+		
+	}
+	
+	public void verifybserverKeywordShowing( ) throws InterruptedException {
+		Thread.sleep(5000);
+		Assert.assertTrue(isElementPresent(observerKeyword));
+		reportInfo();
+	}
+	
+	public void registerBtnForObserver() throws InterruptedException {
+		scrollIntoView(observerRegisterBtn);
+		javascriptButtonClick(observerRegisterBtn);
+	}
+	
+	public void verifyPassowrdExpireMessage( ) throws InterruptedException {
+		Thread.sleep(3000);
+		Assert.assertTrue(isElementPresent(passwordExpirationMsg));
+		reportInfo();
+	}
+	
+	public void verifyBrowserVersionNotSupportedPage( ) throws InterruptedException {
+		Thread.sleep(2000);
+		Assert.assertTrue(isElementPresent(browserversionNotSupported));
+		reportInfo();
+	}
+	
+	public void verifyErrorPage( ) throws InterruptedException {
+		Thread.sleep(2000);
+		Assert.assertTrue(isElementPresent(errorPage));
+		reportInfo();
+	}
+	
+	public void clickSbjectDetailsRefreshIcon( ) throws InterruptedException {
+		Thread.sleep(2000);
+		for(int i=0; i<=5; i++) {
+		javascriptButtonClick(subjctDetailRefreshIcon);
+		Thread.sleep(4000);		
+	   }
+	}
+	
+	public void addBlankPageInResultFile() throws InterruptedException {
+//		PDDocument doc = new PDDocument();
+//		PDPage blankPage = new PDPage();
+//		doc.addPage(blankPage);
+		
+	}
+	
+	public void clickSubjectVisitTab() {
+		javascriptButtonClick(subCalendarVisitBlockAll);
+	}
+	
+	public void initiateVisitDate() throws InterruptedException {
+		javascriptButtonClick(initiateDateOfVisit);
+		Thread.sleep(3000);
+		clickOn(scheduleCurrentDate);
+		clickOn(initiateBtn);
+	}
+	
+	public void clickActionIconForAssessment() {
+		clickOn(actionIconForFirstAssessment);
+		clickOn(markAsNotCompleted);
+	}
+	
+	public void clickReportedOutcomesIcon() {
+		javascriptButtonClick(reportedOutcomesEditIcon);
+	}
+	
+	public void addObserver() {
+		clickReportedOutcomesIcon();
+		clickOnAddObserverBtN();
+		inputObserverRelationName("test");
+		inputObserverAliasName("Observer11");
+		clickOnObserverSaveBTN();
+		clickOnReportedOutComePopUpSaveBTN();
+	}
+	
+	public void initiateSecondVisit() {
+		clickOn(selectVisit2);
+		clickOn(initiateIcon);
+		clickOn(actionsIcon);
+		clickOn(markAsNotAdministered);
+		clickOn(yesBtnAtConfirmWindow);		
+	}
+	
+	public void setBrowserWindowTo80() throws AWTException, InterruptedException {
+		Thread.sleep(2000);
+		 Robot r = new Robot();
+		 r.keyPress(KeyEvent.VK_CONTROL);
+		 r.keyPress(KeyEvent.VK_MINUS);
+		 
+		 r.keyRelease(KeyEvent.VK_CONTROL);
+		 r.keyRelease(KeyEvent.VK_MINUS);
+		 
+		 r.keyPress(KeyEvent.VK_CONTROL);
+		 r.keyPress(KeyEvent.VK_MINUS);
+	 
+		 r.keyRelease(KeyEvent.VK_CONTROL);
+		 r.keyRelease(KeyEvent.VK_MINUS);
+		 Thread.sleep(2000);
+	}
+	
+	public void verifyText(WebElement element, int rownumber) throws Exception {
+
+		String actualText = getText(element);
+		System.out.println("Actual text is : " + actualText);
+		
+		String expectedText = Excel.readLanguageData(rownumber);
+		System.out.println("Expected text is : " + expectedText);
+		
+//		if(actualText.equals(expectedText)) {
+//			System.out.println("Expected text: " + expectedText + " matches with actual text: " + actualText);
+//		} else {
+//			System.out.println("Actual text: " + actualText + " does not matches with expected text: " + expectedText);
+//
+//		}
+		
+		Assert.assertEquals(actualText, expectedText);
+		System.out.println("Expected text: " + expectedText + " matches with actual text: " + actualText);
+
+	}
+
+	public void verifyPartialText(WebElement element, int rownumber) throws Exception {
+
+		String actualText = getText(element);
+		System.out.println("Actual text is : " + actualText);
+
+		String expectedText = Excel.readLanguageData(rownumber).replaceAll("[0-9{}]", "");
+		System.out.println("Expected text is : " + expectedText);
+
+		if (actualText.contains(expectedText)) {
+			System.out.println("Expected text:" + expectedText + "contains in the actual text: " + actualText);
+		} else {
+			System.out.println("Expected text:" + expectedText + " does not matches with actual text: " + actualText);
+
+		}
+
+	}
+
+	public void verifyTermsConditionPage() throws Exception {
+		verifyText(termsAndConditionText1, 6);
+		verifyText(termsAndConditionText2, 9);
+		verifyText(btnAccept, 5);
+		Thread.sleep(2000);
+	    reportInfo();
+	}
+	
+	public void verifyCreatePasswordPage() throws Exception {
+		verifyText(createPasswordBelow, 16);
+		verifyText(yourPasswordShouldHave, 22);
+		verifyText(lowerCaseLetter, 11);
+		verifyText(digit, 10);
+		verifyText(upperCaseLetter, 13);
+		verifyText(characters, 14);
+		verifyText(specialCharacters, 12);
+		//verifyText(passwordField, 30);
+		//verifyText(confirmPasswordField, 26);
+		verifyText(btnNext, 17);
+		Thread.sleep(2000);
+	    reportInfo();
+	}
+	
+	public void verifyCreatePINPage() throws Exception {
+		verifyText(createPINBelow, 28);
+		verifyText(yourPINShouldHave, 29);
+		verifyText(length, 26);
+		//verifyText(pinTextField, 40);
+		//verifyText(confirmPintextField, 27);
+		verifyText(btnNext, 17);
+		Thread.sleep(2000);
+	    reportInfo();
+	}
+	
+	public void verifySelectAQuestionPage() throws Exception {
+		verifyText(selectAQuestionText, 36);
+		Thread.sleep(2000);
+	    reportInfo();
+	}
+	
+	public void verifyRegistrationCompletedSuccessfully() throws Exception {
+		verifyText(successfullySetupPasswordPIN, 40);
+		verifyText(closeThisTabText, 37);
+		verifyText(openWebAppButtonText, 38);
+		Thread.sleep(2000);
+	    reportInfo();
+	}
+}

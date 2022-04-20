@@ -1,0 +1,26 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="HandheldTranslationSuite" verbose="10">
+	<listeners>
+
+		<listener
+			class-name="net.medavante.portal.report.TestCaseTrackingListners"></listener>
+
+	</listeners>
+
+	<test name="Medavante-HandheldTranslationSanity" preserve-order="true" verbose="2">
+
+
+
+		<!--   <groups> <run> <include name="Mobile" /> </run> </groups> -->
+
+		<classes>				
+				<class
+				name="net.medavante.mobile.testscripts.Handheld_Translation_Sanity_Afrikaans_SIP" />
+				<class
+			  	name="net.medavante.mobile.testscripts.Handheld_Translation_Sanity_Bulgarian_SIP" /> 
+				<class
+				name="net.medavante.mobile.testscripts.Handheld_Translation_Sanity_English_SIP" />
+	
+		</classes>
+	</test>
+</suite>

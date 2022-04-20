@@ -1,6 +1,6 @@
 package net.medavante.mobile.pages;
 
-import java.sql.Driver;
+//import java.sql.Driver;
 import java.util.List;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -59,7 +59,7 @@ public class MBLogAnEventPage extends MobileCoreFunctions{
 		for(MobileElement we:eventList){
 			if(we.getText().equalsIgnoreCase(eventToBeOpen)){
 				click(we);
-				Thread.sleep(1500);
+				//Thread.sleep(1000);
 				capturescreen("Screenshot");
 			}
 		}

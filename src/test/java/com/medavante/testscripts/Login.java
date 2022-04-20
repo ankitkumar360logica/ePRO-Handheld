@@ -20,7 +20,7 @@ public class Login extends BaseTest {
     }
 
     @Test
-    public void testValidLogin() {
+    public void testValidLogin() throws InterruptedException {
         reportLog("Login in to application");
         loginPage.loginInApplication(userName, password);
 //        Assert.fail("Test Script failed for Demo");

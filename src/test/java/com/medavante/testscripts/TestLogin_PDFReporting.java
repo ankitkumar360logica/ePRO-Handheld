@@ -20,7 +20,7 @@ public class TestLogin_PDFReporting extends BaseTest{
     }
 
     @Test
-    public void testLogin() {
+    public void testLogin() throws InterruptedException {
         // login in to application
         reportLog("Login in to application");
         loginPage.loginInApplication(userName, password);

@@ -11,8 +11,10 @@
  */
 package net.medavante.portal.selenium.core;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -36,6 +38,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
 import java.util.Set;
@@ -43,9 +46,12 @@ import java.util.concurrent.TimeUnit;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import javax.imageio.ImageIO;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -59,6 +65,9 @@ import org.openqa.selenium.remote.CapabilityType;
 
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.winium.WiniumDriver;
+import org.sikuli.script.Finder;
+import org.sikuli.script.Match;
+import org.sikuli.script.Pattern;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.ITestResult;
@@ -139,13 +148,19 @@ import net.medavante.portal.pages.studynavigator.VisitDetailsPage;
 import net.medavante.portal.pages.traininglibrary.AssetsDetailsPage;
 import net.medavante.portal.pages.traininglibrary.CoursesDetailsPage;
 import net.medavante.portal.pages.traininglibrary.TrainingDetailsPage;
-import net.medavante.portal.pages.webassessment.WebAssessmentPage;
 import net.medavante.portal.report.MobileScreenRecorder;
 import net.medavante.portal.utilities.ApplicationVerificationMessage;
 import net.medavante.portal.utilities.CentralRatingModuleConstants;
 import net.medavante.portal.utilities.MobileConstants;
 import net.medavante.portal.utilities.UserClaims;
 import net.medavante.portal.utilities.Utilities;
+
+import ru.yandex.qatools.ashot.AShot;
+import ru.yandex.qatools.ashot.Screenshot;
+import ru.yandex.qatools.ashot.comparison.ImageDiff;
+import ru.yandex.qatools.ashot.comparison.ImageDiffer;
+import ru.yandex.qatools.ashot.coordinates.WebDriverCoordsProvider;
+import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
 
 public abstract class BaseTest extends MobileDriver
 		implements CentralRatingModuleConstants, ApplicationVerificationMessage, UserClaims, MobileConstants  {
@@ -235,11 +250,8 @@ public abstract class BaseTest extends MobileDriver
 	protected TrainingDetailsPage trainingDetailsPage=new TrainingDetailsPage(driver);
 	protected CoursesDetailsPage coursesDetailsPage=new CoursesDetailsPage(driver);
 	protected AssetsDetailsPage assetsDetailsPage=new AssetsDetailsPage(driver);
-	protected FormManagerPage formManagerPage = new FormManagerPage(driver);
+	protected FormManagerPage formManagerPage = new FormManagerPage(driver);	
 	
-	protected WebAssessmentPage webAssessmentPage = new WebAssessmentPage(driver);
-	
-
 	private static String browserType, applicationUrl, machineForRun, setEnvironment, quitBrowser;
 	private static WebDriver driver;
 	private static AppiumDriver<MobileElement> appiumDriver;
@@ -325,11 +337,11 @@ public abstract class BaseTest extends MobileDriver
 						this.applicationUrl = Configuration.readApplicationFile("sponsorStgURL");
 					}
 					
-				} else if (setEnvironment.equals("test")) {
+				} else if (setEnvironment.equals("maSTG")) {
 					if (className.toString().contains("MAP")) {
 						this.applicationUrl = Configuration.readApplicationFile("maTestURL");
 					} else if (className.toString().contains("SIP")) {
-						this.applicationUrl = Configuration.readApplicationFile("siteTestURL");
+						this.applicationUrl = Configuration.readApplicationFile("maStgURL");
 					} else if (className.toString().contains("SPP")) {
 						this.applicationUrl = Configuration.readApplicationFile("sponsorTestURL");
 					}
@@ -355,6 +367,22 @@ public abstract class BaseTest extends MobileDriver
 						this.applicationUrl = Configuration.readApplicationFile("maQaURL");
 					} else if (className.toString().contains("SIP")) {
 						this.applicationUrl = Configuration.readApplicationFile("trnURL");
+					} else if (className.toString().contains("SPP")) {
+						this.applicationUrl = Configuration.readApplicationFile("sponserQaURL");
+					}
+				}else if (setEnvironment.equals("test")) {
+					if (className.toString().contains("MAP")) {
+						this.applicationUrl = Configuration.readApplicationFile("maQaURL");
+					} else if (className.toString().contains("SIP")) {
+						this.applicationUrl = Configuration.readApplicationFile("siteTestURL");
+					} else if (className.toString().contains("SPP")) {
+						this.applicationUrl = Configuration.readApplicationFile("sponserQaURL");
+					}
+				}else if (setEnvironment.equals("prod")) {
+					if (className.toString().contains("MAP")) {
+						this.applicationUrl = Configuration.readApplicationFile("maQaURL");
+					} else if (className.toString().contains("SIP")) {
+						this.applicationUrl = Configuration.readApplicationFile("siteProdURL");
 					} else if (className.toString().contains("SPP")) {
 						this.applicationUrl = Configuration.readApplicationFile("sponserQaURL");
 					}
@@ -386,6 +414,15 @@ public abstract class BaseTest extends MobileDriver
 				options.addArguments("disable-infobars");
 				options.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
 				options.setExperimentalOption("useAutomationExtension", false);
+			    options.addArguments("--start-maximized");
+			    
+			    Map<String, Object> prefs = new HashMap<String, Object>();
+			    prefs.put("credentials_enable_service", false);
+			    prefs.put("profile.password_manager_enabled", false);
+
+			    options.setExperimentalOption("prefs", prefs);			   
+			    //options.addArguments("window-size=1280,768");
+			    //options.addArguments("Zoom 80%");
 				//options.addArguments("--headless");
 				//options.addArguments("--no-sandbox");
 				//options.addArguments("--disable-dev-shm-usage");
@@ -398,6 +435,7 @@ public abstract class BaseTest extends MobileDriver
 			 * Maximize windoW
 			 */
 			driver.manage().window().maximize();
+			
 
 			/**
 			 * Delete cookies and set timeout
@@ -961,6 +999,119 @@ public abstract class BaseTest extends MobileDriver
 
 	}
 
+	
+	public static void aShotcaptureScreenshots( String imageName, String element) throws BadElementException, MalformedURLException, IOException {
+	String fileName = System.getProperty("className");
+	String createBaselineImages ="";
+	try {
+	createBaselineImages = Configuration.readApplicationFile("captureBaselineImage");
+	} catch (Exception e1) {
+	// TODO Auto-generated catch block
+	e1.printStackTrace();
+	}
+	String screen = "";
+	try {
+	String basePath = Utilities.getPath();
+	String folderPath = basePath + "/baselineImages/" + fileName;
+	int pageNumber = 0;
+	screen = folderPath + "/" +pageNumber + ".png";
+	new File(folderPath).mkdirs();
+	new File(basePath+"/diffImageFolder").mkdirs(); 
+	Screenshot screenshot;
+	if (createBaselineImages.equalsIgnoreCase("yes")) {
+	// screenshot = new AShot().takeScreenshot(driver, driver.findElement(By.xpath("//div[@class='front-page-info']")));
+	screenshot = new AShot().coordsProvider(new WebDriverCoordsProvider()).takeScreenshot(driver);
+	// Now, get the image from the screenshot and write it to the file. You can provide the file type as jpg, png.
+	ImageIO.write(screenshot.getImage(), "PNG", new File(screen));
+	test.log(LogStatus.INFO, "Baseline Ashot_Screenshot captured for page number="+pageNumber+ test.addScreenCapture(screen));
+	pageNumber++;
+	}
+	else if (element != null) {// System.out.println("Element is provided to ignore ashot");
+	// String[] ele = element.split("~");
+	// Set<By> ignoredLocators = new HashSet<By>();
+	// for(int i=0;i<ele.length;i++) {
+	//
+	// ignoredLocators.add(byLocator(ele[i]));
+	// }
+	//
+	// for(By il:ignoredLocators) {
+	// System.out.print("ignoredLocators are == "+il.toString());
+	// }
+	//
+	//
+	// screenshot = new AShot().ignoredElements(ignoredLocators).takeScreenshot(driver);
+	//screenshot = new AShot().addIgnoredElement(byLocator(element)).takeScreenshot(driver);
+	// screenshot = new AShot().addIgnoredElement(By.xpath("//div[@class='input-box password-icon-box']")).coordsProvider(new WebDriverCoordsProvider()).takeScreenshot(driver);
+	//WebElement e = driver.findElement(By.xpath("//div[@class='input-box password-icon-box']"));
+	screenshot = new AShot().coordsProvider(new WebDriverCoordsProvider()).takeScreenshot(driver, driver.findElement(By.xpath("//div[@class='input-box password-icon-box']")));
+	System.out.println("taking screen jitu");
+	}
+	else {
+	System.out.println("Element is not provided to ignore ashot");
+	screenshot = new AShot().coordsProvider(new WebDriverCoordsProvider()).takeScreenshot(driver);
+	// read the image to compare
+	}
+	String expectedImagepath=folderPath+"/"+imageName+".png";
+	BufferedImage expectedImage = ImageIO.read(new File(expectedImagepath));
+	System.out.println("expectedImage coming is = "+folderPath+"/"+imageName+".png"); 
+	BufferedImage actualImage = screenshot.getImage(); 
+	ImageDiffer imgDiff = new ImageDiffer();
+	// ImageDiff diff = imgDiff.makeDiff(actualImage, expectedImage);
+	ImageDiff diff = imgDiff.makeDiff(expectedImage, actualImage);
+	int size = diff.getDiffSize();
+	if(size!=0) {
+	String diffImageName = "Page_diff_"+pageNumber+".png";
+	String locationOfDiff= basePath+"/diffImageFolder/"+diffImageName;
+	//BufferedImage diffImage = diff.getMarkedImage();
+	BufferedImage diffImage = diff.getDiffImage();
+
+	ImageIO.write(diffImage, "PNG", new File(locationOfDiff));
+	
+	test.log(LogStatus.FAIL, "Image compare failed for Image ="+imageName+".png"+ test.addScreenCapture(locationOfDiff));
+	}
+	else {
+	test.log(LogStatus.PASS, "Image compare Pass for Image ="+imageName+".png"+test.addScreenCapture(expectedImagepath));
+	}
+	Thread.sleep(500);
+	Runtime.getRuntime().gc();
+	System.gc();
+	} catch (Exception e) {
+	System.out.println("In aShot catch");
+	}
+	// return Image.getInstance(screen);
+	}
+	/**
+	* Provide the name of the image and coordinates where to click
+	* @param imageName
+	* @param X
+	* @param Y
+	* @throws InterruptedException
+	*/
+	public static void baseImageComparison(String imageName) throws IOException
+	{
+	String fileName1 = System.getProperty("className");
+	String basePath1 = Utilities.getPath(); String folderPath1 = basePath1 + "/baselineImages/" + fileName1;
+	String expectedImage = folderPath1 + "/" + imageName + ".png";
+	// BufferedImage expectedBufferImage = ImageIO.read(new File(expectedImage));
+	Screenshot screenshot1;
+	screenshot1 = new AShot().coordsProvider(new WebDriverCoordsProvider()).takeScreenshot(driver);
+	ImageIO.write(screenshot1.getImage(), "png", new File(basePath1+"\\actualfirstimage.png"));
+	// BufferedImage actualfirstimage = screenshot1.getImage();
+	String actualImage=basePath1+"/"+"actualfirstimage"+".png"; // String actualImage = folderPath1 + "/" + 2 + ".png";
+	Pattern p1 = new Pattern(expectedImage);
+	// Pattern p2 = new Pattern(actualImage); // Finder f = new Finder(p1.getImage());
+	Finder f=new Finder(screenshot1.getImage());
+	f.find(p1);
+	if (f.hasNext()) {
+	Match m = f.next(); System.out.println("Match found with" + (m.getScore()*88+"%"));
+	// m.getImage();
+	f.destroy();
+	test.log(LogStatus.PASS, "Image comparison pass for 90% comparison =" + imageName + ".png"+ test.addScreenCapture(actualImage));
+	} else {
+	System.out.println("No Match found");
+	}
+	}	
+	
 	/**
 	 * Capturing screenshot after every step.
 	 * 
@@ -1007,6 +1158,8 @@ public abstract class BaseTest extends MobileDriver
 		}
 		return Image.getInstance(screen);
 	}
+	
+	
 
 	/**
 	 * Report logs

@@ -37,7 +37,7 @@ public class GenricScriptToCreateSubjectStatusSIP extends BaseTest{
 	
 	
 	@Test
-	public  void subjectStatusCreationScript() {
+	public  void subjectStatusCreationScript() throws InterruptedException {
 		dashBoardPage = loginPage.loginInApplication(userName, password);
 		
 		studyNavigatorDashBoardPage = dashBoardPage.navigateToStudyNavigator();

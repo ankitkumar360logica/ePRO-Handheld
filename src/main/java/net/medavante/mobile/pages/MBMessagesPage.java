@@ -38,7 +38,8 @@ public class MBMessagesPage extends MobileCoreFunctions {
 	@AndroidFindBy(xpath = "(//android.view.ViewGroup[2][@class='android.view.ViewGroup'])[3]")
 	private MobileElement selectFirstMessageFromList;
 	
-	@AndroidFindBy(xpath = "//android.support.v7.widget.LinearLayoutCompat")
+	//@AndroidFindBy(xpath = "//android.support.v7.widget.LinearLayoutCompat")
+	@AndroidFindBy(xpath = "(//android.widget.TextView)[1]")
 	private MobileElement deleteMessage;
 	
 	@AndroidFindBy(xpath = "//android.view.ViewGroup//following-sibling::android.view.View")
@@ -128,7 +129,7 @@ public class MBMessagesPage extends MobileCoreFunctions {
 	
 	public void clickOnSendMessageBtnForMultiCapture() throws InterruptedException {
 		click(sendMsgBtn);
-		Thread.sleep(1500);
+		Thread.sleep(1000);
 		capturescreen("Screenshot");
 
 	}

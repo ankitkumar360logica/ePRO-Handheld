@@ -1,0 +1,24 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="WebModalityTranslationSuite" verbose="10">
+	<listeners>
+
+		<listener
+			class-name="net.medavante.portal.report.TestCaseTrackingListners"></listener>
+
+	</listeners>
+
+	<test name="WebModalityTranslation"
+		preserve-order="true" verbose="2">
+
+
+
+		<!-- <groups> <run> <include name="R1" /> </run> </groups> -->
+
+		<classes>				
+				<class name="net.medavante.mobile.testscripts.WebModality_Sanity_Translation_For_Afrikaans_SIP" />
+				<class name="net.medavante.mobile.testscripts.WebModality_Sanity_Translation_For_Arabic_SIP" />
+				<class name="net.medavante.mobile.testscripts.WebModality_Sanity_Translation_For_Bulgarian_SIP" />
+	
+		</classes>
+	</test>
+</suite>

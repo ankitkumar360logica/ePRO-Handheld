@@ -55,10 +55,11 @@ public class SmokeTestData_SIP extends BaseTest {
 		System.setProperty("className", getClass().getSimpleName());
 	}
 
-	/** Create Organization For Smoke Test Case **/
+	/** Create Organization For Smoke Test Case 
+	 * @throws InterruptedException **/
 
 	@Test(description = "Creating New Organization",enabled=false)
-	public void createNewOrg() {
+	public void createNewOrg() throws InterruptedException {
 		reportLog("Login in to application");
 		dashBoardPage = loginPage.loginInApplication(SuperAdminUN, SuperAdminPW);
 
@@ -81,9 +82,10 @@ public class SmokeTestData_SIP extends BaseTest {
 		loginPage.verifyUserLogout();
 	}
 
-	/** Create new study For Smoke Test Case **/
+	/** Create new study For Smoke Test Case 
+	 * @throws InterruptedException **/
 	@Test(description = "Creating New study")
-	public void createNewStudy() {
+	public void createNewStudy() throws InterruptedException {
 		reportLog("Login in to application");
 		dashBoardPage = loginPage.loginInApplication(SuperAdminUN, SuperAdminPW);
 

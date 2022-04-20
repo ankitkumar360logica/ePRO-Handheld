@@ -130,6 +130,8 @@ public class Constants {
 	public static final String siteLabelText = "Site";
 	public static final String All_SiteText = "All sites";
 	public static final String testSite = "Auto-10 - Test Site";
+	public static final String Prod_Site = "200 - Test Principal Investigator";
+
 
 	public static final String SubjectCategory_Visits = "VISITS";
 	public static final String SubjectCategory_Questionnaires = "QUESTIONNAIRES";

@@ -21,7 +21,13 @@
 		<maven.test.failure.ignore>true</maven.test.failure.ignore>
 	</properties>
 
-
+	<repositories>
+        <repository>
+            <id>com.e-iceblue</id>
+            <name>e-iceblue</name>
+            <url>https://repo.e-iceblue.com/nexus/content/groups/public/</url>
+        </repository>
+	</repositories>
 
 	<dependencies>
 	
@@ -31,6 +37,12 @@
 			<version>6.14.3</version>
 			<scope>compile</scope>
 		</dependency>
+		
+	<dependency>
+        <groupId> e-iceblue </groupId>
+        <artifactId>spire.pdf</artifactId>
+        <version>3.11.6</version>
+    </dependency>
 
 		<dependency>
 			<groupId>junit</groupId>
@@ -174,6 +186,14 @@
 			<artifactId>selenium-java</artifactId>
 			<version>3.141.59</version>
 		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox -->
+		<dependency>
+    		<groupId>org.apache.pdfbox</groupId>
+    		<artifactId>pdfbox</artifactId>
+    		<version>3.0.0-RC1</version>
+		</dependency>
+		
 
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
@@ -233,7 +253,7 @@
 		<dependency>
 			<groupId>io.appium</groupId>
 			<artifactId>java-client</artifactId>
-			<version>7.0.0</version>
+			<version>6.1.0</version>
 		</dependency>
 
 
@@ -249,6 +269,25 @@
 			<artifactId>winium-webdriver</artifactId>
 			<version>0.1.0-1</version>
 		</dependency>
+		
+		<dependency>
+		
+    <groupId>com.assertthat</groupId>
+    <artifactId>selenium-shutterbug</artifactId>
+    <version>1.5</version>
+    <exclusions>
+        <exclusion>
+	    <groupId>org.seleniumhq.selenium</groupId>
+	    <artifactId>selenium-java</artifactId>
+	</exclusion>
+     </exclusions>
+</dependency>
+
+<dependency>
+    <groupId>ru.yandex.qatools.ashot</groupId>
+    <artifactId>ashot</artifactId>
+    <version>1.5.4</version>
+</dependency>
 
 
 	</dependencies>
